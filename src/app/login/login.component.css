@@ -1,0 +1,16 @@
+#errorForm{
+    border: 1px solid red;
+}
+
+#successForm{
+    border: 1px solid green;
+}
+
+.abfBackground{
+    /* background-image: url('../../assets/user/img/bg/bg-2.jpg'); */
+    background-color: aquamarine;
+}
+
+#text{
+    color: white;
+}

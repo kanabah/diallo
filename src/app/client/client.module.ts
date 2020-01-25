@@ -1,0 +1,63 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
+import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
+import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { ClientRoutingModule } from './client-routing.module';
+import { ClientComponent } from './client.component';
+import { AddClientComponent } from './add-client/add-client.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { DemoMaterialModule } from '../services/material.service';
+import { AllClientComponent } from './all-client/all-client.component';
+import { DetailleClientComponent } from './detaille-client/detaille-client.component';
+import { DialogContentAddCommandeOrangeMoneyComponent } from './dialog-content-add-commande-orange-money/dialog-content-add-commande-orange-money.component';
+import { DialogContentAddCommandeMobileMoneyComponent } from './dialog-content-add-commande-mobile-money/dialog-content-add-commande-mobile-money.component';
+import { CommandeAllComponent } from './commande-all/commande-all.component';
+import { CommandeDetailComponent } from './commande-detail/commande-detail.component';
+import { OrderModule } from 'ngx-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { DialogReglementComponent } from './dialog-reglement/dialog-reglement.component';
+import { DialogDeleteCommandeComponent } from './dialog-delete-commande/dialog-delete-commande.component';
+import { ReglementListComponent } from './reglement-list/reglement-list.component';
+import { DeleteReglementComponent } from './delete-reglement/delete-reglement.component';
+import { UpdateCommandeComponent } from './update-commande/update-commande.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DialogContentAddTransfertComponent } from './dialog-content-add-transfert/dialog-content-add-transfert.component';
+import { DialogContentAddStartTimesComponent } from './dialog-content-add-start-times/dialog-content-add-start-times.component';
+import { PeriodeCommandeComponent } from './periode-commande/periode-commande.component';
+import { PeriodeCommandeDetailleComponent } from './periode-commande-detaille/periode-commande-detaille.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { TypeAyementComponent } from './type-ayement/type-ayement.component';
+import { CommandeCreditComponent } from './commande-credit/commande-credit.component';
+
+@NgModule({
+  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, SearchBarComponent, TypeAyementComponent, CommandeCreditComponent],
+  entryComponents: [
+    DialogContentAddCommandeOrangeMoneyComponent,
+    DialogContentAddCommandeMobileMoneyComponent,
+    DialogReglementComponent,
+    DialogDeleteCommandeComponent,
+    DeleteReglementComponent,
+    UpdateCommandeComponent,
+    DialogContentAddTransfertComponent,
+    DialogContentAddStartTimesComponent
+  ],
+  imports: [
+    CommonModule,
+    ClientRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DemoMaterialModule,
+    OrderModule,
+    NgxPaginationModule,
+    FontAwesomeModule,
+  ],
+  providers: [
+        
+  ]
+})
+export class ClientModule {
+}

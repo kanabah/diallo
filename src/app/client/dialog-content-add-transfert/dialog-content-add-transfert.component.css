@@ -1,0 +1,30 @@
+
+#custAlign{
+    margin-left: 150px;
+}
+
+#rounded-circle{
+    border-radius: 50%;
+    max-width: 30px;
+    max-height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    width: 30px;
+    height: 30px;
+}
+
+#errorForm{
+    border: 1px solid red;
+}
+
+#successForm{
+    border: 1px solid green;
+}
+
+#ng-btn{
+    margin-right: 10px;
+}
+  
+#nom{
+    margin-left: 5  px;
+}

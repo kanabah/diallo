@@ -1,0 +1,59 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-header" *ngIf="ok">
+        <h5 class="card-title" >
+            <img src="assets/user/img/contact/1.jpg"  id="rounded-circle" alt="Profile"><span id="nom">{{ prenom }}</span>
+        </h5>
+        <hr>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="payForm" (ngSubmit)="onMoMo()">
+            <div class="form-group">
+                <label for="tel">Numero Telephone</label>
+                <input type="text" [id]="getTelMtnSuccess() ? 'successForm' : getTelMtnError() ? 'errorForm' : ''" formControlName="telMtn" class="form-control" id="tel"  placeholder="Enter le numero orange du client">
+                <span *ngIf="getTelMtnError()" class="text text-danger form-text text-muted"><small>{{ getTelMtnError() }}</small></span>
+            </div>
+            <div formGroupName="commandes">
+                <div class="form-group">
+                    <label for="ModePayemnt">Mode Payement</label>
+                <select class="form-control" id="ModePayemnt" formControlName="modePay">
+                    <option value="Cache">Cache</option>
+                    <option value="OM">Orange Money</option>
+                    <option value="MoMo">Mobile Money</option>
+                </select>
+                </div>
+                <div class="form-group">
+                    <label for="typePayement">Type Payement</label>
+                    <select class="form-control" (change)="select($event)" id="typePayement" formControlName="typePay">
+                        <option value="Total">Total</option>
+                        <option value="Tranche">Tranche</option>
+                        <option value="Credit">Credit</option>
+                    </select>
+                </div>
+                <div class="form-group" *ngIf="ngSomPay">
+                    <label for="somPay">Montant A Payer</label>
+                    <input type="text" [id]="getSomPaySuccess() ? 'successForm' : getSomPayError() ? 'errorForm' : ''" formControlName="somPay"  class="form-control" id="somPay" placeholder="Somme a payer">
+                    <span *ngIf="getSomPayError()" class="text text-danger form-text text-muted"><small>{{ getSomPayError() }}</small></span>
+                </div>
+                <div class="form-group" id="t" *ngIf="ngSomRest">
+                    <label for="somRest">Montant Restant</label>
+                    <input type="text" [id]="getSomRestSuccess() ? 'successForm' : getSomRestError() ? 'errorForm' : ''" class="form-control" id="somRest" formControlName="somRest" placeholder="Somme a payer">
+                    <span *ngIf="getSomRestError()" class="text text-danger form-text text-muted"><small>{{ getSomRestError() }}</small></span>
+                </div>
+                <div class="form-group" *ngIf="ngSomCredit">
+                    <label for="somCredit">Montant A Credit</label>
+                    <input type="text" [id]="getSomCreditSuccess() ? 'successForm' : getSomCreditError() ? 'errorForm' : ''" class="form-control" id="somCredit" formControlName="somCredit" placeholder="Somme a payer">
+                    <span *ngIf="getSomCreditError()" class="text text-danger form-text text-muted"><small>{{ getSomCreditError() }}</small></span>
+                </div>
+            </div>
+            <div class="form-group" >
+                <label for="somDoit">Mot de passe</label>
+                <input type="password" [id]="getPasswordSuccess() ? 'successForm' : getPasswordError() ? 'errorForm' : ''" class="form-control" id="somDoit" formControlName="password" placeholder="Confirmer avec votre mot de passe">
+                <span *ngIf="getPasswordError()" class="text text-danger form-text text-muted"><small>{{ getPasswordError() }}</small></span>
+                <span *ngIf="!passwordIncorect && !getPasswordError()" class="text text-danger form-text text-muted"><small>Mot de passe incorect</small></span>
+            </div>
+            
+            <button type="submit" [disabled]="payForm.pending || payForm.invalid || !etatPadding" class="btn btn-primary" id="ng-btn">{{ !etatPadding ? 'Patienter...': 'Valider'}}</button>
+            <button type="button" (click)="dialogRef.close()"  class="btn btn-default">Annuler</button>
+        </form>
+    </div>
+  </div>

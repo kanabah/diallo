@@ -1,0 +1,44 @@
+<app-search-bar home="Home" title="Tout Les Clients"></app-search-bar>
+<div class="all-content-wrapper">
+    <div class="contacts-area mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" *ngFor="let client of clients | paginate: { itemsPerPage: 12, currentPage: p }">
+                    <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30 " id="mbClient" (click)="onDetailleClient(client._id)">
+                        <div class="panel-body custom-panel-jw">
+                            <div class="social-media-in">
+                                <a href="#" id="bgLogo"><img src="assets\user\img\logo\orange.png" alt="Logo Orange Money"></a>
+                                <a href="#" id="bgLogo"><img src="assets\user\img\logo\momo.jpg" alt="Logo Mobile Money"></a>
+                                <a href="#" id="bgLogo"><img src="assets\user\img\logo\images.jpg" alt="Start Times"></a>
+                            </div>
+                            <img alt="{{ client.nom }}" style="max-width: 100px; min-width: 100px; max-height: 100px; min-height: 100px;"id="imgAavatar" class="img-circle m-b" src="{{ print.printAvatar(client.avatar) }}">
+                            <h3><a href="#">{{ printFullName(client.prenom, client.nom) }}</a></h3>
+                            <p class="all-pro-ad">{{ printAdress(client.adress.commune, client.adress.quartier, client.adress.secteur)}}</p>
+                        </div>
+                        <div class="panel-footer contact-footer">
+                            <div class="professor-stds-int">
+                                <div class="professor-stds">
+                                    <div class="contact-stat"><span>OM: </span> <strong>{{ returnNbCmdClient('OM', client._id) }}</strong></div>
+                                </div>
+                                <div class="professor-stds">
+                                    <div class="contact-stat"><span>MoMo: </span> <strong>{{ returnNbCmdClient('MoMo', client._id) }}</strong></div>
+                                </div>
+                                <div class="professor-stds">
+                                    <div class="contact-stat"><span>ST: </span> <strong>{{ returnNbCmdClient('ST', client._id) }}</strong></div>
+                                </div>
+                                <div class="professor-stds">
+                                    <div class="contact-stat"><span style="display: inline-block; width: 70px;"> Transfert: </span> <strong>{{ returnNbCmdClient('Transfert', client._id) }}</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            <div class="custom-pagination">
+                <ul class="pagination">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

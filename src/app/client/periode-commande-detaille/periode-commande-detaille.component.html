@@ -1,0 +1,60 @@
+<app-search-bar home="Commandes" title="Detaille"></app-search-bar>
+<div class="all-content-wrapper">
+    <div class="product-status mg-b-15">
+        <div class="container-fluid">
+            <div class="row" *ngIf="client">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <h4>
+                            <img src="{{ print.printAvatar(client.avatar) }}"  id="rounded-circle" alt="Profile">{{ client.prenom }} {{ client.nom }}:
+                            <small>Nb Commandes</small><span class="badge badge-success">{{ nbCmd }}</span>,<small>Montant Payer</small><span class="badge badge-success">{{ somPayClient }} GNF</span>,  <small>Montant Restant</small><span class="badge badge-success">{{ somCreditClient }} GNF</span>
+                        </h4>
+                        <div class="" id="inputCherch" >
+                            <!-- <button class="btn btn-primary btn xs">To day</button> -->
+                            <!-- <a href="#" class="">To day</a>
+                            <a href="#" class="">Hier</a> -->
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-primary" (click)="goBack()">
+                                    <input type="radio" id="option8" >Retour
+                                </label>
+                              
+                            </div>
+                        </div>
+                        <div class="asset-inner">
+                            <table>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Etat Pay</th>
+                                    <th>Somme Payé</th>
+                                    <th>Somme Restant</th>
+                                    <th>Somme Credit</th>
+                                    <th>Opperateur</th>
+                                    <th>Nb decodeur</th>
+                                    <th>Mode Pay</th>
+                                    <th>Date</th>
+                                </tr>
+                                <tr *ngFor="let cmd of collection.data |paginate: config">
+                                    <td ><img src="{{ typeCmd(cmd.typeCmd) }}" alt="" id="image"></td>
+                                    <td><span class="badge badge-success"> {{ cmd.typePay}}</span></td>
+                                    <td>{{ cmd.somPay ? cmd.somPay : 0 }}</td>
+                                    <td>{{ cmd.somRest ? cmd.somRest : 0 }}</td>
+                                    <td>{{ cmd.somCredit ? cmd.somCredit : 0 }}</td>
+                                    <td>{{ cmd.opperateur }}</td>
+                                    <td>{{ cmd.nbStartTimes }}</td>
+                                    <td>{{ cmd.modePay }}</td>
+                                    <td>{{ cmd.dateCmd | date }}</td>
+                                    
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="custom-pagination">
+                            <ul class="pagination">
+                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

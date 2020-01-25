@@ -1,0 +1,62 @@
+<app-search-bar home="Commandes" title="Historique de la commande"></app-search-bar>
+<div class="all-content-wrapper">
+    <div class="product-status mg-b-15">
+        <div class="container-fluid">
+            <div class="row" *ngIf="client">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <h4>
+                            <img src="{{ print.printAvatar(client.avatar) }}"  id="rounded-circle" alt="Profile">
+                            Historique de la commande
+                        </h4>
+                        
+                        <div class="" id="inputCherch" >
+                            <!-- <button class="btn btn-primary btn xs">To day</button> -->
+                            <!-- <a href="#" class="">To day</a>
+                            <a href="#" class="">Hier</a> -->
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-primary" (click)="returnBack()">
+                                    <input type="radio"   id="option5" > Retour
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="asset-inner">
+                            <table>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Etat Pay</th>
+                                    <th>Total Payé</th>
+                                    <th>Total Restant</th>
+                                    <th>Total Credit</th>
+                                    <th>Mode Pay</th>
+                                    <th>Somme Regler</th>
+                                    <th>Date</th>
+                                </tr>
+                                <tr *ngFor="let cmd of collection.data |paginate: config; let i=index;">
+                                    <td ><img src="{{ typeCmd(cmd.typeCmd) }}" alt="" id="image"></td>
+                                    <td>{{ cmd.typePay}}</td>
+                                    <td>{{ cmd.somPay ? cmd.somPay : 0 }}</td>
+                                    <td>{{ cmd.somRest ? cmd.somRest : 0 }}</td>
+                                    <td>{{ cmd.somCredit ? cmd.somCredit : 0 }}</td>
+                                    <td>{{ cmd.modePay }}</td>
+                                    <td> <span class="badge badge-info">{{ cmd.someRegler ? cmd.someRegler : 0 }}</span></td>
+                                    <td>{{ cmd.datePay | date }}</td>
+                                    <td>
+                                        <!-- <button data-toggle="tooltip" *ngIf="cmd.cmd_direct == 0" title="Modifier la commande" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button> -->
+                                        <button data-toggle="tooltip" *ngIf="cmd.cmd_direct == 0 && nb == (i+ 1)" (click)="openDelete(cmd._id)" title="Supresion de la commande" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- <div class="custom-pagination">
+                            <ul class="pagination">
+                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                            </ul>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

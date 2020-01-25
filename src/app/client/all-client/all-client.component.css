@@ -1,0 +1,16 @@
+#mbClient{
+    margin-bottom: 20px;
+}
+
+#bgLogo{
+    background-color:white;
+}
+
+#imgAavatar{
+    width: 50%;
+}
+
+a {
+	pointer-events: none;
+	cursor: default;
+}

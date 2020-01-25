@@ -1,0 +1,18 @@
+table {
+    width: 100%;
+  }
+  
+  #inputCherch{
+    float: right;
+    margin-top: -60px;
+  }
+
+#imageClient{
+  width: 30px;
+  height: 30px;
+}
+
+#image{
+    height: 30px;
+    width: 30px;
+}

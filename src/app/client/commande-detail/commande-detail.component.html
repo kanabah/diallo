@@ -1,0 +1,85 @@
+<app-search-bar home="Home" title="Commande du client"></app-search-bar>
+<div class="all-content-wrapper">
+        <div class="product-status mg-b-15">
+            <div class="container-fluid">
+                <div class="row" *ngIf="client">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-status-wrap">
+                            <h4>
+                                <img src="{{ print.printAvatar(client.avatar) }}"  id="rounded-circle" alt="Profile">{{ client.prenom }} {{ client.nom }}
+                            </h4>
+                            <div class="" id="inputCherch" >
+                                <!-- <button class="btn btn-primary btn xs">To day</button> -->
+                                <!-- <a href="#" class="">To day</a>
+                                <a href="#" class="">Hier</a> -->
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-primary active" (click)="onAujourdhui(client._id)">
+                                        <input type="radio" id="option1"> Aujourd'hui
+                                    </label>
+                                    
+                                    <label class="btn btn-primary" (click)="onSemaine(client._id)">
+                                        <input type="radio" id="option3"> La semmaine
+                                    </label>
+                                    <label class="btn btn-primary" (click)="onMonth(client._id)">
+                                        <input type="radio" id="option4"> Le mois
+                                    </label>
+                                    <label class="btn btn-primary" (click)="onTotal()">
+                                        <input type="radio" id="option5" > Toute les cmds
+                                    </label>
+                                    <label class="btn btn-warning" (click)="onTranche(client._id)">
+                                        <input type="radio" id="option6" > Tranche
+                                    </label>
+                                    <label class="btn btn-danger" (click)="onCredit(client._id)">
+                                        <input type="radio" id="option7" > Credit
+                                    </label>
+                                    <label class="btn btn-success" (click)="onTotalCmd(client._id)">
+                                        <input type="radio" id="option8" > Total
+                                    </label>
+                                    <label class="btn btn-info" (click)="onReturn()">
+                                        <input type="radio" name="options" id="option2" autocomplete="off">Retour
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="asset-inner">
+                                <table>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Etat Pay</th>
+                                        <th>Somme Payé</th>
+                                        <th>Somme Restant</th>
+                                        <th>Somme Credit</th>
+                                        <th>Opperateur</th>
+                                        <th>Nb decodeur</th>
+                                        <th>Mode Pay</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tr *ngFor="let cmd of collection.data |paginate: config">
+                                        <td ><img src="{{ typeCmd(cmd.typeCmd) }}" alt="" id="image"></td>
+                                        <td><span class="badge badge-success"> {{ cmd.typePay}}</span></td>
+                                        <td>{{ cmd.somPay ? cmd.somPay : 0 }}</td>
+                                        <td>{{ cmd.somRest ? cmd.somRest : 0 }}</td>
+                                        <td>{{ cmd.somCredit ? cmd.somCredit : 0 }}</td>
+                                        <td>{{ cmd.opperateur }}</td>
+                                        <td>{{ cmd.nbStartTimes }}</td>
+                                        <td>{{ cmd.modePay }}</td>
+                                        <td>{{ cmd.dateCmd | date }}</td>
+                                        <td>
+                                            <button data-toggle="tooltip" (click)="onUpdateCommande(cmd._id, client._id)" *ngIf="cmd.update == 0" title="Modifier la commande" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                            <button data-toggle="tooltip" (click)="openDelete(cmd._id, client._id)" *ngIf="cmd.update == 0" title="Supresion de la commande" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                            <button data-toggle="tooltip" (click)="openDialog(cmd._id, client._id)" *ngIf="cmd.traitement == 1" title="Ajout reglement de la commande" class="pd-setting-ed"><fa-icon [icon]="faCartArrowDown"></fa-icon></button>
+                                            <button data-toggle="tooltip" (click)="goToListReglement(cmd._id, client._id)" routerLinkActive="router-link-active"  title="Liste des reglement de la commande" class="pd-setting-ed"><fa-icon [icon]="faBook"></fa-icon></button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="custom-pagination">
+                                <ul class="pagination">
+                                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

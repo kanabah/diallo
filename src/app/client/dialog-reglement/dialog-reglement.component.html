@@ -1,0 +1,22 @@
+<form [formGroup]="reglementForm" (ngSubmit)="onReglement()">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Mode Payement</label>
+        <select class="form-control" id="exampleFormControlSelect1" formControlName="modePay">
+            <option value="Cache">Cache</option>
+            <option value="OM">Orange Money</option>
+            <option value="MoMo">Mobile Money</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Montant</label>
+        <input type="text" [id]="getMontantSuccess() ? 'successForm' : getMontantError() ? 'errorForm' : ''" class="form-control" formControlName="montant" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer le montant a regler">
+        <span *ngIf="getMontantError()" class="text text-danger form-text text-muted"><small>{{ getMontantError() }}</small></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Mot de passe</label>
+        <input type="password" [id]="getPasswordSuccess() ? 'successForm' : getPasswordError() ? 'errorForm' : ''" class="form-control" formControlName="password" id="exampleInputPassword1" placeholder="Confirmation">
+        <span *ngIf="getPasswordError()" class="text text-danger form-text text-muted"><small>{{ getPasswordError() }}</small></span>
+        <span *ngIf="!passwordIncorect && !getPasswordError()" class="text text-danger form-text text-muted"><small>Mot de passe incorect</small></span>
+    </div>
+    <button type="submit" [disabled]="reglementForm.pending || reglementForm.invalid || !etatPadding" class="btn btn-primary">{{ !etatPadding ? 'Patienter...': 'Valider'}}</button>
+</form>

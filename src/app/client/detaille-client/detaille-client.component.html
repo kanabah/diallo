@@ -1,0 +1,386 @@
+<app-search-bar home="Clients" title="Detaille Client"></app-search-bar>
+<div class="all-content-wrapper">
+    <div class="single-pro-review-area mt-t-30 mg-b-15">
+        <div class="container-fluid">
+            <div class="row" *ngIf="client">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="profile-info-inner">
+                        <div class="profile-img">
+                            <img src="{{ print.printAvatar(client.avatar) }}" title="{{client.prenom }}" alt="{{ client.avatar}}" />
+                        </div>
+                        <div class="profile-details-hr">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="address-hr">
+                                        <p><b>Nom</b><br /> {{ client.nom }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                        <p><b>Prenom</b><br /> {{ client.prenom }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="address-hr">
+                                        <p><b>Email</b><br /> {{ client.email }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                        <p><b>Phone</b><br /> {{ afficheTel() }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="address-hr">
+                                        <p><button type="button" class="btn btn-custon-two btn-primary btn-xs">Depot</button><br /> <b>Some Credit:</b> 5000000GNF <br> <b>Somme Laisser:</b> 50000000GNF</p>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <div class="address-hr">
+                                        <a href="#"><img src="assets/user/img/logo/om1.jpg" class="img" alt="Logo Orange Money"></a>
+                                        <h3>{{ nbCommandeOM }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <div class="address-hr">
+                                        <a href="#"><img src="assets/user/img/logo/momo.jpg" class="img" alt="Logo Mobile Money"></a>
+                                        <h3>{{ nbCommandeMoMo }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <div class="address-hr">
+                                        <a href="#"><img src="assets/user/img/logo/images.jpg" class="img" alt="Start Times"></a>
+                                        <h3>{{ nbCommandeST }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <div class="address-hr">
+                                        <a href="#"><img src="assets/user/img/logo/transfert.png" class="img" alt="Start Times"></a>
+                                        <h3>{{ nbCommandeTransfert }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
+                    <div id="myTabContent" class="tab-content custom-product-edit">
+                        <mat-tab-group>
+                            <div class="product-tab-list tab-pane fade active in" id="description">
+                                <mat-tab label="First">
+                                        <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="review-content-section">
+                                                        <div class="row">
+                                                            
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                                <div class="address-hr biography">
+                                                                    <p><b>Mobile Orange</b><br /> {{ client.telOrange }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                                <div class="address-hr biography">
+                                                                    <p><b>Mobile MTN</b><br /> {{ client.telMtn }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                                <div class="address-hr biography">
+                                                                    <p><b>Mobile Celcome</b><br /> {{ client.telCelcom }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                                <div class="address-hr biography">
+                                                                    <p><b>Sexe</b><br /> {{ client.genre !== 'none' ? client.genre : '' }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                                <div class="address-hr biography">
+                                                                    <p><b>Nom Entreprise</b><br /> {{ client.entreprise }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                                    <div class="address-hr biography">
+                                                                        <p><b>Commune</b><br /> {{ client.adress.commune !== 'none' ? client.adress.commune : '' }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                                <div class="address-hr biography">
+                                                                    <p><b>Quartier</b><br /> {{ client.adress.quartier }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                                                <div class="address-hr biography">
+                                                                    <p><b>Secteur</b><br /> {{ client.adress.secteur }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="content-profile">
+                                                                    <p> {{ client.description }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mg-b-15">
+                                                            <div class="col-lg-12">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="skill-title">
+                                                                                <h2>Somme En Caisse</h2>
+                                                                                <hr />
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="progress-skill">
+                                                                    <div class="pull-right"><span class="{{ getColorText(purcentOm) }}">{{ purcentOm }}%</span></div>
+                                                                        <h2>Orange Money</h2>
+                                                                        <div class="progress progress-mini">
+                                                                        <div [style.width.%]="purcentOm" class="{{ getColorProgress(purcentOm) }}"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress-skill">
+                                                                    <div class="pull-right"><span class="{{ getColorText(purcentMoMo) }}">{{ purcentMoMo }}%</span></div>
+                                                                    <h2>Mobile Money</h2>
+                                                                    <div class="progress progress-mini">
+                                                                        <div [style.width.%]="purcentMoMo" class="{{ getColorProgress(purcentMoMo) }}"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress-skill">
+                                                                    <div class="pull-right"><span class="{{ getColorText(purcentST) }}">{{ purcentST }}%</span></div>
+                                                                    <h2>Start Times</h2>
+                                                                    <div class="progress progress-mini">
+                                                                        <div [style.width.%]="purcentST" class="{{ getColorProgress(purcentST) }}"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress-skill">
+                                                                    <div class="pull-right"><span class="{{ getColorText(purcentTransfert) }}">{{ purcentTransfert }}%</span></div>
+                                                                    <h2>Transfert</h2>
+                                                                    <div class="progress progress-mini">
+                                                                        <div [style.width.%]="purcentTransfert" class="{{ getColorProgress(purcentTransfert) }}"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mg-b-15">
+                                                            <div class="col-lg-12">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="skill-title">
+                                                                            <h5>Dettaille</h5>
+                                                                            <hr />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ex-pro">
+                                                                    <ul>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Ornage Money:</strong> {{ somPayOrangeMoney }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Mobile Money</strong> {{ somPayMobileMoney }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Start Times</strong> {{ somPayStartTimes }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Transfert Credit</strong> {{ somPayTransfert }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Somme Total</strong> {{ somPayTotal }} GNF</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mg-b-15">
+                                                            <div class="col-lg-12">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="skill-title">
+                                                                                <h2>Somme Credit</h2>
+                                                                                <hr />
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="progress-skill">
+                                                                    <div class="pull-right"><span class="{{ getColorTextCredit(purcentCreditOm) }}">{{ purcentCreditOm }}%</span></div>
+                                                                        <h2>Orange Money</h2>
+                                                                        <div class="progress progress-mini">
+                                                                        <div [style.width.%]="purcentCreditOm" class="{{ getColorProgressCredit(purcentCreditOm) }}"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress-skill">
+                                                                    <div class="pull-right"><span class="{{ getColorTextCredit(purcentCreditMoMo) }}">{{ purcentCreditMoMo }}%</span></div>
+                                                                    <h2>Mobile Money</h2>
+                                                                    <div class="progress progress-mini">
+                                                                        <div [style.width.%]="purcentCreditMoMo" class="{{ getColorProgressCredit(purcentCreditMoMo) }}"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress-skill">
+                                                                    <div class="pull-right"><span class="{{ getColorTextCredit(purcentCreditST) }}">{{ purcentCreditST }}%</span></div>
+                                                                    <h2>Start Times</h2>
+                                                                    <div class="progress progress-mini">
+                                                                        <div [style.width.%]="purcentCreditST" class="{{ getColorProgressCredit(purcentCreditST) }}"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress-skill">
+                                                                    <div class="pull-right"><span class="{{ getColorTextCredit(purcentCreditTransfert) }}">{{ purcentCreditTransfert }}%</span></div>
+                                                                    <h2>Transfert</h2>
+                                                                    <div class="progress progress-mini">
+                                                                        <div [style.width.%]="purcentCreditTransfert" class="{{ getColorProgressCredit(purcentCreditTransfert) }}"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mg-b-15">
+                                                            <div class="col-lg-12">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="skill-title">
+                                                                            <h5>Dettaille</h5>
+                                                                            <hr />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ex-pro">
+                                                                    <ul>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Ornage Money:</strong> {{ somCreditOrangeMoney }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Mobile Money</strong> {{ somCreditMobileMoney }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Start Times</strong> {{ somCreditStartTimes }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Transfert Credit</strong> {{ somCreditTransfert }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Somme Total Credit</strong> {{ somCreditTotal }} GNF</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                </mat-tab>
+                            </div>
+                            <div class="product-tab-list tab-pane fade" id="reviews">
+                                <mat-tab label="Second">
+                                        <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="review-content-section">
+                                                        <form [formGroup]="clientForm" (ngSubmit)="onUpdateClient()">
+                                                            <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                        <input formControlName="nom" [id]="getNomSuccess() ? 'successForm' : getNomError() ? 'errorForm' : ''" type="text" class="form-control" placeholder="Nom">
+                                                                        <span *ngIf="getNomError()" class="text text-danger"><small>{{ getNomError() }}</small></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <input type="text" [id]="getPrenomSuccess() ? 'successForm' : getPrenomError() ? 'errorForm' : ''" formControlName="prenom" class="form-control" placeholder="Prenom">
+                                                                        <span *ngIf="getPrenomError()" class="text text-danger"><small>{{ getPrenomError() }}</small></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <input type="text" [id]="getTelOrangeSuccess() ? 'successNotStyl' : getTelOrangeError() ? 'errorForm' : ''" formControlName="telOrange" class="form-control" placeholder="Mobile Orange">
+                                                                        <span *ngIf="getTelOrangeError()" class="text text-danger"><small>{{ getTelOrangeError() }}</small></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <input type="text" [id]="getTelMtnSuccess() ? 'successNotStyl' : getTelMtnError() ? 'errorForm' : ''" formControlName="telMtn" class="form-control" placeholder="Mobile MTN">
+                                                                        <span *ngIf="getTelMtnError()" class="text text-danger"><small>{{ getTelMtnError() }}</small></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <input type="text" [id]="getTelCelcomSuccess() ? 'successNotStyl' : getTelCelcomError() ? 'errorForm' : ''" formControlName="telCelcom" class="form-control" placeholder="Mobile Celcome">
+                                                                        <span *ngIf="getTelCelcomError()" class="text text-danger"><small>{{ getTelCelcomError() }}</small></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <select formControlName="genre" class="form-control">
+                                                                            <option value="none" selected="" disabled="">Genre</option>
+                                                                            <option>Masculin</option>
+                                                                            <option>Feminin</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <!-- <div class="file-upload-inner ts-forms">
+                                                                        <div class="input prepend-big-btn">
+                                                                            <label class="icon-right" for="prepend-big-btn">
+                                                                                <i class="fa fa-download"></i>
+                                                                            </label>
+                                                                            <div class="file-button">
+                                                                                Browse
+                                                                                <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                                                            </div>
+                                                                            <input type="text" id="prepend-big-btn" placeholder="no file selected">
+                                                                        </div>
+                                                                    </div> -->
+                                                                    <div class="form-group">
+                                                                        <input type="email" [id]="getEmailSuccess() ? 'successNotStyl' : getEmailError() ? 'errorForm' : ''" formControlName="email" class="form-control" placeholder="Email">
+                                                                        <span *ngIf="getEmailError()" class="text text-danger"><small>{{ getEmailError() }}</small></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <input type="text" formControlName="entreprise" class="form-control" placeholder="Nom Entreprise">
+                                                                    </div>
+                                                                    <div class="form-group sm-res-mg-15 tbpf-res-mg-15">
+                                                                        <textarea formControlName="description" placeholder="Description"></textarea>
+                                                                    </div>
+                                                                    
+                                                                    <div formGroupName="adress">
+                                                                        <div class="form-group">
+                                                                            <select formControlName="commune" class="form-control">
+                                                                                <option value="none" selected="" disabled="">Commune</option>
+                                                                                <option value="Ratoma">Ratoma</option>
+                                                                                <option value="Matoto">Matoto</option>
+                                                                                <option value="Dixin">Dixin</option>
+                                                                                <option value="Matam">Matam</option>
+                                                                                <option value="Kaloum">Kaloum</option>
+                                                                                <option value="Autre">Autre</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <input formControlName="quartier" id="postcode" type="text" class="form-control" placeholder="Quratier">                                                                
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <input formControlName="secteur" type="text" class="form-control" placeholder="Secteur">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <!-- <input type="file" class="form-control-file" name="avatar" (change)="onFileChange($event)"> -->
+                                                                            <label class="btn btn-default btn-file btn-lg" style="width: 800px;">
+                                                                                <fa-icon [icon]="faFileUpload"></fa-icon>Photo DE Profile client <input type="file" name="avatar" required (change)="onFileChange($event)" style="display: none;">
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="payment-adress mg-t-15">
+                                                                            <!-- <mat-spinner *ngIf="clientForm.pending"></mat-spinner> -->
+                                                                        <button type="submit" [disabled]="clientForm.pending || !etatPadding || clientForm.invalid" class="btn btn-primary waves-effect waves-light mg-b-15">{{ !etatPadding ? 'Patienter...': 'Modifier'}}</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                </mat-tab>
+                            </div>
+                        </mat-tab-group>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 
+<div class="all-content-wrapper" *ngIf="!ok">
+    <div class="analytics-sparkle-area">
+        <div class="container-fluid">
+                <div class="row" >
+                    <div class="col-md-offset-5">
+                        <mat-spinner *ngIf="clientForm.pending"></mat-spinner>  
+                    </div>
+                </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div class="js-detaille-client">
+
+</div> -->
+<!-- <script src="../../../assets/user/js/tab.js"></script> -->

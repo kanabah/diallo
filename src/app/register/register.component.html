@@ -1,0 +1,75 @@
+<div class="error-pagewrap abfBackground">
+    <div class="error-page-int">
+        <div class="text-center custom-login">
+            <h3 id="text">Enregistrement</h3>
+            <p id="text">This is the top app Bonjour!</p>
+        </div>
+        <div class="content-error">
+            <div class="hpanel">
+                <div class="panel-body">
+                    <form action="#" id="loginForm" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                        <div class="row">
+                            <div class="form-group col-lg-12">
+                                <label>Nom et prenom</label>
+                                <input class="form-control" [id]="getNameSuccess() ? 'successForm' : getNameError() ? 'errorForm' : ''" formControlName="name" placeholder="Nom complet de l'agent">
+                                <span *ngIf="getNameError()" class="text text-danger"><small>{{ getNameError() }}</small></span>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>Nom Agence</label>
+                                <input class="form-control" [id]="getNameAgenceSuccess() ? 'successForm' : getNameAgenceError() ? 'errorForm' : ''" formControlName="nameAgence" placeholder="Le nom de l'agence, EX: Agence Sangoyah">
+                                <span><small class="text-danger">{{ getNameAgenceError() }}</small></span>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>Adresse agence</label>
+                                <input class="form-control" [id]="getAdressSuccess() ? 'successForm' : getAdressError() ? 'errorForm' : ''" formControlName="adress" placeholder="L'adresse ou se trouve l'agence, EX: C/Matoto Q/Sangoyah">
+                                <span><small class="text-danger">{{ getAdressError() }}</small></span>
+                            </div>
+                            <!-- <div class="row"> -->
+                                <div class="form-group col-lg-6">
+                                    <label>Email</label>
+                                    <input class="form-control" [id]="getEmailSuccess() ? 'successForm' : getEmailError() ? 'errorForm' : ''" type="email" formControlName="email" placeholder="Email de l'agence">
+                                    <span><small class="text-danger">{{ getEmailError() }}</small></span>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label>Telephone</label>
+                                    <input class="form-control" [id]="getTelSuccess() ? 'successForm' : getTelError() ? 'errorForm' : ''" formControlName="tel" placeholder="Telephone de l'agence">
+                                    <span><small class="text-danger">{{ getTelError() }}{{ ' '}}</small></span>
+                                    <span *ngIf="getEmailError"><small class="text-with">.</small></span>
+                                </div>
+                            <!-- </div>     -->
+                            <!-- <div class="row"> -->
+                                <div class="form-group col-lg-6">
+                                    <label>Mot de passe</label>
+                                    <input type="password" class="form-control" [id]="getPasswordSuccess() ? 'successForm' : getPasswordError() ? 'errorForm' : ''" formControlName="password" placeholder="Minimun 6 caracteres">
+                                    <span><small class="text-danger">{{ getPasswordError() }}</small></span>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label>Repter Mot de passe</label>
+                                    <input type="password" class="form-control" [id]="getPasswordConfirmSuccess() ? 'successForm' : getPasswordConfirmError() ? 'errorForm' : ''" formControlName="passwordConfirm" placeholder="Meme chose que le precedent">
+                                    <span *ngIf="getPasswordConfirmError()"><small class="text-danger">{{ getPasswordConfirmError() }}</small></span>
+                                    <div *ngIf="getPasswordConfirmSuccess()" class="text text-danger">
+                                        <small class="text-danger" *ngIf="this.registerForm.errors?.errorPassword && (this.registerForm.touched || this.registerForm.dirty)">
+                                            Mot de passe non concordant
+                                        </small>
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                            <div class="form-group">
+                                <div class="checkbox col-lg-10 col-lg-offset-1">
+                                    <input type="checkbox" class="i-checks" checked> Acepter les condition d'utilisation
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-success loginbtn" id="custumButton" [disabled]="registerForm.pending || !registerForm.valid || !etatPadding">{{ !etatPadding ? 'Patienter...': 'Enregistrer'}}</button>
+                            <button type="button" (click)="registerForm.reset()" class="btn btn-default ml-5">Annuler</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="text-center login-footer">
+            <p id="text" >Allez a la page de <a [routerLink]="['/login']" routerLinkActive="router-link-active" >connexion</a></p>
+        </div>
+    </div>   
+</div>

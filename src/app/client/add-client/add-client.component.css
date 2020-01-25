@@ -1,0 +1,13 @@
+@import '~dropzone/dist/min/dropzone.min.css';
+
+#errorForm{
+  border: 1px solid red;
+}
+
+#successForm{
+  border: 1px solid green;
+}
+
+#successNotStyl{
+  border: 1px solid none;
+}

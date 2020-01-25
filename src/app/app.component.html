@@ -1,0 +1,9 @@
+<!-- <link rel="stylesheet" href="../assets/user/style.css"> -->
+<ng2-slim-loading-bar color="red"></ng2-slim-loading-bar>
+<app-header-user *ngIf="userService.isLoggedIn()"></app-header-user>
+<router-outlet></router-outlet>
+
+<app-footer-user *ngIf="userService.isLoggedIn()" ></app-footer-user>
+<!-- <div class="js-ng">
+    
+</div> -->

@@ -1,0 +1,118 @@
+<app-search-bar home="Home" title="Ajout Client"></app-search-bar>
+<div class="all-content-wrapper">
+    <div class="single-pro-review-area mt-t-30 mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-payment-inner-st">
+                        <ul id="myTabedu1" class="tab-review-design">
+                            <!-- INFORMATION -->
+                            <div class="card-header">
+                                <h4>Ajout Client</h4>
+                            </div>
+                            <!-- <li><a href="#reviews"> Account Information</a></li> -->
+                            <!-- <li><a href="#INFORMATION">Social Information</a></li> -->
+                            <!-- <img src="../../../../api/public/images/uploads/2019-10-251572002212768téléchargement.jpg" alt=""> -->
+                        </ul>
+                        <div id="myTabContent" class="tab-content custom-product-edit">
+                            <div class="product-tab-list tab-pane fade active in" id="description">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="review-content-section">
+                                            <div id="dropzone1" class="pro-ad">
+                                                <form [formGroup]="clientForm" enctype="multipart/form-data" (ngSubmit)="onSubmit()" action="/upload"  >
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="form-group">
+                                                                <input formControlName="nom" [id]="getNomSuccess() ? 'successForm' : getNomError() ? 'errorForm' : ''" type="text" class="form-control" placeholder="Nom*">
+                                                                <span *ngIf="getNomError()" class="text text-danger"><small>{{ getNomError() }}</small></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input formControlName="prenom" [id]="getPrenomSuccess() ? 'successForm' : getPrenomError() ? 'errorForm' : ''" type="text" class="form-control" placeholder="Prenom*">
+                                                                <span *ngIf="getPrenomError()" class="text text-danger"><small>{{ getPrenomError() }}</small></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input formControlName="telOrange" [id]="getTelOrangeSuccess() ? 'successNotStyl' : getTelOrangeError() ? 'errorForm' : ''" type="text" class="form-control" placeholder="Mobile Orange">
+                                                                <span *ngIf="getTelOrangeError()" class="text text-danger"><small>{{ getTelOrangeError() }}</small></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input formControlName="telMtn" [id]="getTelMtnSuccess() ? 'successNotStyl' : getTelMtnError() ? 'errorForm' : ''" type="text" class="form-control" placeholder="Mobile MTN">
+                                                                <span *ngIf="getTelMtnError()" class="text text-danger"><small>{{ getTelMtnError() }}</small></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input formControlName="telCelcom" [id]="getTelCelcomSuccess() ? 'successNotStyl' : getTelCelcomError() ? 'errorForm' : ''" id="postcode" type="text" class="form-control" placeholder="Mobile Celcome">
+                                                                <span *ngIf="getTelCelcomError()" class="text text-danger"><small>{{ getTelCelcomError() }}</small></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input formControlName="entreprise" type="text" class="form-control" placeholder="Nom Entreprise">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <!-- <input type="file" class="custom-file-input" name="avatar" (change)="onFileChange($event)"> -->
+                                                                <label class="btn btn-default btn-file btn-lg" style="width: 800px;">
+                                                                        <fa-icon [icon]="faFileUpload"></fa-icon>Photo DE Profile client <input type="file" name="avatar" required (change)="onFileChange($event)" style="display: none;">
+                                                                </label>
+                                                                    
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            
+                                                            <div class="form-group res-mg-t-15">
+                                                                <textarea formControlName="description" placeholder="Description"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input formControlName="email" [id]="getEmailSuccess() ? 'successNotStyl' : getEmailError() ? 'errorForm' : ''" id="postcode" type="email" class="form-control" placeholder="Email">                                                                
+                                                                <span *ngIf="getEmailError()" class="text text-danger"><small>{{ getEmailError() }}</small></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <select formControlName="genre" class="form-control">
+                                                                    <option value="none" selected="" disabled="">Genre</option>
+                                                                    <option value="Masculin">Masculin</option>
+                                                                    <option value="Feminin">Feminin</option>
+                                                                </select>
+                                                            </div>
+                                                            <div formGroupName="adress">
+
+                                                                <div class="form-group">
+                                                                    <select formControlName="commune" class="form-control">
+                                                                        <option value="none" selected="" disabled="">Commune</option>
+                                                                        <option value="Ratoma">Ratoma</option>
+                                                                        <option value="Matoto">Matoto</option>
+                                                                        <option value="Dixin">Dixin</option>
+                                                                        <option value="Matam">Matam</option>
+                                                                        <option value="Kaloum">Kaloum</option>
+                                                                        <option value="Autre">Autre</option>
+                                                                    </select>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <input formControlName="quartier" id="postcode" type="text" class="form-control" placeholder="Quratier">                                                                
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input formControlName="secteur" type="text" class="form-control" placeholder="Secteur">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="payment-adress">
+                                                                <button type="submit" [disabled]="clientForm.pending || clientForm.invalid || !etatPadding" class="btn btn-primary waves-effect waves-light">{{ !etatPadding ? 'Patienter...': 'Ajouter'}}</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
