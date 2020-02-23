@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
         this.passwordIncorect = false;
         this.etatPadding = true;
       }else{
-        this.router.navigate(['/'])
+        this.router.navigate(['/']);
       }
     })
   }

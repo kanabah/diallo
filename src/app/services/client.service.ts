@@ -1,3 +1,4 @@
+import { baseUrl } from './backend';
 import { Injectable } from '@angular/core';
 import { Client } from '../interfaces/client';
 import { Observable, of } from 'rxjs';
@@ -8,7 +9,7 @@ import { retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ClientService {
-  private api = 'http://localhost:4000/clients';
+  private api = `${baseUrl}clients`;
 
   constructor(private http: HttpClient) { }
 

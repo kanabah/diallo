@@ -1,3 +1,4 @@
 module.exports = {
-    DB: 'mongodb+srv://dbUser:dbUser@cluster0-h6xiq.mongodb.net/test?retryWrites=true&w=majority'
- };
+    DB: `mongodb+srv://madiou:madiou@cluster0-truva.mongodb.net/test?retryWrites=true&w=majority`,
+    DBDEV: 'mongodb://localhost:27017/abf'
+};

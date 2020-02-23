@@ -1,3 +1,4 @@
+import { baseUrl } from './backend';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -9,7 +10,7 @@ export class PrintClientService {
 
   printAvatar(avatar){
     if(avatar){
-      return `http://localhost:4000/${avatar}`;
+      return `${baseUrl}${avatar}`;
     }else{
       return 'assets/user/img/avatar/avatar.png';
     }

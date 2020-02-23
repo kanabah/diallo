@@ -1,3 +1,4 @@
+import { baseUrl } from './backend';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -12,7 +13,7 @@ import { TokenResponse } from '../interfaces/tokenResponse';
 })
 export class UserService {
   
-  api = 'http://localhost:4000/users';
+  api = `${baseUrl}users`;
   private token: string;
 
   constructor(private http: HttpClient, private router: Router) { }
