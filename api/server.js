@@ -7,8 +7,8 @@ fs = require('fs'),
 mongoose = require('mongoose'),
 config = require('./DB');
 
-var privateKey  = fs.readFileSync('/home/abfgrup/ssl/keys/9cdf0_fe081_15ba3e0fb174329e560b42255e27bd91.key', 'utf8');
-var certificate = fs.readFileSync('/home/abfgrup/ssl/certs/abf_grup_com_9cdf0_fe081_1614341213_2ed9e09cef0601506f76e0f193e9949b.crt', 'utf8');
+var privateKey  = fs.readFileSync('/home/abfgrup/ssl/keys/c8623_ee753_d616ac42867c5843a60743bca9679c69.key', 'utf8');
+var certificate = fs.readFileSync('/home/abfgrup/ssl/certs/abf_grup_com_c8623_ee753_1590600121_4be0e232f39ea057c10617c6d1bce4aa.crt', 'utf8');
 
 const app = express();
 app.use(express.static(path.join(__dirname, '')));
@@ -34,7 +34,7 @@ app.use(cors());
 app.use('/users', userRoutes);
 app.use('/clients', clientRoutes);
 
-const port = process.env.PORT || 5202;
+const port = process.env.PORT || 8443;
 
 const options = {
   key: privateKey,
