@@ -17,7 +17,7 @@ import { Location } from '@angular/common';
   templateUrl: './commande-detail.component.html',
   styleUrls: ['./commande-detail.component.css']
 })
-export class CommandeDetailComponent implements OnInit, OnDestroy {
+export class CommandeDetailComponent implements OnInit, OnDestroy, OnDestroy {
   faCoffee = faCoffee;
   faCartArrowDown = faCartArrowDown;
   faBook = faBook;
@@ -62,7 +62,7 @@ export class CommandeDetailComponent implements OnInit, OnDestroy {
     // this.getClient();
   }
   
-  getClient(){
+  public getClient(){
     if((this.periode == 'total')){
 
       this.clientService.detaille(this.route.snapshot.paramMap.get('id')).subscribe(res => {
@@ -158,6 +158,7 @@ export class CommandeDetailComponent implements OnInit, OnDestroy {
       this.periode = 'tranche';
       this.collection = { count: 20, data: res  };
     })
+    // this.ngOnDestroy();
   }
 
   onCredit(client_id){

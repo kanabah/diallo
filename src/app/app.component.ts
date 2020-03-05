@@ -37,8 +37,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
-    // setTimeout(() => {
-    //   this.js.jsHomeUser();
-    // }, 1000)
+    
   }
 }

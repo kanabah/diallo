@@ -58,13 +58,9 @@ export class DetailleClientComponent implements OnInit {
   constructor(private clientService: ClientService, private route: ActivatedRoute, private js: JsService, private fb:FormBuilder, private _snackBar: MatSnackBar, private router: Router, public print: PrintClientService) { }
   ngOnInit() {
     
-    // // this.js.jsDeatilleClient();
-    // setTimeout(() => {
-    // }, 200);
     this.detaille();  
     this.client$.subscribe(res => {
       this.client = res;
-      // console.log('CLient Detaille', this.client.commandes);
       
       this.initialiseForms();
       this.calculTransactionClient()    

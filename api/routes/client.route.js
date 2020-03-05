@@ -79,13 +79,10 @@ clientRoutes.route('/addCommande/:id/user_id/:user_id').put(auth,ctrClient.addCo
 //UPLOAD IMAGE AVATAR
 clientRoutes.route('/avatar').post(upload.single('file'), (req, res) => {
     if (req.file) {
-        console.log('AVATAR file', req.file.path);
         return res.json(`${req.file.path}`);
     }
     else{
-        console.log('NOT AVATAR');
         return res.json(``);
-    //   res.status("409").json("No Files to Upload.");
   } 
 });
 

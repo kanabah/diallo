@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { controlCodeTelValidator } from 'src/app/validators/tel-required-once-validator';
 import { passwordValidator } from './../validators/password-register-validators';
 import { UserService } from './../services/user.service';
@@ -17,7 +16,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   etatPadding: boolean = true;
 
-  constructor(private http: HttpClient ,private fb:FormBuilder, private userService: UserService, private snackBra: SnackBarService, private router: Router) { }
+  constructor(private fb:FormBuilder, private userService: UserService, private snackBra: SnackBarService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -28,7 +27,6 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/login']);
       this.snackBra.openSnackBar('Compte Creer Avec Success!!!', 'Fermer');
     })
-   
   }
 
   registerForm = this.fb.group(
@@ -36,9 +34,22 @@ export class RegisterComponent implements OnInit {
       name: ['', [Validators.required]],
       nameAgence: ['', [Validators.required]],
       adress: ['', [Validators.required]],
-      email: ['', 
+      email: ['', {
+        validators: [
+         Validators.required,
+          Validators.email,
+       ],
+        asyncValidators: [emailValidatorRegister(this.userService, 'register')],
+        updateOn: 'blur'}
      ],
-     tel: ['', 
+     tel: ['', {
+      validators: [
+      Validators.required,
+        Validators.minLength(9),
+        Validators.pattern(/^[0-9+]{9,9}$/), controlCodeTelValidator(/^620|621|622|623|624|625|626|627|628|629|660|661|662|664|666|669|655|656|657/i)
+    ],
+      asyncValidators: [telValidatorRegister(this.userService)],
+      updateOn: 'blur'}
     ],
       password: ['', [Validators.required, Validators.minLength(6)]],
       passwordConfirm: ['', [Validators.required, Validators.minLength(6)]]
@@ -99,11 +110,9 @@ export class RegisterComponent implements OnInit {
         return "Le telephone de l'agence est requis";
       }else if(this.tel.errors.minLength){
         return 'Telephone incorect';
-      }
-      // else if(this.tel.errors.telExist){
-      //   return 'Cet numero est deja utiliser';
-      // }
-      else if(this.tel.errors.codeErr){
+      }else if(this.tel.errors.telExist){
+        return 'Cet numero est deja utiliser';
+      }else if(this.tel.errors.codeErr){
         return 'Code telephone incorect';
       }else if(this.tel.errors.pattern){
         return 'Telephone incorect';
@@ -123,10 +132,9 @@ export class RegisterComponent implements OnInit {
         return 'Le mail est requis';
       }else if(this.email.errors.email){
         return 'Le email est incorect';
+      }else if(this.email.errors.emailExist){
+        return 'Cet email est deja utiliser';
       }
-      // else if(this.email.errors.emailExist){
-      //   return 'Cet email est deja utiliser';
-      // }
     }
   }
 

@@ -19,6 +19,7 @@ export class DialogReglementComponent implements OnInit {
   constructor(private fb: FormBuilder, private clientService: ClientService, public dialogRef: MatDialogRef<DialogReglementComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private userService: UserService, private snackBar: SnackBarService) { }
 
   ngOnInit() {
+    
   }
 
   reglementForm = this.fb.group({
@@ -47,7 +48,7 @@ export class DialogReglementComponent implements OnInit {
             this.clientService.addReglement(this.data.id, this.reglementForm.value, this.data.client_id).subscribe(res => {
               this.dialogRef.close();
               this.snackBar.openSnackBar('Reglemnt effectuer aves success!!!', 'Fermer');
-            })
+            })  
           }else{
             this.etatPadding = true;
           }

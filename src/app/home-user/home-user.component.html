@@ -137,7 +137,7 @@
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success ctn-vs-{{purcentYear}}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentNbCmdYear']"> <span class="sr-only">60% Complete</span></div>
                                 </div>
-                            </li>*
+                            </li>
                             <li [routerLink]="['/client/periodeCommande', 'all']">
                                 <h2><span>{{ infoTotal['sumEntrerAll'] }}</span> <small> GNF</small></h2> <small>Total</small>
                                 <div class="pull-right">{{ infoTotal['countNbCmdAll'] }} cmds <i class="fa fa-level-up text-success ctn-ic-2"></i></div>
@@ -217,17 +217,20 @@
 </div>
 
 <div class="all-content-wrapper" *ngIf="!ok">
-        <div class="analytics-sparkle-area">
-            <div class="container-fluid">
-                    <div class="row" >
-                        <div class="col-md-offset-5">
-                            <mat-spinner></mat-spinner>  
-                        </div>
+    <div class="analytics-sparkle-area">
+        <div class="container-fluid">
+                <div class="row" >
+                    <div class="col-md-offset-5">
+                        <mat-spinner></mat-spinner>  
                     </div>
-            </div>
+                </div>
         </div>
+    </div>
 </div>
 
+<!-- <div class="js-ng">
+
+</div> -->
 <!-- <script src="assets/user/js/sparkline/jquery.sparkline.min.js"></script>
 <script src="assets/user/js/sparkline/jquery.charts-sparkline.js"></script>
 <script src="assets/user/js/sparkline/sparkline-active.js"></script> -->

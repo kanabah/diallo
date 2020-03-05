@@ -851,14 +851,14 @@ module.exports.periode = async function(req, res){
                     })
                 })
             }else if(periode == 'all'){
+                
                 clients = clis.filter(function(result){
                     if(result.deteCmdUpdate){
                         return result;
                     }
                     
-                })
-                
-                
+                });
+
                 clients.forEach(res => {
                     res.commandes.forEach(result => {
                         if(result.delete == 0){
@@ -978,7 +978,6 @@ module.exports.commandeCredit = async function(req, res){
              {$unwind: {path: "$commandes"}},
              { $match: {"commandes.typePay": { "$in": ['Credit', 'Tranche']}, "commandes.delete": { "$eq": 0}}}
             ]).sort( { "commandes.dateCmd": -1 } );
-            console.log('nbNomPay Tranche', periode  );
             if(periode == 'today'){
                 clients = commandeCredits.filter(function(result){
                     return result.commandes.dateCmd.getDate() == day && result.commandes.dateCmd.getMonth() == month && result.commandes.dateCmd.getFullYear() == year;
@@ -997,6 +996,8 @@ module.exports.commandeCredit = async function(req, res){
                 })
             }else if(periode == 'all'){
                 clients = commandeCredits;
+                console.log('All', clients);
+                
             }
         
         return res.status(200).json(clients);

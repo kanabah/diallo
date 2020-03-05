@@ -50,6 +50,7 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription = timer(0, 2000).subscribe(res => {
       this.infoHome();
     });
+    // this.js.jsHomeUser();
     // this.infoHome()
   }
 
@@ -57,7 +58,6 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
     this.clientService.returnInfoHome().subscribe(res => {
       this.ok = true;
       this.infoTotal = res;
-      console.log('Res', this.infoTotal['clients']);
       this.calculPurcentCommande();
     })
   }
@@ -186,7 +186,7 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(){
     setTimeout(() => {
-      this.js.jsHomeUser();
+      // this.js.jsHomeUser();
     }, 1000)
   }
 

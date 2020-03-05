@@ -71,7 +71,6 @@ export class PeriodeCommandeComponent implements OnInit {
     );
     
     this.$ok.subscribe((resuts: Client[]) => {
-      console.log('My Params SUBCRIBE', resuts);
       this.somPayTotal  = resuts['somPayTotal'];
       this.somCreditTotal  = resuts['somCreditTotal'];
       this.clients = new MatTableDataSource(resuts['clients']);
