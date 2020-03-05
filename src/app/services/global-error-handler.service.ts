@@ -20,6 +20,6 @@ export class GlobalErrorHandlerService {
         //A client-side or network error occurred.	          
         console.error('An error occurred:', error.message);          
     }     
-    router.navigate(['/error']);
+    // router.navigate(['/error']);
   }
 }

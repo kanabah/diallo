@@ -14,7 +14,6 @@ export class ClientService {
   constructor(private http: HttpClient) { }
 
   addClient(client: Client): Observable<Client>{
-    console.log('CLIENT SERVICE guinee', client);
     return this.http.post<Client>(`${this.api}/addClient`, client).pipe(
       retry(3)
     );

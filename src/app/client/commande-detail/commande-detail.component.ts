@@ -30,7 +30,7 @@ export class CommandeDetailComponent implements OnInit, OnDestroy, OnDestroy {
   subscription: Subscription;
   commandes: any;
   periode: string = 'total';
-  
+  order: string = 'cmd.modePay';
   constructor(private route: ActivatedRoute, private clientService: ClientService, private router: Router, public dialog: MatDialog, private location: Location, public print: PrintClientService) {
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {

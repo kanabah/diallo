@@ -30,7 +30,6 @@ export class AddClientComponent implements OnInit {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.clientForm.get('avatar').setValue(file);
-      // console.log('AVATAR', this.clientForm.get('avatar').value);
       
     }
   }

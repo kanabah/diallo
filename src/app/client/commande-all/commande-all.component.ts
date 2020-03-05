@@ -37,6 +37,7 @@ clients = new MatTableDataSource();
 
   allCommandes(){
     this.clientService.allClientCommande().subscribe((resuts: Client[]) => {
+      resuts.sort((a: any, b: any) => a.deteCmdUpdate < b.deteCmdUpdate ? 1 : a.deteCmdUpdate > b.deteCmdUpdate ? -1 : 0);
       this.clients = new MatTableDataSource(resuts);
       this.clients.paginator = this.paginator;
       this.clients.sort = this.sort;

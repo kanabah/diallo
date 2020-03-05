@@ -1,3 +1,4 @@
+import { OrderModule } from 'ngx-order-pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 
@@ -52,6 +53,7 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
     BrowserAnimationsModule,
     DemoMaterialModule,
     FontAwesomeModule,
+    OrderModule
   ],
   providers: [
     {
