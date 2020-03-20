@@ -29,7 +29,7 @@ clients = new MatTableDataSource();
   }
 
   //DATA TABLE
-  displayedColumns: string[] = ['avatar', 'nom', 'prenom', 'adress.commune', 'adress.quartier', 'adress.secteur', 'telOrange', 'telMtn', 'telCelcom', '_id'];
+  displayedColumns: string[] = ['avatar', 'nom', 'prenom', 'adress.commune', 'adress.quartier', 'adress.secteur', 'telOrange', 'telMtn', 'telCelcom', 'telPerso', '_id'];
   
   applyFilter(filterValue: string) {
     this.clients.filter = filterValue.trim().toLowerCase();

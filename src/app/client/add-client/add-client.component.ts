@@ -117,6 +117,13 @@ export class AddClientComponent implements OnInit {
       asyncValidators: [telCLientUniqueValidator(this.clientService)],
       updateOn: 'blur'}
    ],
+    telPerso: ['', {
+      validators: [
+        Validators.pattern(/^[0-9+]{9,9}$/)
+     ],
+      asyncValidators: [telCLientUniqueValidator(this.clientService)],
+      updateOn: 'blur'}
+   ],
     adress: this.fb.group({
       commune: ['none'],
       quartier: [''],
@@ -233,6 +240,30 @@ export class AddClientComponent implements OnInit {
     }
   }
 
+  successPerso(){
+    if(this.telCelcom.valid || this.telCelcom.value == ''){
+      return true;
+    }
+  }
+
+  getTelPersoError(){
+    if(this.telPerso.invalid && (this.telPerso.dirty || this.telPerso.touched)){
+      if(this.telPerso.errors.required){
+        return 'Le numero de telephone est requis';
+      }else if(this.telPerso.errors.pattern){
+        return 'Numero telephone incorect';
+      }else if(this.telPerso.errors.telExist){
+        return 'Cet numero est dejat utiliser';
+      }
+    }
+  }
+
+  getTelPersoSuccess(){
+    if(this.telPerso.valid){
+      return true;
+    }
+  }
+
   getTelOrangeError(){
     if(this.telOrange.invalid && (this.telOrange.dirty || this.telOrange.touched)){
       if(this.telOrange.errors.required){
@@ -287,6 +318,10 @@ export class AddClientComponent implements OnInit {
 
   get telCelcom(){
     return this.clientForm.get('telCelcom');
+  }
+
+  get telPerso(){
+    return this.clientForm.get('telPerso');
   }
 
   get nomEntreprise(){

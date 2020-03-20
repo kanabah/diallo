@@ -191,6 +191,7 @@ module.exports.updateClient = async function(req, res){
             client[0].telOrange = req.body.telOrange;
             client[0].telMtn = req.body.telMtn;
             client[0].telCelcom = req.body.telCelcom;
+            client[0].telPerso = req.body.telPerso;
             client[0].entreprise = req.body.entreprise;
             client[0].description = req.body.description;
             client[0].genre = req.body.genre;
@@ -423,6 +424,7 @@ module.exports.onUpdateCommande = async function(req, res){
             commande[0].modePay = req.body.commandes.modePay;
             commande[0].opperateur = req.body.commandes.opperateur;
             commande[0].nbStartTimes = req.body.commandes.nbStartTimes;
+            commande[0].traitement = req.body.commandes.traitement;
             // commande[0].dateCmd = Date.now();
 
             reglement.somPay = req.body.commandes.somPay;

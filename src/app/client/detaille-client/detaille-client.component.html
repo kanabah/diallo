@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                     <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                        <p><b>Phone</b><br /> {{ afficheTel() }}</p>
+                                        <p><b>Phone Personel</b><br /> {{ client.telPerso ? client.telPerso : afficheTel() }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -85,21 +85,25 @@
                                                                     <p><b>Mobile Orange</b><br /> {{ client.telOrange }}</p>
                                                                 </div>
                                                             </div>
+                                                            
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                                 <div class="address-hr biography">
                                                                     <p><b>Mobile MTN</b><br /> {{ client.telMtn }}</p>
                                                                 </div>
                                                             </div>
+
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                                 <div class="address-hr biography">
                                                                     <p><b>Mobile Celcome</b><br /> {{ client.telCelcom }}</p>
                                                                 </div>
                                                             </div>
+
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                                 <div class="address-hr biography">
                                                                     <p><b>Sexe</b><br /> {{ client.genre !== 'none' ? client.genre : '' }}</p>
                                                                 </div>
                                                             </div>
+
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
@@ -270,22 +274,32 @@
                                                                         <input formControlName="nom" [id]="getNomSuccess() ? 'successForm' : getNomError() ? 'errorForm' : ''" type="text" class="form-control" placeholder="Nom">
                                                                         <span *ngIf="getNomError()" class="text text-danger"><small>{{ getNomError() }}</small></span>
                                                                     </div>
+
                                                                     <div class="form-group">
                                                                         <input type="text" [id]="getPrenomSuccess() ? 'successForm' : getPrenomError() ? 'errorForm' : ''" formControlName="prenom" class="form-control" placeholder="Prenom">
                                                                         <span *ngIf="getPrenomError()" class="text text-danger"><small>{{ getPrenomError() }}</small></span>
                                                                     </div>
+
                                                                     <div class="form-group">
                                                                         <input type="text" [id]="getTelOrangeSuccess() ? 'successNotStyl' : getTelOrangeError() ? 'errorForm' : ''" formControlName="telOrange" class="form-control" placeholder="Mobile Orange">
                                                                         <span *ngIf="getTelOrangeError()" class="text text-danger"><small>{{ getTelOrangeError() }}</small></span>
                                                                     </div>
+
                                                                     <div class="form-group">
                                                                         <input type="text" [id]="getTelMtnSuccess() ? 'successNotStyl' : getTelMtnError() ? 'errorForm' : ''" formControlName="telMtn" class="form-control" placeholder="Mobile MTN">
                                                                         <span *ngIf="getTelMtnError()" class="text text-danger"><small>{{ getTelMtnError() }}</small></span>
                                                                     </div>
+
                                                                     <div class="form-group">
                                                                         <input type="text" [id]="getTelCelcomSuccess() ? 'successNotStyl' : getTelCelcomError() ? 'errorForm' : ''" formControlName="telCelcom" class="form-control" placeholder="Mobile Celcome">
                                                                         <span *ngIf="getTelCelcomError()" class="text text-danger"><small>{{ getTelCelcomError() }}</small></span>
                                                                     </div>
+
+                                                                    <div class="form-group">
+                                                                        <input type="text" [id]="getTelPersoSuccess() ? 'successNotStyl' : getTelPersoError() ? 'errorForm' : ''" formControlName="telPerso" class="form-control" placeholder="Mobile Personel">
+                                                                        <span *ngIf="getTelPersoError()" class="text text-danger"><small>{{ getTelPersoError() }}</small></span>
+                                                                    </div>
+
                                                                     <div class="form-group">
                                                                         <select formControlName="genre" class="form-control">
                                                                             <option value="none" selected="" disabled="">Genre</option>
@@ -293,18 +307,7 @@
                                                                             <option>Feminin</option>
                                                                         </select>
                                                                     </div>
-                                                                    <!-- <div class="file-upload-inner ts-forms">
-                                                                        <div class="input prepend-big-btn">
-                                                                            <label class="icon-right" for="prepend-big-btn">
-                                                                                <i class="fa fa-download"></i>
-                                                                            </label>
-                                                                            <div class="file-button">
-                                                                                Browse
-                                                                                <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;">
-                                                                            </div>
-                                                                            <input type="text" id="prepend-big-btn" placeholder="no file selected">
-                                                                        </div>
-                                                                    </div> -->
+                                                                    
                                                                     <div class="form-group">
                                                                         <input type="email" [id]="getEmailSuccess() ? 'successNotStyl' : getEmailError() ? 'errorForm' : ''" formControlName="email" class="form-control" placeholder="Email">
                                                                         <span *ngIf="getEmailError()" class="text text-danger"><small>{{ getEmailError() }}</small></span>

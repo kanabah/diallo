@@ -27,22 +27,32 @@
                                                                 <input formControlName="nom" [id]="getNomSuccess() ? 'successForm' : getNomError() ? 'errorForm' : ''" type="text" class="form-control" placeholder="Nom*">
                                                                 <span *ngIf="getNomError()" class="text text-danger"><small>{{ getNomError() }}</small></span>
                                                             </div>
+
                                                             <div class="form-group">
                                                                 <input formControlName="prenom" [id]="getPrenomSuccess() ? 'successForm' : getPrenomError() ? 'errorForm' : ''" type="text" class="form-control" placeholder="Prenom*">
                                                                 <span *ngIf="getPrenomError()" class="text text-danger"><small>{{ getPrenomError() }}</small></span>
                                                             </div>
+
                                                             <div class="form-group">
                                                                 <input formControlName="telOrange" [id]="getTelOrangeSuccess() ? 'successNotStyl' : getTelOrangeError() ? 'errorForm' : ''" type="text" class="form-control" placeholder="Mobile Orange">
                                                                 <span *ngIf="getTelOrangeError()" class="text text-danger"><small>{{ getTelOrangeError() }}</small></span>
                                                             </div>
+
                                                             <div class="form-group">
                                                                 <input formControlName="telMtn" [id]="getTelMtnSuccess() ? 'successNotStyl' : getTelMtnError() ? 'errorForm' : ''" type="text" class="form-control" placeholder="Mobile MTN">
                                                                 <span *ngIf="getTelMtnError()" class="text text-danger"><small>{{ getTelMtnError() }}</small></span>
                                                             </div>
+
                                                             <div class="form-group">
                                                                 <input formControlName="telCelcom" [id]="getTelCelcomSuccess() ? 'successNotStyl' : getTelCelcomError() ? 'errorForm' : ''" id="postcode" type="text" class="form-control" placeholder="Mobile Celcome">
                                                                 <span *ngIf="getTelCelcomError()" class="text text-danger"><small>{{ getTelCelcomError() }}</small></span>
                                                             </div>
+
+                                                            <div class="form-group">
+                                                                <input formControlName="telPerso" [id]="getTelPersoSuccess() ? 'successNotStyl' : getTelPersoError() ? 'errorForm' : ''" id="postcode" type="text" class="form-control" placeholder="Mobile Personel">
+                                                                <span *ngIf="getTelPersoError()" class="text text-danger"><small>{{ getTelPersoError() }}</small></span>
+                                                            </div>
+
                                                             <div class="form-group">
                                                                 <input formControlName="entreprise" type="text" class="form-control" placeholder="Nom Entreprise">
                                                             </div>
@@ -51,8 +61,7 @@
                                                                 <!-- <input type="file" class="custom-file-input" name="avatar" (change)="onFileChange($event)"> -->
                                                                 <label class="btn btn-default btn-file btn-lg" style="width: 800px;">
                                                                         <fa-icon [icon]="faFileUpload"></fa-icon>Photo DE Profile client <input type="file" name="avatar" required (change)="onFileChange($event)" style="display: none;">
-                                                                </label>
-                                                                    
+                                                                </label>        
                                                             </div>
 
 

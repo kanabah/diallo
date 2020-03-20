@@ -30,48 +30,6 @@ export class DialogContentAddTransfertComponent implements OnInit {
 
   etatPadding: boolean = true;
   verificationChamp: boolean = true;
-
-
-  select(event){
-    if(event.target.value === 'Tranche'){
-      this.ngSomRest = true;
-      this.ngSomPay = true;
-      this.ngSomCredit = false;
-
-      this.somCredit.setValue('');
-
-      this.somPay.setValidators([Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]);
-      this.somRest.setValidators([Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]);
-      this.somCredit.clearValidators();
-
-    }else if(event.target.value === 'Credit'){
-      this.ngSomRest = false;
-      this.ngSomPay = false;
-      this.ngSomCredit = true;
-
-      this.somPay.setValue('');
-      this.somRest.setValue('');
-      
-      this.somPay.clearValidators();
-      this.somRest.clearValidators();
-      this.somCredit.setValidators([Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]);
-      
-    }else if(event.target.value === 'Total'){
-      this.ngSomRest = false;
-      this.ngSomPay = true;
-      this.ngSomCredit = false;
-
-      this.somRest.setValue('');
-      this.somCredit.setValue('');
-
-      this.somPay.setValidators([Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]);
-      this.somRest.clearValidators();
-      this.somCredit.clearValidators();
-    }
-    this.somPay.updateValueAndValidity();
-    this.somRest.updateValueAndValidity();
-    this.somCredit.updateValueAndValidity();
-  }
   
   constructor(private fb: FormBuilder, private clientService: ClientService, private changeDedectionRef: ChangeDetectorRef, private snackBar: SnackBarService, private router: Router, public dialogRef: MatDialogRef<DialogContentAddTransfertComponent>, private userService: UserService) { }
   
@@ -83,7 +41,7 @@ export class DialogContentAddTransfertComponent implements OnInit {
   }
 
   test(){
-    if(this.somPay.value == '' && this.somRest.value == '' && this.somCredit.value == ''){
+    if(this.somCredit.value == ''){
       this.verificationChamp =  false;
     }
   }
@@ -100,24 +58,11 @@ export class DialogContentAddTransfertComponent implements OnInit {
           this.passwordIncorect = false;
           this.etatPadding = true;
         }else{
-          if(this.typePay.value == 'Tranche'){
-            this.traitement.setValue(1);
-          }else if(this.typePay.value == 'Credit'){
-            this.traitement.setValue(1);
-          }
+          this.somRest.setValue(this.somCredit.value);
 
-          if(this.typePay.value == 'Credit'){
-            this.somRest.setValue(this.somCredit.value);
-          }
-
-          if(this.opperateur.value == 'Choisir'){
-            this.snackBar.openSnackBar("Veuiller choisir l'opperateur", 'Fermer');
-            return;
-          }
-          
           if(this.getTelTransfertSuccess()){
             this.clientService.addCommande(this.idClient, this.payForm.value, this.userService.getUserDetails()._id).subscribe(res => {
-              this.snackBar.openSnackBar('Commande Ajouter Avec Success!!!', 'Fermer');
+              this.snackBar.openSnackBar('Rechargement Effectuer avec success!!!', 'Fermer');
               this.etatPadding = true;
               this.dialogRef.close();
             })
@@ -141,14 +86,13 @@ export class DialogContentAddTransfertComponent implements OnInit {
       updateOn: 'blur'}
    ],
    commandes: this.fb.group({
-     somPay: ['', [Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]],
-     typePay: ['Total', [Validators.required]],
-     modePay: ['Cache', [Validators.required]],
-     opperateur: ['Choisir', [Validators.required]],
-     typeCmd: ['Transfert', []],
+     somCredit: ['', [Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]],
+     traitement: ['1', []],
+     typePay: ['Credit', []],
+     somPay: ['', []],
+     modePay: ['Cache', []],
      somRest: ['', []],
-     somCredit: ['', []],
-     traitement: ['0', []],
+     typeCmd: ['Transfert', []], //Je laisse Le typeCmd a "Transfert" pour ne pas me fatiguer a modifier la logique.
      reglement: this.fb.group({
       
      })
@@ -185,36 +129,6 @@ export class DialogContentAddTransfertComponent implements OnInit {
     }
   }
 
-  getSomPayError(){
-    if(this.somPay.invalid && (this.somPay.dirty || this.somPay.touched)){
-      if(this.somPay.errors.required){
-        return 'Cet Montant est requis.';
-      }else if(this.somPay.errors.pattern){
-        return 'Montant Incorect';
-      }
-    }
-  }
-  
-  getSomPaySuccess(){
-    if(this.somPay.valid){
-      return true;
-    }
-  }
-  getSomRestError(){
-    if(this.somRest.invalid && (this.somRest.dirty || this.somRest.touched)){
-      if(this.somRest.errors.required){
-        return 'Cet Montant est requis';
-      }else if(this.somRest.errors.pattern){
-        return 'Montant incorect';
-      }
-    }
-  }
-  
-  getSomRestSuccess(){
-    if(this.somRest.valid){
-      return true;
-    }
-  }
   getSomCreditError(){
     if(this.somCredit.invalid && (this.somCredit.dirty || this.somCredit.touched)){
       if(this.somCredit.errors.required){
@@ -255,24 +169,12 @@ export class DialogContentAddTransfertComponent implements OnInit {
     return this.payForm.get('telTransfert');
   }
 
-  get opperateur(){
-    return this.payForm.get('commandes.opperateur');
-  }
-  
-  get modePay(){
-    return this.payForm.get('commandes.modePay');
-  }
-  get typePay(){
-    return this.payForm.get('commandes.typePay');
-  }
-  get somPay(){
-    return this.payForm.get('commandes.somPay');
-  }
-  get somRest(){
-    return this.payForm.get('commandes.somRest');
-  }
   get somCredit(){
     return this.payForm.get('commandes.somCredit');
+  }
+
+  get somRest(){
+    return this.payForm.get('commandes.somRest');
   }
   get password(){
     return this.payForm.get('password');

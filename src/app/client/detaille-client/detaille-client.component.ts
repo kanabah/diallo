@@ -289,6 +289,7 @@ export class DetailleClientComponent implements OnInit {
       telMtn: this.client.telMtn ? this.client.telMtn : '',
       genre: this.client.genre ? this.client.genre : '',
       telCelcom: this.client.telCelcom ? this.client.telCelcom : '',
+      telPerso: this.client.telPerso ? this.client.telPerso : '',
       avatar: this.client.avatar ? this.client.avatar : '',
       adress: {
         commune: this.client.adress.commune ? this.client.adress.commune : '',
@@ -321,6 +322,13 @@ export class DetailleClientComponent implements OnInit {
     telCelcom: ['', {
       validators: [
         Validators.pattern(/^[0-9+]{9,9}$/), controlCodeTelValidator(/^655|656|657/i)
+     ],
+      asyncValidators: [telUpdateClientValidator(this.clientService, this.route.snapshot.paramMap.get('id'))],
+      updateOn: 'blur'}
+   ],
+   telPerso: ['', {
+      validators: [
+        Validators.pattern(/^[0-9+]{9,9}$/)
      ],
       asyncValidators: [telUpdateClientValidator(this.clientService, this.route.snapshot.paramMap.get('id'))],
       updateOn: 'blur'}
@@ -431,6 +439,24 @@ export class DetailleClientComponent implements OnInit {
     }
   }
 
+  getTelPersoError(){
+    if(this.telPerso.invalid && (this.telPerso.dirty || this.telPerso.touched)){
+      if(this.telPerso.errors.required){
+        return 'Le telephone personel est requis';
+      }else if(this.telPerso.errors.pattern){
+        return 'telphone personel est incorect';
+      }else if(this.telPerso.errors.telExist){
+        return 'Cet numero est dejat utiliser';
+      }
+    }
+  }
+
+  getTelPersoSuccess(){
+    if(this.telPerso.valid){
+      return true;
+    }
+  }
+
   getTelOrangeError(){
     if(this.telOrange.invalid && (this.telOrange.dirty || this.telOrange.touched)){
       if(this.telOrange.errors.required){
@@ -485,6 +511,10 @@ export class DetailleClientComponent implements OnInit {
 
   get telCelcom(){
     return this.clientForm.get('telCelcom');
+  }
+
+  get telPerso(){
+    return this.clientForm.get('telPerso');
   }
 
   get nomEntreprise(){

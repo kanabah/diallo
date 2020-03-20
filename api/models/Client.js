@@ -13,6 +13,7 @@ var clientSchema = new Schema({
     telOrange: Number,
     telMtn: Number,
     telCelcom: Number,
+    telPerso: Number,
     adress: {
         commune: String,
         quartier: String,

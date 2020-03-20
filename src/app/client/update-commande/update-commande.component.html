@@ -11,7 +11,7 @@
         <form [formGroup]="payForm" (ngSubmit)="onUpdate()">
             
             <div formGroupName="commandes">
-                <div class="form-group">
+                <div class="form-group" *ngIf="commande.typeCmd !== 'Transfert'">
                     <label for="ModePayemnt">Mode Payement</label>
                 <select class="form-control" id="ModePayemnt" formControlName="modePay">
                     <option value="Cache">Cache</option>
@@ -19,21 +19,12 @@
                     <option value="MoMo">Mobile Money</option>
                 </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="commande.typeCmd !== 'Transfert'">
                     <label for="typePayement">Type Payement</label>
                     <select class="form-control" (change)="select($event)" id="typePayement" formControlName="typePay">
                         <option value="Total">Total</option>
                         <option value="Tranche">Tranche</option>
                         <option value="Credit">Credit</option>
-                    </select>
-                </div>
-                <div class="form-group" *ngIf="commande.typeCmd == 'Transfert'">
-                    <label for="opperateur">Opperateur</label>
-                    <select class="form-control" id="opperateur" formControlName="opperateur">
-                        <option value="Choisir" disabled>Choisir L'operateur</option>
-                        <option value="Orange">Orange</option>
-                        <option value="MTN">NTN</option>
-                        <option value="Celcom">Celcom</option>
                     </select>
                 </div>
 

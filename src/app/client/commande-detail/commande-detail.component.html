@@ -54,7 +54,7 @@
                                         <th>Date</th>
                                     </tr>
                                     <tr *ngFor="let cmd of collection.data |paginate: config">
-                                        <td ><img src="{{ typeCmd(cmd.typeCmd) }}" alt="" id="image"></td>
+                                        <td ><img src="{{ typeCmd(cmd.typeCmd) }}" alt="Image" id="image"></td>
                                         <td><span class="badge badge-success"> {{ cmd.typePay}}</span></td>
                                         <td>{{ cmd.somPay ? cmd.somPay : 0 }}</td>
                                         <td>{{ cmd.somRest ? cmd.somRest : 0 }}</td>

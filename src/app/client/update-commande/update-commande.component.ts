@@ -172,7 +172,6 @@ export class UpdateCommandeComponent implements OnInit {
             this.somRest.setValue(this.somCredit.value);
           }
 
-          console.log('Type Commande', this.typeCmd.value);
           
           if(this.typeCmd.value == 'ST'){
             if(!this.nbStartTimes.value){
@@ -180,7 +179,8 @@ export class UpdateCommandeComponent implements OnInit {
               return;
             }
           }
-
+          console.log('Traitement', this.traitement.value);
+          
           this.clientService.onUpdateCommande(this.data.cmd_id, this.data.client_id,this.userService.getUserDetails()._id, this.payForm.value).subscribe(res => {
             this.snackBar.openSnackBar('Commande Modifier Avec Success!!!', 'Fermer');
             this.dialogRef.close();
