@@ -55,6 +55,12 @@ export class ClientService {
     )
   }
 
+  public getCommandeCredit(id): Observable<Client>{
+    return this.http.get<Client>(`${this.api}/getCommandeCredit/${id}`).pipe(
+      retry(3)
+    )
+  }
+
   public periodeDetailleCommande(id, myParams): Observable<Client>{
     return this.http.get<Client>(`${this.api}/periodeDetailleCommande/${id}/${myParams}`).pipe(
       retry(3)
@@ -177,6 +183,12 @@ export class ClientService {
 
   public returnInfoHome(): Observable<any>{
     return this.http.get<any>(`${this.api}/returnInfoHome`).pipe(
+      retry(3)
+    )
+  }
+
+  public getMontantClient(id, type): Observable<any>{
+    return this.http.get<any>(`${this.api}/getMontantClient/${id}/${type}`).pipe(
       retry(3)
     )
   }

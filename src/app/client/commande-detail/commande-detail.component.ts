@@ -58,7 +58,7 @@ export class CommandeDetailComponent implements OnInit, OnDestroy, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = timer(0, 2000).subscribe(res => this.getClient());
+    this.subscription = timer(0, 10000).subscribe(res => this.getClient());
     // this.getClient();
   }
   

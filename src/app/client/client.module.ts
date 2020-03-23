@@ -32,9 +32,10 @@ import { PeriodeCommandeDetailleComponent } from './periode-commande-detaille/pe
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { TypeAyementComponent } from './type-ayement/type-ayement.component';
 import { CommandeCreditComponent } from './commande-credit/commande-credit.component';
+import { CommandeCreditDettailleComponent } from './commande-credit-dettaille/commande-credit-dettaille.component';
 
 @NgModule({
-  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, SearchBarComponent, TypeAyementComponent, CommandeCreditComponent],
+  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, SearchBarComponent, TypeAyementComponent, CommandeCreditComponent, CommandeCreditDettailleComponent],
   entryComponents: [
     DialogContentAddCommandeOrangeMoneyComponent,
     DialogContentAddCommandeMobileMoneyComponent,

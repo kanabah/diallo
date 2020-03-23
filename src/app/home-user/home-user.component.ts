@@ -47,7 +47,7 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
   ok: boolean = false;
 
   ngOnInit() {
-    this.subscription = timer(0, 2000).subscribe(res => {
+    this.subscription = timer(0, 10000).subscribe(res => {
       this.infoHome();
     });
     // this.js.jsHomeUser();

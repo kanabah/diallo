@@ -5,8 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ClientService } from 'src/app/services/client.service';
 import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Client } from 'src/app/interfaces/client';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-commande-credit',
@@ -26,7 +27,7 @@ export class CommandeCreditComponent implements OnInit {
   $commandesCredit: any;
   $ok: any;
 
-  constructor(private route: ActivatedRoute, private clientService: ClientService, public print: PrintClientService) { }
+  constructor(private router: Router, private snackBar: SnackBarService ,private route: ActivatedRoute, private clientService: ClientService, public print: PrintClientService) { }
 
   ngOnInit() {
     this.route.paramMap.pipe(
@@ -35,9 +36,8 @@ export class CommandeCreditComponent implements OnInit {
       ),
     ).subscribe(result => {
       this.myParams = result;
-      // console.log('My Result', this.myParams);
-      
-      // this.myParams = this.route.snapshot.paramMap.get('periode');
+      this.getCommandeCredit();
+
       if(this.myParams == 'all'){
         this.periodeCmd = 'Total';
       }else if(this.myParams == 'week'){
@@ -51,35 +51,92 @@ export class CommandeCreditComponent implements OnInit {
       }
     })
 
-    this.getCommandeCredit();
+    
   }
 
   //DATA TABLE
-  displayedColumns: string[] = ['avatar', 'nom', 'prenom', 'telOrange', 'telMtn', 'telCelcom', 'commandes.typeCmd', 'commandes.somPay', 'commandes.somRest', 'commandes.modePay','commandes.opperateur','commandes.nbStartTimes', 'commandes.dateCmd'];
+  displayedColumns: string[] = ['avatar', 'nom', 'prenom', 'adress.commune', 'adress.quartier', 'adress.secteur', 'telOrange', 'telMtn', 'telCelcom', 'telPerso', '_id'];
     
   applyFilter(filterValue: string) {
     this.clients.filter = filterValue.trim().toLowerCase();
   }
 
-  getCommandeCredit(){
-    this.$ok = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.clientService.periode(params.get('periode')), 
-      ),
-    );
+  // getCommandeCredit(){
+  //   this.$ok = this.route.paramMap.pipe(
+  //     switchMap((params: ParamMap) =>
+  //       this.clientService.periode(params.get('periode')), 
+  //     ),
+  //   );
 
-    this.$commandesCredit = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.clientService.commandeCredit(params.get('periode')), 
-      ),
-    );
+  //   this.$commandesCredit = this.route.paramMap.pipe(
+  //     switchMap((params: ParamMap) =>
+  //       this.clientService.commandeCredit(params.get('periode')), 
+  //     ),
+  //   );
     
-    this.$commandesCredit.subscribe((resuts: Client[]) => {
-      this.clients = new MatTableDataSource(resuts);      
+  //   this.$commandesCredit.subscribe((resuts: Client[]) => {
+  //     this.clients = new MatTableDataSource(resuts);      
+  //       this.clients.paginator = this.paginator;
+  //       this.clients.sort = this.sort;
+      
+  //   })  
+  // }
+
+
+  getCommandeCredit(){
+    let date = new Date();
+    this.clientService.allClientCommande().subscribe((resuts: Client[]) => {
         this.clients.paginator = this.paginator;
         this.clients.sort = this.sort;
-      
-    })  
+        
+        if(this.route.snapshot.paramMap.get('periode') == 'today')
+        {
+          var resultats = resuts.filter(function(result){
+        console.log('RESULT', result.commandes.length);
+
+            if(result.deteCmdUpdate){
+              var deteCmdUpdate = new Date(result.deteCmdUpdate);
+              return result.commandes.length > 0 && deteCmdUpdate.getDate() == date.getDate() && deteCmdUpdate.getMonth() == date.getMonth() && deteCmdUpdate.getFullYear() == date.getFullYear();
+            }
+            
+          }) 
+        }
+
+        if(this.route.snapshot.paramMap.get('periode') == 'month')
+        {
+          var resultats = resuts.filter(function(result){
+            if(result.deteCmdUpdate){
+              var deteCmdUpdate = new Date(result.deteCmdUpdate);
+              return deteCmdUpdate.getMonth() == date.getMonth() && deteCmdUpdate.getFullYear() == date.getFullYear();
+            }
+            
+          }) 
+        }
+
+        if(this.route.snapshot.paramMap.get('periode') == 'year')
+        {
+          var resultats = resuts.filter(function(result){
+            if(result.deteCmdUpdate){
+              var deteCmdUpdate = new Date(result.deteCmdUpdate);
+              return deteCmdUpdate.getFullYear() == date.getFullYear();
+            }
+            
+          }) 
+        }
+
+        if(this.route.snapshot.paramMap.get('periode') == 'all')
+        {
+          var resultats = resuts.filter(function(result){
+            if(result.deteCmdUpdate){
+              return resuts;
+            }
+            
+          }) 
+        }
+
+      this.clients = new MatTableDataSource(resultats);      
+
+    });
   }
 
   typeCmd(typeCmd){
@@ -92,6 +149,17 @@ export class CommandeCreditComponent implements OnInit {
     }else if(typeCmd == 'Transfert'){
       return 'assets/user/img/logo/transfert.png';
     }
+  }
+
+  onCommande(id, periode){
+    this.clientService.detaille(id).subscribe(res => {
+      this.client = res;
+      if(this.client.commandes.length > 0){
+        this.router.navigate(['client/commandes/commande-credit-detaill', id, periode])
+      }else{
+        this.snackBar.openSnackBar("Cet client n'a pas effectuer des commandes!!!", 'Fermer')
+      }
+    })  
   }
 
 }

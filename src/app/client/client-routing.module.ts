@@ -11,6 +11,7 @@ import { CommandeDetailComponent } from './commande-detail/commande-detail.compo
 import { PeriodeCommandeComponent } from './periode-commande/periode-commande.component';
 import { TypeAyementComponent } from './type-ayement/type-ayement.component';
 import { CommandeCreditComponent } from './commande-credit/commande-credit.component';
+import { CommandeCreditDettailleComponent } from './commande-credit-dettaille/commande-credit-dettaille.component';
 
 
 const routes: Routes = [
@@ -53,6 +54,10 @@ const routes: Routes = [
       {
         path: 'commandes/commande-detaill/:id',
         component: CommandeDetailComponent
+      },
+      {
+        path: 'commandes/commande-credit-detaill/:id/:periode',
+        component: CommandeCreditDettailleComponent
       },
       {
         path: 'commandes/commande-detaill/reglement-list/:cmd_id/:client_id',

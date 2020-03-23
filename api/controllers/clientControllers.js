@@ -127,6 +127,24 @@ module.exports.clientDettaille = async function(req, res){
     }
 }
 
+module.exports.getCommandeCredit = async function(req, res){
+    let id = req.params.id;
+    
+    try{
+        let client = await Client.find({"_id": id});
+        
+        if(!client){
+            return res.status(404).send(new Error('Utilisateur not found 404'));
+        }else{
+            
+            return res.status(200).json(client[0]);
+        }
+
+    }catch(err){
+        return res.status(500).send(new Error('Erreur de server 500...'));
+    }
+}
+
 module.exports.reglementList = async function(req, res){
     let cmd_id = req.params.cmd_id;
     let client_id = req.params.client_id;
@@ -503,6 +521,52 @@ module.exports.onAujourdhui = async function(req, res){
         })  
 
         return res.status(200).json(commandes);
+    }catch(err){
+        return res.status(500).send(new Error('Erreur de server 500...'));
+    }
+}
+
+module.exports.getMontantClient = async function(req, res){
+    let client_id = req.params.id;
+    let type = req.params.type;
+    var sumTotal = 0;
+    var sumOM = 0;
+    var sumMoMo = 0;
+    var sumST = 0;
+    var sumTransfert = 0;
+    try{
+        let client = await Client.find({"_id": client_id});
+        // let client = await Client.aggregate([{$unwind: "$commandes"}, {$group: {_id: null, sum: {$sum: "$commandes.somRest"}}}]);
+
+        client[0].commandes.forEach(res =>{
+            sumTotal +=res.somRest;
+            
+            if(res.typeCmd == 'OM'){
+                sumOM +=res.somRest;
+            }
+
+            if(res.typeCmd == 'MoMo'){
+                sumMoMo +=res.somRest;
+            }
+            if(res.typeCmd == 'ST'){
+                sumST +=res.somRest;
+            }
+            if(res.typeCmd == 'Transfert'){
+                sumTransfert +=res.somRest;
+            }
+        });
+        
+        var resultats = {
+            somRestOM: sumOM,
+            somRestMoMo: sumMoMo,
+            somRestST: sumST,
+            somRestTransfert: sumTransfert,
+            somRestTotal: sumTotal,
+        }
+
+        console.log('Get Some Credit', resultats);
+        
+        return res.status(200).json(resultats);
     }catch(err){
         return res.status(500).send(new Error('Erreur de server 500...'));
     }

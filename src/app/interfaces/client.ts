@@ -16,6 +16,7 @@ export interface Client {
     entreprise: string,
     description: string,
     avatar: string,
+    deteCmdUpdate: any,
     commandes: [{
         _id: any,
         value: any,

@@ -33,6 +33,24 @@
                                         <td mat-cell *matCellDef="let element"> {{element.prenom}} </td>
                                     </ng-container>
                                     
+                                    <!-- Weight Column -->
+                                    <ng-container matColumnDef="adress.commune">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Commune </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.adress.commune == 'none' ? '' : element.adress.commune }} </td>
+                                    </ng-container>
+                                    
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="adress.quartier">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quartier </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.adress.quartier}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="adress.secteur">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Secteur </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.adress.secteur}} </td>
+                                    </ng-container>
+
                                     <!-- Symbol Column -->
                                     <ng-container matColumnDef="telOrange">
                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Tel Orange </th>
@@ -51,41 +69,18 @@
                                         <td mat-cell *matCellDef="let element"> {{element.telCelcom}} </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="commandes.typeCmd">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Type Cmd </th>
-                                        <td mat-cell *matCellDef="let element"> <img src="{{ typeCmd(element.commandes.typeCmd) }}" alt="" id="image"></td>
-                                    </ng-container>
                                     <!-- Symbol Column -->
-                                    <ng-container matColumnDef="commandes.somPay">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Somme Pay </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.commandes.somPay}} </td>
+                                    <ng-container matColumnDef="telPerso">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tel Personel </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.telPerso}} </td>
+                                    </ng-container>
+                                    
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="_id">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Commandes </th>
+                                        <td mat-cell *matCellDef="let element"> <button class="btn btn-primary btn-xs"  (click)="onCommande(element._id, myParams)">Voir</button> </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="commandes.somRest">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Somme Rest </th>
-                                        <td mat-cell *matCellDef="let element"> <span class="badge badge-danger">{{element.commandes.somRest}}</span> </td>
-                                    </ng-container>
-                                    
-                                    
-                                    <ng-container matColumnDef="commandes.modePay">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Mode Pay </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.commandes.modePay}} </td>
-                                    </ng-container>
-                                    
-                                    <ng-container matColumnDef="commandes.opperateur">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Opperateur </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.commandes.opperateur}} </td>
-                                    </ng-container>
-                                    
-                                    <ng-container matColumnDef="commandes.nbStartTimes">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nb Decodeurs </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.commandes.nbStartTimes}} </td>
-                                    </ng-container>
-                                    
-                                    <ng-container matColumnDef="commandes.dateCmd">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.commandes.dateCmd | date }} </td>
-                                    </ng-container>
                                 <!-- Position Column -->
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

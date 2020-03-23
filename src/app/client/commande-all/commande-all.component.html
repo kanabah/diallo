@@ -73,9 +73,39 @@
                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Tel Personel </th>
                                         <td mat-cell *matCellDef="let element"> {{element.telPerso}} </td>
                                     </ng-container>
-                                    
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="genre">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Credit OM </th>
+                                        <td mat-cell *matCellDef="let element"><span class="badge badge-success">{{ getCreditClient(element._id).somRestOM }}</span></td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="email">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Credit MoMo </th>
+                                        <td mat-cell *matCellDef="let element"><span class="badge badge-success">{{ getCreditClient(element._id).somRestMoMo }}</span>  </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="description">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Credit ST </th>
+                                        <td mat-cell *matCellDef="let element"><span class="badge badge-success">{{ getCreditClient(element._id).somRestST }}</span>  </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="entreprise">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Credit Espece </th>
+                                        <td mat-cell *matCellDef="let element"><span class="badge badge-success">{{ getCreditClient(element._id).somRestTransfert }}</span>  </td>
+                                    </ng-container>
+
                                     <!-- Symbol Column -->
                                     <ng-container matColumnDef="_id">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Credit </th>
+                                        <td mat-cell *matCellDef="let element"><span class="badge badge-success">{{ getCreditClient(element._id).somRestTotal }}</span>  </td>
+                                    </ng-container>
+                                    
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="nbCmd">
                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Commandes </th>
                                         <td mat-cell *matCellDef="let element"> <button class="btn btn-primary btn-xs"  (click)="onCommande(element._id)">Voir</button> </td>
                                     </ng-container>
