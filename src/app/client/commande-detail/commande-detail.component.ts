@@ -17,7 +17,7 @@ import { Location } from '@angular/common';
   templateUrl: './commande-detail.component.html',
   styleUrls: ['./commande-detail.component.css']
 })
-export class CommandeDetailComponent implements OnInit, OnDestroy, OnDestroy {
+export class CommandeDetailComponent implements OnInit, OnDestroy {
   faCoffee = faCoffee;
   faCartArrowDown = faCartArrowDown;
   faBook = faBook;
@@ -59,7 +59,6 @@ export class CommandeDetailComponent implements OnInit, OnDestroy, OnDestroy {
 
   ngOnInit() {
     this.subscription = timer(0, 10000).subscribe(res => this.getClient());
-    // this.getClient();
   }
   
   public getClient(){
@@ -71,6 +70,8 @@ export class CommandeDetailComponent implements OnInit, OnDestroy, OnDestroy {
         this.commandes = res.commandes.filter(function(res){
           return res.delete == 0;
         })
+        
+        this.commandes.sort((a: any, b: any) => a.dateCmd < b.dateCmd ? 1 : a.dateCmd > b.dateCmd ? -1 : 0);
         this.collection = { count: 20, data: this.commandes  };
       })
     }else if(this.periode == 'aujourdhui'){

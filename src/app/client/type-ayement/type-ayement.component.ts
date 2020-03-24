@@ -36,7 +36,6 @@ export class TypeAyementComponent implements OnInit {
   
     allCommandes(route){
       this.clientService.TypePayement(route).subscribe((resuts: Client[]) => {
-        console.log('CLients Tranche', resuts);
         this.clients = new MatTableDataSource(resuts);      
         this.clients.paginator = this.paginator;
         this.clients.sort = this.sort;

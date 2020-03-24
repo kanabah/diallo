@@ -61,31 +61,10 @@ export class CommandeCreditComponent implements OnInit {
     this.clients.filter = filterValue.trim().toLowerCase();
   }
 
-  // getCommandeCredit(){
-  //   this.$ok = this.route.paramMap.pipe(
-  //     switchMap((params: ParamMap) =>
-  //       this.clientService.periode(params.get('periode')), 
-  //     ),
-  //   );
-
-  //   this.$commandesCredit = this.route.paramMap.pipe(
-  //     switchMap((params: ParamMap) =>
-  //       this.clientService.commandeCredit(params.get('periode')), 
-  //     ),
-  //   );
-    
-  //   this.$commandesCredit.subscribe((resuts: Client[]) => {
-  //     this.clients = new MatTableDataSource(resuts);      
-  //       this.clients.paginator = this.paginator;
-  //       this.clients.sort = this.sort;
-      
-  //   })  
-  // }
-
-
   getCommandeCredit(){
     let date = new Date();
     this.clientService.allClientCommande().subscribe((resuts: Client[]) => {
+      resuts.sort((a: any, b: any) => a.deteCmdUpdate < b.deteCmdUpdate ? 1 : a.deteCmdUpdate > b.deteCmdUpdate ? -1 : 0);
         this.clients.paginator = this.paginator;
         this.clients.sort = this.sort;
         this.clientsAll = resuts;

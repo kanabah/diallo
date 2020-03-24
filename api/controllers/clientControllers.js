@@ -20,7 +20,7 @@ module.exports.telExist = async function(req, res){
     let tel = req.params.tel;
     if(tel !== ''){
         try{
-            let client = await Client.find({$or: [{ "telOrange": tel}, { "telMtn": tel}, {"telCelcom": tel}]});
+            let client = await Client.find({$or: [{ "telOrange": tel}, { "telMtn": tel}, {"telCelcom": tel}, {"telPerso": tel}]});
             if(!client){
                 return res.status(404).send(new Error('Érror 404 data note found...'));
             }else{

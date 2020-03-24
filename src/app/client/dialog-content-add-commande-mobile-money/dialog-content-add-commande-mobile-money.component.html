@@ -1,7 +1,7 @@
 <div class="card" style="width: 18rem;">
     <div class="card-header" *ngIf="ok">
         <h5 class="card-title" >
-            <img src="assets/user/img/contact/1.jpg"  id="rounded-circle" alt="Profile"><span id="nom">{{ prenom }}</span>
+            <img src="{{ print.printAvatar(avatar) }}"  id="rounded-circle" alt="Profile"><span id="nom">{{ prenom }}</span>
         </h5>
         <hr>
     </div>

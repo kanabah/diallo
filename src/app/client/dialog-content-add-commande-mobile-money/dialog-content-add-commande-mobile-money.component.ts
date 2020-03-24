@@ -1,3 +1,4 @@
+import { PrintClientService } from './../../services/print-client.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client.service';
@@ -27,7 +28,8 @@ export class DialogContentAddCommandeMobileMoneyComponent implements OnInit {
   ngSomCredit: boolean = false;
   passwordIncorect= true;
   user: any;
-
+  avatar: any;
+  
   etatPadding: boolean = true;
   verificationChamp: boolean = true;
 
@@ -72,7 +74,7 @@ export class DialogContentAddCommandeMobileMoneyComponent implements OnInit {
     this.somCredit.updateValueAndValidity();
   }
   
-  constructor(private fb: FormBuilder, private clientService: ClientService, private changeDedectionRef: ChangeDetectorRef, private snackBar: SnackBarService, private router: Router, public dialogRef: MatDialogRef<DialogContentAddCommandeMobileMoneyComponent>, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private clientService: ClientService, private changeDedectionRef: ChangeDetectorRef, private snackBar: SnackBarService, private router: Router, public dialogRef: MatDialogRef<DialogContentAddCommandeMobileMoneyComponent>, private userService: UserService, public print: PrintClientService) { }
   
   ngAfterContentChecked(): void {
     this.changeDedectionRef.detectChanges();
@@ -162,6 +164,7 @@ export class DialogContentAddCommandeMobileMoneyComponent implements OnInit {
         this.quartier = this.telMtn.errors.client.value.adress.quartier;
         this.secteur = this.telMtn.errors.client.value.adress.secteur;
         this.idClient = this.telMtn.errors.client.value._id;
+        this.avatar = this.telMtn.errors.client.value.avatar;
         this.ok = true;
         this.telMtn.setErrors(null);
       }else if(this.telMtn.errors.codeErr){
