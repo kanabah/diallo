@@ -8,7 +8,7 @@
                 <a routerLink="/"><img class="main-logo" style="width: 100px;" src="assets/user/img/logo/abf.jpeg" alt="" /></a>
                 <strong><a routerLink="/"><img src="assets/user/img/logo/logosn.png" alt="" /></a></strong>
             </div>
-            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+            <div class="left-custom-menu-adp-wrap comment-scrollbar" id="overflow">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
                         <li class="active">
@@ -45,31 +45,31 @@
                             </ul>
                         </li>
 
-                        <li>
+                        <!-- <li>
                             <a  class="has-arrow"data-toggle="collapse" data-target="#demolibra" href="#"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Periode <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                            <ul id="demolibra" class="collapse dropdown-header-top">
+                            <ul id="demolibra" class="collapse dropdown-header-top"> -->
                                 <li>
-                                    <a class="" [routerLink]="['/client/periodeCommande', 'today']"    aria-expanded="false"> <span class="mini-click-non">Cmds Aujourd'hui</span></a>
+                                    <a class="" [routerLink]="['/client/periodeCommande', 'today']"    aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Aujourd'hui</span></a>
                                     
                                 </li>
                                 <li>
-                                    <a class="" [routerLink]="['/client/periodeCommande', 'week']"   aria-expanded="false"> <span class="mini-click-non">Cmds Semmaine</span></a>
+                                    <a class="" [routerLink]="['/client/periodeCommande', 'week']"   aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Semmaine</span></a>
                                     
                                 </li>
                                 <li>
-                                    <a class="" [routerLink]="['/client/periodeCommande', 'ceMois']"   aria-expanded="false"> <span class="mini-click-non">Cmds Mois</span></a>
+                                    <a class="" [routerLink]="['/client/periodeCommande', 'ceMois']"   aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Mois</span></a>
                                     
                                 </li>
                                 <li>
-                                    <a class="" [routerLink]="['/client/periodeCommande', 'year']"   aria-expanded="false"> <span class="mini-click-non">Cmds Annee</span></a>
+                                    <a class="" [routerLink]="['/client/periodeCommande', 'year']"   aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Annee</span></a>
                                     
                                 </li>
                                 <li>
-                                    <a class="" [routerLink]="['/client/periodeCommande', 'all']"   aria-expanded="false"> <span class="mini-click-non">Cmds Total</span></a>
+                                    <a class="" [routerLink]="['/client/periodeCommande', 'all']"   aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Total</span></a>
                                     
                                 </li>
-                            </ul>
-                        </li>
+                            <!-- </ul>
+                        </li> -->
                         
                     </ul>
                 </nav>
