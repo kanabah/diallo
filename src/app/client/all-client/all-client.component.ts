@@ -37,7 +37,7 @@ export class AllClientComponent implements OnInit {
   }
 
   printFullName(prenom, nom){
-    return prenom.concat(' '+nom).slice(0, 29);
+    return prenom.concat(' '+nom).slice(0, 20);
   }
 
   allClient(){

@@ -36,8 +36,8 @@ app.use('/clients', clientRoutes);
 
 app.get('/', (request, response) => response.send("Welcome to sogma API"));
 
-// const port = process.env.PORT || 5202;
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 5202;
+// const port = process.env.PORT || 4001;
 
 // const options = {
 //   key: privateKey,
