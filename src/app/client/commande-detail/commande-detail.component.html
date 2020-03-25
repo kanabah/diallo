@@ -52,7 +52,7 @@
                                         <th>Mode Pay</th>
                                         <th>Date</th>
                                     </tr>
-                                        <tr *ngFor="let cmd of collection.data |paginate: config | orderBy:'cmd.dateCmd': 'desc'" [ngClass]="{'bg-warning': cmd.typeCmd == 'MoMo' ? true : false, 'bg-danger': cmd.typeCmd == 'OM' ? true : false, 'bg-info': cmd.typeCmd == 'Transfert' ? true : false, 'bg-success': cmd.typeCmd == 'ST' ? true : false  }">
+                                        <tr *ngFor="let cmd of collection.data |paginate: config | orderBy:'cmd.dateCmd': false" [ngClass]="{'bg-warning': cmd.typeCmd == 'MoMo' ? true : false, 'bg-danger': cmd.typeCmd == 'OM' ? true : false, 'bg-info': cmd.typeCmd == 'Transfert' ? true : false, 'bg-success': cmd.typeCmd == 'ST' ? true : false  }">
                                         <td ><img src="{{ typeCmd(cmd.typeCmd) }}" alt="Image" id="image"></td>
                                         <td><span class="badge badge-success"> {{ cmd.typePay}}</span></td>
                                         <td>{{ !cmd.somPay ? 0 : cmd.somPay | currency:'':''  }}</td>

@@ -20,7 +20,7 @@ export class CommandeCreditDettailleComponent implements OnInit {
   };
   client: Client;
 
-  constructor(private clientService: ClientService, private route: ActivatedRoute, private print: PrintClientService, private location: Location) {
+  constructor(private clientService: ClientService, private route: ActivatedRoute, public print: PrintClientService, private location: Location) {
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
         {
@@ -35,6 +35,10 @@ export class CommandeCreditDettailleComponent implements OnInit {
       currentPage: 1,
       totalItems: this.collection.count
     };
+  }
+
+  pageChanged(event){
+    this.config.currentPage = event;
   }
 
   ngOnInit() {
