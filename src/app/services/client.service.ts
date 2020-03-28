@@ -25,6 +25,12 @@ export class ClientService {
     )
   }
 
+  public telExistAddClient(tel: number): Observable<any>{
+    return this.http.get<any>(`${this.api}/telExistAddClient/${tel}`).pipe(
+      retry(3),
+    )
+  }
+
   public emailExist(email: string): Observable<any>{
     return this.http.get<any>(`${this.api}/existEmail/${email}`).pipe(
       retry(3),

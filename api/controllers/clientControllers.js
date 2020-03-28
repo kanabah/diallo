@@ -20,6 +20,23 @@ module.exports.telExist = async function(req, res){
     let tel = req.params.tel;
     if(tel !== ''){
         try{
+            let client = await Client.find({$or: [{ "telOrange": tel}, { "telMtn": tel}, {"telCelcom": tel}, {"telPerso": tel}], "user_id": req.payload._id});
+            if(!client){
+                return res.status(404).send(new Error('Érror 404 data note found...'));
+            }else{
+                return res.status(200).json(client);
+            }
+            
+        }catch(err){
+            return res.status(500).send(new Error('Erreur 500...'));
+        }
+    }
+}
+
+module.exports.telExistAddClient = async function(req, res){
+    let tel = req.params.tel;
+    if(tel !== ''){
+        try{
             let client = await Client.find({$or: [{ "telOrange": tel}, { "telMtn": tel}, {"telCelcom": tel}, {"telPerso": tel}]});
             if(!client){
                 return res.status(404).send(new Error('Érror 404 data note found...'));
@@ -52,7 +69,7 @@ module.exports.emailExist = async function(req, res){
 
 module.exports.allClientCommande = async function(req, res){
     try{
-        let clients = await Client.find({ nbCmd: { $ne: 0 }}).sort( { nbCmd: -1 } );
+        let clients = await Client.find({ nbCmd: { $ne: 0 }, "user_id": req.payload._id}).sort( { nbCmd: -1 } );
 
         if(!clients){
             return res.status(404).send(new Error('Produit not found 404'));
@@ -70,11 +87,8 @@ module.exports.allClient = async function(req, res){
     var nbOM = 0;
     var nbMoMo = 0;
     try{
-        let clients = await Client.find({});
+        let clients = await Client.find({"user_id": req.payload._id});
         let clis = await Client.aggregate([{$unwind: {path: "$commandes"}}]);
-
-        // console.log('All client', clis);
-        
 
           var returnInfoClient = {
             clients: clients,
@@ -82,7 +96,6 @@ module.exports.allClient = async function(req, res){
             nbMoMo: nbMoMo,
             clis: clis
           }
-
         
         if(!clients){
             return res.status(404).send(new Error('Produit not found 404'));
@@ -113,7 +126,7 @@ module.exports.clientDettaille = async function(req, res){
     let id = req.params.id;
     
     try{
-        let client = await Client.find({"_id": id});
+        let client = await Client.find({"_id": id, "user_id": req.payload._id});
         
         if(!client){
             return res.status(404).send(new Error('Utilisateur not found 404'));
@@ -653,23 +666,24 @@ module.exports.onTotalCmd = async function(req, res){
 module.exports.returnInfoHome = async function(req, res){
     var date = new Date();
     
+    
     try{
         var sumTotalOM = 0;  
         var sumTotalMoMo = 0;  
         var sumTotalST = 0;  
         var sumTotalTransfert = 0;  
-
+        
         var sumCreditOM = 0;  
         var sumCreditMoMo = 0;  
         var sumCreditST = 0;  
         var sumCreditTransfert = 0;
-
+        
         var sumEntrerJour = 0;  
         var sumEntrerWeek = 0;  
         var sumEntrerMonth = 0;  
         var sumEntrerYear = 0;  
         var sumEntrerAll = 0;  
-
+        
         var total = 0;  
         var pourcentOM = 0;  
         var pourcentMoMo = 0;  
@@ -683,23 +697,25 @@ module.exports.returnInfoHome = async function(req, res){
         var countNbCmdYear = 0;
         var countNbCmdAll = 0;
         var myDate;
-
+        
         var pourcentNbCmdDay = 0;
         var pourcentNbCmdMonth = 0;
         var pourcentNbCmdWeek = 0;
         var pourcentNbCmdYear = 0;
-
+        
         myDate = formatDate(date);
-
+        
         let cmds = await Client.distinct('commandes');
-        let nbClientTranche = await Client.find({"commandes.typePay": 'Tranche', "commandes.delete": 0}).count();
-        let nbClientCredit = await Client.find({"commandes.typePay": 'Credit', "commandes.delete": 0}).count();
-        let nbClientTotal = await Client.find({"commandes.typePay": 'Total', "commandes.delete": 0}).count();
-        let clients = await Client.find({nbCmd: { $ne: 0 }}).sort( { nbCmd: -1 } ).limit(5);
-        let nbClients = await Client.find({}).count();
+        let nbClientTranche = await Client.find({"commandes.typePay": 'Tranche', "commandes.user_id": req.payload._id, "commandes.delete": 0}).count();
+        let nbClientCredit = await Client.find({"commandes.typePay": 'Credit', "commandes.user_id": req.payload._id, "commandes.delete": 0}).count();
+        let nbClientTotal = await Client.find({"commandes.typePay": 'Total', "commandes.user_id": req.payload._id, "commandes.delete": 0}).count();
+        console.log('User ID', nbClientTotal);
+
+        let clients = await Client.find({nbCmd: { $ne: 0 }, "user_id": req.payload._id}).sort( { nbCmd: -1 } ).limit(5);
+        let nbClients = await Client.find({ "user_id": req.payload._id }).count();
 
         commandes = cmds.filter(function(res){
-            return res.delete == 0;
+            return res.delete == 0 && res.user_id == req.payload._id;
         });
         
         let commandeMonth = [];
@@ -762,12 +778,6 @@ module.exports.returnInfoHome = async function(req, res){
             }
         });
 
-        // console.log('Somme Credit Orange Money', sumCreditOM);
-        // console.log('Somme Credit MoMo', sumCreditMoMo);
-        // console.log('Somme Credit ST', sumCreditST);
-        // console.log('Somme Credit TRansfert', sumCreditTransfert);
-        
-        
         total = sumTotalOM + sumTotalMoMo + sumTotalST + sumTotalTransfert;
         
         pourcentOM = Math.round((sumTotalOM * 100)/ total);
@@ -816,18 +826,6 @@ module.exports.returnInfoHome = async function(req, res){
             clients: clients,
         }
 
-        // console.log('Somme Total OM', sumTotalOM);
-        // console.log('Somme Total MoMo', sumTotalMoMo);
-        // console.log('Somme Total ST', sumTotalST);
-        // console.log('Somme Total Transfert', sumTotalTransfert);
-        // console.log('pourcentOM', pourcentOM);
-        // console.log('Total', total);
-
-        // console.log('Sum Entrer Jour', sumEntrerJour);
-        // console.log('Sum Entrer Week', sumEntrerWeek);
-        // console.log('Sum Entrer Month', sumEntrerMonth);
-        
-
         return res.status(200).json(returnSumTotal);
     }catch(err){
         return res.status(500).send(new Error('Erreur de server 500...'));
@@ -846,7 +844,7 @@ module.exports.periode = async function(req, res){
     
 
     try{
-        let clis = await Client.find({}).sort( { nbCmd: -1 } ); 
+        let clis = await Client.find({"user_id": req.payload._id}).sort( { nbCmd: -1 } ); 
             if(periode == 'today'){
                 clients = clis.filter(function(result){
                     if(result.deteCmdUpdate){
@@ -963,7 +961,7 @@ module.exports.periodeDetailleCommande = async function(req, res){
     // console.log('myParams', myParams);
     
     try{
-        let client = await Client.find({"_id": id});
+        let client = await Client.find({"_id": id, "user_id": req.payload._id});
         cmds = client[0].commandes;
         
         if(myParams == 'today'){

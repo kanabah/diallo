@@ -37,9 +37,7 @@ export class PeriodeCommandeComponent implements OnInit {
       ),
     ).subscribe(result => {
       this.myParams = result;
-      // console.log('My Result', this.myParams);
       
-      // this.myParams = this.route.snapshot.paramMap.get('periode');
       if(this.myParams == 'all'){
         this.periodeCmd = 'Total';
       }else if(this.myParams == 'week'){

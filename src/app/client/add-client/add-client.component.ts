@@ -1,9 +1,10 @@
+import { UserService } from './../../services/user.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { debounceTime } from 'rxjs/operators';
 import { timer } from 'rxjs';
 import { ClientService } from 'src/app/services/client.service';
-import { telCLientUniqueValidator } from 'src/app/validators/tel-client-validators';
+import { telCLientAddUniqueValidator } from 'src/app/validators/tel-client-add-validators';
 import { controlCodeTelValidator } from 'src/app/validators/tel-required-once-validator';
 import { emailValidatorClient } from 'src/app/validators/email-client-validators';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -19,7 +20,7 @@ export class AddClientComponent implements OnInit {
   faFileUpload = faFileUpload;
   etatPadding: boolean = true;
 
-  constructor(private fb: FormBuilder, private clientService: ClientService, private _snackBar: MatSnackBar, private router: Router) { }
+  constructor(private fb: FormBuilder, private clientService: ClientService, private _snackBar: MatSnackBar, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     
@@ -74,6 +75,7 @@ export class AddClientComponent implements OnInit {
       if(this.okCelecom || this.okMtn || this.okOrange){
         this.clientService.upload(formData).subscribe(res => {
           this.avatar.setValue(res);
+          this.user_id.setValue(this.userService.getUserDetails()._id);
 
           this.clientService.addClient(this.clientForm.value).subscribe(res => {
             this.openSnackBar('Client ajouter avec success', 'Fermer');
@@ -100,28 +102,28 @@ export class AddClientComponent implements OnInit {
       validators: [
         Validators.pattern(/^[0-9+]{9,9}$/), controlCodeTelValidator(/^620|621|622|623|624|625|626|627|628|629/i)
      ],
-      asyncValidators: [telCLientUniqueValidator(this.clientService)],
+      asyncValidators: [telCLientAddUniqueValidator(this.clientService)],
       updateOn: 'blur'}
    ],
     telMtn: ['', {
       validators: [
         Validators.pattern(/^[0-9+]{9,9}$/), controlCodeTelValidator(/^660|661|662|664|666|669/i)
      ],
-      asyncValidators: [telCLientUniqueValidator(this.clientService)],
+      asyncValidators: [telCLientAddUniqueValidator(this.clientService)],
       updateOn: 'blur'}
    ],
     telCelcom: ['', {
       validators: [
         Validators.pattern(/^[0-9+]{9,9}$/), controlCodeTelValidator(/^655|656|657/i)
      ],
-      asyncValidators: [telCLientUniqueValidator(this.clientService)],
+      asyncValidators: [telCLientAddUniqueValidator(this.clientService)],
       updateOn: 'blur'}
    ],
     telPerso: ['', {
       validators: [
         Validators.pattern(/^[0-9+]{9,9}$/)
      ],
-      asyncValidators: [telCLientUniqueValidator(this.clientService)],
+      asyncValidators: [telCLientAddUniqueValidator(this.clientService)],
       updateOn: 'blur'}
    ],
     adress: this.fb.group({
@@ -139,6 +141,7 @@ export class AddClientComponent implements OnInit {
       updateOn: 'blur'}
    ],
     genre: ['none'],
+    user_id: [''],
   } )
 
   
@@ -354,6 +357,10 @@ export class AddClientComponent implements OnInit {
 
   get avatar(){
     return this.clientForm.get('avatar');
+  }
+
+  get user_id(){
+    return this.clientForm.get('user_id');
   }
 
 }
