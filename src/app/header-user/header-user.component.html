@@ -26,48 +26,64 @@
                                 </li>
                             </ul>
                         </li>
-
-                        <li><a class="has-arrow" data-toggle="collapse" data-target="#demopro" ><span class="educate-icon educate-professor icon-wrap"></span>Commandes <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                            <ul id="demopro" class="collapse dropdown-header-top">
-                                <li><a title="La liste de toute les Commandes" [routerLink]="['/client/commandes/all']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Liste</span></a>
-                                </li>
-                            </ul>
-                        </li>
                         
-                        <li>
-                            <a class="has-arrow" data-toggle="collapse" data-target="#democrou" ><span class="educate-icon educate-professor icon-wrap"></span>Credit <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                            <ul id="democrou" class="collapse dropdown-header-top">
-                                <li><a title="La liste de toute les Commandes" [routerLink]="['/client/commandes/credit/', 'today']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Jour</span></a></li>
-                                <li><a title="La liste de toute les Commandes" [routerLink]="['/client/commandes/credit/', 'week']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Semmaine</span></a></li>
-                                <li><a title="La liste de toute les Commandes" [routerLink]="['/client/commandes/credit/', 'month']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Mois</span></a></li>
-                                <li><a title="La liste de toute les Commandes" [routerLink]="['/client/commandes/credit/', 'year']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Annee</span></a></li>
-                                <li><a title="La liste de toute les Commandes" [routerLink]="['/client/commandes/credit/', 'all']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Total</span></a></li>
-                            </ul>
-                        </li>
+                        <!-- DEBUT TESTE SI C'EST UN PROMOTEUR -->
+                        <div *ngIf="userService.getUserDetails().role == 'promoteur'">
+                            <li>
+                                <a class="" [routerLink]="['/promoteur/list/enter']"    aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Liste Entrer</span></a>
+                            </li>
 
-                        <!-- <li>
-                            <a  class="has-arrow"data-toggle="collapse" data-target="#demolibra" ><span class="educate-icon educate-professor icon-wrap"></span>Cmds Periode <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                            <ul id="demolibra" class="collapse dropdown-header-top"> -->
-                                <li>
-                                    <a class="" [routerLink]="['/client/periodeCommande', 'today']"    aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Aujourd'hui</span></a>
-                                    
-                                </li>
-                                <li>
-                                    <a class="" [routerLink]="['/client/periodeCommande', 'week']"   aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Semmaine</span></a>
-                                    
-                                </li>
-                                <li>
-                                    <a class="" [routerLink]="['/client/periodeCommande', 'ceMois']"   aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Mois</span></a>
-                                    
-                                </li>
-                                <li>
-                                    <a class="" [routerLink]="['/client/periodeCommande', 'year']"   aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Annee</span></a>
-                                    
-                                </li>
-                                <li>
-                                    <a class="" [routerLink]="['/client/periodeCommande', 'all']"   aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Total</span></a>
-                                    
-                                </li>
+                            <li>
+                                <a class="" [routerLink]="['/client/periodeCommande', 'today']"    aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Liste Sortie</span></a>
+                            </li>
+                        </div>
+                        <!-- FIN TESTE SI C'EST UN PROMOTEUR -->
+                        
+                        <!-- DEBUT TESTE SI C'EST UN UTILISATEUR -->
+                        <div *ngIf="userService.getUserDetails().role == 'user'">
+                                            
+                            <li><a class="has-arrow" data-toggle="collapse" data-target="#demopro" ><span class="educate-icon educate-professor icon-wrap"></span>Commandes <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                <ul id="demopro" class="collapse dropdown-header-top">
+                                    <li><a title="La liste de toute les Commandes" [routerLink]="['/client/commandes/all']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Liste</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <a class="has-arrow" data-toggle="collapse" data-target="#democrou" ><span class="educate-icon educate-professor icon-wrap"></span>Credit <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                <ul id="democrou" class="collapse dropdown-header-top">
+                                    <li><a title="La liste de toute les Commandes" [routerLink]="['/client/commandes/credit/', 'today']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Jour</span></a></li>
+                                    <li><a title="La liste de toute les Commandes" [routerLink]="['/client/commandes/credit/', 'week']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Semmaine</span></a></li>
+                                    <li><a title="La liste de toute les Commandes" [routerLink]="['/client/commandes/credit/', 'month']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Mois</span></a></li>
+                                    <li><a title="La liste de toute les Commandes" [routerLink]="['/client/commandes/credit/', 'year']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Annee</span></a></li>
+                                    <li><a title="La liste de toute les Commandes" [routerLink]="['/client/commandes/credit/', 'all']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Total</span></a></li>
+                                </ul>
+                            </li>
+
+                            <!-- <li>
+                                <a  class="has-arrow"data-toggle="collapse" data-target="#demolibra" ><span class="educate-icon educate-professor icon-wrap"></span>Cmds Periode <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                <ul id="demolibra" class="collapse dropdown-header-top"> -->
+                                    <li>
+                                        <a class="" [routerLink]="['/client/periodeCommande', 'today']"    aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Aujourd'hui</span></a>
+                                        
+                                    </li>
+                                    <li>
+                                        <a class="" [routerLink]="['/client/periodeCommande', 'week']"   aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Semmaine</span></a>
+                                        
+                                    </li>
+                                    <li>
+                                        <a class="" [routerLink]="['/client/periodeCommande', 'ceMois']"   aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Mois</span></a>
+                                        
+                                    </li>
+                                    <li>
+                                        <a class="" [routerLink]="['/client/periodeCommande', 'year']"   aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Annee</span></a>
+                                        
+                                    </li>
+                                    <li>
+                                        <a class="" [routerLink]="['/client/periodeCommande', 'all']"   aria-expanded="false"> <span class="mini-click-non"><span class="educate-icon educate-professor icon-wrap"></span>Cmds Total</span></a>
+                                        
+                                    </li>
+                                </div>
                             <!-- </ul>
                         </li> -->
                         
@@ -172,62 +188,76 @@
                                         <mat-icon>reorder</mat-icon>
                                       </button>
                                       <mat-menu #menu="matMenu">
+
                                         <button mat-menu-item [routerLink]="['/']" >
                                           <mat-icon>home</mat-icon>
                                           <span>Home</span>
                                         </button>
+
                                         <button mat-menu-item [routerLink]="['/client/add']" routerLinkActive="router-link-active" >
                                           <mat-icon>group_add</mat-icon>
                                           <span>Ajout Client</span>
                                         </button>
+
                                         <button mat-menu-item [routerLink]="['/client/all']" routerLinkActive="router-link-active" >
                                           <mat-icon>person_pin</mat-icon>
                                           <span>Liste Client</span>
                                         </button>
-                                        <button mat-menu-item [routerLink]="['/client/commandes/all']" routerLinkActive="router-link-active" >
-                                          <mat-icon>local_grocery_store</mat-icon>
-                                          <span>Liste Commandes</span>
+
+                                        <button mat-menu-item [routerLink]="['/client/all']" routerLinkActive="router-link-active" >
+                                          <mat-icon>person_pin</mat-icon>
+                                          <span>Liste Client</span>
                                         </button>
-                                        <button mat-menu-item [routerLink]="['/client/commandes/credit/today']" routerLinkActive="router-link-active" >
-                                          <mat-icon>shuffle</mat-icon>
-                                          <span>Credit jour</span>
-                                        </button>
-                                        <button mat-menu-item [routerLink]="['/client/commandes/credit/week']" routerLinkActive="router-link-active" >
-                                          <mat-icon>shuffle</mat-icon>
-                                          <span>Credit Semaine</span>
-                                        </button>
-                                        <button mat-menu-item [routerLink]="['/client/commandes/credit/month']" routerLinkActive="router-link-active" >
-                                          <mat-icon>shuffle</mat-icon>
-                                          <span>Credit Mois</span>
-                                        </button>
-                                        <button mat-menu-item [routerLink]="['/client/commandes/credit/year']" routerLinkActive="router-link-active" >
-                                          <mat-icon>shuffle</mat-icon>
-                                          <span>Credit Annee</span>
-                                        </button>
-                                        <button mat-menu-item [routerLink]="['/client/commandes/credit/all']" routerLinkActive="router-link-active" >
-                                          <mat-icon>shuffle</mat-icon>
-                                          <span>Credit Total</span>
-                                        </button>
-                                        <button mat-menu-item [routerLink]="['/client/periodeCommande/today']" routerLinkActive="router-link-active" >
-                                          <mat-icon>graphic_eq</mat-icon>
-                                          <span>Commandes Jour</span>
-                                        </button>
-                                        <button mat-menu-item [routerLink]="['/client/periodeCommande/week']" routerLinkActive="router-link-active" >
-                                          <mat-icon>graphic_eq</mat-icon>
-                                          <span>Commandes Semmaine</span>
-                                        </button>
-                                        <button mat-menu-item [routerLink]="['/client/periodeCommande/ceMois']" routerLinkActive="router-link-active" >
-                                          <mat-icon>graphic_eq</mat-icon>
-                                          <span>Commandes Mois</span>
-                                        </button>
-                                        <button mat-menu-item [routerLink]="['/client/periodeCommande/year']" routerLinkActive="router-link-active" >
-                                          <mat-icon>graphic_eq</mat-icon>
-                                          <span>Commandes Annee</span>
-                                        </button>
-                                        <button mat-menu-item [routerLink]="['/client/periodeCommande/all']" routerLinkActive="router-link-active" >
-                                          <mat-icon>graphic_eq</mat-icon>
-                                          <span>Commandes Total</span>
-                                        </button>
+
+                                        <!-- DEBUT TEST SI C'EST UN UTILISATEUR QUI CE CONNECTE -->
+                                        <div *ngIf="userService.getUserDetails().role == 'user'"> 
+                                            
+                                            <button mat-menu-item [routerLink]="['/client/commandes/all']" routerLinkActive="router-link-active" >
+                                            <mat-icon>local_grocery_store</mat-icon>
+                                            <span>Liste Commandes</span>
+                                            </button>
+                                            <button mat-menu-item [routerLink]="['/client/commandes/credit/today']" routerLinkActive="router-link-active" >
+                                            <mat-icon>shuffle</mat-icon>
+                                            <span>Credit jour</span>
+                                            </button>
+                                            <button mat-menu-item [routerLink]="['/client/commandes/credit/week']" routerLinkActive="router-link-active" >
+                                            <mat-icon>shuffle</mat-icon>
+                                            <span>Credit Semaine</span>
+                                            </button>
+                                            <button mat-menu-item [routerLink]="['/client/commandes/credit/month']" routerLinkActive="router-link-active" >
+                                            <mat-icon>shuffle</mat-icon>
+                                            <span>Credit Mois</span>
+                                            </button>
+                                            <button mat-menu-item [routerLink]="['/client/commandes/credit/year']" routerLinkActive="router-link-active" >
+                                            <mat-icon>shuffle</mat-icon>
+                                            <span>Credit Annee</span>
+                                            </button>
+                                            <button mat-menu-item [routerLink]="['/client/commandes/credit/all']" routerLinkActive="router-link-active" >
+                                            <mat-icon>shuffle</mat-icon>
+                                            <span>Credit Total</span>
+                                            </button>
+                                            <button mat-menu-item [routerLink]="['/client/periodeCommande/today']" routerLinkActive="router-link-active" >
+                                            <mat-icon>graphic_eq</mat-icon>
+                                            <span>Commandes Jour</span>
+                                            </button>
+                                            <button mat-menu-item [routerLink]="['/client/periodeCommande/week']" routerLinkActive="router-link-active" >
+                                            <mat-icon>graphic_eq</mat-icon>
+                                            <span>Commandes Semmaine</span>
+                                            </button>
+                                            <button mat-menu-item [routerLink]="['/client/periodeCommande/ceMois']" routerLinkActive="router-link-active" >
+                                            <mat-icon>graphic_eq</mat-icon>
+                                            <span>Commandes Mois</span>
+                                            </button>
+                                            <button mat-menu-item [routerLink]="['/client/periodeCommande/year']" routerLinkActive="router-link-active" >
+                                            <mat-icon>graphic_eq</mat-icon>
+                                            <span>Commandes Annee</span>
+                                            </button>
+                                            <button mat-menu-item [routerLink]="['/client/periodeCommande/all']" routerLinkActive="router-link-active" >
+                                            <mat-icon>graphic_eq</mat-icon>
+                                            <span>Commandes Total</span>
+                                            </button>
+                                        
+                                        </div>
                                       </mat-menu>
                                 </nav>
                             </div>

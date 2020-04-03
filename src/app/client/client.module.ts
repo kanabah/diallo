@@ -29,13 +29,13 @@ import { DialogContentAddTransfertComponent } from './dialog-content-add-transfe
 import { DialogContentAddStartTimesComponent } from './dialog-content-add-start-times/dialog-content-add-start-times.component';
 import { PeriodeCommandeComponent } from './periode-commande/periode-commande.component';
 import { PeriodeCommandeDetailleComponent } from './periode-commande-detaille/periode-commande-detaille.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
 import { TypeAyementComponent } from './type-ayement/type-ayement.component';
 import { CommandeCreditComponent } from './commande-credit/commande-credit.component';
 import { CommandeCreditDettailleComponent } from './commande-credit-dettaille/commande-credit-dettaille.component';
+import { SharedModule } from '../shared.module';
 
 @NgModule({
-  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, SearchBarComponent, TypeAyementComponent, CommandeCreditComponent, CommandeCreditDettailleComponent],
+  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, TypeAyementComponent, CommandeCreditComponent, CommandeCreditDettailleComponent],
   entryComponents: [
     DialogContentAddCommandeOrangeMoneyComponent,
     DialogContentAddCommandeMobileMoneyComponent,
@@ -55,6 +55,7 @@ import { CommandeCreditDettailleComponent } from './commande-credit-dettaille/co
     OrderModule,
     NgxPaginationModule,
     FontAwesomeModule,
+    SharedModule
   ],
   providers: [
         

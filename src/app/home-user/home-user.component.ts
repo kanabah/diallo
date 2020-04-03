@@ -1,3 +1,4 @@
+import { UserService } from './../services/user.service';
 import { PrintClientService } from './../services/print-client.service';
 import { Subscription, timer } from 'rxjs';
 import { ClientService } from './../services/client.service';
@@ -20,7 +21,7 @@ import { faDollyFlatbed } from '@fortawesome/free-solid-svg-icons';
 })
 export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription;
-  constructor(private js: JsService, public dialog: MatDialog, private clientService: ClientService, public print: PrintClientService) { }
+  constructor(private js: JsService, public dialog: MatDialog, private clientService: ClientService, public print: PrintClientService, public userService : UserService) { }
   infoTotal: any;
   purcentDay: any = 0;
   purcentMonth: any = 0;

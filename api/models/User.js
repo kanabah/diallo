@@ -29,6 +29,14 @@ var userSchema = new Schema({
     photo:{
         type: String
     },
+    agence_id:{ //Pour l'ID de L'utilisteur qui gere l'agence pour aue si le promoteure enregistre un client on poura svoir qu'il s'agit d'un promoteur.
+        type: String,
+        required: false
+    },
+    role:{
+        type: String,
+        default: 'user'
+    },
     active:{
         type: Number,
         default: 0
@@ -58,6 +66,8 @@ userSchema.methods.generateJwt = function() {
       _id: this._id,
       email: this.email,
       name: this.name,
+      role: this.role,
+      agence_id: this.agence_id,
       exp: parseInt(expiry.getTime() / 1000),
     }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
   };

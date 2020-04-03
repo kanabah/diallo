@@ -75,7 +75,12 @@ export class AddClientComponent implements OnInit {
       if(this.okCelecom || this.okMtn || this.okOrange){
         this.clientService.upload(formData).subscribe(res => {
           this.avatar.setValue(res);
-          this.user_id.setValue(this.userService.getUserDetails()._id);
+          if(this.userService.getUserDetails().role == 'promoteur'){
+            this.user_id.setValue(this.userService.getUserDetails().agence_id);
+            this.promoteur.setValue(1);
+          }else{  
+            this.user_id.setValue(this.userService.getUserDetails()._id)
+          }
 
           this.clientService.addClient(this.clientForm.value).subscribe(res => {
             this.openSnackBar('Client ajouter avec success', 'Fermer');
@@ -141,6 +146,7 @@ export class AddClientComponent implements OnInit {
       updateOn: 'blur'}
    ],
     genre: ['none'],
+    promoteur: [0],
     user_id: [''],
   } )
 
@@ -361,6 +367,10 @@ export class AddClientComponent implements OnInit {
 
   get user_id(){
     return this.clientForm.get('user_id');
+  }
+
+  get promoteur(){
+    return this.clientForm.get('promoteur');
   }
 
 }

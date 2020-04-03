@@ -6,6 +6,9 @@ export interface User{
     adress: string;
     tel: string;
     photo: string;
+    user_id: string;
+    agence_id: string;
+    role: string;
     password: string;
     active: number;
     exp: number;

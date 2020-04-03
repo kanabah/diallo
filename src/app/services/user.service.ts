@@ -106,6 +106,13 @@ export class UserService {
       retry(3)
     )
   }
-
+  
+  public getRole(role){
+    if(role == 'user'){
+      return true;
+    }else if(role == 'admi'){
+      return false;
+    }
+  }
 
 }

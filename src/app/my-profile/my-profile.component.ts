@@ -19,7 +19,7 @@ import { updateTelUserValidator } from '../validators/update-tel-user.validators
 export class MyProfileComponent implements OnInit {
   user: User;
 
-  constructor(public dialog: MatDialog, public print: PrintClientService, private userService: UserService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private snackBar: SnackBarService) { }
+  constructor(public dialog: MatDialog, public print: PrintClientService, public userService: UserService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private snackBar: SnackBarService) { }
 
   ngOnInit() {
     this.getUser();

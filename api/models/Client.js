@@ -2,6 +2,7 @@ const mongoose =  require('mongoose');
 const Schema = mongoose.Schema;
 
 var clientSchema = new Schema({
+    _id: Schema.Types.ObjectId,
     nom:{
         type: String,
         required: true
@@ -94,6 +95,11 @@ var clientSchema = new Schema({
         type: Date,
         default: null
     },
+    promoteur: { // 1 Si le client est ajouter par un promoteur
+        type: Number,
+        default: 0
+    },
+    promoteur_id: String, //Id du promoteur si il ajoute un client
     user_id: String,
 },{
     collection: 'clients',

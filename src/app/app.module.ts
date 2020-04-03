@@ -1,3 +1,5 @@
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { PromoteurModule } from './promoteur/promoteur.module';
 import { OrderModule } from 'ngx-order-pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
@@ -24,7 +26,7 @@ import { DemoMaterialModule } from './services/material.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
-
+import { SharedModule } from './shared.module';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
   imports: [
     BrowserModule,
     ClientModule,
+    PromoteurModule,
     AppRoutingModule,
     SlimLoadingBarModule,
     ReactiveFormsModule,
@@ -53,7 +56,8 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
     BrowserAnimationsModule,
     DemoMaterialModule,
     FontAwesomeModule,
-    OrderModule
+    OrderModule,
+    SharedModule
   ],
   providers: [
     {
@@ -69,6 +73,7 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
     GlobalErrorHandlerService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [SearchBarComponent],
 })
 export class AppModule { }

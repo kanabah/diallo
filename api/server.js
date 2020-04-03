@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, '')));
 //======================START ROUTES================
 const userRoutes = require('./routes/user.route');
 const clientRoutes = require('./routes/client.route');
+const promoteurRoutes = require('./routes/promoteur.route');
 //======================END ROUTES================
 
 mongoose.Promise = global.Promise;
@@ -33,6 +34,7 @@ app.use(cors());
 
 app.use('/users', userRoutes);
 app.use('/clients', clientRoutes);
+app.use('/promoteurs', promoteurRoutes);
 
 app.get('/', (request, response) => response.send("Welcome to sogma API"));
 
