@@ -1,4 +1,5 @@
 var Client = require('../models/Client');
+var Promoteur = require('../models/Promoteur');
 
 module.exports.addClient = async function(req, res){
     try{
@@ -700,6 +701,9 @@ module.exports.returnInfoHome = async function(req, res){
         var pourcentNbCmdMonth = 0;
         var pourcentNbCmdWeek = 0;
         var pourcentNbCmdYear = 0;
+
+        var totalEntrerDay = 0;
+        var totalSortieDay = 0;
         
         myDate = formatDate(date);
         
@@ -707,10 +711,28 @@ module.exports.returnInfoHome = async function(req, res){
         let nbClientTranche = await Client.find({"commandes.typePay": 'Tranche', "commandes.user_id": req.payload._id, "commandes.delete": 0}).count();
         let nbClientCredit = await Client.find({"commandes.typePay": 'Credit', "commandes.user_id": req.payload._id, "commandes.delete": 0}).count();
         let nbClientTotal = await Client.find({"commandes.typePay": 'Total', "commandes.user_id": req.payload._id, "commandes.delete": 0}).count();
-        console.log('User ID', nbClientTotal);
 
         let clients = await Client.find({nbCmd: { $ne: 0 }, "user_id": req.payload._id}).sort( { nbCmd: -1 } ).limit(5);
-        let nbClients = await Client.find({ "user_id": req.payload._id }).count();
+        let nbClients = await Client.find({ $or: [{"user_id": req.payload._id}, {"user_id": req.payload.agence_id}]}).count();
+
+        let promoteurs = Promoteur.find({});
+        eventPromoteurs = (await promoteurs).filter(function(res){
+            return res.user_id == req.payload._id;
+        });
+
+        eventPromoteurs.forEach(result => {
+            if(result.createdAt.getDate() == date.getDate() && result.createdAt.getMonth() == date.getMonth() && result.createdAt.getFullYear() == date.getFullYear()){
+                if(result.type == 'entrer'){
+                    totalEntrerDay += result.montant;
+                }
+
+                if(result.type == 'sortie'){
+                    totalSortieDay += result.montant;
+                }
+            }
+        });
+
+        // console.log('Entrer', totalSortieDay);
 
         commandes = cmds.filter(function(res){
             return res.delete == 0 && res.user_id == req.payload._id;
@@ -820,6 +842,8 @@ module.exports.returnInfoHome = async function(req, res){
             pourcentNbCmdMonth: pourcentNbCmdMonth,
             pourcentNbCmdWeek: pourcentNbCmdWeek,
             pourcentNbCmdYear: pourcentNbCmdYear,
+            totalEntrerDay: totalEntrerDay,
+            totalSortieDay: totalSortieDay,
             nbClients: nbClients,
             clients: clients,
         }

@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Spression </h1>
+<form [formGroup]="confirmForm" (ngSubmit)="onConfirm()">
+    <div mat-dialog-content>
+        <p>Voulez vous vraiment?</p>
+        <mat-form-field>
+            <input matInput formControlName="password" type="password" placeholder="Votre mot de passe">
+            <mat-error *ngIf="getPasswordError()" class="text text-danger form-text text-muted" > {{ getPasswordError() }}</mat-error>
+        </mat-form-field><br>   
+        <span *ngIf="!passwordIncorect && !getPasswordError()" class="text text-danger form-text text-muted"><small>Mot de passe incorect</small></span>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="dialogRef.close()">No Merci</button>
+        <button mat-button type="submit"  [disabled]="confirmForm.invalid || !etatPadding"  cdkFocusInitial>{{ !etatPadding ? 'Patienter...': 'Oui'}}</button>
+    </div>
+
+</form>
+    

@@ -24,4 +24,28 @@ export class PromoteurService {
       retry(3)
     );
   }
+
+  public listeSortieCaissse(): Observable<Promoteur[]>{
+    return this.http.get<Promoteur[]>(`${this.api}/listeSortieCaissse`).pipe(
+      retry(3)
+    );
+  }
+
+  public getCaisseById(id): Observable<Promoteur>{
+    return this.http.get<Promoteur>(`${this.api}/getCaisseById/${id}`).pipe(
+      retry(3)
+    )
+  }
+
+  public deleteCaisseById(id): Observable<Promoteur>{
+    return this.http.get<Promoteur>(`${this.api}/deleteCaisseById/${id}`).pipe(
+      retry(3)
+    )
+  }
+
+  public updatedCaisse(id, promoteur: Promoteur): Observable<Promoteur>{
+    return this.http.put<Promoteur>(`${this.api}/updatedCaisse/${id}`, promoteur).pipe(
+      retry(3)
+    );
+  }
 }

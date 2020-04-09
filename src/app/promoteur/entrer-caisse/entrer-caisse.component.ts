@@ -1,3 +1,4 @@
+import { Route, Router } from '@angular/router';
 import { UserService } from './../../services/user.service';
 import { PromoteurService } from './../../services/promoteur.service';
 import { returnInfoClientValidator } from 'src/app/validators/return-info-client-validator';
@@ -5,7 +6,6 @@ import { ClientService } from './../../services/client.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
-
 
 @Component({
   selector: 'app-entrer-caisse',
@@ -18,7 +18,7 @@ export class EntrerCaisseComponent implements OnInit {
   user: any;
   idClient: string;
 
-  constructor(private snackBar: SnackBarService ,private userService: UserService, private fb: FormBuilder, private clientService: ClientService, private promoteurService: PromoteurService) { }
+  constructor(private route: Router, private snackBar: SnackBarService, private userService: UserService, private fb: FormBuilder, private clientService: ClientService, private promoteurService: PromoteurService) { }
 
   ngOnInit() {
   }
@@ -37,6 +37,7 @@ export class EntrerCaisseComponent implements OnInit {
 
         this.promoteurService.entrerCaisse(this.entrerForm.value).subscribe(res => {
           this.snackBar.openSnackBar('Ajout Reusie!!', 'Fermer');
+          this.route.navigate(['promoteur/list/enter'])
         });
       }
     });

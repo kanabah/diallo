@@ -54,9 +54,11 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   infoHome(){
+    var somActuel = 0;
     this.clientService.returnInfoHome().subscribe(res => {
       this.ok = true;
       this.infoTotal = res;
+      somActuel = this.infoTotal['totalEntrerDay'] - this.infoTotal['totalSortieDay']; 
       this.calculPurcentCommande();
     })
   }

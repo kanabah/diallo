@@ -1,5 +1,5 @@
-import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteCaisseComponent } from './../dialog-delete-caisse/dialog-delete-caisse.component';
+import { MatDialog } from '@angular/material/dialog';
 import { PrintClientService } from './../../services/print-client.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -10,12 +10,13 @@ import { Promoteur } from 'src/app/interfaces/promoteur';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
+
 @Component({
-  selector: 'app-list-entrer-caisse',
-  templateUrl: './list-entrer-caisse.component.html',
-  styleUrls: ['./list-entrer-caisse.component.css']
+  selector: 'app-list-sortie-caisse',
+  templateUrl: './list-sortie-caisse.component.html',
+  styleUrls: ['./list-sortie-caisse.component.css']
 })
-export class ListEntrerCaisseComponent implements OnInit {
+export class ListSortieCaisseComponent implements OnInit {
   dataSource: any[] = [];
   caisses = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -24,7 +25,7 @@ export class ListEntrerCaisseComponent implements OnInit {
   constructor(private dialog: MatDialog,private promoteurService: PromoteurService, public print: PrintClientService, private router: Router) { }
 
   ngOnInit() {
-    this.getListEntrerCaisse();
+    this.listeSortieCaissse();
   }
 
   //DATA TABLE
@@ -34,8 +35,8 @@ export class ListEntrerCaisseComponent implements OnInit {
     this.caisses.filter = filterValue.trim().toLowerCase();
   }
 
-  getListEntrerCaisse(){
-    this.promoteurService.listeEntrerCaissse().subscribe((resuts : Promoteur[]) => {
+  listeSortieCaissse(){
+    this.promoteurService.listeSortieCaissse().subscribe((resuts : Promoteur[]) => {
       resuts.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
       this.caisses = new MatTableDataSource(resuts);
       this.caisses.paginator = this.paginator;
@@ -52,4 +53,5 @@ export class ListEntrerCaisseComponent implements OnInit {
       data: {"id": id}
     });
   }
+
 }

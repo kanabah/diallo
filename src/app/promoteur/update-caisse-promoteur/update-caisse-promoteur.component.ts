@@ -1,3 +1,5 @@
+import { Promoteur } from 'src/app/interfaces/promoteur';
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from './../../services/user.service';
 import { PromoteurService } from './../../services/promoteur.service';
 import { returnInfoClientValidator } from 'src/app/validators/return-info-client-validator';
@@ -5,22 +7,40 @@ import { ClientService } from './../../services/client.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-sortie-caisse',
-  templateUrl: './sortie-caisse.component.html',
-  styleUrls: ['./sortie-caisse.component.css']
+  selector: 'app-update-caisse-promoteur',
+  templateUrl: './update-caisse-promoteur.component.html',
+  styleUrls: ['./update-caisse-promoteur.component.css']
 })
-export class SortieCaisseComponent implements OnInit {
+export class UpdateCaissePromoteurComponent implements OnInit {
   etatPadding: boolean = true;
   passwordIncorect: boolean = true;
   user: any;
   idClient: string;
+  id: any;
+  promoteur: Promoteur;
 
-  constructor(private router: Router, private snackBar: SnackBarService ,private userService: UserService, private fb: FormBuilder, private clientService: ClientService, private promoteurService: PromoteurService) { }
+  constructor(private route: ActivatedRoute,private snackBar: SnackBarService ,private userService: UserService, private fb: FormBuilder, private clientService: ClientService, private promoteurService: PromoteurService) { }
 
   ngOnInit() {
+    this.getCaisseById();
+  }
+
+  getCaisseById(){
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.promoteurService.getCaisseById(this.id).subscribe(res => {
+      this.promoteur = res[0];
+      
+      this.initialiseForms();
+    });
+  }
+
+  private initialiseForms(){
+    this.updateForm.patchValue({
+      montant: this.promoteur.montant ? this.promoteur.montant : '',
+      description: this.promoteur.description ? this.promoteur.description : '',
+    });
   }
 
   onSubmit(){
@@ -30,27 +50,16 @@ export class SortieCaisseComponent implements OnInit {
         this.passwordIncorect = false;
         this.etatPadding = true;
       }else{
-        this.user_id.setValue(this.userService.getUserDetails()._id);
-        this.agence_id.setValue(this.userService.getUserDetails().agence_id);
         this.client_id.setValue(this.idClient);
-        this.type.setValue('sortie');
-        
-        this.promoteurService.entrerCaisse(this.sortieForm.value).subscribe(res => {
-          this.snackBar.openSnackBar('Ajout Reusie!!', 'Fermer');
-          this.router.navigate(['promoteur/list/sortie'])
+
+        this.promoteurService.updatedCaisse(this.id, this.updateForm.value).subscribe(res => {
+          this.snackBar.openSnackBar('Modification Reuissie!!', 'Fermer');
         });
       }
     });
   }
 
-  sortieForm = this.fb.group({
-    tel: ['', {
-      validators: [Validators.required,
-        Validators.pattern(/^[0-9+]{9,9}$/)
-     ],
-      asyncValidators: [returnInfoClientValidator(this.clientService)],
-      updateOn: 'blur'}
-   ],
+  updateForm = this.fb.group({
     montant: ['', [Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]],
     description: [''],
     client_id: [''],
@@ -84,7 +93,7 @@ export class SortieCaisseComponent implements OnInit {
         return 'le numero est incorect.';
       }else if(this.tel.errors.client){
         this.idClient = this.tel.errors.client.value._id;
-        // console.log('idClient', this.idClient);
+        // this.nom = this.tel.errors.client.value.nom;
         // this.prenom = this.tel.errors.client.value.prenom;
         // this.commune = this.tel.errors.client.value.adress.commune;
         // this.quartier = this.tel.errors.client.value.adress.quartier;
@@ -121,35 +130,35 @@ export class SortieCaisseComponent implements OnInit {
   }
 
   get tel(){
-    return this.sortieForm.get('tel');
+    return this.updateForm.get('tel');
   }
 
   get montant(){
-    return this.sortieForm.get('montant');
+    return this.updateForm.get('montant');
   }
 
   get description(){
-    return this.sortieForm.get('description');
+    return this.updateForm.get('description');
   }
 
   get user_id(){
-    return this.sortieForm.get('user_id');
+    return this.updateForm.get('user_id');
   }
 
   get agence_id(){
-    return this.sortieForm.get('agence_id');
+    return this.updateForm.get('agence_id');
   }
 
   get client_id(){
-    return this.sortieForm.get('client_id');
+    return this.updateForm.get('client_id');
   }
 
   get type(){
-    return this.sortieForm.get('type');
+    return this.updateForm.get('type');
   }
 
   get password(){
-    return this.sortieForm.get('password');
+    return this.updateForm.get('password');
   }
 
 }

@@ -1,3 +1,5 @@
+import { ListSortieCaisseComponent } from './list-sortie-caisse/list-sortie-caisse.component';
+import { UpdateCaissePromoteurComponent } from './update-caisse-promoteur/update-caisse-promoteur.component';
 import { ListEntrerCaisseComponent } from './list-entrer-caisse/list-entrer-caisse.component';
 import { SortieCaisseComponent } from './sortie-caisse/sortie-caisse.component';
 import { AuthGuard } from './../guards/auth.guard';
@@ -22,6 +24,14 @@ const routes: Routes = [
       {
         path: 'list/enter',
         component: ListEntrerCaisseComponent
+      },
+      {
+        path: 'list/sortie',
+        component: ListSortieCaisseComponent
+      },
+      {
+        path: 'list/caisses/update/:id',
+        component: UpdateCaissePromoteurComponent
       }
     ]
   }

@@ -29,6 +29,16 @@ var userSchema = new Schema({
     photo:{
         type: String
     },
+    soldActuel: [{
+        montant: {
+            type: Number,
+            default: 0
+        },
+        date: {
+            type: Date,
+            default: Date.now
+        }
+    }],
     agence_id:{ //Pour l'ID de L'utilisteur qui gere l'agence pour aue si le promoteure enregistre un client on poura svoir qu'il s'agit d'un promoteur.
         type: String,
         required: false

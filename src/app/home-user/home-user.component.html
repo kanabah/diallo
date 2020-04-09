@@ -41,7 +41,7 @@
                     <div class="analytics-sparkle-line reso-mg-b-30">
                         <div class="analytics-content">
                             <h5>Ajout Client</h5>
-                            <h2><span >{{ infoTotal['sumTotalOM'] | currency:'':'' }}</span><span></span> <span class="tuition-fees"><button type="button" [routerLink]="['/client/add']" routerLinkActive="router-link-active"  class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
+                            <h2><span >{{ infoTotal['nbClients'] }}</span><span></span> <span class="tuition-fees"><button type="button" [routerLink]="['/client/add']" routerLinkActive="router-link-active"  class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
                         </div>
                     </div>
                 </div>
@@ -75,12 +75,10 @@
                         <h3 class="box-title">Status de l'Agence</h3>
                         <ul class="basic-list">
                             <li>Total Client <span class="pull-right label-danger label-1 label">{{ infoTotal['nbClients'] }}</span></li>
-                            <li>Total Credit OM<span class="{{ colorCreditOM }}">{{ infoTotal['sumCreditOM'] | currency:'':'' }}GNF</span></li>
-                            <li>Total Credit MoMo <span class="{{ colorCreditMoMo }}">{{ infoTotal['sumCreditMoMo'] | currency:'':'' }}GNF</span></li>
-                            <li>Total Credit Start Times <span class="{{ colorCreditST }}">{{ infoTotal['sumCreditST'] | currency:'':'' }}GNF</span></li>
-                            <li>Total Credit Espece <span class="{{ colorCreditTransfert }}">{{ infoTotal['sumCreditTransfert'] | currency:'':'' }}GNF</span></li>
-                            <li>Total Debit Client <span class="pull-right label-purple label-6 label">A faire</span></li>
-                            <li>Total Caisse <span class="pull-right label-purple label-7 label">{{ infoTotal['total'] | currency:'':'' }}GNF</span></li>
+                            <li>Somme Debit Agence<span class="{{ colorCreditOM }}">{{ infoTotal['sumCreditOM'] | currency:'':'' }}GNF</span></li>
+                            <li>Total Entrer Du Jour<span class="{{ colorCreditMoMo }}">{{ infoTotal['totalEntrerDay'] | currency:'':'' }}GNF</span></li>
+                            <li>Total Sortie Du Jour<span class="{{ colorCreditST }}">{{ infoTotal['totalSortieDay'] | currency:'':'' }}GNF</span></li>
+                            <li>Somme Actuelle Du Jour<span class="{{ colorCreditTransfert }}">{{ somActuel | currency:'':'' }}GNF</span></li>
                         </ul>
                     </div>
                 </div>
