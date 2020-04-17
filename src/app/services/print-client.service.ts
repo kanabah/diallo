@@ -15,4 +15,12 @@ export class PrintClientService {
       return 'assets/user/img/avatar/avatar.png';
     }
   }
+
+  printAdmi(avatar){
+    if(avatar){
+      return `${baseUrl}${avatar}`;
+    }else{
+      return 'assets/user/img/avatar/avatar.png';
+    }
+  }
 }

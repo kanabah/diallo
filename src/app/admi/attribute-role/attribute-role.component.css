@@ -1,0 +1,11 @@
+#id{
+    color: red;
+}
+
+#errorForm{
+    border: 1px solid red;
+}
+
+#successForm{
+    border: 1px solid green;
+}

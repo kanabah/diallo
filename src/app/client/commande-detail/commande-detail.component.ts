@@ -115,11 +115,8 @@ export class CommandeDetailComponent implements OnInit, OnDestroy {
   }
 
   openDelete(id, client_id){
-    const dialogRef = this.dialog.open(DialogDeleteCommandeComponent, {
+    this.dialog.open(DialogDeleteCommandeComponent, {
       data: {"id": id, "client_id": client_id}
-    });
-    
-    dialogRef.afterClosed().subscribe(result => { 
     });
   }
 

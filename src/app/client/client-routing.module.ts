@@ -1,10 +1,12 @@
+import { AttributeEspeceComponent } from './attribute-espece/attribute-espece.component';
+import { AuthGuard } from './../guards/auth.guard';
+import { ListPromoteurComponent } from './list-promoteur/list-promoteur.component';
 import { PeriodeCommandeDetailleComponent } from './periode-commande-detaille/periode-commande-detaille.component';
 import { ReglementListComponent } from './reglement-list/reglement-list.component';
 import { CommandeAllComponent } from './commande-all/commande-all.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddClientComponent } from './add-client/add-client.component';
-import { AuthGuard } from '../guards/auth.guard';
 import { AllClientComponent } from './all-client/all-client.component';
 import { DetailleClientComponent } from './detaille-client/detaille-client.component';
 import { CommandeDetailComponent } from './commande-detail/commande-detail.component';
@@ -15,6 +17,20 @@ import { CommandeCreditDettailleComponent } from './commande-credit-dettaille/co
 
 
 const routes: Routes = [
+  {
+    path: 'promoteur',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'list',
+        component:  ListPromoteurComponent,
+      },
+      {
+        path: 'attribute-espece',
+        component:  AttributeEspeceComponent,
+      }
+    ]
+  },
   {
     path: 'client',
     canActivate: [AuthGuard],

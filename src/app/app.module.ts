@@ -1,3 +1,4 @@
+import { AdmiModule } from './admi/admi.module';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { PromoteurModule } from './promoteur/promoteur.module';
 import { OrderModule } from 'ngx-order-pipe';
@@ -27,6 +28,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { SharedModule } from './shared.module';
+import { HeaderAdmiComponent } from './header-admi/header-admi.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { SharedModule } from './shared.module';
     RegisterComponent,
     MyProfileComponent,
     UpdatePasswordComponent,
+    HeaderAdmiComponent,
   ],
   entryComponents: [
     UpdatePasswordComponent
@@ -48,6 +51,7 @@ import { SharedModule } from './shared.module';
     BrowserModule,
     ClientModule,
     PromoteurModule,
+    AdmiModule,
     AppRoutingModule,
     SlimLoadingBarModule,
     ReactiveFormsModule,

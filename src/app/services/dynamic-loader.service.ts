@@ -54,6 +54,11 @@ export const ScriptStore: Path[] = [
   { src: "assets/user/js/dropzone/dropzone.js"},
 ];
 
+export const ScriptStoreAdmi: Path[] = [
+  { src: "../../../assets/admi/main.css"},
+  { src: "../../../assets/admi/scripts/main.js"},  // A COMMENTER DEBUT
+];
+
 export const ScriptStoreHome: Path[] = [
   { src: "assets/user/js/vendor/modernizr-2.8.3.min.js"},
   { src: "assets/user/js/vendor/jquery-1.12.4.min.js"},

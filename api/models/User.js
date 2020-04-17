@@ -34,6 +34,7 @@ var userSchema = new Schema({
             type: Number,
             default: 0
         },
+        description: String,
         date: {
             type: Date,
             default: Date.now

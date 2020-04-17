@@ -101,6 +101,12 @@ export class UserService {
     )
   }
 
+  public telExistPromoteur(tel: number): Observable<any>{
+    return this.http.get<any>(`${this.api}/telExistPromoteur/${tel}`).pipe(
+      retry(3),
+    )
+  }
+
   public updateUser(id: string, user: User): Observable<any>{
     return this.http.put<User>(`${this.api}/updateUser/${id}`, user).pipe(
       retry(3)
@@ -113,6 +119,49 @@ export class UserService {
     }else if(role == 'admi'){
       return false;
     }
+  }
+
+  public newUsers(): Observable<User[]>{
+    return this.http.get<User[]>(`${this.api}/newUsers`).pipe(
+      retry(3)
+    );
+  }
+
+  public acpetUser(id): Observable<User>{
+    return this.http.get<User>(`${this.api}/acpetUser/${id}`).pipe(
+      retry(3)
+    );
+  }
+
+  public declineUser(id): Observable<User>{
+    return this.http.get<User>(`${this.api}/declineUser/${id}`).pipe(
+      retry(3)
+    );
+  }
+
+  public getAllUsersActive(): Observable<User[]>{
+    return this.http.get<User[]>(`${this.api}/getAllUsersActive`).pipe(
+      retry(3)
+    );
+  }
+
+  public getAllPromoteurs(user_id): Observable<User[]>{
+    return this.http.get<User[]>(`${this.api}/getAllPromoteurs/${user_id}`).pipe(
+      retry(3)
+    );
+  }
+
+  public attriButeRole(id, role, agence_id): Observable<User>{
+    agence_id = agence_id == '' ? 'Select' : agence_id;
+    return this.http.get<User>(`${this.api}/attriButeRole/${id}/${role}/${agence_id}`).pipe(
+      retry(3)
+    );
+  }
+
+  public addSoldePromoteur(id, solde, description): Observable<User>{
+    return this.http.get<User>(`${this.api}/addSoldePromoteur/${id}/${solde}/${description}`).pipe(
+      retry(3)
+    );
   }
 
 }

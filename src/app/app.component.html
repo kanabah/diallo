@@ -1,9 +1,10 @@
 <!-- <link rel="stylesheet" href="../assets/user/style.css"> -->
 <ng2-slim-loading-bar color="red"></ng2-slim-loading-bar>
-<app-header-user *ngIf="userService.isLoggedIn()"></app-header-user>
+<app-header-user *ngIf="userService.isLoggedIn() && (userService.getUserDetails().role == 'user' || userService.getUserDetails().role == 'promoteur')"></app-header-user>
+<app-header-admi *ngIf="userService.isLoggedIn() && (userService.getUserDetails().role == 'admi')"></app-header-admi>
 <router-outlet></router-outlet>
 
-<app-footer-user *ngIf="userService.isLoggedIn()" ></app-footer-user>
+<app-footer-user *ngIf="userService.isLoggedIn() && (userService.getUserDetails().role != 'admi')" ></app-footer-user>
 <!-- <div class="js-ng">
     
 </div> -->

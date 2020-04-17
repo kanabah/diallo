@@ -33,9 +33,11 @@ import { TypeAyementComponent } from './type-ayement/type-ayement.component';
 import { CommandeCreditComponent } from './commande-credit/commande-credit.component';
 import { CommandeCreditDettailleComponent } from './commande-credit-dettaille/commande-credit-dettaille.component';
 import { SharedModule } from '../shared.module';
+import { ListPromoteurComponent } from './list-promoteur/list-promoteur.component';
+import { AttributeEspeceComponent } from './attribute-espece/attribute-espece.component';
 
 @NgModule({
-  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, TypeAyementComponent, CommandeCreditComponent, CommandeCreditDettailleComponent],
+  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, TypeAyementComponent, CommandeCreditComponent, CommandeCreditDettailleComponent, ListPromoteurComponent, AttributeEspeceComponent],
   entryComponents: [
     DialogContentAddCommandeOrangeMoneyComponent,
     DialogContentAddCommandeMobileMoneyComponent,

@@ -1,24 +1,51 @@
-import { Injectable } from '@angular/core';
-import { ScriptStore } from './dynamic-loader.service';
+import { UserService } from './user.service';
+import { Injectable, Inject, Injector } from '@angular/core';
+import { ScriptStore, ScriptStoreAdmi } from './dynamic-loader.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResourcesService {
 
-  constructor() { }
-
+  constructor(private injector: Injector) { }
+  
   public loadResources() {
+    const userService = this.injector.get(UserService); 
+
     let res;
-        for( let result of ScriptStore ) {
+      if(userService.isLoggedIn())
+      {
+        if(userService.getUserDetails().role != 'admi')
+        {
+          for(let result of ScriptStore ) {
             res = result.src;
             if( res.indexOf('css') >= 0 ) {
-               this.loadCSS(res);
+              this.loadCSS(res);
             }else if (res.indexOf('js') >= 0 ) {
               this.loadJS(res);
+            }
+          }
+        }else{
+          for(let result of ScriptStoreAdmi ) {
+            res = result.src;
+            if( res.indexOf('css') >= 0 ) {
+              this.loadCSS(res);
+            }else if (res.indexOf('js') >= 0 ) {
+              this.loadJS(res);
+            }
           }
         }
-
+      }else{
+        for(let result of ScriptStore ) {
+          res = result.src;
+          if( res.indexOf('css') >= 0 ) {
+            this.loadCSS(res);
+          }else if (res.indexOf('js') >= 0 ) {
+            this.loadJS(res);
+          }
+        }
+      }
+      
   }
 
   public loadCSS( resourcePath: string ) {

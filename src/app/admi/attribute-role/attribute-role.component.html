@@ -1,0 +1,23 @@
+<form [formGroup]="controlForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="role">Role</label>
+        <select formControlName="role" (change)="select($event)" id="role" class="form-control">
+            <option value="user">Agence</option>
+            <option value="promoteur">Promoteur</option>
+        </select>
+        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+    </div>
+    <div class="form-group" *ngIf="promoteur">
+        <label for="agence_id">Agence</label>
+        <select formControlName="agence_id" id="agence_id" class="form-control">
+            <option value="Select" disabled>Choissisez une Agence</option>
+            <option [value]="user._id" *ngFor="let user of users">{{ user.nameAgence }}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="password">Mot de passse</label>
+        <input type="password" [id]="getPasswordSuccess() ? 'successForm' : getPasswordError() ? 'errorForm' : ''" formControlName="password" class="form-control" id="password" placeholder="******">
+        <span *ngIf="!passwordIncorect && !getPasswordError()" class="text text-danger form-text text-muted" ><small id="id">Mot de passe incorect</small></span>
+    </div>
+    <button type="submit" [disabled]="controlForm.invalid || !etatPadding" class="btn btn-primary">{{ !etatPadding ? 'Patienter...': 'Valider'}}</button>
+</form>

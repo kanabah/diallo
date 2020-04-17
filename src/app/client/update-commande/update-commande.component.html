@@ -1,12 +1,4 @@
 <div class="card" style="width: 18rem;">
-    <!-- <div class="card-header" *ngIf="ok">
-        <h5 class="card-title" >
-            <img src="assets/user/img/contact/1.jpg"  id="rounded-circle" alt="Profile"><span id="nom">{{ nom }}</span>
-            <span class="float-right text-muted text-danger"  id="custAlign">50000GNF</span>
-        </h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{ commune }}/{{ quartier }}/{{ secteur }}</h6>
-        <hr>
-    </div> -->
     <div class="card-body" *ngIf="commande">
         <form [formGroup]="payForm" (ngSubmit)="onUpdate()">
             
