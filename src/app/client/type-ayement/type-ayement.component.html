@@ -57,23 +57,18 @@
                                     <!-- Symbol Column -->
                                     <ng-container matColumnDef="commandes.somPay">
                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Somme Pay </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.commandes.somPay}} </td>
+                                        <td mat-cell *matCellDef="let element"> {{element.commandes.somPay | currency:'':''}} </td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="commandes.somRest">
                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Somme Rest </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.commandes.somRest}} </td>
+                                        <td mat-cell *matCellDef="let element"> {{element.commandes.somRest | currency:'':''}} </td>
                                     </ng-container>
                                     
                                     
                                     <ng-container matColumnDef="commandes.modePay">
                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Mode Pay </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.commandes.modePay}} </td>
-                                    </ng-container>
-                                    
-                                    <ng-container matColumnDef="commandes.opperateur">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Opperateur </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.commandes.opperateur}} </td>
+                                        <td mat-cell *matCellDef="let element"> {{element.commandes.modePay }} </td>
                                     </ng-container>
                                     
                                     <ng-container matColumnDef="commandes.nbStartTimes">

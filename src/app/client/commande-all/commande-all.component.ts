@@ -31,7 +31,6 @@ cool: any = '';
 
   ngOnInit() {
     this.allCommandes();
-    this.getAllClient();
   }
 
   //DATA TABLE
@@ -68,11 +67,6 @@ cool: any = '';
     })  
   }
 
-  getAllClient(){
-    this.clientService.allClient().subscribe(res => {
-      this.clientsAll = res['clients'];
-    });
-  }
 
   getCreditClient(id){
     var sumTotal = 0;

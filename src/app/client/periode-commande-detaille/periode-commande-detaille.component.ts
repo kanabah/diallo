@@ -69,7 +69,7 @@ export class PeriodeCommandeDetailleComponent implements OnInit {
     }else if(typeCmd == 'ST'){
       return 'assets/user/img/logo/images.jpg';
     }else if(typeCmd == 'Transfert'){
-      return 'assets/user/img/logo/transfert.png';
+      return 'assets/user/img/logo/transfert.jpg';
     }
   }
 

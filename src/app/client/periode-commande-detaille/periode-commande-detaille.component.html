@@ -7,7 +7,7 @@
                     <div class="product-status-wrap">
                         <h4>
                             <img src="{{ print.printAvatar(client.avatar) }}"  id="rounded-circle" alt="Profile">{{ client.prenom }} {{ client.nom }}:
-                            <small>Nb Commandes</small><span class="badge badge-success">{{ nbCmd }}</span>,<small>Montant Payer</small><span class="badge badge-success">{{ somPayClient }} GNF</span>,  <small>Montant Restant</small><span class="badge badge-success">{{ somCreditClient }} GNF</span>
+                            <small>Nb Commandes</small><span class="badge badge-success">{{ nbCmd }}</span>,<small>Montant Payer</small><span class="badge badge-success">{{ somPayClient | currency:'':'' }} GNF</span>,  <small>Montant Restant</small><span class="badge badge-success">{{ somCreditClient| currency:'':'' }} GNF</span>
                         </h4>
                         <div class="" id="inputCherch" >
                             <!-- <button class="btn btn-primary btn xs">To day</button> -->
@@ -28,18 +28,16 @@
                                     <th>Somme Payé</th>
                                     <th>Somme Restant</th>
                                     <th>Somme Credit</th>
-                                    <th>Opperateur</th>
                                     <th>Nb decodeur</th>
                                     <th>Mode Pay</th>
                                     <th>Date</th>
                                 </tr>
-                                <tr *ngFor="let cmd of collection.data |paginate: config">
+                                <tr *ngFor="let cmd of collection.data |paginate: config" [ngClass]="{'bg-warning': cmd.typeCmd == 'MoMo' ? true : false, 'bg-danger': cmd.typeCmd == 'OM' ? true : false, 'bg-info': cmd.typeCmd == 'Transfert' ? true : false, 'bg-success': cmd.typeCmd == 'ST' ? true : false  }">
                                     <td ><img src="{{ typeCmd(cmd.typeCmd) }}" alt="" id="image"></td>
                                     <td><span class="badge badge-success"> {{ cmd.typePay}}</span></td>
-                                    <td>{{ cmd.somPay ? cmd.somPay : 0 }}</td>
-                                    <td>{{ cmd.somRest ? cmd.somRest : 0 }}</td>
-                                    <td>{{ cmd.somCredit ? cmd.somCredit : 0 }}</td>
-                                    <td>{{ cmd.opperateur }}</td>
+                                    <td>{{ !cmd.somPay ? 0 : cmd.somPay | currency:'':'' }}</td>
+                                    <td>{{ !cmd.somRest ? 0 : cmd.somRest | currency:'':'' }}</td>
+                                    <td>{{ !cmd.somCredit ? 0 :cmd.somCredit | currency:'':'' }}</td>
                                     <td>{{ cmd.nbStartTimes }}</td>
                                     <td>{{ cmd.modePay }}</td>
                                     <td>{{ cmd.dateCmd | date }}</td>

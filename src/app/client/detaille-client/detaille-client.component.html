@@ -167,7 +167,7 @@
                                                                 </div>
                                                                 <div class="progress-skill">
                                                                     <div class="pull-right"><span class="{{ getColorText(purcentTransfert) }}">{{ purcentTransfert }}%</span></div>
-                                                                    <h2>Transfert</h2>
+                                                                    <h2>Espece</h2>
                                                                     <div class="progress progress-mini">
                                                                         <div [style.width.%]="purcentTransfert" class="{{ getColorProgress(purcentTransfert) }}"></div>
                                                                     </div>
@@ -186,11 +186,11 @@
                                                                 </div>
                                                                 <div class="ex-pro">
                                                                     <ul>
-                                                                        <li><i class="fa fa-angle-right"></i> <strong>Ornage Money:</strong> {{ somPayOrangeMoney }} GNF</li>
-                                                                        <li><i class="fa fa-angle-right"></i> <strong>Mobile Money</strong> {{ somPayMobileMoney }} GNF</li>
-                                                                        <li><i class="fa fa-angle-right"></i> <strong>Start Times</strong> {{ somPayStartTimes }} GNF</li>
-                                                                        <li><i class="fa fa-angle-right"></i> <strong>Transfert Credit</strong> {{ somPayTransfert }} GNF</li>
-                                                                        <li><i class="fa fa-angle-right"></i> <strong>Somme Total</strong> {{ somPayTotal }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Ornage Money:</strong> {{ somPayOrangeMoney | currency:'':'' }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Mobile Money</strong> {{ somPayMobileMoney | currency:'':'' }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Start Times</strong> {{ somPayStartTimes | currency:'':'' }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Espece</strong> {{ somPayTransfert | currency:'':'' }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Somme Total</strong> {{ somPayTotal | currency:'':'' }} GNF</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -228,7 +228,7 @@
                                                                 </div>
                                                                 <div class="progress-skill">
                                                                     <div class="pull-right"><span class="{{ getColorTextCredit(purcentCreditTransfert) }}">{{ purcentCreditTransfert }}%</span></div>
-                                                                    <h2>Transfert</h2>
+                                                                    <h2>Espece</h2>
                                                                     <div class="progress progress-mini">
                                                                         <div [style.width.%]="purcentCreditTransfert" class="{{ getColorProgressCredit(purcentCreditTransfert) }}"></div>
                                                                     </div>
@@ -247,11 +247,11 @@
                                                                 </div>
                                                                 <div class="ex-pro">
                                                                     <ul>
-                                                                        <li><i class="fa fa-angle-right"></i> <strong>Ornage Money:</strong> {{ somCreditOrangeMoney }} GNF</li>
-                                                                        <li><i class="fa fa-angle-right"></i> <strong>Mobile Money</strong> {{ somCreditMobileMoney }} GNF</li>
-                                                                        <li><i class="fa fa-angle-right"></i> <strong>Start Times</strong> {{ somCreditStartTimes }} GNF</li>
-                                                                        <li><i class="fa fa-angle-right"></i> <strong>Transfert Credit</strong> {{ somCreditTransfert }} GNF</li>
-                                                                        <li><i class="fa fa-angle-right"></i> <strong>Somme Total Credit</strong> {{ somCreditTotal }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Ornage Money:</strong> {{ somCreditOrangeMoney | currency:'':'' }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Mobile Money</strong> {{ somCreditMobileMoney | currency:'':'' }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Start Times</strong> {{ somCreditStartTimes | currency:'':'' }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Espece</strong> {{ somCreditTransfert | currency:'':'' }} GNF</li>
+                                                                        <li><i class="fa fa-angle-right"></i> <strong>Somme Total Credit</strong> {{ somCreditTotal | currency:'':'' }} GNF</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>

@@ -40,7 +40,7 @@
                     <div class="analytics-sparkle-line reso-mg-b-30">
                         <div class="analytics-content">
                             <h5>Orange Money</h5>
-                            <h2><span >{{ infoTotal['sumTotalOM'] }}</span><span><small>GNF</small></span> <span class="tuition-fees"><button type="button" (click)="openDialog()" class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
+                            <h2><span >{{ infoTotal['sumTotalOM'] | currency:'':'' }}</span><span><small>GNF</small></span> <span class="tuition-fees"><button type="button" (click)="openDialog()" class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
                             <span class="text-{{ alertOM }}">{{ infoTotal['pourcentOM'] }}%</span>
                             <div class="progress m-b-0">
                                 <div class="progress-bar progress-bar-{{ alertOM }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentOM']"> <span class="sr-only">20% Complete</span> </div>
@@ -52,7 +52,7 @@
                     <div class="analytics-sparkle-line reso-mg-b-30">
                         <div class="analytics-content">
                             <h5>Mobile Money</h5>
-                            <h2><span>{{ infoTotal['sumTotalMoMo'] }}</span><small>GNF</small> <span class="tuition-fees"><button type="button" (click)="openDialogMoMo()" class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
+                            <h2><span>{{ infoTotal['sumTotalMoMo'] | currency:'':'' }}</span><small>GNF</small> <span class="tuition-fees"><button type="button" (click)="openDialogMoMo()" class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
                             <span class="text-{{ alertMoMo }}">{{ infoTotal['pourcentMoMo'] }}%</span>
                             <div class="progress m-b-0">
                                 <div class="progress-bar progress-bar-{{ alertMoMo }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentMoMo']"> <span class="sr-only">230% Complete</span> </div>
@@ -64,7 +64,7 @@
                     <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
                         <div class="analytics-content">
                             <h5>Start Times</h5>
-                            <h2><span>{{ infoTotal['sumTotalST'] }}</span><small>GNF</small> <span class="tuition-fees"><button type="button" (click)="openStartTimes()" class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
+                            <h2><span>{{ infoTotal['sumTotalST'] | currency:'':'' }}</span><small>GNF</small> <span class="tuition-fees"><button type="button" (click)="openStartTimes()" class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
                             <span class="text-{{ alertST }}">{{ infoTotal['pourcentST'] }}%</span>
                             <div class="progress m-b-0">
                                 <div class="progress-bar progress-bar-{{ alertST }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentST']"> <span class="sr-only">20% Complete</span> </div>
@@ -76,7 +76,7 @@
                     <div class="analytics-sparkle-line table-mg-t-pro dk-res-t-pro-30">
                         <div class="analytics-content">
                             <h5>Rechargement Espece</h5>
-                            <h2><span>{{ infoTotal['sumTotalTransfert'] }}</span><small>GNF</small> <span class="tuition-fees"><button type="button" (click)="openTransfert()" class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
+                            <h2><span>{{ infoTotal['sumTotalTransfert'] | currency:'':'' }}</span><small>GNF</small> <span class="tuition-fees"><button type="button" (click)="openTransfert()" class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
                             <span class="text-{{ alertTransfert }}">{{ infoTotal['pourcentTransfert'] }}%</span>
                             <div class="progress m-b-0">
                                 <div class="progress-bar progress-bar-{{ alertTransfert }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentTransfert']"> <span class="sr-only">230% Complete</span> </div>
@@ -96,12 +96,12 @@
                         <h3 class="box-title">Status de l'Agence</h3>
                         <ul class="basic-list">
                             <li>Total Client <span class="pull-right label-danger label-1 label">{{ infoTotal['nbClients'] }}</span></li>
-                            <li>Total Credit OM<span class="{{ colorCreditOM }}">{{ infoTotal['sumCreditOM'] }}GNF</span></li>
-                            <li>Total Credit MoMo <span class="{{ colorCreditMoMo }}">{{ infoTotal['sumCreditMoMo'] }}GNF</span></li>
-                            <li>Total Credit Start Times <span class="{{ colorCreditST }}">{{ infoTotal['sumCreditST'] }}GNF</span></li>
-                            <li>Total Credit Transfert <span class="{{ colorCreditTransfert }}">{{ infoTotal['sumCreditTransfert'] }}GNF</span></li>
+                            <li>Total Credit OM<span class="{{ colorCreditOM }}">{{ infoTotal['sumCreditOM'] | currency:'':'' }}GNF</span></li>
+                            <li>Total Credit MoMo <span class="{{ colorCreditMoMo }}">{{ infoTotal['sumCreditMoMo'] | currency:'':'' }}GNF</span></li>
+                            <li>Total Credit Start Times <span class="{{ colorCreditST }}">{{ infoTotal['sumCreditST'] | currency:'':'' }}GNF</span></li>
+                            <li>Total Credit Transfert <span class="{{ colorCreditTransfert }}">{{ infoTotal['sumCreditTransfert'] | currency:'':'' }}GNF</span></li>
                             <li>Total Debit Client <span class="pull-right label-purple label-6 label">A faire</span></li>
-                            <li>Total Caisse <span class="pull-right label-purple label-7 label">{{ infoTotal['total'] }}GNF</span></li>
+                            <li>Total Caisse <span class="pull-right label-purple label-7 label">{{ infoTotal['total'] | currency:'':'' }}GNF</span></li>
                         </ul>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                         <h3 class="box-title">Entrer Caisse</h3>
                         <ul class="country-state">
                             <li [routerLink]="['/client/periodeCommande', 'today']">
-                                <h2><span class="">{{ infoTotal['sumEntrerJour'] }}</span> <small>GNF</small></h2> <small>Aujaurdh'hui</small>
+                                <h2><span class="">{{ infoTotal['sumEntrerJour'] | currency:'':'' }}</span> <small>GNF</small></h2> <small>Aujaurdh'hui</small>
                                 <div class="pull-right">{{ infoTotal['countNbCmdDay'] }} cmds <i class="{{ arowDay }}"></i></div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success ctn-vs-{{purcentDay}}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentNbCmdDay']"> <span class="sr-only">75% Complete</span></div>
@@ -118,28 +118,28 @@
                                 <!-- <hr> -->
                             </li>
                             <li [routerLink]="['/client/periodeCommande', 'week']">
-                                <h2><span class="">{{ infoTotal['sumEntrerWeek'] }}</span> <small>GNF</small></h2> <small>Cette Semmaine</small>
+                                <h2><span class="">{{ infoTotal['sumEntrerWeek'] | currency:'':'' }}</span> <small>GNF</small></h2> <small>Cette Semmaine</small>
                                 <div class="pull-right">{{ infoTotal['countNbCmdWeek'] }} cmds <i class="{{ arowWeek }}"></i></div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success ctn-vs-{{purcentWeek}}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentNbCmdWeek']"> <span class="sr-only">55% Complete</span></div>
                                 </div>
                             </li>
                             <li [routerLink]="['/client/periodeCommande', 'ceMois']" routerLinkActive="router-link-active" >
-                                <h2><span class="">{{ infoTotal['sumEntrerMonth'] }}</span> <small>GNF</small></h2> <small>Cet Mois</small>
+                                <h2><span class="">{{ infoTotal['sumEntrerMonth'] | currency:'':'' }}</span> <small>GNF</small></h2> <small>Cet Mois</small>
                                 <div class="pull-right">{{ infoTotal['countNbCmdMonth'] }} cmds<i class="{{ arowMonth }}"></i></div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success ctn-vs-{{purcentMonth}}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentNbCmdMonth']"> <span class="sr-only">33% Complete</span></div>
                                 </div>
                             </li>
                             <li [routerLink]="['/client/periodeCommande', 'year']">
-                                <h2><span>{{ infoTotal['sumEntrerYear'] }}</span> <small>GNF</small></h2> <small>L'Annee</small>
+                                <h2><span>{{ infoTotal['sumEntrerYear'] | currency:'':'' }}</span> <small>GNF</small></h2> <small>L'Annee</small>
                                 <div class="pull-right">{{ infoTotal['countNbCmdYear'] }} cmds <i class="{{ arowYear }}"></i></div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success ctn-vs-{{purcentYear}}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentNbCmdYear']"> <span class="sr-only">60% Complete</span></div>
                                 </div>
                             </li>
                             <li [routerLink]="['/client/periodeCommande', 'all']">
-                                <h2><span>{{ infoTotal['sumEntrerAll'] }}</span> <small> GNF</small></h2> <small>Total</small>
+                                <h2><span>{{ infoTotal['sumEntrerAll'] | currency:'':'' }}</span> <small> GNF</small></h2> <small>Total</small>
                                 <div class="pull-right">{{ infoTotal['countNbCmdAll'] }} cmds <i class="fa fa-level-up text-success ctn-ic-2"></i></div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-inverse ctn-vs-5" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:100%;"> <span class="sr-only">48% Complete</span></div>

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 import { Component, OnInit } from '@angular/core';
 import { count } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-commande-credit-dettaille',
@@ -19,7 +20,7 @@ export class CommandeCreditDettailleComponent implements OnInit {
   };
   client: Client;
 
-  constructor(private clientService: ClientService, private route: ActivatedRoute, private print: PrintClientService) {
+  constructor(private clientService: ClientService, private route: ActivatedRoute, private print: PrintClientService, private location: Location) {
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
         {
@@ -91,5 +92,9 @@ export class CommandeCreditDettailleComponent implements OnInit {
     }else if(typeCmd == 'Transfert'){
       return 'assets/user/img/logo/transfert.jpg';
     }
+  }
+
+  onReturn(){
+    this.location.back();
   }
 }

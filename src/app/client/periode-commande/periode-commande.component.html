@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap">
-                        <h4><span> Commande {{ periodeCmd }}:</span> <small>Nb CLient</small><span class="badge badge-success">{{ clientNumber }}</span>, <small>Montant Payer</small><span class="badge badge-success">{{ somPayTotal }} GNF</span>,  <small>Montant Restant</small><span class="badge badge-success">{{ somCreditTotal }} GNF</span></h4>
+                        <h4><span> Commande {{ periodeCmd }}:</span> <small>Nb CLient</small><span class="badge badge-success">{{ clientNumber }}</span>, <small>Montant Payer</small><span class="badge badge-success">{{ somPayTotal | currency:'':'' }} GNF</span>,  <small>Montant Restant</small><span class="badge badge-success">{{ somCreditTotal | currency:'':'' }} GNF</span></h4>
                         <div id="inputCherch">
                             <mat-form-field>
                                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">

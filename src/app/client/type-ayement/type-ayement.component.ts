@@ -28,7 +28,7 @@ export class TypeAyementComponent implements OnInit {
     }
   
     //DATA TABLE
-    displayedColumns: string[] = ['avatar', 'nom', 'prenom', 'telOrange', 'telMtn', 'telCelcom', 'commandes.typeCmd', 'commandes.somPay', 'commandes.somRest', 'commandes.modePay','commandes.opperateur','commandes.nbStartTimes', 'commandes.dateCmd'];
+    displayedColumns: string[] = ['avatar', 'nom', 'prenom', 'telOrange', 'telMtn', 'telCelcom', 'commandes.typeCmd', 'commandes.somPay', 'commandes.somRest', 'commandes.modePay','commandes.nbStartTimes', 'commandes.dateCmd'];
     
     applyFilter(filterValue: string) {
       this.clients.filter = filterValue.trim().toLowerCase();
@@ -52,7 +52,7 @@ export class TypeAyementComponent implements OnInit {
     }else if(typeCmd == 'ST'){
       return 'assets/user/img/logo/images.jpg';
     }else if(typeCmd == 'Transfert'){
-      return 'assets/user/img/logo/transfert.png';
+      return 'assets/user/img/logo/transfert.jpg';
     }
   }
 

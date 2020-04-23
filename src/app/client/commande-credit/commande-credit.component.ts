@@ -1,3 +1,4 @@
+import { Client } from './../../interfaces/client';
 import { PrintClientService } from './../../services/print-client.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,7 +7,6 @@ import { ClientService } from 'src/app/services/client.service';
 import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Client } from 'src/app/interfaces/client';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class CommandeCreditComponent implements OnInit {
   clients = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  
+  clientsAll: Client[] = [];
   myParams: any;
   periodeCmd: any;
   $commandesCredit: any;
@@ -55,7 +55,7 @@ export class CommandeCreditComponent implements OnInit {
   }
 
   //DATA TABLE
-  displayedColumns: string[] = ['avatar', 'nom', 'prenom', 'adress.commune', 'adress.quartier', 'adress.secteur', 'telOrange', 'telMtn', 'telCelcom', 'telPerso', '_id'];
+  displayedColumns: string[] = ['avatar', 'nom', 'prenom', 'adress.commune', 'adress.quartier', 'adress.secteur', 'telOrange', 'telMtn', 'telCelcom', 'telPerso', 'genre', 'email', 'description','entreprise', '_id', 'nbCmd'];
     
   applyFilter(filterValue: string) {
     this.clients.filter = filterValue.trim().toLowerCase();
@@ -88,17 +88,15 @@ export class CommandeCreditComponent implements OnInit {
     this.clientService.allClientCommande().subscribe((resuts: Client[]) => {
         this.clients.paginator = this.paginator;
         this.clients.sort = this.sort;
-        
+        this.clientsAll = resuts;
+
         if(this.route.snapshot.paramMap.get('periode') == 'today')
         {
           var resultats = resuts.filter(function(result){
-        console.log('RESULT', result.commandes.length);
-
             if(result.deteCmdUpdate){
               var deteCmdUpdate = new Date(result.deteCmdUpdate);
-              return result.commandes.length > 0 && deteCmdUpdate.getDate() == date.getDate() && deteCmdUpdate.getMonth() == date.getMonth() && deteCmdUpdate.getFullYear() == date.getFullYear();
+              return deteCmdUpdate.getDate() == date.getDate() && deteCmdUpdate.getMonth() == date.getMonth() && deteCmdUpdate.getFullYear() == date.getFullYear();
             }
-            
           }) 
         }
 
@@ -137,6 +135,119 @@ export class CommandeCreditComponent implements OnInit {
       this.clients = new MatTableDataSource(resultats);      
 
     });
+  }
+
+  getCreditClient(id){
+    var sumTotal = 0;
+    var sumOM = 0;
+    var sumMoMo = 0;
+    var sumST = 0;
+    var sumTransfert = 0;
+    var date = new Date();
+
+    var clis = this.clientsAll.filter(res => {
+      return res._id == id
+    });
+
+    clis[0].commandes.forEach(res =>{
+      var dateCmd = new Date(res.dateCmd);
+      
+      //RECUPERATION DES SOLDES CREDIT EFFECTUER DU JOUR
+      if(this.route.snapshot.paramMap.get('periode') == 'today'){
+        if(dateCmd.getDate() == date.getDate() && dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear()){
+          
+          sumTotal +=res.somRest;
+      
+          if(res.typeCmd == 'OM'){
+              sumOM +=res.somRest;
+          }
+    
+          if(res.typeCmd == 'MoMo'){
+              sumMoMo +=res.somRest;
+          }
+          if(res.typeCmd == 'ST'){
+              sumST +=res.somRest;
+          }
+          if(res.typeCmd == 'Transfert'){
+              sumTransfert +=res.somRest;
+          }
+        }
+      }
+
+      //RECUPERATION DES SOLDES CREDIT EFFECTUER DU MOIS
+      if(this.route.snapshot.paramMap.get('periode') == 'month'){
+        if(dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear()){
+          
+          sumTotal +=res.somRest;
+      
+          if(res.typeCmd == 'OM'){
+              sumOM +=res.somRest;
+          }
+    
+          if(res.typeCmd == 'MoMo'){
+              sumMoMo +=res.somRest;
+          }
+          if(res.typeCmd == 'ST'){
+              sumST +=res.somRest;
+          }
+          if(res.typeCmd == 'Transfert'){
+              sumTransfert +=res.somRest;
+          }
+        }
+      }
+
+      //RECUPERATION DES SOLDES CREDIT EFFECTUER DE L'ANNEE
+      if(this.route.snapshot.paramMap.get('periode') == 'year'){
+        if(dateCmd.getFullYear() == date.getFullYear()){
+          
+          sumTotal +=res.somRest;
+      
+          if(res.typeCmd == 'OM'){
+              sumOM +=res.somRest;
+          }
+    
+          if(res.typeCmd == 'MoMo'){
+              sumMoMo +=res.somRest;
+          }
+          if(res.typeCmd == 'ST'){
+              sumST +=res.somRest;
+          }
+          if(res.typeCmd == 'Transfert'){
+              sumTransfert +=res.somRest;
+          }
+        }
+      }
+
+      //RECUPERATION DES SOLDES CREDIT EFFECTUER TOTAL
+      if(this.route.snapshot.paramMap.get('periode') == 'all'){
+          sumTotal +=res.somRest;
+      
+          if(res.typeCmd == 'OM'){
+              sumOM +=res.somRest;
+          }
+    
+          if(res.typeCmd == 'MoMo'){
+              sumMoMo +=res.somRest;
+          }
+          if(res.typeCmd == 'ST'){
+              sumST +=res.somRest;
+          }
+          if(res.typeCmd == 'Transfert'){
+              sumTransfert +=res.somRest;
+          }
+      }
+    
+    });
+  
+    var resultats = {
+        somRestOM: sumOM,
+        somRestMoMo: sumMoMo,
+        somRestST: sumST,
+        somRestTransfert: sumTransfert,
+        somRestTotal: sumTotal,
+    }
+    
+   return resultats;
   }
 
   typeCmd(typeCmd){
