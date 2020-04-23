@@ -1,1 +1,89 @@
-<app-search-bar home="Home" title="Liste Promoteur"></app-search-bar>
+<app-search-bar home="Home" title="Liste Des promoteurs"></app-search-bar>
+<div class="all-content-wrapper">
+    <div class="product-status mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <h4>Promoteurs</h4>
+                        <div id="inputCherch">
+                            <mat-form-field>
+                                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
+                            </mat-form-field>
+                        </div>
+                        <div class="asset-inner">
+                                
+                            <table mat-table [dataSource]="caisses" class="mat-elevation-z8" matSort>
+
+                                <ng-container matColumnDef="name">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                    </ng-container>
+                                    
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="nameAgence">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Agence </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.nameAgence}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="tel">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Telephone </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.tel}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="email">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="adress">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Adresse </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.adress}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="createdAt">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.createdAt | date}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="active">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                                        <td mat-cell *matCellDef="let element"> 
+                                            <section class="example-section">
+                                                <mat-slide-toggle (click)="changeEtat(element._id)"
+                                                    class="example-margin"
+                                                    [color]="color"
+                                                    [checked]="element.active == 1 ? true : false"
+                                                    [disabled]="disabled">
+                                                </mat-slide-toggle>
+                                            </section>
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="_id">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Production </th>
+                                        <td mat-cell *matCellDef="let element"> <a [routerLink]="['../production/total', element._id]" class="btn btn-info btn-xs" routerLinkActive="router-link-active" >Voir</a> </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="role">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Debit </th>
+                                        <td mat-cell *matCellDef="let element"> <a [routerLink]="['../attribution-list', element._id]" class="btn btn-info btn-xs" routerLinkActive="router-link-active" >Voir</a> </td>
+                                    </ng-container>
+                                <!-- Position Column -->
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>                                      
+                            <mat-paginator [pageSizeOptions]="[10, 20, 35, 100]"></mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

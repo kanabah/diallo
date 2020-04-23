@@ -1,4 +1,5 @@
 var Client = require('../models/Client');
+var User = require('../models/User');
 var Promoteur = require('../models/Promoteur');
 
 module.exports.addClient = async function(req, res){
@@ -115,6 +116,20 @@ module.exports.allCommande = async function(req, res){
             return res.status(404).send(new Error('Produit not found 404'));
         }else{
             return res.status(200).json(commandes);
+        }
+    }catch(err){
+        return res.status(500).send(new Error('Error 500'));
+    }
+}
+
+module.exports.getClients = async function(req, res){
+    try{
+        let clients = await Client.find({});
+
+        if(!clients){
+            return res.status(404).send(new Error('Produit not found 404'));
+        }else{
+            return res.status(200).json(clients);
         }
     }catch(err){
         return res.status(500).send(new Error('Error 500'));
@@ -665,7 +680,6 @@ module.exports.onTotalCmd = async function(req, res){
 module.exports.returnInfoHome = async function(req, res){
     var date = new Date();
     
-    
     try{
         var sumTotalOM = 0;  
         var sumTotalMoMo = 0;  
@@ -715,10 +729,13 @@ module.exports.returnInfoHome = async function(req, res){
         let clients = await Client.find({nbCmd: { $ne: 0 }, "user_id": req.payload._id}).sort( { nbCmd: -1 } ).limit(5);
         let nbClients = await Client.find({ $or: [{"user_id": req.payload._id}, {"user_id": req.payload.agence_id}]}).count();
 
+        //DEBUT POUR LE PROMOTEUR
         let promoteurs = Promoteur.find({});
         eventPromoteurs = (await promoteurs).filter(function(res){
             return res.user_id == req.payload._id;
         });
+
+        let promoteur = await User.find({"_id": req.payload._id});
 
         eventPromoteurs.forEach(result => {
             if(result.createdAt.getDate() == date.getDate() && result.createdAt.getMonth() == date.getMonth() && result.createdAt.getFullYear() == date.getFullYear()){
@@ -732,7 +749,7 @@ module.exports.returnInfoHome = async function(req, res){
             }
         });
 
-        // console.log('Entrer', totalSortieDay);
+        // FIN POUR LE PROMOTEUR
 
         commandes = cmds.filter(function(res){
             return res.delete == 0 && res.user_id == req.payload._id;
@@ -842,10 +859,12 @@ module.exports.returnInfoHome = async function(req, res){
             pourcentNbCmdMonth: pourcentNbCmdMonth,
             pourcentNbCmdWeek: pourcentNbCmdWeek,
             pourcentNbCmdYear: pourcentNbCmdYear,
+            // DEBUT POUR LE Promoteur
             totalEntrerDay: totalEntrerDay,
             totalSortieDay: totalSortieDay,
             nbClients: nbClients,
             clients: clients,
+            promoteur: promoteur
         }
 
         return res.status(200).json(returnSumTotal);

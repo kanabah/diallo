@@ -28,6 +28,16 @@ export class ListSortieCaisseComponent implements OnInit {
     this.listeSortieCaissse();
   }
 
+  disabledButtonIfNotToDay(dateSoldActuel){
+    var dateMod = new Date();
+    var date = new Date(dateSoldActuel);
+    if(dateMod.getDate() == date.getDate() && dateMod.getMonth() == date.getMonth() && dateMod.getFullYear() == date.getFullYear()){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
   //DATA TABLE
   displayedColumns: string[] = ['client_id.avatar', 'client_id.nom', 'client_id.prenom', 'client_id.telOrange', 'client_id.telMtn', 'client_id.telCelcom', 'client_id.telPerso', 'description', 'montant', 'createdAt', '_id'];
   

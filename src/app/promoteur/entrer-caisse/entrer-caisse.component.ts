@@ -26,6 +26,7 @@ export class EntrerCaisseComponent implements OnInit {
   onSubmit(){
     this.user = {"email": this.userService.getUserDetails().email, "password": this.password.value};
     this.userService.login(this.user).subscribe(res => {
+      
       if(!res){
         this.passwordIncorect = false;
         this.etatPadding = true;
@@ -37,7 +38,7 @@ export class EntrerCaisseComponent implements OnInit {
 
         this.promoteurService.entrerCaisse(this.entrerForm.value).subscribe(res => {
           this.snackBar.openSnackBar('Ajout Reusie!!', 'Fermer');
-          this.route.navigate(['promoteur/list/enter'])
+          this.route.navigate(['promoteur/list/enterJour'])
         });
       }
     });

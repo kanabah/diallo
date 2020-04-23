@@ -37,8 +37,20 @@ export class PromoteurService {
     )
   }
 
+  public getPromoteurByUserId(): Observable<Promoteur>{
+    return this.http.get<Promoteur>(`${this.api}/getPromoteurByUserId`).pipe(
+      retry(3)
+    )
+  }
+
   public deleteCaisseById(id): Observable<Promoteur>{
     return this.http.get<Promoteur>(`${this.api}/deleteCaisseById/${id}`).pipe(
+      retry(3)
+    )
+  }
+
+  public getPromoteurByUserIdForAgenceAndAdmi(id): Observable<Promoteur[]>{
+    return this.http.get<Promoteur[]>(`${this.api}/getPromoteurByUserIdForAgenceAndAdmi/${id}`).pipe(
       retry(3)
     )
   }

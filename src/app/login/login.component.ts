@@ -25,7 +25,11 @@ export class LoginComponent implements OnInit {
         this.passwordIncorect = false;
         this.etatPadding = true;
       }else{
-        this.router.navigate(['/']);
+        if(this.userService.getUserDetails().role != 'admi'){
+          this.router.navigate(['/']);
+        }else{
+          this.router.navigate(['/admi/home']);
+        }
       }
     })
   }

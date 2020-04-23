@@ -8,4 +8,5 @@ export interface Promoteur{
     agence_id: string;
     user_id: string;
     active: number;
+    createdAt: Date;
 }

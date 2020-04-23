@@ -16,6 +16,10 @@ promoteurRoutes.route('/getCaisseById/:id').get(auth, ctrPromoteur.getCaisseById
 
 promoteurRoutes.route('/listeSortieCaissse').get(auth, ctrPromoteur.listeSortieCaissse);
 
+promoteurRoutes.route('/getPromoteurByUserId').get(auth, ctrPromoteur.getPromoteurByUserId);
+
+promoteurRoutes.route('/getPromoteurByUserIdForAgenceAndAdmi/:id').get(auth, ctrPromoteur.getPromoteurByUserIdForAgenceAndAdmi);
+
 promoteurRoutes.route('/deleteCaisseById/:id').get(auth, ctrPromoteur.deleteCaisseById);
 
 promoteurRoutes.route('/updatedCaisse/:id').put(auth, ctrPromoteur.updatedCaisse);

@@ -8,6 +8,11 @@ export interface User{
     photo: string;
     user_id: string;
     agence_id: string;
+    soldActuel: [{
+        date: any,
+        montant,
+        _id: string
+    }];
     role: string;
     password: string;
     active: number;

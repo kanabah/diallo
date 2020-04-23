@@ -1,4 +1,6 @@
-import { Route, Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { User } from './../../interfaces/user';
+import { Route, Router, ActivatedRoute } from '@angular/router';
 import { UserService } from './../../services/user.service';
 import { PromoteurService } from './../../services/promoteur.service';
 import { ClientService } from './../../services/client.service';
@@ -8,20 +10,50 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { recherchTelPromoteur } from 'src/app/validators/recherch-tel-promoteur.validator';
 
 @Component({
-  selector: 'app-attribute-espece',
-  templateUrl: './attribute-espece.component.html',
-  styleUrls: ['./attribute-espece.component.css']
+  selector: 'app-attribution-update',
+  templateUrl: './attribution-update.component.html',
+  styleUrls: ['./attribution-update.component.css']
 })
-export class AttributeEspeceComponent implements OnInit {
+export class AttributionUpdateComponent implements OnInit {
   etatPadding: boolean = true;
   passwordIncorect: boolean = true;
   user: any;
   idClient: string;
   name: string;
+  agence: User;
+  debit: any;
+  id_sold: any;
+  id_user: any;
 
-  constructor(private route: Router, private snackBar: SnackBarService, private userService: UserService, private fb: FormBuilder, private clientService: ClientService, private promoteurService: PromoteurService) { }
+  constructor(private route: Router, private snackBar: SnackBarService, private userService: UserService, private fb: FormBuilder, private clientService: ClientService, private promoteurService: PromoteurService, private router: ActivatedRoute, private location: Location) { }
 
   ngOnInit() {
+    let id = this.router.snapshot.paramMap.get('id');
+    let user_id = this.router.snapshot.paramMap.get('user_id');
+    this.id_sold = id;
+    this.id_user = user_id;
+
+    this.getAgence(user_id, id);
+  }
+
+  getAgence(user_id, id){
+    this.userService.getUser(user_id).subscribe(res => {
+      this.agence = res;
+      this.debit = this.agence.soldActuel.filter(result =>{
+        return result._id == id;
+      })
+      
+      console.log('Agence', this.debit[0]);
+      this.initialiseForms();
+    })
+  }
+
+  
+  private initialiseForms(){
+    this.controlFrom.patchValue({
+          montant: this.debit[0].montant ? this.debit[0].montant : '',
+          description: this.debit[0].description ? this.debit[0].description : '',
+    })
   }
 
   onSubmit(){
@@ -36,22 +68,15 @@ export class AttributeEspeceComponent implements OnInit {
         this.client_id.setValue(this.idClient);
         this.type.setValue('entrer');
 
-        this.userService.addSoldePromoteur(this.idClient, this.controlFrom.value).subscribe(res => {
-          this.snackBar.openSnackBar('Ajout Reusie!!', 'Fermer');
-          this.route.navigate(['/'])
+        this.userService.updateDebitPromoteurForAgence(this.controlFrom.value, this.id_user, this.id_sold).subscribe(res => {
+          this.snackBar.openSnackBar('Modification  Reuissie!!', 'Fermer');
+          this.location.back();
         });
       }
     });
   }
 
   controlFrom = this.fb.group({
-    tel: ['', {
-      validators: [Validators.required,
-        Validators.pattern(/^[0-9+]{9,9}$/)
-     ],
-      asyncValidators: [recherchTelPromoteur(this.userService)],
-      updateOn: 'blur'}
-   ],
     montant: ['', [Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]],
     description: [''],
     client_id: [''],
@@ -146,5 +171,4 @@ export class AttributeEspeceComponent implements OnInit {
   get password(){
     return this.controlFrom.get('password');
   }
-
 }

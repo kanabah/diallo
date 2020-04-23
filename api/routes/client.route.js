@@ -40,6 +40,8 @@ clientRoutes.route('/detaille/:id').get(auth,ctrClient.clientDettaille);
 
 clientRoutes.route('/getCommandeCredit/:id').get(auth,ctrClient.getCommandeCredit);
 
+clientRoutes.route('/getClients').get(auth,ctrClient.getClients);
+
 clientRoutes.route('/getMontantClient/:id/:type').get(auth,ctrClient.getMontantClient);
 
 clientRoutes.route('/periodeDetailleCommande/:id/:myParams').get(auth,ctrClient.periodeDetailleCommande);

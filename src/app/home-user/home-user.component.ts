@@ -21,6 +21,10 @@ import { faDollyFlatbed } from '@fortawesome/free-solid-svg-icons';
 })
 export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription;
+  soldPromoteur: any;
+  soldPromoteurToday = 0;
+  someActuJour = 0;
+
   constructor(private js: JsService, public dialog: MatDialog, private clientService: ClientService, public print: PrintClientService, public userService : UserService) { }
   infoTotal: any;
   purcentDay: any = 0;
@@ -53,14 +57,33 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  
   infoHome(){
+    let date = new Date();
     var somActuel = 0;
+    
     this.clientService.returnInfoHome().subscribe(res => {
       this.ok = true;
       this.infoTotal = res;
-      somActuel = this.infoTotal['totalEntrerDay'] - this.infoTotal['totalSortieDay']; 
+
+      //GET MONTANT JOURNALIERE DU PROMOTEUR
+      this.soldPromoteur = this.infoTotal['promoteur'][0].soldActuel;
+      var filtreSoldeJour = this.soldPromoteur.filter(function(res){  
+        var deteResult = new Date(res.date);
+          return deteResult.getDate() == date.getDate() && deteResult.getMonth() == date.getMonth() && deteResult.getFullYear() == date.getFullYear();
+      });
+
+      var oups = 0
+      filtreSoldeJour.forEach(element => {
+        oups += element.montant;
+      });
+
+      this.soldPromoteurToday = oups;
+      
       this.calculPurcentCommande();
+      this.someActuJour = this.soldPromoteurToday + this.infoTotal['totalEntrerDay'] - this.infoTotal['totalSortieDay'];//this.infoTotal['totalEntrerDay'] - this.infoTotal['totalSortieDay']; 
     })
+    
   }
 
   calculPurcentCommande(){
@@ -196,28 +219,19 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContentAddCommandeOrangeMoneyComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    this.dialog.open(DialogContentAddCommandeOrangeMoneyComponent);
   }
   
     openDialogMoMo(){
-      const dialogRef = this.dialog.open(DialogContentAddCommandeMobileMoneyComponent);
-      dialogRef.afterClosed().subscribe(result => {
-      });
+      this.dialog.open(DialogContentAddCommandeMobileMoneyComponent);
     }
   
     openTransfert(){
-      const dialogRef = this.dialog.open(DialogContentAddTransfertComponent);
-      dialogRef.afterClosed().subscribe(result => {
-      });
+      this.dialog.open(DialogContentAddTransfertComponent);
     }
   
     openStartTimes(){
-      const dialogRef = this.dialog.open(DialogContentAddStartTimesComponent);
-      dialogRef.afterClosed().subscribe(result => {
-      });
+      this.dialog.open(DialogContentAddStartTimesComponent);
     }
 
     ngOnDestroy(){

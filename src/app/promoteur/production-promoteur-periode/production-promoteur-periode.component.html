@@ -1,0 +1,107 @@
+<app-search-bar home="Home" title="Poduction"></app-search-bar>
+<div class="all-content-wrapper">
+    <div class="single-pro-review-area mt-t-30 mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-payment-inner-st">
+                        <ul id="myTabedu1" class="tab-review-design">
+                            <!-- INFORMATION -->
+                            <div class="card-header">
+                                <h4>Production Promoteur <button *ngIf="!search" class="btn btn-primary btn-xs pull-right" (click)="search=true">Retour</button></h4>
+                            </div>
+                        </ul>
+                        <div id="myTabContent" class="tab-content custom-product-edit">
+                            <div class="product-tab-list tab-pane fade active in" id="description">
+                                <div class="row" *ngIf="search">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="review-content-section">
+
+                                            <div id="dropzone1" class="pro-ad" >
+                                                <form [formGroup]="controlFrom" (ngSubmit)="onSubmit()" >
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="form-group">
+                                                                <label for="tel">Telephone Promoteur</label>
+                                                                <input formControlName="tel" [id]="getTelSuccess() ? 'successForm' : getTelError() ? 'errorForm' : ''" type="text" class="form-control" id="tel" placeholder="Numero Telephone Promoteur">
+                                                                <span *ngIf="getTelError()" class="text text-danger"><small>{{ getTelError() }}</small></span>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="type">Type</label>
+                                                                <select formControlName="type" class="form-control" id="type">
+                                                                    <option value="Tout">Tout</option>
+                                                                    <option value="entrer">Entrer</option>
+                                                                    <option value="sortie">Sortie</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="date">Date</label>
+                                                                <input formControlName="date" type="date" [id]="getDateSuccess() ? 'successForm' : getDateError() ? 'errorForm' : ''" id="date" class="form-control" placeholder="Date">
+                                                                <span *ngIf="getDateError()" class="text text-danger"><small>{{ getDateError() }}</small></span>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <button type="submit" [disabled]="controlFrom.pending || controlFrom.invalid" class="btn btn-primary waves-effect waves-light" id="margin-right">{{ !etatPadding ? 'Patienter...': 'Recherche'}}</button>
+                                                                <button type="reset"  class="btn btn-danger "> Annuler</button> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="!search">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="product-status-wrap">
+                                            <div class="asset-inner">
+                                                <table>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Type</th>
+                                                        <th>Nom</th>
+                                                        <th>Prenom</th>
+                                                        <th>Tel Orange</th>
+                                                        <th>Tel MTN</th>
+                                                        <th>Tel Celcome</th>
+                                                        <th>Tel Personel</th>
+                                                        <th>Montant</th>
+                                                        <th>Description</th>
+                                                        <th>Date</th>
+                                                        <!-- | orderBy:'result.createdAt': false -->
+                                                    </tr>
+                                                    <tr *ngFor="let result of collection.data | paginate: config" [ngClass]="{'bg-success': result.type == 'entrer' ? true : false, 'bg-danger': result.type == 'sortie' ? true : false }">
+                                                        <td ><img src="{{ print.printAvatar(result.avatar) }}" alt="Image" id="image"></td>
+                                                        <td><span class="badge badge-success"> {{ result.type}}</span></td>
+                                                        <td>{{ result.client_id.nom }}</td>
+                                                        <td>{{ result.client_id.prenom }}</td>
+                                                        <td>{{ result.client_id.telOrange }}</td>
+                                                        <td>{{ result.client_id.telMtn }}</td>
+                                                        <td>{{ result.client_id.telCelcom }}</td>
+                                                        <td>{{ result.client_id.telPerso }}</td>
+                                                        <td>{{ result.montant }}</td>
+                                                        <td>{{ result.description }}</td>
+                                                        <td>{{ result.createdAt | date }}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="custom-pagination">
+                                                <ul class="pagination">
+                                                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

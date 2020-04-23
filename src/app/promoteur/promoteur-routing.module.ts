@@ -1,3 +1,10 @@
+import { AttributionUpdateComponent } from './attribution-update/attribution-update.component';
+import { AttributionListComponent } from './attribution-list/attribution-list.component';
+import { ProductionPromoteurPeriodeComponent } from './production-promoteur-periode/production-promoteur-periode.component';
+import { ProductionPromoteurTotalComponent } from './production-promoteur-total/production-promoteur-total.component';
+import { ListDebitAgenceComponent } from './list-debit-agence/list-debit-agence.component';
+import { ListSortieJourComponent } from './list-sortie-jour/list-sortie-jour.component';
+import { ListEntrerJourComponent } from './list-entrer-jour/list-entrer-jour.component';
 import { ListSortieCaisseComponent } from './list-sortie-caisse/list-sortie-caisse.component';
 import { UpdateCaissePromoteurComponent } from './update-caisse-promoteur/update-caisse-promoteur.component';
 import { ListEntrerCaisseComponent } from './list-entrer-caisse/list-entrer-caisse.component';
@@ -28,6 +35,34 @@ const routes: Routes = [
       {
         path: 'list/sortie',
         component: ListSortieCaisseComponent
+      },
+      {
+        path: 'list/enterJour',
+        component: ListEntrerJourComponent
+      },
+      {
+        path: 'list/sortieJour',
+        component: ListSortieJourComponent
+      },
+      {
+        path: 'list/debit',
+        component: ListDebitAgenceComponent
+      },
+      {
+        path: 'production-periode',
+        component: ProductionPromoteurPeriodeComponent
+      },
+      {
+        path: 'attribution-list/:id',
+        component: AttributionListComponent
+      },
+      {
+        path: 'attribution-update/:id/:user_id',
+        component: AttributionUpdateComponent
+      },
+      {
+        path: 'production/total/:id',
+        component: ProductionPromoteurTotalComponent
       },
       {
         path: 'list/caisses/update/:id',

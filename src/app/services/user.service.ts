@@ -151,6 +151,30 @@ export class UserService {
     );
   }
 
+  public getUsers(): Observable<User[]>{
+    return this.http.get<User[]>(`${this.api}/getUsers/`).pipe(
+      retry(3)
+    );
+  }
+
+  public changeEtatUser(id): Observable<User>{
+    return this.http.get<User>(`${this.api}/changeEtatUser/${id}`).pipe(
+      retry(3)
+    );
+  }
+
+  public updateDebitPromoteurForAgence(user, id, id_sold): Observable<User>{
+    return this.http.put<User>(`${this.api}/updateDebitPromoteurForAgence/${id}/${id_sold}`, user).pipe(
+      retry(3)
+    );
+  }
+
+  public deleteDebitPromoteurForAgence(id, id_sold): Observable<User>{
+    return this.http.get<User>(`${this.api}/deleteDebitPromoteurForAgence/${id}/${id_sold}`).pipe(
+      retry(3)
+    );
+  }
+
   public attriButeRole(id, role, agence_id): Observable<User>{
     agence_id = agence_id == '' ? 'Select' : agence_id;
     return this.http.get<User>(`${this.api}/attriButeRole/${id}/${role}/${agence_id}`).pipe(
@@ -158,8 +182,20 @@ export class UserService {
     );
   }
 
-  public addSoldePromoteur(id, solde, description): Observable<User>{
-    return this.http.get<User>(`${this.api}/addSoldePromoteur/${id}/${solde}/${description}`).pipe(
+  public addSoldePromoteur(id, promoteur): Observable<User>{
+    return this.http.put<User>(`${this.api}/addSoldePromoteur/${id}`, promoteur).pipe(
+      retry(3)
+    );
+  }
+
+  public getPromoteur(id, agence_id): Observable<User>{
+    return this.http.get<User>(`${this.api}/getPromoteur/${id}/${agence_id}`).pipe(
+      retry(3)
+    );
+  }
+
+  public getUser(id): Observable<User>{
+    return this.http.get<User>(`${this.api}/getUser/${id}`).pipe(
       retry(3)
     );
   }

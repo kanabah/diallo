@@ -1,3 +1,4 @@
+import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PromoteurComponent } from './promoteur.component';
@@ -13,12 +14,21 @@ import { DemoMaterialModule } from '../services/material.service';
 import { UpdateCaissePromoteurComponent } from './update-caisse-promoteur/update-caisse-promoteur.component';
 import { ListSortieCaisseComponent } from './list-sortie-caisse/list-sortie-caisse.component';
 import { DialogDeleteCaisseComponent } from './dialog-delete-caisse/dialog-delete-caisse.component';
+import { ListEntrerJourComponent } from './list-entrer-jour/list-entrer-jour.component';
+import { ListSortieJourComponent } from './list-sortie-jour/list-sortie-jour.component';
+import { ListDebitAgenceComponent } from './list-debit-agence/list-debit-agence.component';
+import { ProductionPromoteurTotalComponent } from './production-promoteur-total/production-promoteur-total.component';
+import { ProductionPromoteurPeriodeComponent } from './production-promoteur-periode/production-promoteur-periode.component';
+import { AttributionListComponent } from './attribution-list/attribution-list.component';
+import { AttributionUpdateComponent } from './attribution-update/attribution-update.component';
+import { DeleteConfirmCoteAgenceComponent } from './delete-confirm-cote-agence/delete-confirm-cote-agence.component';
 
 
 @NgModule({
-  declarations: [PromoteurComponent, EntrerCaisseComponent, SortieCaisseComponent, ListEntrerCaisseComponent, UpdateCaissePromoteurComponent, ListSortieCaisseComponent, DialogDeleteCaisseComponent],
+  declarations: [PromoteurComponent, EntrerCaisseComponent, SortieCaisseComponent, ListEntrerCaisseComponent, UpdateCaissePromoteurComponent, ListSortieCaisseComponent, DialogDeleteCaisseComponent, ListEntrerJourComponent, ListSortieJourComponent, ListDebitAgenceComponent, ProductionPromoteurTotalComponent, ProductionPromoteurPeriodeComponent, AttributionListComponent, AttributionUpdateComponent, DeleteConfirmCoteAgenceComponent],
   entryComponents: [
-    DialogDeleteCaisseComponent
+    DialogDeleteCaisseComponent,
+    DeleteConfirmCoteAgenceComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +37,8 @@ import { DialogDeleteCaisseComponent } from './dialog-delete-caisse/dialog-delet
     ReactiveFormsModule,
     DemoMaterialModule,
     PromoteurRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
   ]
 })
 export class PromoteurModule { }

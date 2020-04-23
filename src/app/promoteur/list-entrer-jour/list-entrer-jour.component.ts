@@ -11,30 +11,21 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-list-entrer-caisse',
-  templateUrl: './list-entrer-caisse.component.html',
-  styleUrls: ['./list-entrer-caisse.component.css']
+  selector: 'app-list-entrer-jour',
+  templateUrl: './list-entrer-jour.component.html',
+  styleUrls: ['./list-entrer-jour.component.css']
 })
-export class ListEntrerCaisseComponent implements OnInit {
+export class ListEntrerJourComponent implements OnInit {
   dataSource: any[] = [];
   caisses = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  resultFilterDay: any;
 
   constructor(private dialog: MatDialog,private promoteurService: PromoteurService, public print: PrintClientService, private router: Router) { }
 
   ngOnInit() {
     this.getListEntrerCaisse();
-  }
-
-  disabledButtonIfNotToDay(dateSoldActuel){
-    var dateMod = new Date();
-    var date = new Date(dateSoldActuel);
-    if(dateMod.getDate() == date.getDate() && dateMod.getMonth() == date.getMonth() && dateMod.getFullYear() == date.getFullYear()){
-      return false;
-    }else{
-      return true;
-    }
   }
 
   //DATA TABLE
@@ -45,9 +36,15 @@ export class ListEntrerCaisseComponent implements OnInit {
   }
 
   getListEntrerCaisse(){
+    let date = new Date();
     this.promoteurService.listeEntrerCaissse().subscribe((resuts : Promoteur[]) => {
-      resuts.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
-      this.caisses = new MatTableDataSource(resuts);
+      this.resultFilterDay = resuts.filter(function(res){
+        var dateAdd = new Date(res.createdAt);
+          return dateAdd.getDate() == date.getDate() && dateAdd.getMonth() == date.getMonth() && dateAdd.getFullYear() == date.getFullYear();
+      });
+
+      this.resultFilterDay.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
+      this.caisses = new MatTableDataSource(this.resultFilterDay);
       this.caisses.paginator = this.paginator;
       this.caisses.sort = this.sort;
     });
@@ -62,4 +59,5 @@ export class ListEntrerCaisseComponent implements OnInit {
       data: {"id": id}
     });
   }
+
 }

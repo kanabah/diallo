@@ -49,6 +49,12 @@ export class ClientService {
     )
   }
 
+  public getClients(): Observable<Client[]>{
+    return this.http.get<Client[]>(`${this.api}/getClients`).pipe(
+      retry(3)
+    )
+  }
+
   public allCommande(): Observable<Client[]>{
     return this.http.get<Client[]>(`${this.api}/allCommande`).pipe(
       retry(3)

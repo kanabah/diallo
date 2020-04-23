@@ -277,16 +277,16 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="analytics-sparkle-line reso-mg-b-30">
                         <div class="analytics-content">
-                            <h5>Entrer Caisse </h5>
-                            <h2><span>{{ infoTotal['sumTotalMoMo'] | currency:'':'' }}</span> <span class="tuition-fees"><button type="button" [routerLink]="['/promoteur/enter/checkout']" routerLinkActive="router-link-active"  class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
+                            <h5>Entrer Caisse <small>(GNF)</small></h5>
+                            <h2><span>{{ infoTotal['totalEntrerDay'] | currency:'':'' }}</span> <span class="tuition-fees"><button type="button" [routerLink]="['/promoteur/enter/checkout']" routerLinkActive="router-link-active"  class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
                         <div class="analytics-content">
-                            <h5>Sortie Caisse</h5>
-                            <h2><span>{{ infoTotal['sumTotalST'] | currency:'':'' }}</span><span class="tuition-fees"><button type="button" [routerLink]="['/promoteur/out/checkout']" routerLinkActive="router-link-active"  class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
+                            <h5>Sortie Caisse <small>(GNF)</small></h5>
+                            <h2><span>{{ infoTotal['totalSortieDay'] | currency:'':'' }}</span><span class="tuition-fees"><button type="button" [routerLink]="['/promoteur/out/checkout']" routerLinkActive="router-link-active"  class="btn btn-custon-two btn-primary btn-xs">Ajouter</button></span></h2>
                             
                         </div>
                     </div>
@@ -301,13 +301,13 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="white-box">
-                        <h3 class="box-title">Status de l'Agence</h3>
+                        <h3 class="box-title">Status Journaliere de l'Agence</h3>
                         <ul class="basic-list">
                             <li>Total Client <span class="pull-right label-danger label-1 label">{{ infoTotal['nbClients'] }}</span></li>
-                            <li>Somme Debit Agence<span class="{{ colorCreditOM }}">{{ infoTotal['sumCreditOM'] | currency:'':'' }}GNF</span></li>
-                            <li>Total Entrer Du Jour<span class="{{ colorCreditMoMo }}">{{ infoTotal['totalEntrerDay'] | currency:'':'' }}GNF</span></li>
-                            <li>Total Sortie Du Jour<span class="{{ colorCreditST }}">{{ infoTotal['totalSortieDay'] | currency:'':'' }}GNF</span></li>
-                            <li>Somme Actuelle Du Jour<span class="{{ colorCreditTransfert }}">{{ somActuel | currency:'':'' }}GNF</span></li>
+                            <li>Somme Debit Agence<span class="{{ colorCreditOM }}">{{ soldPromoteurToday | currency:'':'' }}GNF</span></li>
+                            <li>Total Entrer Du Jour<span class="{{ colorCreditMoMo }}">{{ infoTotal['totalEntrerDay'] | currency:'':'' }} GNF</span></li>
+                            <li>Total Sortie Du Jour<span class="{{ colorCreditST }}">{{ infoTotal['totalSortieDay'] | currency:'':'' }} GNF</span></li>
+                            <li>Somme Actuelle Du Jour<span class="{{ colorCreditTransfert }}">{{ someActuJour | currency:'':'' }} GNF</span></li>
                         </ul>
                     </div>
                 </div>

@@ -1,0 +1,35 @@
+#margin-right{
+    margin-right: 10px;
+}
+
+#errorForm{
+    border: 1px solid red;
+  }
+  
+  #successForm{
+    border: 1px solid green;
+  }
+  
+  #successNotStyl{
+    border: 1px solid none;
+  }
+  
+  #rounded-circle{
+    border-radius: 50%;
+    max-width: 30px;
+    max-height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    width: 30px;
+    height: 30px;
+}
+
+#inputCherch{
+    float: right;
+    margin-top: -60px;
+}
+
+#image{
+    height: 30px;
+    width: 30px;
+}

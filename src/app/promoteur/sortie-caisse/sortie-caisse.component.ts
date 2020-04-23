@@ -6,6 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { Router } from '@angular/router';
+import { testMontantSortiePromoteurValidator } from 'src/app/validators/test-montant-sortie-promoteur.validator';
 
 @Component({
   selector: 'app-sortie-caisse',
@@ -17,10 +18,15 @@ export class SortieCaisseComponent implements OnInit {
   passwordIncorect: boolean = true;
   user: any;
   idClient: string;
+  promoteur: any;
+  montantTotalEntrerDuJour: any = 0;
+  montantTotalSortieDuJour: any = 0;
+  filtreDay: any;
 
   constructor(private router: Router, private snackBar: SnackBarService ,private userService: UserService, private fb: FormBuilder, private clientService: ClientService, private promoteurService: PromoteurService) { }
 
   ngOnInit() {
+    
   }
 
   onSubmit(){
@@ -28,18 +34,18 @@ export class SortieCaisseComponent implements OnInit {
     this.userService.login(this.user).subscribe(res => {
       if(!res){
         this.passwordIncorect = false;
-        this.etatPadding = true;
-      }else{
-        this.user_id.setValue(this.userService.getUserDetails()._id);
-        this.agence_id.setValue(this.userService.getUserDetails().agence_id);
-        this.client_id.setValue(this.idClient);
-        this.type.setValue('sortie');
-        
-        this.promoteurService.entrerCaisse(this.sortieForm.value).subscribe(res => {
-          this.snackBar.openSnackBar('Ajout Reusie!!', 'Fermer');
-          this.router.navigate(['promoteur/list/sortie'])
-        });
-      }
+          this.etatPadding = true;
+        }else{
+          this.user_id.setValue(this.userService.getUserDetails()._id);
+          this.agence_id.setValue(this.userService.getUserDetails().agence_id);
+          this.client_id.setValue(this.idClient);
+          this.type.setValue('sortie');
+          
+          this.promoteurService.entrerCaisse(this.sortieForm.value).subscribe(res => {
+            this.snackBar.openSnackBar('Ajout Reusie!!', 'Fermer');
+            this.router.navigate(['promoteur/list/sortieJour'])
+          });
+        }
     });
   }
 
@@ -51,7 +57,14 @@ export class SortieCaisseComponent implements OnInit {
       asyncValidators: [returnInfoClientValidator(this.clientService)],
       updateOn: 'blur'}
    ],
-    montant: ['', [Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]],
+   montant:  ['', {
+    validators: [
+      Validators.required,
+      Validators.pattern(/^[0-9+]{1,}$/),
+    ],
+      asyncValidators: [testMontantSortiePromoteurValidator(this.userService, this.promoteurService)],
+      updateOn: 'blur'}
+    ],
     description: [''],
     client_id: [''],
     agence_id: [''],
@@ -66,6 +79,8 @@ export class SortieCaisseComponent implements OnInit {
         return 'Cet Montant est requis.';
       }else if(this.montant.errors.pattern){
         return 'Montant Incorect';
+      }else if(this.montant.errors.imposible){
+        return 'Montant Superieur a la somme des entrer du jour';
       }
     }
   }

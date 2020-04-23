@@ -1,5 +1,7 @@
+import { User } from './../../interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogDeleteCaisseComponent } from './../dialog-delete-caisse/dialog-delete-caisse.component';
 import { PrintClientService } from './../../services/print-client.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,49 +13,37 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-list-promoteur',
-  templateUrl: './list-promoteur.component.html',
-  styleUrls: ['./list-promoteur.component.css']
+  selector: 'app-list-debit-agence',
+  templateUrl: './list-debit-agence.component.html',
+  styleUrls: ['./list-debit-agence.component.css']
 })
-export class ListPromoteurComponent implements OnInit {
+export class ListDebitAgenceComponent implements OnInit {
   dataSource: any[] = [];
   caisses = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  resultFilterDay: any;
 
-  constructor(private dialog: MatDialog,private userService: UserService, public print: PrintClientService, private router: Router) { }
+  constructor(private userService: UserService, public print: PrintClientService) { }
 
   ngOnInit() {
-    this.getAllPromoteurs();
+    this.getListEntrerCaisse();
   }
 
   //DATA TABLE
-  displayedColumns: string[] = ['name', 'nameAgence', 'tel', 'email', 'adress', 'createdAt', 'active', '_id','role'];
+  displayedColumns: string[] = ['montant', 'description', 'date'];
   
   applyFilter(filterValue: string) {
     this.caisses.filter = filterValue.trim().toLowerCase();
   }
-  
-  getAllPromoteurs(){
-    this.userService.getAllPromoteurs(this.userService.getUserDetails()._id).subscribe(res => {
-      res.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
-      this.caisses = new MatTableDataSource(res);
+
+  getListEntrerCaisse(){
+    this.userService.getUser(this.userService.getUserDetails()._id).subscribe((resuts : User) => {
+      resuts.soldActuel.sort((a: any, b: any) => a.date < b.date ? 1 : a.date > b.date ? -1 : 0);
+      this.caisses = new MatTableDataSource(resuts.soldActuel);
       this.caisses.paginator = this.paginator;
       this.caisses.sort = this.sort;
-    })
+    });
   }
-
-  changeEtat(id){
-    this.userService.changeEtatUser(id).subscribe(res => {
-      console.log(res);
-    })
-  }
-
-  // dialogDeleteCaisse(id){
-  //   this.dialog.open(DialogDeleteCaisseComponent, {
-  //     data: {"id": id}
-  //   });
-  // }
-
 
 }
