@@ -1,3 +1,4 @@
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,10 +13,12 @@ import { NavAdmiComponent } from './nav-admi/nav-admi.component';
 import { TitlePageComponent } from './title-page/title-page.component';
 import { ConfirmPasswordComponent } from './confirm-password/confirm-password.component';
 import { AttributeRoleComponent } from './attribute-role/attribute-role.component';
+import { FooterAdmiComponent } from './footer-admi/footer-admi.component';
+import { AddGuichetsComponent } from './add-guichets/add-guichets.component';
 
 
 @NgModule({
-  declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent],
+  declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent, FooterAdmiComponent, AddGuichetsComponent],
   entryComponents: [
     ConfirmPasswordComponent,
     AttributeRoleComponent
@@ -24,7 +27,8 @@ import { AttributeRoleComponent } from './attribute-role/attribute-role.componen
     CommonModule,
     AdmiRoutingModule,
     ReactiveFormsModule,
-    DemoMaterialModule
+    DemoMaterialModule,
+    NgxPaginationModule
   ]
 })
 export class AdmiModule { }

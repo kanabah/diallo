@@ -55,8 +55,8 @@ export const ScriptStore: Path[] = [
 ];
 
 export const ScriptStoreAdmi: Path[] = [
-  { src: "../../../assets/admi/main.css"},
-  { src: "../../../assets/admi/scripts/main.js"},  // A COMMENTER DEBUT
+  { src: "../../../../assets/admi/main.css"},
+  { src: "../../../../assets/admi/scripts/main.js"},  // A COMMENTER DEBUT
 ];
 
 export const ScriptStoreHome: Path[] = [

@@ -1,0 +1,57 @@
+<div class="app-main">  
+    <app-nav-admi></app-nav-admi>
+    <div class="app-main__outer">
+       <div class="app-main__inner">  
+            <app-title-page></app-title-page>         
+           <div class="row">
+               <div class="col-md-12">
+                   <div class="main-card mb-3 card">
+                       <div class="card-header">
+                           Montant Guichet
+                       </div>
+                       <div class="card-body">
+                            <form [formGroup]="formControl" (ngSubmit)="onSubmit()">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Telphone Agence</label>
+                                    <input type="text" class="form-control" formControlName="tel" id="exampleInputEmail1" [id]="getTelSuccess() ? 'successForm' : getTelError() ? 'errorForm' : ''" aria-describedby="emailHelp" placeholder="Agence">
+                                    <span *ngIf="getTelError()" class="text text-danger"><small>{{ getTelError() }}</small></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Type</label>
+                                    <select formControlName="type" class="form-control" id="exampleFormControlSelect1">
+                                      <option value="Selectioner" disabled>Selectioner</option>
+                                      <option value="wester">Wester Union</option>
+                                      <option value="wari">Wari</option>
+                                      <option value="money">Money Gram</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Montant</label>
+                                    <input type="text" formControlName="montant" [id]="getMontantSuccess() ? 'successForm' : getMontantError() ? 'errorForm' : ''" class="form-control" id="exampleFormControlInput1" placeholder="Montant Guichet">
+                                    <span *ngIf="getMontantError()" class="text text-danger"><small>{{ getMontantError() }}</small></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea formControlName="description" class="form-control" placeholder="Description"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Mot de passe</label>
+                                    <input type="password" formControlName="password" class="form-control" [id]="getPasswordSuccess() ? 'successNotStyl' : getPasswordError() ? 'errorForm' : ''" id="exampleInputPassword1" placeholder="******">
+                                    <span *ngIf="getPasswordError()" class="text text-danger"><small>{{ getPasswordError() }}</small></span>
+                                    <span *ngIf="!passwordIncorect && !getPasswordError()" class="text text-danger form-text text-muted"><small>Mot de passe incorect</small></span>
+                                
+                                </div>
+                                
+                                <button type="Ajouter" [disabled]="formControl.invalid" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                   </div>
+               </div>
+           </div>
+        </div>
+        <app-footer-admi></app-footer-admi>
+    </div>
+</div>

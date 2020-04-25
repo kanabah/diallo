@@ -1,3 +1,4 @@
+import { AddGuichetsComponent } from './add-guichets/add-guichets.component';
 import { NewUsersComponent } from './new-users/new-users.component';
 import { ElementNotificationComponent } from './element-notification/element-notification.component';
 import { AuthGuard } from './../guards/auth.guard';
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'elemennts-notification/new-users',
         component: NewUsersComponent
+      },
+      {
+        path: 'guichet',
+        component: AddGuichetsComponent
       },
     ]
   }

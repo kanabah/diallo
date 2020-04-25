@@ -1,3 +1,4 @@
+import { JsService } from 'src/app/services/js.service';
 import { AttributeRoleComponent } from './../attribute-role/attribute-role.component';
 import { ConfirmPasswordComponent } from './../confirm-password/confirm-password.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,9 +16,10 @@ import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 export class NewUsersComponent implements OnInit {
   newUsers: User[] = [];
   faUserPlus = faUserPlus;
-  constructor(private dialog: MatDialog,private userService: UserService, public print: PrintClientService) { }
+  constructor(private dialog: MatDialog,private userService: UserService, public print: PrintClientService, private jsService: JsService) { }
 
   ngOnInit() {
+    // this.jsService.jsAdmi();
     this.getNewUsers();
   }
 

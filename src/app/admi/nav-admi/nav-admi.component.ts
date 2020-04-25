@@ -1,3 +1,4 @@
+import { JsService } from 'src/app/services/js.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavAdmiComponent implements OnInit {
 
-  constructor() { }
+  constructor(private js: JsService) { }
 
   ngOnInit() {
+    this.js.jsAdmi();
   }
 
 }
