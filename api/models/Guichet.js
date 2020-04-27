@@ -11,20 +11,18 @@ var guichetSchema = new Schema({
         type: Number,
         default: 0
     },
-    variations: [{
-        montantBrute: {
-            type: Number,
-            default: 0
-        },
-        description: {
-            type: String
-        },
-        date: {
-            type: Date,
-            default: Date.now
-        }
-    }],
-    user_id: String,
+    description: {
+        type: String
+    },
+    action: {
+        type: Number,
+        default: 0
+    },
+    delete: {
+        type: Number,
+        default: 0
+    },
+    user_id: { type: Schema.Types.ObjectId, ref: 'User' },
 },{
     collection: 'guichets',
     timestamps: true

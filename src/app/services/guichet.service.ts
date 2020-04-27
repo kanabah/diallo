@@ -18,4 +18,22 @@ export class GuichetService {
       retry(3)
     )
   }
+
+  getGuichets(): Observable<Guichet[]>{
+    return this.http.get<Guichet[]>(`${this.api}/getGuichets`).pipe(
+      retry(3)
+    )
+  }
+
+  deleteGuichet(id): Observable<Guichet>{
+    return this.http.get<Guichet>(`${this.api}/deleteGuichet/${id}`).pipe(
+      retry(3)
+    )
+  }
+
+  uodateGuichet(id, guichet): Observable<Guichet>{
+    return this.http.put<Guichet>(`${this.api}/uodateGuichet/${id}`, guichet).pipe(
+      retry(3)
+    )
+  }
 }

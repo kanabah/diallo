@@ -15,10 +15,12 @@ import { ConfirmPasswordComponent } from './confirm-password/confirm-password.co
 import { AttributeRoleComponent } from './attribute-role/attribute-role.component';
 import { FooterAdmiComponent } from './footer-admi/footer-admi.component';
 import { AddGuichetsComponent } from './add-guichets/add-guichets.component';
+import { GuichetListComponent } from './guichet-list/guichet-list.component';
+import { UpdateGuichetComponent } from './update-guichet/update-guichet.component';
 
 
 @NgModule({
-  declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent, FooterAdmiComponent, AddGuichetsComponent],
+  declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent, FooterAdmiComponent, AddGuichetsComponent, GuichetListComponent, UpdateGuichetComponent],
   entryComponents: [
     ConfirmPasswordComponent,
     AttributeRoleComponent

@@ -1,3 +1,5 @@
+import { UpdateGuichetComponent } from './update-guichet/update-guichet.component';
+import { GuichetListComponent } from './guichet-list/guichet-list.component';
 import { AddGuichetsComponent } from './add-guichets/add-guichets.component';
 import { NewUsersComponent } from './new-users/new-users.component';
 import { ElementNotificationComponent } from './element-notification/element-notification.component';
@@ -27,6 +29,14 @@ const routes: Routes = [
       {
         path: 'guichet',
         component: AddGuichetsComponent
+      },
+      {
+        path: 'guichet-list',
+        component: GuichetListComponent
+      },
+      {
+        path: 'guichet-list/update/:id',
+        component: UpdateGuichetComponent
       },
     ]
   }

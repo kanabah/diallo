@@ -14,7 +14,10 @@ userRoutes.route('/addUser').post(ctrUserAutentification.register);
 userRoutes.route('/login').post(ctrUserAutentification.login);
 
 userRoutes.route('/existEmail/:email').get(ctrUser.emailExist);
+
 userRoutes.route('/telExist/:tel').get(ctrUser.telExist);
+
+userRoutes.route('/getUserByPhone/:tel').get(ctrUser.getUserByPhone);
 
 userRoutes.route('/updateUser/:id').put(auth,ctrUser.updateUser);
 

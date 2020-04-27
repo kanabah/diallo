@@ -269,6 +269,20 @@ module.exports.telExistPromoteur = async function(req, res){
     }
 }
 
+module.exports.getUserByPhone = async function(req, res){
+    let tel = req.params.tel;
+    try{
+        let user = await User.find({"tel": tel});
+        if(!user){
+            return res.status(404).send(new Error('Érror 404 data note found...'));
+        }else{
+            return res.status(200).json(user);
+        }
+    }catch(err){
+        return res.status(500).send(new Error('Erreur 500...'));
+    }
+}
+
 module.exports.updateUser = async function(req, res){
     let id = req.params.id;
     

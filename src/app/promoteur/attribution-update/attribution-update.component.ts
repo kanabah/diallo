@@ -51,8 +51,8 @@ export class AttributionUpdateComponent implements OnInit {
   
   private initialiseForms(){
     this.controlFrom.patchValue({
-          montant: this.debit[0].montant ? this.debit[0].montant : '',
-          description: this.debit[0].description ? this.debit[0].description : '',
+      montant: this.debit[0].montant ? this.debit[0].montant : '',
+      description: this.debit[0].description ? this.debit[0].description : '',
     })
   }
 

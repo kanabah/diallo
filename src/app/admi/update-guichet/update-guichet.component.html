@@ -7,16 +7,10 @@
                <div class="col-md-12">
                    <div class="main-card mb-3 card">
                        <div class="card-header">
-                           Montant Guichet {{ idUser }}
+                           Modification Guichet
                        </div>
                        <div class="card-body">
                             <form [formGroup]="formControl" (ngSubmit)="onSubmit()">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Telphone Agence</label>
-                                    <input type="text" class="form-control" formControlName="tel" id="exampleInputEmail1" [id]="getTelSuccess() ? 'successForm' : getTelError() ? 'errorForm' : ''" aria-describedby="emailHelp" placeholder="Agence">
-                                    <span *ngIf="getTelError()" class="text text-danger"><small>{{ getTelError() }}</small></span>
-                                </div>
-
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Type</label>
                                     <select formControlName="type" class="form-control" id="exampleFormControlSelect1">

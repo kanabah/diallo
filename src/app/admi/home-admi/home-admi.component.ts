@@ -4,14 +4,16 @@ import { Client } from './../../interfaces/client';
 import { ClientService } from 'src/app/services/client.service';
 import { User } from './../../interfaces/user';
 import { UserService } from 'src/app/services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+
+import CanvasJS from '../../../assets/admi/canvasjs.min';
 
 @Component({
   selector: 'app-home-admi',
   templateUrl: './home-admi.component.html',
   styleUrls: ['./home-admi.component.css']
 })
-export class HomeAdmiComponent implements OnInit {
+export class HomeAdmiComponent implements OnInit, AfterViewInit {
   users: User[] = [];
   agences: User[] = [];
   agenceActive: User[] = [];
@@ -24,6 +26,7 @@ export class HomeAdmiComponent implements OnInit {
     count: 0,
     data: []
   };
+  
   sumTotalOM: number = 0;
   sumTotalMoMo: number = 0;
   sumTotalST: number = 0;
@@ -37,7 +40,7 @@ export class HomeAdmiComponent implements OnInit {
   pourcentOM: number = 0;
   pourcentMoMo: number = 0;
   pourcentST: number = 0;
-  pourcentRechargement: number = 0;
+  pourcentRechargement: number = 0;  
 
   alertOM: any;
   alertMoMo: any;
@@ -78,9 +81,43 @@ export class HomeAdmiComponent implements OnInit {
     this.config.currentPage = event;
   }
 
+  ngAfterViewInit(){
+  }
+  
   ngOnInit() {
+    this.getChartsColumn();
     // this.jsService.jsAdmi();
     this.getAllUsers();
+  }
+
+  getChartsColumn(){
+    let chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      exportEnabled: true,
+      title: {
+        text: "Basic Column Chart in Angular"
+      },
+      data: [{
+        type: "column",
+        dataPoints: [
+          { y: 71, label: "Apple" },
+          { y: 55, label: "Mango" },
+          { y: 50, label: "Orange" },
+          { y: 65, label: "Banana" },
+          { y: 95, label: "Pineapple" },
+          { y: 68, label: "Pears" },
+          { y: 28, label: "Grapes" },
+          { y: 34, label: "Lychee" },
+          { y: 14, label: "Jackfruit" }
+        ]
+      }]
+    });
+      
+    chart.render();
+  }
+
+  getChartCercle(){
+    
   }
 
   getAllUsers(){

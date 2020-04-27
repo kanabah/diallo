@@ -2,11 +2,8 @@ export interface Guichet{
     _id: string;
     type: string;
     montant: number;
-    variations: [{
-        montantBrute: number,
-        description: string,
-        date: Date
-    }];
+    action: string;
     user_id: string;
+    delete: number;
     createdAt: Date;
 }

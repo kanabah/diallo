@@ -1,3 +1,4 @@
+import { GuichetService } from './../../services/guichet.service';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { UserService } from 'src/app/services/user.service';
 import { Validators, FormBuilder } from '@angular/forms';
@@ -14,7 +15,7 @@ export class ConfirmPasswordComponent implements OnInit {
   passwordIncorect: boolean = true;
   etatPadding: boolean = true;
 
-  constructor(private fb: FormBuilder,private userService: UserService,public dialogRef: MatDialogRef<ConfirmPasswordComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private snacKbar: SnackBarService) { }
+  constructor(private fb: FormBuilder,private userService: UserService,public dialogRef: MatDialogRef<ConfirmPasswordComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private snacKbar: SnackBarService, private guichetService: GuichetService ) { }
 
   ngOnInit() {
   }
@@ -43,6 +44,13 @@ export class ConfirmPasswordComponent implements OnInit {
           this.userService.declineUser(this.data.id).subscribe(res => {
           this.dialogRef.close();
             this.snacKbar.openSnackBar('Agence Supprimer Avec Success!!!', 'Fermer');
+          });
+        }
+
+        if(this.data.object == 'delete-guichet'){
+          this.guichetService.deleteGuichet(this.data.id).subscribe(res => {
+          this.dialogRef.close();
+            this.snacKbar.openSnackBar('Guichet Supprimer Avec Success!!!', 'Fermer');
           });
         }
       }

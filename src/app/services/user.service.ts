@@ -200,4 +200,10 @@ export class UserService {
     );
   }
 
+  public getUserByPhone(tel): Observable<any>{
+    return this.http.get<any>(`${this.api}/getUserByPhone/${tel}`).pipe(
+      retry(3)
+    );
+  }
+
 }
