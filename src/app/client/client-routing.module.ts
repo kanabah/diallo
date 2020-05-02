@@ -1,3 +1,6 @@
+import { UpdateTransactionComponent } from './update-transaction/update-transaction.component';
+import { GuichetListUserComponent } from './guichet-list-user/guichet-list-user.component';
+import { TransactionGuichetComponent } from './transaction-guichet/transaction-guichet.component';
 import { AttributeEspeceComponent } from './attribute-espece/attribute-espece.component';
 import { AuthGuard } from './../guards/auth.guard';
 import { ListPromoteurComponent } from './list-promoteur/list-promoteur.component';
@@ -29,6 +32,24 @@ const routes: Routes = [
         path: 'attribute-espece',
         component:  AttributeEspeceComponent,
       }
+    ]
+  },
+  {
+    path: 'guichet',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'transaction',
+        component:  TransactionGuichetComponent,
+      },
+      {
+        path: 'transaction/list/:type',
+        component:  GuichetListUserComponent,
+      },
+      {
+        path: 'transaction/update/:id',
+        component:  UpdateTransactionComponent,
+      },
     ]
   },
   {

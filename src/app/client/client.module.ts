@@ -35,9 +35,13 @@ import { CommandeCreditDettailleComponent } from './commande-credit-dettaille/co
 import { SharedModule } from '../shared.module';
 import { ListPromoteurComponent } from './list-promoteur/list-promoteur.component';
 import { AttributeEspeceComponent } from './attribute-espece/attribute-espece.component';
+import { TransactionGuichetComponent } from './transaction-guichet/transaction-guichet.component';
+import { GuichetListUserComponent } from './guichet-list-user/guichet-list-user.component';
+import { UpdateTransactionComponent } from './update-transaction/update-transaction.component';
+import { DeleteCoterUserComponent } from './delete-coter-user/delete-coter-user.component';
 
 @NgModule({
-  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, TypeAyementComponent, CommandeCreditComponent, CommandeCreditDettailleComponent, ListPromoteurComponent, AttributeEspeceComponent],
+  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, TypeAyementComponent, CommandeCreditComponent, CommandeCreditDettailleComponent, ListPromoteurComponent, AttributeEspeceComponent, TransactionGuichetComponent, GuichetListUserComponent, UpdateTransactionComponent, DeleteCoterUserComponent],
   entryComponents: [
     DialogContentAddCommandeOrangeMoneyComponent,
     DialogContentAddCommandeMobileMoneyComponent,
@@ -46,7 +50,8 @@ import { AttributeEspeceComponent } from './attribute-espece/attribute-espece.co
     DeleteReglementComponent,
     UpdateCommandeComponent,
     DialogContentAddTransfertComponent,
-    DialogContentAddStartTimesComponent
+    DialogContentAddStartTimesComponent,
+    DeleteCoterUserComponent
   ],
   imports: [
     CommonModule,

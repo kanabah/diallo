@@ -51,13 +51,13 @@ cool: any = '';
   }
 
   getClientDetailles(id: string){
-    this.clientService.detaille(id).subscribe(res => {
+    this.clientService.clientDetailleCommande(id).subscribe(res => {
       this.client = res;
     })  
   }
 
   onCommande(id){
-    this.clientService.detaille(id).subscribe(res => {
+    this.clientService.clientDetailleCommande(id).subscribe(res => {
       this.client = res;
       if(this.client.commandes.length > 0){
         this.router.navigate(['client/commandes/commande-detaill', id])

@@ -1,3 +1,4 @@
+import { ListGuichetProductionAgenceComponent } from './list-guichet-production-agence/list-guichet-production-agence.component';
 import { UpdateGuichetComponent } from './update-guichet/update-guichet.component';
 import { GuichetListComponent } from './guichet-list/guichet-list.component';
 import { AddGuichetsComponent } from './add-guichets/add-guichets.component';
@@ -37,6 +38,10 @@ const routes: Routes = [
       {
         path: 'guichet-list/update/:id',
         component: UpdateGuichetComponent
+      },
+      {
+        path: 'guichet-list-production/:type',
+        component: ListGuichetProductionAgenceComponent
       },
     ]
   }

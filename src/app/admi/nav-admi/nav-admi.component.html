@@ -189,19 +189,31 @@
                 <li>
                     <a [routerLink]="['/admi/guichet']" routerLinkActive="router-link-active" >
                         <i class="metismenu-icon pe-7s-mouse">
-                        </i>Ajouter    
+                        </i>Attribution    
                     </a>
                 </li>
                 <li>
                     <a [routerLink]="['/admi/guichet-list']" routerLinkActive="router-link-active" >
                         <i class="metismenu-icon pe-7s-eyedropper">
-                        </i>Money Gram Liste
+                        </i>Liste Attribution
                     </a>
                 </li>
                 <li>
-                    <a href="forms-validation.html">
+                    <a [routerLink]="['/admi/guichet-list-production', 'wari']" routerLinkActive="router-link-active" >
                         <i class="metismenu-icon pe-7s-pendrive">
-                        </i>Wari Liste
+                        </i>Production Wari
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/admi/guichet-list-production', 'wester']" routerLinkActive="router-link-active" >
+                        <i class="metismenu-icon pe-7s-pendrive">
+                        </i>Production Wester Union
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/admi/guichet-list-production', 'money']" routerLinkActive="router-link-active" >
+                        <i class="metismenu-icon pe-7s-pendrive">
+                        </i>Production Money Gram
                     </a>
                 </li>
                 <li class="app-sidebar__heading">Charts</li>

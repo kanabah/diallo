@@ -69,8 +69,6 @@ var clientSchema = new Schema({
                 type: Number,
                 default: 0
             },
-            // somePayer: Number,
-            // someRestant: Number,
             datePay: {
                 type: Date,
                 default: Date.now

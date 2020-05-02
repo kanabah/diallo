@@ -31,8 +31,20 @@ export class GuichetService {
     )
   }
 
+  changeAutorisation(id): Observable<Guichet>{
+    return this.http.get<Guichet>(`${this.api}/changeAutorisation/${id}`).pipe(
+      retry(3)
+    )
+  }
+
   uodateGuichet(id, guichet): Observable<Guichet>{
     return this.http.put<Guichet>(`${this.api}/uodateGuichet/${id}`, guichet).pipe(
+      retry(3)
+    )
+  }
+
+  updateGuichetAgence(id, guichet): Observable<Guichet>{
+    return this.http.put<Guichet>(`${this.api}/updateGuichetAgence/${id}`, guichet).pipe(
       retry(3)
     )
   }

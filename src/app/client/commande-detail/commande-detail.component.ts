@@ -64,7 +64,7 @@ export class CommandeDetailComponent implements OnInit, OnDestroy {
   public getClient(){
     if((this.periode == 'total')){
 
-      this.clientService.detaille(this.route.snapshot.paramMap.get('id')).subscribe(res => {
+      this.clientService.clientDetailleCommande(this.route.snapshot.paramMap.get('id')).subscribe(res => {
         this.client = res;
         
         this.commandes = res.commandes.filter(function(res){

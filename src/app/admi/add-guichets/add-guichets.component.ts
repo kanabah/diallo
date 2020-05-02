@@ -37,6 +37,7 @@ export class AddGuichetsComponent implements OnInit {
           this.passwordIncorect = false;
           this.etatPadding = true;
         }else{
+          // this.agence_id.setValue(this.idUser);
           this.user_id.setValue(this.idUser);
           
           this.guichetService.addGuichet(this.formControl.value).subscribe(res => {
@@ -60,6 +61,7 @@ export class AddGuichetsComponent implements OnInit {
     montant: ['', [Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]],
     description: [''],
     user_id: [''],
+    agence_id: [''],
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
@@ -127,6 +129,10 @@ export class AddGuichetsComponent implements OnInit {
 
   get type(){
     return this.formControl.get('type');
+  }
+
+  get agence_id(){
+    return this.formControl.get('agence_id');
   }
 
   get montant(){

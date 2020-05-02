@@ -14,6 +14,14 @@ var guichetSchema = new Schema({
     description: {
         type: String
     },
+    tel: {
+        type: Number,
+    },
+    code: String,
+    autorise: {
+        type: Number,
+        default: 0
+    },
     action: {
         type: Number,
         default: 0
@@ -23,6 +31,7 @@ var guichetSchema = new Schema({
         default: 0
     },
     user_id: { type: Schema.Types.ObjectId, ref: 'User' },
+    // agence_id: { type: Schema.Types.ObjectId, ref: 'User' },
 },{
     collection: 'guichets',
     timestamps: true

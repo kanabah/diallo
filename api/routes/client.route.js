@@ -38,6 +38,8 @@ clientRoutes.route('/allCommande').get(auth,ctrClient.allCommande);
 
 clientRoutes.route('/detaille/:id').get(auth,ctrClient.clientDettaille);
 
+clientRoutes.route('/clientDetailleCommande/:id').get(auth,ctrClient.clientDetailleCommande);
+
 clientRoutes.route('/getCommandeCredit/:id').get(auth,ctrClient.getCommandeCredit);
 
 clientRoutes.route('/getClients').get(auth,ctrClient.getClients);

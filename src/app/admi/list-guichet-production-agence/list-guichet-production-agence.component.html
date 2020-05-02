@@ -7,17 +7,19 @@
                <div class="col-md-12">
                    <div class="main-card mb-3 card">
                        <div class="card-header">
-                           List Guichets
+                           {{ getType(type) }}
                        </div>
                        <div class="table-responsive">
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>Nom & Prenom</th>
-                                <th>Type</th>
+                                <th>Action</th>
+                                <th>Code</th>
                                 <th class="text-center">Description</th>
                                 <th class="text-center">Montant</th>
                                 <th class="text-center">Date</th>
+                                <th class="text-center">Autorisation</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -37,14 +39,20 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center"><span class="badge badge-info">{{ getType(guichet.type) }}</span></td>
+                                <td class="text-center"><span class="{{ getBadge(guichet.action) }}">{{ getAction(guichet.action) }}</span></td>
+                                <td class="text-center">{{ guichet.code }}</td>
                                 <td class="text-center">{{ guichet.description }}</td>
                                 <td class="text-center">{{ guichet.montant }}</td>
                                 <td class="text-center">{{ guichet.createdAt | date }}</td>
-                                <td>
-                                    <button data-toggle="tooltip" (click)="redirectMod(guichet._id)" title="Modification" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Mod </button>
-                                    <button data-toggle="tooltip" (click)="deleteGuichet(guichet._id)" title="Supresion" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i>Sup</button>
-                                            
+                                <td class="text-center">
+                                    <section class="example-section">
+                                        <mat-slide-toggle (click)="changeAutorisation(guichet._id)"
+                                            class="example-margin"
+                                            [color]="color"
+                                            [checked]="guichet.autorise == 0 ? false : true"
+                                            [disabled]="disabled">
+                                        </mat-slide-toggle>
+                                    </section> 
                                 </td>
                             </tr>
                             </tbody>

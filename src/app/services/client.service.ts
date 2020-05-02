@@ -61,6 +61,12 @@ export class ClientService {
     )
   }
 
+  public clientDetailleCommande(id): Observable<Client>{
+    return this.http.get<Client>(`${this.api}/clientDetailleCommande/${id}`).pipe(
+      retry(3)
+    )
+  }
+
   public detaille(id): Observable<Client>{
     return this.http.get<Client>(`${this.api}/detaille/${id}`).pipe(
       retry(3)

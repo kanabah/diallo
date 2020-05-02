@@ -57,7 +57,7 @@ export class GuichetListComponent implements OnInit {
     this.guichetService.getGuichets().subscribe(res => {
       this.guichets = res;
       this.guichetList = this.guichets.filter(result => {
-        return result.delete == 0;
+        return result.delete == 0 && result.action == 0;
       })
 
       this.guichetList.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
@@ -67,6 +67,16 @@ export class GuichetListComponent implements OnInit {
 
   redirectMod(id){
     this.router.navigate(['admi/guichet-list/update', id])
+  }
+
+  getType(type){
+    if(type == 'wester'){
+      return 'Wester Union';
+    }else if(type == 'money'){
+      return 'Money Gram';
+    }else if(type == 'wari'){
+      return 'Wari';
+    }
   }
 
 }
