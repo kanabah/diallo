@@ -1,0 +1,19 @@
+#image{
+    height: 30px;
+    width: 30px;
+}
+
+#rounded-circle{
+    border-radius: 50%;
+    max-width: 30px;
+    max-height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    width: 30px;
+    height: 30px;
+}
+
+#inputCherch{
+    float: right;
+    margin-top: -60px;
+}

@@ -1,3 +1,4 @@
+import { RaportGuichetPeriodeComponent } from './raport-guichet-periode/raport-guichet-periode.component';
 import { UpdateTransactionComponent } from './update-transaction/update-transaction.component';
 import { GuichetListUserComponent } from './guichet-list-user/guichet-list-user.component';
 import { TransactionGuichetComponent } from './transaction-guichet/transaction-guichet.component';
@@ -45,6 +46,10 @@ const routes: Routes = [
       {
         path: 'transaction/list/:type',
         component:  GuichetListUserComponent,
+      },
+      {
+        path: 'transaction/raport/:periode',
+        component: RaportGuichetPeriodeComponent,
       },
       {
         path: 'transaction/update/:id',

@@ -136,6 +136,22 @@ module.exports.getClients = async function(req, res){
     }
 }
 
+
+module.exports.getAllClients = async function(req, res){
+    try{
+        let clients = await Client.find({}).populate('user_id');
+        console.log('Clientr And User', clients);
+        
+        if(!clients){
+            return res.status(404).send(new Error('Produit not found 404'));
+        }else{
+            return res.status(200).json(clients);
+        }
+    }catch(err){
+        return res.status(500).send(new Error('Error 500'));
+    }
+}
+
 module.exports.clientDetailleCommande = async function(req, res){
     let id = req.params.id;
     

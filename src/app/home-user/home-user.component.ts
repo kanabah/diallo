@@ -1,3 +1,4 @@
+import { GuichetService } from './../services/guichet.service';
 import { UserService } from './../services/user.service';
 import { PrintClientService } from './../services/print-client.service';
 import { Subscription, timer } from 'rxjs';
@@ -13,6 +14,7 @@ import { faAlignCenter } from '@fortawesome/free-solid-svg-icons';
 import { faBraille } from '@fortawesome/free-solid-svg-icons';
 import { faAlignJustify } from '@fortawesome/free-solid-svg-icons';
 import { faDollyFlatbed } from '@fortawesome/free-solid-svg-icons';
+import { Guichet } from '../interfaces/guichet';
 
 @Component({
   selector: 'app-home-user',
@@ -25,7 +27,7 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
   soldPromoteurToday = 0;
   someActuJour = 0;
 
-  constructor(private js: JsService, public dialog: MatDialog, private clientService: ClientService, public print: PrintClientService, public userService : UserService) { }
+  constructor(private js: JsService, public dialog: MatDialog, private clientService: ClientService, public print: PrintClientService, public userService : UserService, private guichetService: GuichetService) { }
   infoTotal: any;
   purcentDay: any = 0;
   purcentMonth: any = 0;
@@ -51,12 +53,139 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ok: boolean = false;
 
+  guichetResults: Guichet[] = [];
+
+  depotWester: number = 0;
+  depotWari: number = 0;
+  depotMoney: number = 0;
+  totalDepot: number = 0;
+
+  depotDayWester: number = 0;
+  depotDayWari: number = 0;
+  depotDayMoney: number = 0;
+  totalDayDepot: number = 0;
+
+  retraitDayWester: number = 0;
+  retraitDayWari: number = 0;
+  retraitDayMoney: number = 0;
+  totalDayRetrait: number = 0;
+  
+  retraitWester: number = 0;
+  retraitWari: number = 0;
+  retraitMoney: number = 0;
+  totalRetrait: number = 0;
+
+  caisseWester: number = 0;
+  caisseWari: number = 0;
+  caisseMoney: number = 0;
+  TotalcaisseGuichet: number = 0;
+
   ngOnInit() {
+    this.infoHome();
     this.subscription = timer(0, 10000).subscribe(res => {
-      this.infoHome();
     });
+    this.getGuichets();
   }
 
+  getGuichets(){
+    this.guichetService.getGuichets().subscribe(res => {
+      this.guichetResults = res;
+
+      this.guichetResults.forEach(element => {
+        var date = new Date();
+        var dateElement = new Date(element.createdAt);
+        if(element.user_id._id == this.userService.getUserDetails()._id){
+          if(element.delete == 0){
+            //ADDITION DES DEPOTS
+            if((element.action == 1 || element.action == 0)  ){
+              if(element.type == 'wester'){
+                this.depotWester += element.montant;
+                
+                if(dateElement.getDate() == date.getDate() && dateElement.getMonth() == date.getMonth() && dateElement.getFullYear() == date.getFullYear()){
+                  this.depotDayWester += element.montant;
+                }
+              }
+  
+              if(element.type == 'wari'){
+                this.depotWari += element.montant;
+
+                if(dateElement.getDate() == date.getDate() && dateElement.getMonth() == date.getMonth() && dateElement.getFullYear() == date.getFullYear()){
+                  this.depotDayWari += element.montant;
+                }
+              }
+  
+              if(element.type == 'money'){
+                this.depotMoney += element.montant;
+
+                if(dateElement.getDate() == date.getDate() && dateElement.getMonth() == date.getMonth() && dateElement.getFullYear() == date.getFullYear()){
+                  this.depotDayMoney += element.montant;
+                }
+              }
+            }
+            //ADDITION DES RETRAITS
+            if((element.action == 2)  ){
+              if(element.type == 'wester'){
+                this.retraitWester += element.montant;
+
+                if(dateElement.getDate() == date.getDate() && dateElement.getMonth() == date.getMonth() && dateElement.getFullYear() == date.getFullYear()){
+                  this.retraitDayWester += element.montant;
+                }
+              }
+  
+              if(element.type == 'wari'){
+                this.retraitWari += element.montant;
+
+                if(dateElement.getDate() == date.getDate() && dateElement.getMonth() == date.getMonth() && dateElement.getFullYear() == date.getFullYear()){
+                  this.retraitDayWari += element.montant;
+                }
+              }
+  
+              if(element.type == 'money'){
+                this.retraitMoney += element.montant;
+
+                if(dateElement.getDate() == date.getDate() && dateElement.getMonth() == date.getMonth() && dateElement.getFullYear() == date.getFullYear()){
+                  this.retraitDayMoney += element.montant;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      this.caisseWester = this.depotWester - this.retraitWester;
+      this.caisseWari = this.depotWari - this.retraitWari;
+      this.caisseMoney = this.depotMoney - this.retraitMoney;
+
+      this.totalDepot = this.depotWester + this.depotWari + this.depotMoney;
+      this.totalRetrait = this.retraitWester + this.retraitWari + this.retraitMoney;
+
+      this.totalDayDepot = this.depotDayWester + this.depotDayWari + this.depotDayMoney;
+      this.totalDayRetrait = this.retraitDayWester + this.retraitDayWari + this.retraitDayMoney;
+
+      this.TotalcaisseGuichet = this.caisseWester + this.caisseWari + this.caisseMoney;
+
+      console.log('DepotDay Wster', this.depotDayWester);
+      console.log('DepotDay Wari', this.depotDayWari);
+      console.log('DepotDay Money Gram', this.depotDayMoney);
+
+      console.log('retraitDay Wster', this.retraitDayWester);
+      console.log('retraitDay Wari', this.retraitDayWari);
+      console.log('retraitDay Money Gram', this.retraitDayMoney);
+
+      console.log('Depot Wster', this.depotWester);
+      console.log('Depot Wari', this.depotWari);
+      console.log('Depot Money Gram', this.depotMoney);
+
+      console.log('retrait Wster', this.retraitWester);
+      console.log('retrait Wari', this.retraitWari);
+      console.log('retrait Money Gram', this.retraitMoney);
+
+      console.log('caisse Wster', this.caisseWester);
+      console.log('caisse Wari', this.caisseWari);
+      console.log('caisse Money Gram', this.caisseMoney);
+      
+    })
+  }
   
   infoHome(){
     let date = new Date();

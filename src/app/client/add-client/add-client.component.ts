@@ -126,6 +126,7 @@ export class AddClientComponent implements OnInit {
    ],
     telPerso: ['', {
       validators: [
+        Validators.required,
         Validators.pattern(/^[0-9+]{9,9}$/)
      ],
       asyncValidators: [telCLientAddUniqueValidator(this.clientService)],

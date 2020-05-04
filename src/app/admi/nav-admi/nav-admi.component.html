@@ -178,11 +178,29 @@
                         Tables
                     </a>
                 </li>
-                <li class="app-sidebar__heading">Widgets</li>
+                <li class="app-sidebar__heading">Commandes</li>
                 <li>
-                    <a href="dashboard-boxes.html">
+                    <a [routerLink]="['/admi/commandes-list/total', 'total']" routerLinkActive="router-link-active" >
                         <i class="metismenu-icon pe-7s-display2"></i>
-                        Dashboard Boxes
+                        Total
+                    </a>
+
+                    <a [routerLink]="['/admi/commandes-list/total', 'day']" routerLinkActive="router-link-active" >
+                        <i class="metismenu-icon pe-7s-display2"></i>
+                        Aujourd'hui
+                    </a>
+
+                    <a [routerLink]="['/admi/commandes-list/total', 'week']" routerLinkActive="router-link-active" >
+                        <i class="metismenu-icon pe-7s-display2"></i>
+                        Semmaine
+                    </a>
+                    <a [routerLink]="['/admi/commandes-list/total', 'month']" routerLinkActive="router-link-active" >
+                        <i class="metismenu-icon pe-7s-display2"></i>
+                        Mois
+                    </a>
+                    <a [routerLink]="['/admi/commandes-list/total', 'year']" routerLinkActive="router-link-active" >
+                        <i class="metismenu-icon pe-7s-display2"></i>
+                        Annee
                     </a>
                 </li>
                 <li class="app-sidebar__heading">GUICHETS</li>

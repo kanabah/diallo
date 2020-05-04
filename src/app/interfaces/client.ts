@@ -6,6 +6,7 @@ export interface Client {
     telMtn: number,
     telCelcom: number,
     telPerso: number,
+    nbCmd: number,
     adress: {
         commune: string,
         quartier: string,

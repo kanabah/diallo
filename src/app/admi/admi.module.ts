@@ -18,9 +18,11 @@ import { AddGuichetsComponent } from './add-guichets/add-guichets.component';
 import { GuichetListComponent } from './guichet-list/guichet-list.component';
 import { UpdateGuichetComponent } from './update-guichet/update-guichet.component';
 import { ListGuichetProductionAgenceComponent } from './list-guichet-production-agence/list-guichet-production-agence.component';
+import { CommandesListAdmiComponent } from './commandes-list-admi/commandes-list-admi.component';
+import { CommandesDetailleAdmiComponent } from './commandes-detaille-admi/commandes-detaille-admi.component';
 
 @NgModule({
-  declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent, FooterAdmiComponent, AddGuichetsComponent, GuichetListComponent, UpdateGuichetComponent, ListGuichetProductionAgenceComponent],
+  declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent, FooterAdmiComponent, AddGuichetsComponent, GuichetListComponent, UpdateGuichetComponent, ListGuichetProductionAgenceComponent, CommandesListAdmiComponent, CommandesDetailleAdmiComponent],
   entryComponents: [
     ConfirmPasswordComponent,
     AttributeRoleComponent

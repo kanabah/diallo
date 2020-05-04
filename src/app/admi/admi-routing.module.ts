@@ -1,3 +1,4 @@
+import { CommandesListAdmiComponent } from './commandes-list-admi/commandes-list-admi.component';
 import { ListGuichetProductionAgenceComponent } from './list-guichet-production-agence/list-guichet-production-agence.component';
 import { UpdateGuichetComponent } from './update-guichet/update-guichet.component';
 import { GuichetListComponent } from './guichet-list/guichet-list.component';
@@ -8,6 +9,7 @@ import { AuthGuard } from './../guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeAdmiComponent } from './home-admi/home-admi.component';
+import { CommandesDetailleAdmiComponent } from './commandes-detaille-admi/commandes-detaille-admi.component';
 
 
 const routes: Routes = [
@@ -42,6 +44,14 @@ const routes: Routes = [
       {
         path: 'guichet-list-production/:type',
         component: ListGuichetProductionAgenceComponent
+      },
+      {
+        path: 'commandes-list/total/:periode',
+        component: CommandesListAdmiComponent
+      },
+      {
+        path: 'commandes-list/total/details/:id',
+        component: CommandesDetailleAdmiComponent
       },
     ]
   }

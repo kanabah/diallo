@@ -39,9 +39,10 @@ import { TransactionGuichetComponent } from './transaction-guichet/transaction-g
 import { GuichetListUserComponent } from './guichet-list-user/guichet-list-user.component';
 import { UpdateTransactionComponent } from './update-transaction/update-transaction.component';
 import { DeleteCoterUserComponent } from './delete-coter-user/delete-coter-user.component';
+import { RaportGuichetPeriodeComponent } from './raport-guichet-periode/raport-guichet-periode.component';
 
 @NgModule({
-  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, TypeAyementComponent, CommandeCreditComponent, CommandeCreditDettailleComponent, ListPromoteurComponent, AttributeEspeceComponent, TransactionGuichetComponent, GuichetListUserComponent, UpdateTransactionComponent, DeleteCoterUserComponent],
+  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, TypeAyementComponent, CommandeCreditComponent, CommandeCreditDettailleComponent, ListPromoteurComponent, AttributeEspeceComponent, TransactionGuichetComponent, GuichetListUserComponent, UpdateTransactionComponent, DeleteCoterUserComponent, RaportGuichetPeriodeComponent],
   entryComponents: [
     DialogContentAddCommandeOrangeMoneyComponent,
     DialogContentAddCommandeMobileMoneyComponent,

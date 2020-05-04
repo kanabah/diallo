@@ -45,7 +45,7 @@ export class TransactionGuichetComponent implements OnInit {
                 console.log('result Guichets', this.guichets);
                 console.log('Action Value', this.action.value);
                 this.guichets.forEach(result => {
-                  if(result.user_id == this.userService.getUserDetails()._id && result.type == this.type.value && result.delete == 0){
+                  if(result.user_id._id == this.userService.getUserDetails()._id && result.type == this.type.value && result.delete == 0){
                     if(result.action == 0 || result.action == 1){
                       this.sumTotalDepot += result.montant;
                     }

@@ -1,0 +1,50 @@
+<div class="app-main">  
+    <app-nav-admi></app-nav-admi>
+    <div class="app-main__outer">
+       <div class="app-main__inner">  
+            <app-title-page></app-title-page>         
+           <div class="row">
+               <div class="col-md-12">
+                   <div class="main-card mb-3 card">
+                       <div class="card-header">
+                            <img src="{{ print.printAvatar(client.avatar) }}"  id="rounded-circle" alt="Profile"> &nbsp; Commandes Detaille pour le client <span class=" badge badge-success">{{ client.nom }} {{ client.prenom }}</span>
+                            <div class="pull-right"> <button >Oups</button></div>
+                        </div>
+                       <div class="table-responsive">
+                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th class="text-center">Type</th>
+                                <th class="text-center">Etat Pay</th>
+                                <th class="text-center">Somme Payé</th>
+                                <th class="text-center">Somme Restant</th>
+                                <th class="text-center">Somme Credit</th>
+                                <th class="text-center">Nb Decodeur</th>
+                                <th class="text-center">Mode Pay</th>
+                                <th class="text-center">Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cmd of collection.data |paginate: config" [ngClass]="{'bg-warning': cmd.typeCmd == 'MoMo' ? true : false, 'bg-danger': cmd.typeCmd == 'OM' ? true : false, 'bg-info': cmd.typeCmd == 'Transfert' ? true : false, 'bg-success': cmd.typeCmd == 'ST' ? true : false  }" class="text-withe">
+                                <td class="text-center"><img src="{{ typeCmd(cmd.typeCmd) }}" alt="Image" id="image"></td>
+                                <td class="text-center">{{ cmd.typePay}}</td>
+                                <td class="text-center">{{ !cmd.somPay ? 0 : cmd.somPay | currency:'':''  }}</td>
+                                <td class="text-center">{{ !cmd.somRest ? 0 : cmd.somRest | currency:'':'' }}</td>
+                                <td class="text-center">{{ !cmd.somCredit ? 0 : cmd.somCredit | currency:'':'' }}</td>
+                                <td class="text-center">{{ cmd.nbStartTimes }}</td>
+                                <td class="text-center">{{ cmd.modePay }}</td>
+                                <td class="text-center">{{ cmd.dateCmd | date }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                       </div>
+                       <div class="d-block text-center card-footer">
+                            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                        </div>
+                   </div>
+               </div>
+           </div>
+        </div>
+        <app-footer-admi></app-footer-admi>
+    </div>
+</div>
