@@ -1,0 +1,86 @@
+<div class="app-main">  
+    <app-nav-admi></app-nav-admi>
+    <div class="app-main__outer">
+       <div class="app-main__inner">  
+            <app-title-page></app-title-page>         
+           <div class="row">
+               <div class="col-md-12">
+                   <div class="main-card mb-3 card">
+                       <div class="card-header" *ngIf="!recherche && client[0]">
+                        <img src="{{ print.printAvatar(client[0].avatar) }}"  id="rounded-circle" alt="Profile"> &nbsp;
+                           Commande pour le client <span class=" badge badge-success">{{ client[0].nom }} {{ client[0].prenom }}</span> <br><span  class="d-block d-sm-block d-md-none text-primary" (click)="recherche=true">Recherche</span>
+                           <button class="btn btn-outline-dark btn-sm pull-right d-none d-md-block d-lg-block ml-5" (click)="onRecherche(); recherche=true">Recherche</button>
+                       </div>
+                       <div class="card-header" *ngIf="recherche">
+                           Recherche
+                       </div>
+                       <div class="card-body" *ngIf="recherche">
+                            <form [formGroup]="formControl" (ngSubmit)="onSubmit()">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Telphone</label>
+                                    <input type="text" class="form-control" formControlName="tel" id="exampleInputEmail1" [id]="getTelSuccess() ? 'successForm' : getTelError() ? 'errorForm' : ''" aria-describedby="emailHelp" placeholder="Telphone Client">
+                                    <span *ngIf="getTelError()" class="text text-danger"><small>{{ getTelError() }}</small></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="periode">Periode</label>
+                                    <select formControlName="periode" class="form-control" id="periode">
+                                        <option value="tout">Tout</option>
+                                        <option value="day">Jour</option>
+                                        <option value="week">Semmaine</option>
+                                        <option value="month">Mois</option>
+                                        <option value="year">Annee</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Mot de passe</label>
+                                    <input type="password" formControlName="password" class="form-control" [id]="getPasswordSuccess() ? 'successNotStyl' : getPasswordError() ? 'errorForm' : ''" id="exampleInputPassword1" placeholder="******">
+                                    <span *ngIf="getPasswordError()" class="text text-danger"><small>{{ getPasswordError() }}</small></span>
+                                    <span *ngIf="!passwordIncorect && !getPasswordError()" ><small class="text text-danger" id="red" >Mot de passe incorect</small></span>
+                                
+                                </div>
+                                
+                                <button type="Ajouter" [disabled]="formControl.invalid" class="btn btn-primary">Valider</button>
+                            </form>
+                        </div>
+
+                        <div class="table-responsive" *ngIf="!recherche">
+                            <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Type</th>
+                                    <th class="text-center">Etat Pay</th>
+                                    <th class="text-center">Somme Payé</th>
+                                    <th class="text-center">Somme Restant</th>
+                                    <th class="text-center">Somme Credit</th>
+                                    <th class="text-center">Nb Decodeur</th>
+                                    <th class="text-center">Mode Pay</th>
+                                    <th class="text-center">Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let cmd of collection.data |paginate: config" [ngClass]="{'bg-warning': cmd.typeCmd == 'MoMo' ? true : false, 'bg-danger': cmd.typeCmd == 'OM' ? true : false, 'bg-info': cmd.typeCmd == 'Transfert' ? true : false, 'bg-success': cmd.typeCmd == 'ST' ? true : false  }" class="text-withe">
+                                    <td class="text-center"><img src="{{ typeCmd(cmd.typeCmd) }}" alt="Image" id="image"></td>
+                                    <td class="text-center text-light">{{ cmd.typePay}}</td>
+                                    <td class="text-center text-light">{{ !cmd.somPay ? 0 : cmd.somPay | currency:'':''  }}</td>
+                                    <td class="text-center text-light">{{ !cmd.somRest ? 0 : cmd.somRest | currency:'':'' }}</td>
+                                    <td class="text-center text-light">{{ !cmd.somCredit ? 0 : cmd.somCredit | currency:'':'' }}</td>
+                                    <td class="text-center text-light">{{ cmd.nbStartTimes }}</td>
+                                    <td class="text-center text-light">{{ cmd.modePay }}</td>
+                                    <td class="text-center text-light">{{ cmd.dateCmd | date }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                           </div>
+                           <div class="d-block text-center card-footer" *ngIf="!recherche">
+                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                            </div>
+
+                   </div>
+               </div>
+           </div>
+        </div>
+        <app-footer-admi></app-footer-admi>
+    </div>
+</div>

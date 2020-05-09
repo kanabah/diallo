@@ -33,6 +33,23 @@ module.exports.telExist = async function(req, res){
     }
 }
 
+module.exports.telExistByAdmi = async function(req, res){
+    let tel = req.params.tel;
+    if(tel !== ''){
+        try{
+            let client = await Client.find({$or: [{ "telOrange": tel}, { "telMtn": tel}, {"telCelcom": tel}, {"telPerso": tel}]});
+            if(!client){
+                return res.status(404).send(new Error('Érror 404 data note found...'));
+            }else{
+                return res.status(200).json(client);
+            }
+            
+        }catch(err){
+            return res.status(500).send(new Error('Erreur 500...'));
+        }
+    }
+}
+
 module.exports.telExistAddClient = async function(req, res){
     let tel = req.params.tel;
     if(tel !== ''){
@@ -140,7 +157,7 @@ module.exports.getClients = async function(req, res){
 module.exports.getAllClients = async function(req, res){
     try{
         let clients = await Client.find({}).populate('user_id');
-        console.log('Clientr And User', clients);
+        // console.log('Clientr And User', clients);
         
         if(!clients){
             return res.status(404).send(new Error('Produit not found 404'));

@@ -97,7 +97,7 @@ var clientSchema = new Schema({
         type: Number,
         default: 0
     },
-    promoteur_id: { type: Schema.Types.ObjectId, ref: 'User' }, //Id du promoteur si il ajoute un client
+    // promoteur_id: String, //Id du promoteur si il ajoute un client
     user_id: { type: Schema.Types.ObjectId, ref: 'User' },
 },{
     collection: 'clients',

@@ -7,7 +7,7 @@
                <div class="col-md-12">
                    <div class="main-card mb-3 card">
                        <div class="card-header">
-                           Commandes
+                           {{ getTitleCommande(periode) }}
                        </div>
                        <div class="table-responsive">
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
@@ -46,11 +46,11 @@
                                 <td class="text-center">{{ client.user_id.tel }}</td>
                                 <td class="text-center">{{ client.nom }} {{ client.prenom }}</td>
                                 <td class="text-center">{{ client.telPerso }}</td>
-                                <td class="text-center"><span class=" badge badge-danger">{{ getCreditClient(client._id).somRestOM | currency:'':'' }}</span></td>
-                                <td class="text-center"><span class=" badge badge-danger">{{ getCreditClient(client._id).somRestMoMo | currency:'':'' }}</span></td>
-                                <td class="text-center"><span class=" badge badge-danger">{{ getCreditClient(client._id).somRestST | currency:'':'' }}</span></td>
-                                <td class="text-center"><span class=" badge badge-danger">{{ getCreditClient(client._id).somRestTransfert | currency:'':'' }}</span></td>
-                                <td class="text-center"><span class=" badge badge-danger">{{ getCreditClient(client._id).somRestTotal | currency:'':'' }}</span></td>
+                                <td class="text-center"><span class="badge badge-danger">{{ getCreditClient(client._id).somRestOM | currency:'':'' }}</span></td>
+                                <td class="text-center"><span class="badge badge-danger">{{ getCreditClient(client._id).somRestMoMo | currency:'':'' }}</span></td>
+                                <td class="text-center"><span class="badge badge-danger">{{ getCreditClient(client._id).somRestST | currency:'':'' }}</span></td>
+                                <td class="text-center"><span class="badge badge-danger">{{ getCreditClient(client._id).somRestTransfert | currency:'':'' }}</span></td>
+                                <td class="text-center"><span class="badge badge-danger">{{ getCreditClient(client._id).somRestTotal | currency:'':'' }}</span></td>
                                 <!-- <td>
                                     <button data-toggle="tooltip" (click)="redirectMod(guichet._id)" title="Modification" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Mod </button>
                                     <button data-toggle="tooltip" (click)="deleteGuichet(guichet._id)" title="Supresion" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i>Sup</button>

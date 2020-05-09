@@ -1,0 +1,20 @@
+#errorForm{
+    border: 1px solid red;
+  }
+  
+  #successForm{
+    border: 1px solid green;
+  }
+  
+  #successNotStyl{
+    border: 1px solid none;
+  }
+
+  #red{
+    color: red;
+  }
+ 
+  #marge-left{
+      margin-left: 75%;
+        
+  }

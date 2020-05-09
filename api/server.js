@@ -43,6 +43,7 @@ app.get('/', (request, response) => response.send("Welcome to sogma API"));
 // const port = process.env.PORT || 5202;
 const port = process.env.PORT || 4001;
 
+app.listen(port, () => console.log('Listen Server in port ', port));
 // const options = {
 //   key: privateKey,
 //   cert: certificate
@@ -51,5 +52,3 @@ const port = process.env.PORT || 4001;
 // https.createServer(options, app).listen(port, function(){
 //   console.log('Listening on port ' + port);
 // });
-
-app.listen(port, () => console.log('Listen Server in port ', port));

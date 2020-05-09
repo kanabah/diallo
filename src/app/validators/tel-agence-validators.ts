@@ -9,9 +9,7 @@ export function telAgenceValidator(userService: UserService): AsyncValidatorFn{
       return userService.getUserByPhone(control.value).pipe(
         map(user => {
           if(user.length > 0){
-              if(user[0].active == 1){
-                  
-                  console.log('Js suis kana', user[0]);
+              if(user[0].active == 1 && user[0].role != 'admi'){
                   return {'user': {value: user[0]}};
               }else{
                 return {'telNotExist': true};

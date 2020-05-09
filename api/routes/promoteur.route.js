@@ -14,6 +14,8 @@ promoteurRoutes.route('/listeEntrerCaissse').get(auth, ctrPromoteur.listeEntrerC
 
 promoteurRoutes.route('/getCaisseById/:id').get(auth, ctrPromoteur.getCaisseById);
 
+promoteurRoutes.route('/getPromoteurs').get(auth, ctrPromoteur.getPromoteurs);
+
 promoteurRoutes.route('/listeSortieCaissse').get(auth, ctrPromoteur.listeSortieCaissse);
 
 promoteurRoutes.route('/getPromoteurByUserId').get(auth, ctrPromoteur.getPromoteurByUserId);

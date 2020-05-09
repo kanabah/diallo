@@ -122,17 +122,15 @@ module.exports.getPromoteurByUserIdForAgenceAndAdmi = async function(req, res){
     }
 }
 
-// module.exports.getProductionPromoteurByPeriode = async function(req, res){
-//     let id = req.params.id;
-
-//     try{
-//         let promoteur = await Promoteur.find({"user_id": id }).populate('client_id');
-//         if(promoteur){
-//            return res.status(200).json(promoteur);
-//         }else{
-//             return res.status(404).send(new Error('404 not found'));
-//         }
-//     }catch(err){
-//         return res.status(500).send(new Error('Erreur server 500...'));
-//     }
-// }
+module.exports.getPromoteurs = async function(req, res){
+    try{
+        let promoteurs = await Promoteur.find({}).populate('client_id');
+        if(promoteurs){
+           return res.status(200).json(promoteurs);
+        }else{
+            return res.status(404).send(new Error('404 not found'));
+        }
+    }catch(err){
+        return res.status(500).send(new Error('Erreur server 500...'));
+    }
+}

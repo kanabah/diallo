@@ -39,7 +39,7 @@
                                 </td>
                                 <td class="text-center"><span class="badge badge-info">{{ getType(guichet.type) }}</span></td>
                                 <td class="text-center">{{ guichet.description }}</td>
-                                <td class="text-center">{{ guichet.montant }}</td>
+                                <td class="text-center">{{ guichet.montant | currency:'':'' }}</td>
                                 <td class="text-center">{{ guichet.createdAt | date }}</td>
                                 <td>
                                     <button data-toggle="tooltip" (click)="redirectMod(guichet._id)" title="Modification" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Mod </button>

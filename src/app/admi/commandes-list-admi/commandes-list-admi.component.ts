@@ -1,3 +1,4 @@
+import { WeekService } from './../../services/week.service';
 import { switchMap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PrintClientService } from './../../services/print-client.service';
@@ -22,7 +23,7 @@ export class CommandesListAdmiComponent implements OnInit {
     data: []
   };
 
-  constructor(private clientService: ClientService, public print: PrintClientService, private router: Router, private route: ActivatedRoute) {
+  constructor(private clientService: ClientService, public print: PrintClientService, private router: Router, private route: ActivatedRoute, private week: WeekService) {
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -45,6 +46,8 @@ export class CommandesListAdmiComponent implements OnInit {
   }
 
   ngOnInit() {
+    var result = this.week.getWeekNumber(new Date())
+    console.log('DATE WEEK', result);
     this.getClients();
   }
 
@@ -56,7 +59,7 @@ export class CommandesListAdmiComponent implements OnInit {
     })).subscribe(res => {
         var date = new Date();
         this.clientFilters = res;
-        console.log('Periode', this.periode);
+        // console.log('Periode', this.periode);
         
 
         if(this.periode == 'total'){
@@ -69,6 +72,13 @@ export class CommandesListAdmiComponent implements OnInit {
           this.clients = this.clientFilters.filter(result => {
             var deteCmdUpdate = new Date(result.deteCmdUpdate);
             return result.nbCmd != 0 && deteCmdUpdate.getDate() == date.getDate() && deteCmdUpdate.getMonth() == date.getMonth() && deteCmdUpdate.getFullYear() == date.getFullYear();
+          })
+        }
+
+        if(this.periode == 'week'){
+          this.clients = this.clientFilters.filter(result => {
+            var deteCmdUpdate = new Date(result.deteCmdUpdate);
+            return result.nbCmd != 0 && this.week.getWeekNumber(date) == this.week.getWeekNumber(deteCmdUpdate) && deteCmdUpdate.getFullYear() == date.getFullYear(); //== this.filterDatesByCurrentWeek([deteCmdUpdate]);
           })
         }
 
@@ -130,7 +140,21 @@ export class CommandesListAdmiComponent implements OnInit {
     return resultats;
   }
 
+  getTitleCommande(periode){
+    if(periode == 'total'){
+      return 'Commandes Total';
+    }else if(periode == 'day'){
+      return "Commande Ajaurd'hui";
+    }else if(periode == 'week'){
+      return 'Commande de la semmaine';
+    }else if(periode == 'month'){
+      return 'Commande du mois';
+    }else if(periode == 'year'){
+      return "Commande de l'annnee";
+    }
+  }
+  
   getDetail(id){
-    this.router.navigate(['/admi/commandes-list/total/details', id]);
+    this.router.navigate(['/admi/commandes-list/total/details', id, this.periode]);
   }
 }

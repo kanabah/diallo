@@ -40,8 +40,9 @@ export interface Client {
         }],
         update: number,
         delete: number,
-        dateCmd: Date
+        dateCmd: Date,
+        user_id: string
     }],
     active: number,
-    user_id: string,
+    user_id: any,
 }

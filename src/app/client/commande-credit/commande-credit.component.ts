@@ -8,6 +8,7 @@ import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { WeekService } from 'src/app/services/week.service';
 
 @Component({
   selector: 'app-commande-credit',
@@ -27,9 +28,11 @@ export class CommandeCreditComponent implements OnInit {
   $commandesCredit: any;
   $ok: any;
 
-  constructor(private router: Router, private snackBar: SnackBarService ,private route: ActivatedRoute, private clientService: ClientService, public print: PrintClientService) { }
+  constructor(private router: Router, private snackBar: SnackBarService ,private route: ActivatedRoute, private clientService: ClientService, public print: PrintClientService, private weekEnd: WeekService) { }
 
   ngOnInit() {
+    console.log('JE SUIS COOL');
+    
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
         this.clientService.returnPeriode(params.get('periode')), 
@@ -70,6 +73,16 @@ export class CommandeCreditComponent implements OnInit {
         this.clientsAll = resuts;
 
         if(this.route.snapshot.paramMap.get('periode') == 'today')
+        {
+          var resultats = resuts.filter(function(result){
+            if(result.deteCmdUpdate){
+              var deteCmdUpdate = new Date(result.deteCmdUpdate);
+              return deteCmdUpdate.getDate() == date.getDate() && deteCmdUpdate.getMonth() == date.getMonth() && deteCmdUpdate.getFullYear() == date.getFullYear();
+            }
+          }) 
+        }
+        
+        if(this.route.snapshot.paramMap.get('periode') == 'week')
         {
           var resultats = resuts.filter(function(result){
             if(result.deteCmdUpdate){

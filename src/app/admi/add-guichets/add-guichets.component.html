@@ -7,7 +7,7 @@
                <div class="col-md-12">
                    <div class="main-card mb-3 card">
                        <div class="card-header">
-                           Montant Guichet {{ idUser }}
+                           Montant Guichet &nbsp;<span class="badge badge-success">{{ nameAgence }}</span>
                        </div>
                        <div class="card-body">
                             <form [formGroup]="formControl" (ngSubmit)="onSubmit()">
@@ -45,7 +45,7 @@
                                 
                                 </div>
                                 
-                                <button type="Ajouter" [disabled]="formControl.invalid" class="btn btn-primary">Submit</button>
+                                <button type="Ajouter" [disabled]="formControl.invalid" class="btn btn-primary">Valider</button>
                             </form>
                         </div>
                    </div>

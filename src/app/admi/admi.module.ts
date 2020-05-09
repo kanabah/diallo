@@ -20,9 +20,16 @@ import { UpdateGuichetComponent } from './update-guichet/update-guichet.componen
 import { ListGuichetProductionAgenceComponent } from './list-guichet-production-agence/list-guichet-production-agence.component';
 import { CommandesListAdmiComponent } from './commandes-list-admi/commandes-list-admi.component';
 import { CommandesDetailleAdmiComponent } from './commandes-detaille-admi/commandes-detaille-admi.component';
+import { RechercheCommandeByAgenceComponent } from './recherche-commande-by-agence/recherche-commande-by-agence.component';
+import { CommandeRechercheByClientComponent } from './commande-recherche-by-client/commande-recherche-by-client.component';
+import { GuichetByAgenceComponent } from './guichet-by-agence/guichet-by-agence.component';
+import { PromoteurListComponent } from './promoteur-list/promoteur-list.component';
+import { ProductionPromoteurAdmiComponent } from './production-promoteur-admi/production-promoteur-admi.component';
+import { ListDebitPromoteurAdmiComponent } from './list-debit-promoteur-admi/list-debit-promoteur-admi.component';
+import { ProductionPromoteurByDateComponent } from './production-promoteur-by-date/production-promoteur-by-date.component';
 
 @NgModule({
-  declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent, FooterAdmiComponent, AddGuichetsComponent, GuichetListComponent, UpdateGuichetComponent, ListGuichetProductionAgenceComponent, CommandesListAdmiComponent, CommandesDetailleAdmiComponent],
+  declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent, FooterAdmiComponent, AddGuichetsComponent, GuichetListComponent, UpdateGuichetComponent, ListGuichetProductionAgenceComponent, CommandesListAdmiComponent, CommandesDetailleAdmiComponent, RechercheCommandeByAgenceComponent, CommandeRechercheByClientComponent, GuichetByAgenceComponent, PromoteurListComponent, ProductionPromoteurAdmiComponent, ListDebitPromoteurAdmiComponent, ProductionPromoteurByDateComponent],
   entryComponents: [
     ConfirmPasswordComponent,
     AttributeRoleComponent

@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class AddGuichetsComponent implements OnInit {
   idUser: any;
-  name: any;
+  nameAgence: any;
   user: any;
   passwordIncorect: boolean = true;
   etatPadding: boolean = true;
@@ -89,7 +89,7 @@ export class AddGuichetsComponent implements OnInit {
         return 'le numero est incorect.';
       }else if(this.tel.errors.user){
         this.idUser = this.tel.errors.user.value._id;
-        this.name = this.tel.errors.user.value.name;
+        this.nameAgence = this.tel.errors.user.value.nameAgence;
         this.tel.setErrors(null);
       }else if(this.tel.errors.telNotExist){
         return "Cet Numero de telephone n'existe pas.";

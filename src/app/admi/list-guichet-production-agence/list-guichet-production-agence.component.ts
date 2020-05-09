@@ -106,6 +106,7 @@ export class ListGuichetProductionAgenceComponent implements OnInit {
       return 'badge badge-warning';
     }
   }
+  
   redirectMod(id){
     this.router.navigate(['admi/guichet-list/update', id])
   }

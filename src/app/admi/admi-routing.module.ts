@@ -1,3 +1,9 @@
+import { ProductionPromoteurByDateComponent } from './production-promoteur-by-date/production-promoteur-by-date.component';
+import { ListDebitPromoteurAdmiComponent } from './list-debit-promoteur-admi/list-debit-promoteur-admi.component';
+import { ProductionPromoteurAdmiComponent } from './production-promoteur-admi/production-promoteur-admi.component';
+import { PromoteurListComponent } from './promoteur-list/promoteur-list.component';
+import { GuichetByAgenceComponent } from './guichet-by-agence/guichet-by-agence.component';
+import { CommandeRechercheByClientComponent } from './commande-recherche-by-client/commande-recherche-by-client.component';
 import { CommandesListAdmiComponent } from './commandes-list-admi/commandes-list-admi.component';
 import { ListGuichetProductionAgenceComponent } from './list-guichet-production-agence/list-guichet-production-agence.component';
 import { UpdateGuichetComponent } from './update-guichet/update-guichet.component';
@@ -10,6 +16,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeAdmiComponent } from './home-admi/home-admi.component';
 import { CommandesDetailleAdmiComponent } from './commandes-detaille-admi/commandes-detaille-admi.component';
+import { RechercheCommandeByAgenceComponent } from './recherche-commande-by-agence/recherche-commande-by-agence.component';
 
 
 const routes: Routes = [
@@ -26,6 +33,14 @@ const routes: Routes = [
         component: ElementNotificationComponent,
       },
       {
+        path: 'commande-recherche-by-agence',
+        component: RechercheCommandeByAgenceComponent,
+      },
+      {
+        path: 'commande-recherche-by-client',
+        component: CommandeRechercheByClientComponent,
+      },
+      {
         path: 'elemennts-notification/new-users',
         component: NewUsersComponent
       },
@@ -34,8 +49,28 @@ const routes: Routes = [
         component: AddGuichetsComponent
       },
       {
+        path: 'promoteur-list',
+        component: PromoteurListComponent
+      },
+      {
+        path: 'production-promoteur-admi/:id',
+        component: ProductionPromoteurAdmiComponent
+      },
+      {
+        path: 'list-debit-promoteur-admi/:id',
+        component: ListDebitPromoteurAdmiComponent
+      },
+      {
+        path: 'production-promoteur-by-date',
+        component: ProductionPromoteurByDateComponent
+      },
+      {
         path: 'guichet-list',
         component: GuichetListComponent
+      },
+      {
+        path: 'guichet-by-agence',
+        component: GuichetByAgenceComponent
       },
       {
         path: 'guichet-list/update/:id',
@@ -50,7 +85,7 @@ const routes: Routes = [
         component: CommandesListAdmiComponent
       },
       {
-        path: 'commandes-list/total/details/:id',
+        path: 'commandes-list/total/details/:id/:periode',
         component: CommandesDetailleAdmiComponent
       },
     ]

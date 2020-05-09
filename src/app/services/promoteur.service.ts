@@ -55,6 +55,12 @@ export class PromoteurService {
     )
   }
 
+  public getPromoteurs(): Observable<Promoteur[]>{
+    return this.http.get<Promoteur[]>(`${this.api}/getPromoteurs`).pipe(
+      retry(3)
+    )
+  }
+
   public updatedCaisse(id, promoteur: Promoteur): Observable<Promoteur>{
     return this.http.put<Promoteur>(`${this.api}/updatedCaisse/${id}`, promoteur).pipe(
       retry(3)

@@ -52,8 +52,6 @@ export class ProductionPromoteurTotalComponent implements OnInit {
       this.promoteurs = resuts;
       this.promoteurs.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
         this.collection = { count: 20, data: this.promoteurs  };
-        console.log('Collection', this.collection.data);
-        
     })
 
     this.userService.getUser(id).subscribe(res => {
