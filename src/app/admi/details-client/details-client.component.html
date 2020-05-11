@@ -1,0 +1,65 @@
+<div class="app-main">  
+    <app-nav-admi></app-nav-admi>
+    <div class="app-main__outer">
+       <div class="app-main__inner">  
+            <app-title-page></app-title-page>         
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body"><h5 class="card-title">Commande Payer</h5>
+                            <ul class="list-group">
+                                <li class="active list-group-item bg-danger">Orange Money<span class="badge badge-info badge-pill ml-1">{{ nbCommandeOM }}</span> <span class="pull-right badge badge-success">{{ somPayOrangeMoney | currency:'':'' }}</span></li>
+                                <li class="active list-group-item bg-warning">Mobile Money<span class="badge badge-info badge-pill ml-1">{{ nbCommandeMoMo }}</span> <span class="pull-right badge badge-success">{{ somPayMobileMoney | currency:'':'' }}</span></li>
+                                <li class="active list-group-item bg-success">Start Times<span class="badge badge-info badge-pill ml-1">{{ nbCommandeST }}</span> <span class="pull-right badge badge-success">{{ somPayStartTimes | currency:'':'' }}</span></li>
+                                <li class="active list-group-item bg-info">Rechargement<span class="badge badge-success badge-pill ml-1">{{ nbCommandeTransfert }}</span> <span class="pull-right badge badge-success">{{ somPayTransfert | currency:'':'' }}</span></li>
+                                <li class="list-group-item">Total<span class="badge badge-danger badge-pill ml-1">{{ nbCommandeTransfert + nbCommandeST + nbCommandeMoMo + nbCommandeOM }}</span> <span class="pull-right badge badge-danger">{{ somPayTotal | currency:'':'' }}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body"><h5 class="card-title">Commande Non Payer</h5>
+                            <div>
+                                <ul class="list-group">
+                                    <li class="active list-group-item bg-danger">Orange Money<span class="badge badge-info badge-pill ml-1">{{ nbCommandeOM }}</span> <span class="pull-right badge badge-success">{{ somCreditOrangeMoney | currency:'':'' }}</span></li>
+                                <li class="active list-group-item bg-warning">Mobile Money<span class="badge badge-info badge-pill ml-1">{{ nbCommandeMoMo }}</span> <span class="pull-right badge badge-success">{{ somCreditMobileMoney | currency:'':'' }}</span></li>
+                                <li class="active list-group-item bg-success">Start Times<span class="badge badge-info badge-pill ml-1">{{ nbCommandeST }}</span> <span class="pull-right badge badge-success">{{ somCreditStartTimes | currency:'':'' }}</span></li>
+                                <li class="active list-group-item bg-info">Rechargement<span class="badge badge-success badge-pill ml-1">{{ nbCommandeTransfert }}</span> <span class="pull-right badge badge-success">{{ somCreditTransfert | currency:'':'' }}</span></li>
+                                <li class="list-group-item">Total<span class="badge badge-danger badge-pill ml-1">{{ nbCommandeTransfert + nbCommandeST + nbCommandeMoMo + nbCommandeOM }}</span> <span class="pull-right badge badge-danger">{{ somCreditTotal | currency:'':'' }}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body"><h5 class="card-title">Entrer caisse</h5>
+                            <ul class="list-group">
+                                <li class="justify-content-between list-group-item">Jour <span class="badge badge-info badge-pill">{{ countProductDay }}</span> <span class="pull-right badge badge-success">{{ sumEntrerDay | currency:'':''}}</span></li>
+                                <li class="justify-content-between list-group-item">Semaine <span class="badge badge-info badge-pill">{{ countProductWeek }}</span> <span class="pull-right badge badge-success">{{ sumEntrerWeek | currency:'':''}}</span></li>
+                                <li class="justify-content-between list-group-item">Mois <span class="badge badge-info badge-pill">{{ countProductMonth }}</span> <span class="pull-right badge badge-success">{{ sumEntrerMonth | currency:'':''}}</span></li>
+                                <li class="justify-content-between list-group-item">Annee <span class="badge badge-info badge-pill">{{ countProductYear }}</span> <span class="pull-right badge badge-success">{{ sumEntrerYear | currency:'':''}}</span></li>
+                                <li class="justify-content-between list-group-item">Total <span class="badge badge-danger badge-pill">{{ countProductTotal }}</span> <span class="pull-right badge badge-danger">{{ sumEntrerTotal | currency:'':''}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body"><h5 class="card-title">Credit caisse</h5>
+                            <ul class="list-group">
+                                <li class="justify-content-between list-group-item">Jour <span class="badge badge-info badge-pill">{{ countProductDay }}</span> <span class="pull-right badge badge-success">{{ sumCreditDay | currency:'':''}}</span></li>
+                                <li class="justify-content-between list-group-item">Semaine <span class="badge badge-info badge-pill">{{ countProductWeek }}</span> <span class="pull-right badge badge-success">{{ sumCreditWeek | currency:'':''}}</span></li>
+                                <li class="justify-content-between list-group-item">Mois <span class="badge badge-info badge-pill">{{ countProductMonth }}</span> <span class="pull-right badge badge-success">{{ sumCreditMonth | currency:'':''}}</span></li>
+                                <li class="justify-content-between list-group-item">Annee <span class="badge badge-info badge-pill">{{ countProductYear }}</span> <span class="pull-right badge badge-success">{{ sumCreditYear | currency:'':''}}</span></li>
+                                <li class="justify-content-between list-group-item">Total <span class="badge badge-danger badge-pill">{{ countProductTotal }}</span> <span class="pull-right badge badge-danger">{{ sumCreditTotal | currency:'':''}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-footer-admi></app-footer-admi>
+    </div>
+</div>

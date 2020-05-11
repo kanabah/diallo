@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Client } from 'src/app/interfaces/client';
 import { ClientService } from 'src/app/services/client.service';
 import { JsService } from 'src/app/services/js.service';
@@ -25,7 +26,7 @@ export class ListClientComponent implements OnInit {
     data: []
   };
 
-  constructor(private dialog: MatDialog,private clientService: ClientService, public print: PrintClientService, private jsService: JsService) { 
+  constructor(private dialog: MatDialog,private clientService: ClientService, public print: PrintClientService, private route: Router) { 
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -58,6 +59,10 @@ export class ListClientComponent implements OnInit {
       
       this.collection = { count: 20, data: this.clients };
     })
+  }
+
+  onDetails(id){
+    this.route.navigate(['admi/details-client', id]);
   }
 
 }

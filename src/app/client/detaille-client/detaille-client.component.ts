@@ -9,8 +9,6 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { JsService } from 'src/app/services/js.service';
 import { controlCodeTelValidator } from 'src/app/validators/tel-required-once-validator';
-import { telCLientUniqueValidator } from 'src/app/validators/tel-client-validators';
-import { emailValidatorClient } from 'src/app/validators/email-client-validators';
 import { telUpdateClientValidator } from 'src/app/validators/tel-update-client-validator';
 import { emailUpdateClientValidator } from 'src/app/validators/email-update-client-validator';
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons';

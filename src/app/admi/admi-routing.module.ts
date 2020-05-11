@@ -1,3 +1,4 @@
+import { DetailsClientComponent } from './details-client/details-client.component';
 import { ListClientComponent } from './list-client/list-client.component';
 import { GuichetByCodeComponent } from './guichet-by-code/guichet-by-code.component';
 import { ProductionPromoteurByDateComponent } from './production-promoteur-by-date/production-promoteur-by-date.component';
@@ -57,6 +58,10 @@ const routes: Routes = [
       {
         path: 'list-client',
         component: ListClientComponent
+      },
+      {
+        path: 'details-client/:id',
+        component: DetailsClientComponent
       },
       {
         path: 'promoteur-list',

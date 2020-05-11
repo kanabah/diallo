@@ -205,6 +205,24 @@ module.exports.clientDettaille = async function(req, res){
     }
 }
 
+module.exports.getClient = async function(req, res){
+    let id = req.params.id;
+    
+    try{
+        let client = await Client.find({"_id": id});
+        
+        if(!client){
+            return res.status(404).send(new Error('Utilisateur not found 404'));
+        }else{
+            
+            return res.status(200).json(client[0]);
+        }
+
+    }catch(err){
+        return res.status(500).send(new Error('Erreur de server 500...'));
+    }
+}
+
 module.exports.getCommandeCredit = async function(req, res){
     let id = req.params.id;
     
