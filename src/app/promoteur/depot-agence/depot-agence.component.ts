@@ -1,3 +1,4 @@
+import { User } from './../../interfaces/user';
 import { Route, Router } from '@angular/router';
 import { UserService } from './../../services/user.service';
 import { PromoteurService } from './../../services/promoteur.service';
@@ -6,21 +7,36 @@ import { ClientService } from './../../services/client.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { Promoteur } from 'src/app/interfaces/promoteur';
 
 @Component({
-  selector: 'app-entrer-caisse',
-  templateUrl: './entrer-caisse.component.html',
-  styleUrls: ['./entrer-caisse.component.css']
+  selector: 'app-depot-agence',
+  templateUrl: './depot-agence.component.html',
+  styleUrls: ['./depot-agence.component.css']
 })
-export class EntrerCaisseComponent implements OnInit {
+export class DepotAgenceComponent implements OnInit {
   etatPadding: boolean = true;
   passwordIncorect: boolean = true;
   user: any;
   idClient: string;
+  userDetails: User;
+
+  resultAfterCalcul: number = 0;
+
+  promoteurs: Promoteur[] = [];
 
   constructor(private route: Router, private snackBar: SnackBarService, private userService: UserService, private fb: FormBuilder, private clientService: ClientService, private promoteurService: PromoteurService) { }
 
   ngOnInit() {
+    this.promoteurService.getPromoteurs().subscribe(res => {
+      this.promoteurs = res;
+    });
+    
+    this.userService.getUser(this.userService.getUserDetails()._id).subscribe(res => {
+      this.userDetails = res;
+      this.getPromoteurs(this.userService.getUserDetails()._id);
+    });
+
   }
 
   onSubmit(){
@@ -32,33 +48,51 @@ export class EntrerCaisseComponent implements OnInit {
         this.passwordIncorect = false;
         this.etatPadding = true;
       }else{
-        this.user_id.setValue(this.userService.getUserDetails()._id);
-        this.agence_id.setValue(this.userService.getUserDetails().agence_id);
-        this.client_id.setValue(this.idClient);
-        this.type.setValue('entrer');
-
-        this.promoteurService.entrerCaisse(this.entrerForm.value).subscribe(res => {
-          this.snackBar.openSnackBar('Ajout Reusie!!', 'Fermer');
-          this.route.navigate(['promoteur/list/enterJour'])
-        });
+        if(this.resultAfterCalcul > 1 && this.montant.value < this.resultAfterCalcul){
+          this.userService.addSoldeSortie(this.userService.getUserDetails()._id, this.entrerForm.value).subscribe(res => {
+            this.snackBar.openSnackBar("Solde Ajouter Avec Success!!!", "Quitter");
+            this.route.navigate(['/']);
+          })
+        }else{
+          this.etatPadding = true;
+          this.snackBar.openSnackBar("Impossible Le Montant Est Trop Grand!!!", "Quitter");
+        }
       }
     });
   }
 
+  getPromoteurs(id){
+    var sumEntrer = 0;
+    var sumSortie = 0;
+    var montantSoldActuel = 0;
+    var montantSoldSortie = 0;
+
+      this.promoteurs.forEach(element => {
+        if(element.user_id == id){
+          if(element.type == 'entrer'){
+            sumEntrer += element.montant;
+          }else if(element.type == 'sortie'){
+            sumSortie += element.montant;
+          }
+        }
+      })
+
+      this.userDetails.soldActuel.forEach(element => {
+        montantSoldActuel += element.montant;
+      })
+
+      this.userDetails.soldSortie.forEach(element => {
+        montantSoldSortie += element.montant;
+      })
+      
+      this.resultAfterCalcul = sumEntrer + montantSoldActuel - sumSortie - montantSoldSortie;
+    return this.resultAfterCalcul;
+  }
+
+
   entrerForm = this.fb.group({
-    tel: ['', {
-      validators: [Validators.required,
-        Validators.pattern(/^[0-9+]{9,9}$/)
-     ],
-      asyncValidators: [returnInfoClientValidator(this.clientService)],
-      updateOn: 'blur'}
-   ],
     montant: ['', [Validators.required, Validators.pattern(/^[0-9+]{1,}$/)]],
     description: [''],
-    client_id: [''],
-    agence_id: [''],
-    user_id: [''],
-    type: [''],
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
@@ -74,34 +108,6 @@ export class EntrerCaisseComponent implements OnInit {
 
   getMontantSuccess(){
     if(this.montant.valid){
-      return true;
-    }
-  }
-
-  getTelError(){
-    if(this.tel.invalid && (this.tel.dirty || this.tel.touched)){
-      if(this.tel.errors.required){
-        return 'Le numero de telephone est requis.';
-      }else if(this.tel.errors.pattern){
-        return 'le numero est incorect.';
-      }else if(this.tel.errors.client){
-        this.idClient = this.tel.errors.client.value._id;
-        // this.nom = this.tel.errors.client.value.nom;
-        // this.prenom = this.tel.errors.client.value.prenom;
-        // this.commune = this.tel.errors.client.value.adress.commune;
-        // this.quartier = this.tel.errors.client.value.adress.quartier;
-        // this.secteur = this.tel.errors.client.value.adress.secteur;
-        // this.avatar = this.tel.errors.client.value.avatar;
-        // this.ok = true;
-        this.tel.setErrors(null);
-      }else if(this.tel.errors.telNotExist){
-        return "Cet Numero de telephone n'existe pas.";
-      }
-    }
-  }
-  
-  getTelSuccess(){
-    if(this.tel.valid){
       return true;
     }
   }
@@ -122,10 +128,6 @@ export class EntrerCaisseComponent implements OnInit {
     }
   }
 
-  get tel(){
-    return this.entrerForm.get('tel');
-  }
-
   get montant(){
     return this.entrerForm.get('montant');
   }
@@ -134,25 +136,8 @@ export class EntrerCaisseComponent implements OnInit {
     return this.entrerForm.get('description');
   }
 
-  get user_id(){
-    return this.entrerForm.get('user_id');
-  }
-
-  get agence_id(){
-    return this.entrerForm.get('agence_id');
-  }
-
-  get client_id(){
-    return this.entrerForm.get('client_id');
-  }
-
-  get type(){
-    return this.entrerForm.get('type');
-  }
-
   get password(){
     return this.entrerForm.get('password');
   }
-
 
 }

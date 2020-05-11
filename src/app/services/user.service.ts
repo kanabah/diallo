@@ -169,8 +169,20 @@ export class UserService {
     );
   }
 
+  public updateDepotAgence(user, id, id_sold): Observable<User>{
+    return this.http.put<User>(`${this.api}/updateDepotAgence/${id}/${id_sold}`, user).pipe(
+      retry(3)
+    );
+  }
+
   public deleteDebitPromoteurForAgence(id, id_sold): Observable<User>{
     return this.http.get<User>(`${this.api}/deleteDebitPromoteurForAgence/${id}/${id_sold}`).pipe(
+      retry(3)
+    );
+  }
+
+  public deleteDepotAgence(id, id_sold): Observable<User>{
+    return this.http.get<User>(`${this.api}/deleteDepotAgence/${id}/${id_sold}`).pipe(
       retry(3)
     );
   }
@@ -184,6 +196,12 @@ export class UserService {
 
   public addSoldePromoteur(id, promoteur): Observable<User>{
     return this.http.put<User>(`${this.api}/addSoldePromoteur/${id}`, promoteur).pipe(
+      retry(3)
+    );
+  }
+
+  public addSoldeSortie(id, promoteur): Observable<User>{
+    return this.http.put<User>(`${this.api}/addSoldeSortie/${id}`, promoteur).pipe(
       retry(3)
     );
   }

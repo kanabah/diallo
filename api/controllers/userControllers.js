@@ -62,8 +62,30 @@ module.exports.addSoldePromoteur = async function(req, res){
         user[0].soldActuel.push(soldeActuel);
 
         user[0].save();
-        console.log('User Solde', user[0]);
-        
+
+        if(!user[0]){
+            return res.status(404).send(new Error('Érror 404 data note found...'));
+        }else{
+            return res.status(200).json(user[0]);
+        }
+    }catch(err){
+        return res.status(500).send(new Error('Erreur 500...'));
+    }
+}
+
+module.exports.addSoldeSortie = async function(req, res){
+    let id = req.params.id;
+    let solde = req.body.montant;
+    let description = req.body.description;
+    try{
+        let user = await User.find({"_id": id});
+        let soldeActuel = {
+            montant: solde,
+            description: description
+        }
+        user[0].soldSortie.push(soldeActuel);
+
+        user[0].save();
 
         if(!user[0]){
             return res.status(404).send(new Error('Érror 404 data note found...'));
@@ -144,6 +166,30 @@ module.exports.updateDebitPromoteurForAgence = async function(req, res){
     }
 }
 
+module.exports.updateDepotAgence = async function(req, res){
+    let id  = req.params.id;
+    let id_sold  = req.params.id_sold;
+    try{
+        let user = await User.find({"_id": id});
+        var result = user[0].soldSortie.filter(res => {
+            return res._id == id_sold;
+        })
+
+        result[0].montant = req.body.montant;
+        result[0].description = req.body.description;
+        
+        user[0].save();
+        
+        if(!user[0]){
+            return res.status(404).send(new Error('Érror 404 data note found...'));
+        }else{
+            return res.status(200).json(user[0]);
+        }
+    }catch(err){
+        return res.status(500).send(new Error('Erreur 500...'));
+    }
+}
+
 module.exports.deleteDebitPromoteurForAgence = async function(req, res){
     let id  = req.params.id;
     let id_sold  = req.params.id_sold;
@@ -152,6 +198,26 @@ module.exports.deleteDebitPromoteurForAgence = async function(req, res){
 
         someArray = user[0].soldActuel.filter(result => result._id != id_sold);
         user[0].soldActuel = someArray;
+        user[0].save();
+
+        if(!user[0]){
+            return res.status(404).send(new Error('Érror 404 data note found...'));
+        }else{
+            return res.status(200).json(user[0]);
+        }
+    }catch(err){
+        return res.status(500).send(new Error('Erreur 500...'));
+    }
+}
+
+module.exports.deleteDepotAgence = async function(req, res){
+    let id  = req.params.id;
+    let id_sold  = req.params.id_sold;
+    try{
+        let user = await User.find({"_id": id});
+
+        someArray = user[0].soldSortie.filter(result => result._id != id_sold);
+        user[0].soldSortie = someArray;
         user[0].save();
 
         if(!user[0]){

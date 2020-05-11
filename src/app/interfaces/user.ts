@@ -13,6 +13,11 @@ export interface User{
         montant,
         _id: string
     }];
+    soldSortie: [{
+        date: any,
+        montant,
+        _id: string
+    }];
     role: string;
     password: string;
     active: number;

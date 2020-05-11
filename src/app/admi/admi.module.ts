@@ -27,9 +27,11 @@ import { PromoteurListComponent } from './promoteur-list/promoteur-list.componen
 import { ProductionPromoteurAdmiComponent } from './production-promoteur-admi/production-promoteur-admi.component';
 import { ListDebitPromoteurAdmiComponent } from './list-debit-promoteur-admi/list-debit-promoteur-admi.component';
 import { ProductionPromoteurByDateComponent } from './production-promoteur-by-date/production-promoteur-by-date.component';
+import { GuichetByCodeComponent } from './guichet-by-code/guichet-by-code.component';
+import { ListClientComponent } from './list-client/list-client.component';
 
 @NgModule({
-  declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent, FooterAdmiComponent, AddGuichetsComponent, GuichetListComponent, UpdateGuichetComponent, ListGuichetProductionAgenceComponent, CommandesListAdmiComponent, CommandesDetailleAdmiComponent, RechercheCommandeByAgenceComponent, CommandeRechercheByClientComponent, GuichetByAgenceComponent, PromoteurListComponent, ProductionPromoteurAdmiComponent, ListDebitPromoteurAdmiComponent, ProductionPromoteurByDateComponent],
+  declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent, FooterAdmiComponent, AddGuichetsComponent, GuichetListComponent, UpdateGuichetComponent, ListGuichetProductionAgenceComponent, CommandesListAdmiComponent, CommandesDetailleAdmiComponent, RechercheCommandeByAgenceComponent, CommandeRechercheByClientComponent, GuichetByAgenceComponent, PromoteurListComponent, ProductionPromoteurAdmiComponent, ListDebitPromoteurAdmiComponent, ProductionPromoteurByDateComponent, GuichetByCodeComponent, ListClientComponent],
   entryComponents: [
     ConfirmPasswordComponent,
     AttributeRoleComponent

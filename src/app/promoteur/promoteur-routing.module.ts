@@ -1,3 +1,6 @@
+import { UpdateDepotAgenceComponent } from './update-depot-agence/update-depot-agence.component';
+import { ListDepotAgenceComponent } from './list-depot-agence/list-depot-agence.component';
+import { DepotAgenceComponent } from './depot-agence/depot-agence.component';
 import { AttributionUpdateComponent } from './attribution-update/attribution-update.component';
 import { AttributionListComponent } from './attribution-list/attribution-list.component';
 import { ProductionPromoteurPeriodeComponent } from './production-promoteur-periode/production-promoteur-periode.component';
@@ -51,6 +54,18 @@ const routes: Routes = [
       {
         path: 'production-periode',
         component: ProductionPromoteurPeriodeComponent
+      },
+      {
+        path: 'depot-agence',
+        component: DepotAgenceComponent
+      },
+      {
+        path: 'list-depot-agence',
+        component: ListDepotAgenceComponent
+      },
+      {
+        path: 'update-depot-agence/:id',
+        component: UpdateDepotAgenceComponent
       },
       {
         path: 'attribution-list/:id',

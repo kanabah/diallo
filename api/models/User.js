@@ -29,7 +29,18 @@ var userSchema = new Schema({
     photo:{
         type: String
     },
-    soldActuel: [{
+    soldActuel: [{ //POUR LE PROMOTEUR
+        montant: {
+            type: Number,
+            default: 0
+        },
+        description: String,
+        date: {
+            type: Date,
+            default: Date.now
+        }
+    }],
+    soldSortie: [{ //POUR LE PROMOTEUR
         montant: {
             type: Number,
             default: 0

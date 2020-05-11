@@ -1,3 +1,4 @@
+import { User } from './../../interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PrintClientService } from './../../services/print-client.service';
@@ -16,16 +17,94 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-promoteur.component.css']
 })
 export class ListPromoteurComponent implements OnInit {
+  userFilters: User[] = [];
   dataSource: any[] = [];
   caisses = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private dialog: MatDialog,private userService: UserService, public print: PrintClientService, private router: Router) { }
+  soldActuel: User[] = [];
+  soldSortie: User[] = [];
+  users: User[] = [];
+
+  promoteurs: any[] = [];
+  userDetails: any;
+  resultAfterCalcul: any;
+
+  constructor(private promoteurService: PromoteurService,private userService: UserService, public print: PrintClientService, private router: Router) { }
 
   ngOnInit() {
+    this.promoteurService.getPromoteurs().subscribe(res => {
+      this.promoteurs = res;
+    });
+    this.getUsers();
     this.getAllPromoteurs();
+    
   }
+
+  getUsers(){
+    this.userService.getUsers().subscribe(res => {
+      this.userFilters = res;
+      
+      this.users = this.userFilters.filter(result => {
+        return result.role == 'promoteur';
+      });
+    })
+  }
+
+  getPromoteurs(id){
+    var sumEntrer = 0;
+    var sumSortie = 0;
+    var montantSoldActuel = 0;
+    var montantSoldSortie = 0;
+
+      this.promoteurs.forEach(element => {
+        if(element.user_id == id){
+          if(element.type == 'entrer'){
+            sumEntrer += element.montant;
+          }else if(element.type == 'sortie'){
+            sumSortie += element.montant;
+          }
+        }
+      })
+
+      this.soldActuel = this.users.filter(result =>{
+        if(result._id == id){
+          return result.soldActuel;
+        }
+      })
+
+      this.soldSortie = this.users.filter(result =>{
+        if(result._id == id){
+          return result.soldSortie;
+        }
+      })
+      console.log('soldSORTIE', this.soldSortie);
+
+      this.soldActuel.filter(response => {
+        response.soldActuel.forEach(element => {
+          montantSoldActuel += element.montant;
+        })
+      })
+      
+      this.soldSortie.filter(response => {
+        response.soldSortie.forEach(element => {
+          montantSoldSortie += element.montant;
+        })
+      })
+      
+      
+      var resultats = {
+        sumPromoteurEntrer: sumEntrer,
+        sumPromoteurSortie: sumSortie,
+        montantSoldActuel: montantSoldActuel,
+        montantSoldSortie: montantSoldSortie
+      }
+      // console.log('RESULT Sold Actu', resultats);
+
+    return resultats;
+  }
+
 
   //DATA TABLE
   displayedColumns: string[] = ['name', 'nameAgence', 'tel', 'email', 'adress', 'createdAt', 'active', '_id','role'];
@@ -36,6 +115,7 @@ export class ListPromoteurComponent implements OnInit {
   
   getAllPromoteurs(){
     this.userService.getAllPromoteurs(this.userService.getUserDetails()._id).subscribe(res => {
+      this.users = res;
       res.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
       this.caisses = new MatTableDataSource(res);
       this.caisses.paginator = this.paginator;

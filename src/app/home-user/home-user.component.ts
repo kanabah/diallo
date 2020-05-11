@@ -1,3 +1,5 @@
+import { PromoteurService } from './../services/promoteur.service';
+import { User } from './../interfaces/user';
 import { GuichetService } from './../services/guichet.service';
 import { UserService } from './../services/user.service';
 import { PrintClientService } from './../services/print-client.service';
@@ -15,6 +17,7 @@ import { faBraille } from '@fortawesome/free-solid-svg-icons';
 import { faAlignJustify } from '@fortawesome/free-solid-svg-icons';
 import { faDollyFlatbed } from '@fortawesome/free-solid-svg-icons';
 import { Guichet } from '../interfaces/guichet';
+import { Promoteur } from '../interfaces/promoteur';
 
 @Component({
   selector: 'app-home-user',
@@ -27,7 +30,11 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
   soldPromoteurToday = 0;
   someActuJour = 0;
 
-  constructor(private js: JsService, public dialog: MatDialog, private clientService: ClientService, public print: PrintClientService, public userService : UserService, private guichetService: GuichetService) { }
+  resultAfterCalcul: number = 0;
+  userDetails: User;
+  promoteurs: Promoteur[] = [];
+
+  constructor(private js: JsService, public dialog: MatDialog, private clientService: ClientService, public print: PrintClientService, public userService : UserService, private guichetService: GuichetService, private promoteurService: PromoteurService) { }
   infoTotal: any;
   purcentDay: any = 0;
   purcentMonth: any = 0;

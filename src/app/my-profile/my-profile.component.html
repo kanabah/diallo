@@ -96,7 +96,7 @@
                                                             <form action="#" id="loginForm" [formGroup]="registerForm" (ngSubmit)="onUpdateUser()">
                                                                 <div class="row">
                                                                     <div class="form-group col-lg-12">
-                                                                        <label>Nom et prenom {{ userService.getUserDetails()._id }}</label>
+                                                                        <label>Nom et prenom</label>
                                                                         <input class="form-control" [id]="getNameSuccess() ? 'successForm' : getNameError() ? 'errorForm' : ''" formControlName="name" placeholder="Nom complet de l'agent">
                                                                         <span *ngIf="getNameError()" class="text text-danger"><small>{{ getNameError() }}</small></span>
                                                                     </div>

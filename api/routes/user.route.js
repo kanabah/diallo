@@ -25,7 +25,11 @@ userRoutes.route('/changeEtatUser/:id').get(auth,ctrUser.changeEtatUser);
 
 userRoutes.route('/updateDebitPromoteurForAgence/:id/:id_sold').put(auth,ctrUser.updateDebitPromoteurForAgence);
 
+userRoutes.route('/updateDepotAgence/:id/:id_sold').put(auth,ctrUser.updateDepotAgence);
+
 userRoutes.route('/deleteDebitPromoteurForAgence/:id/:id_sold').get(auth,ctrUser.deleteDebitPromoteurForAgence);
+
+userRoutes.route('/deleteDepotAgence/:id/:id_sold').get(auth,ctrUser.deleteDepotAgence);
 
 userRoutes.route('/profile').get(auth, ctrProfile.profileRead);
 
@@ -42,6 +46,8 @@ userRoutes.route('/acpetUser/:id').get(auth, ctrUser.acpetUser);
 userRoutes.route('/telExistPromoteur/:tel').get(auth, ctrUser.telExistPromoteur);
 
 userRoutes.route('/addSoldePromoteur/:id').put(auth, ctrUser.addSoldePromoteur);
+
+userRoutes.route('/addSoldeSortie/:id').put(auth, ctrUser.addSoldeSortie);
 
 userRoutes.route('/attriButeRole/:id/:role/:agence_id').get(auth, ctrUser.attriButeRole);
 

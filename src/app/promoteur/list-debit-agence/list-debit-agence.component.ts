@@ -1,16 +1,10 @@
 import { User } from './../../interfaces/user';
 import { UserService } from 'src/app/services/user.service';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogDeleteCaisseComponent } from './../dialog-delete-caisse/dialog-delete-caisse.component';
 import { PrintClientService } from './../../services/print-client.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { PromoteurService } from './../../services/promoteur.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Promoteur } from 'src/app/interfaces/promoteur';
-import { Location } from '@angular/common';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-debit-agence',

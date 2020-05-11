@@ -767,6 +767,12 @@ module.exports.returnInfoHome = async function(req, res){
         var pourcentNbCmdWeek = 0;
         var pourcentNbCmdYear = 0;
 
+        sumTotalPromoteurEntrer = 0;
+        sumTotalPromoteurSortie = 0;
+        montantSoldSortie = 0;
+        montantSoldActuel = 0;
+        montantResult = 0;
+
         var totalEntrerDay = 0;
         var totalSortieDay = 0;
         
@@ -798,7 +804,24 @@ module.exports.returnInfoHome = async function(req, res){
                     totalSortieDay += result.montant;
                 }
             }
+            if(result.type == 'entrer'){
+                sumTotalPromoteurEntrer += result.montant;
+            }
+
+            if(result.type == 'sortie'){
+                sumTotalPromoteurSortie += result.montant;
+            }
         });
+
+        promoteur[0].soldSortie.forEach(element => {
+            montantSoldSortie += element.montant;
+        })
+
+        promoteur[0].soldActuel.forEach(element => {
+            montantSoldActuel += element.montant;
+        })
+
+        montantResult = sumTotalPromoteurEntrer + montantSoldActuel - sumTotalPromoteurSortie -montantSoldSortie;
 
         // FIN POUR LE PROMOTEUR
 
@@ -915,7 +938,8 @@ module.exports.returnInfoHome = async function(req, res){
             totalSortieDay: totalSortieDay,
             nbClients: nbClients,
             clients: clients,
-            promoteur: promoteur
+            promoteur: promoteur,
+            montantResult: montantResult
         }
 
         return res.status(200).json(returnSumTotal);

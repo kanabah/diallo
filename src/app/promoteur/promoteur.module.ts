@@ -22,10 +22,13 @@ import { ProductionPromoteurPeriodeComponent } from './production-promoteur-peri
 import { AttributionListComponent } from './attribution-list/attribution-list.component';
 import { AttributionUpdateComponent } from './attribution-update/attribution-update.component';
 import { DeleteConfirmCoteAgenceComponent } from './delete-confirm-cote-agence/delete-confirm-cote-agence.component';
+import { DepotAgenceComponent } from './depot-agence/depot-agence.component';
+import { ListDepotAgenceComponent } from './list-depot-agence/list-depot-agence.component';
+import { UpdateDepotAgenceComponent } from './update-depot-agence/update-depot-agence.component';
 
 
 @NgModule({
-  declarations: [PromoteurComponent, EntrerCaisseComponent, SortieCaisseComponent, ListEntrerCaisseComponent, UpdateCaissePromoteurComponent, ListSortieCaisseComponent, DialogDeleteCaisseComponent, ListEntrerJourComponent, ListSortieJourComponent, ListDebitAgenceComponent, ProductionPromoteurTotalComponent, ProductionPromoteurPeriodeComponent, AttributionListComponent, AttributionUpdateComponent, DeleteConfirmCoteAgenceComponent],
+  declarations: [PromoteurComponent, EntrerCaisseComponent, SortieCaisseComponent, ListEntrerCaisseComponent, UpdateCaissePromoteurComponent, ListSortieCaisseComponent, DialogDeleteCaisseComponent, ListEntrerJourComponent, ListSortieJourComponent, ListDebitAgenceComponent, ProductionPromoteurTotalComponent, ProductionPromoteurPeriodeComponent, AttributionListComponent, AttributionUpdateComponent, DeleteConfirmCoteAgenceComponent, DepotAgenceComponent, ListDepotAgenceComponent, UpdateDepotAgenceComponent],
   entryComponents: [
     DialogDeleteCaisseComponent,
     DeleteConfirmCoteAgenceComponent

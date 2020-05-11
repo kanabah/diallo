@@ -40,6 +40,14 @@ export class DeleteConfirmCoteAgenceComponent implements OnInit {
             this.snacKbar.openSnackBar('Suppresion Reuissie!!!', 'Fermer');
           });
         }
+
+        if(this.data.object == 'delete-depot-agence'){
+          this.userService.deleteDepotAgence(this.data.user_id, this.data.id_sold).subscribe(res => {
+            this.dialogRef.close();
+            this.router.navigate(['/']);
+            this.snacKbar.openSnackBar('Suppresion Reuissie!!!', 'Fermer');
+          });
+        }
       }
     })
   }

@@ -21,9 +21,7 @@ export class PromoteurListComponent implements OnInit {
   faUserPlus = faUserPlus;
   promoteurs: Promoteur[] = [];
   soldActuel: User[] = [];
-
-  // sumPromoteurEntrer: number = 0;
-  // sumPromoteurSortie: number = 0;
+  soldSortie: User[] = [];
 
   config: any;
   collection : any = {
@@ -53,7 +51,6 @@ export class PromoteurListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.jsService.jsAdmi();
     this.promoteurService.getPromoteurs().subscribe(res => {
       this.promoteurs = res;
     })
@@ -67,7 +64,6 @@ export class PromoteurListComponent implements OnInit {
       this.users = this.userFilters.filter(result => {
         return result.role == 'promoteur';
       });
-      // console.log('USER FILTERS', this.users);
       
       this.users.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
       this.collection = { count: 20, data: this.users };
@@ -77,7 +73,9 @@ export class PromoteurListComponent implements OnInit {
   getPromoteurs(id){
     var sumEntrer = 0;
     var sumSortie = 0;
-    var montant = 0;
+    var montantSoldActuel = 0;
+    var montantSoldSortie = 0;
+
       this.promoteurs.forEach(element => {
         if(element.user_id == id){
           if(element.type == 'entrer'){
@@ -94,21 +92,34 @@ export class PromoteurListComponent implements OnInit {
         }
       })
 
-      var soldResult = this.soldActuel.filter(response => {
+      this.soldSortie = this.users.filter(result =>{
+        if(result._id == id){
+          return result.soldSortie;
+        }
+      })
+      console.log('soldSORTIE', this.soldSortie);
+
+      this.soldActuel.filter(response => {
         response.soldActuel.forEach(element => {
-          montant += element.montant;
+          montantSoldActuel += element.montant;
         })
       })
       
-      console.log('RESULT Sold Actu', montant);
+      this.soldSortie.filter(response => {
+        response.soldSortie.forEach(element => {
+          montantSoldSortie += element.montant;
+        })
+      })
+      
+      
+      var resultats = {
+        sumPromoteurEntrer: sumEntrer,
+        sumPromoteurSortie: sumSortie,
+        montantSoldActuel: montantSoldActuel,
+        montantSoldSortie: montantSoldSortie
+      }
+      // console.log('RESULT Sold Actu', resultats);
 
-    var resultats = {
-      sumPromoteurEntrer: sumEntrer,
-      sumPromoteurSortie: sumSortie,
-      montant: montant
-    }
-
-    // console.log('ENTRER', resultats);
     return resultats;
   }
 

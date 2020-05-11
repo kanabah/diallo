@@ -42,8 +42,6 @@ export class AttributionUpdateComponent implements OnInit {
       this.debit = this.agence.soldActuel.filter(result =>{
         return result._id == id;
       })
-      
-      console.log('Agence', this.debit[0]);
       this.initialiseForms();
     })
   }

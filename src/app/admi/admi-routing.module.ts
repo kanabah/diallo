@@ -1,3 +1,5 @@
+import { ListClientComponent } from './list-client/list-client.component';
+import { GuichetByCodeComponent } from './guichet-by-code/guichet-by-code.component';
 import { ProductionPromoteurByDateComponent } from './production-promoteur-by-date/production-promoteur-by-date.component';
 import { ListDebitPromoteurAdmiComponent } from './list-debit-promoteur-admi/list-debit-promoteur-admi.component';
 import { ProductionPromoteurAdmiComponent } from './production-promoteur-admi/production-promoteur-admi.component';
@@ -47,6 +49,14 @@ const routes: Routes = [
       {
         path: 'guichet',
         component: AddGuichetsComponent
+      },
+      {
+        path: 'guichet-by-code',
+        component: GuichetByCodeComponent
+      },
+      {
+        path: 'list-client',
+        component: ListClientComponent
       },
       {
         path: 'promoteur-list',
