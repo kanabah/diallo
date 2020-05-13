@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Client } from 'src/app/interfaces/client';
 import { ClientService } from 'src/app/services/client.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-list-client',
-  templateUrl: './list-client.component.html',
-  styleUrls: ['./list-client.component.css']
+  selector: 'app-visit-client-for-agence',
+  templateUrl: './visit-client-for-agence.component.html',
+  styleUrls: ['./visit-client-for-agence.component.css']
 })
-export class ListClientComponent implements OnInit {
+export class VisitClientForAgenceComponent implements OnInit {
   clients: Client[] = [];
   faUserPlus = faUserPlus;
 
@@ -21,7 +21,7 @@ export class ListClientComponent implements OnInit {
     data: []
   };
 
-  constructor(private dialog: MatDialog,private clientService: ClientService, public print: PrintClientService, private route: Router) { 
+  constructor(private dialog: MatDialog,private clientService: ClientService, public print: PrintClientService, private route: Router, private router: ActivatedRoute) { 
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -44,13 +44,16 @@ export class ListClientComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.jsService.jsAdmi();
-    this.getAllClients();
+    var id = this.router.snapshot.paramMap.get('id');
+
+    this.getAllClients(id);
   }
 
-  getAllClients(){
+  getAllClients(id){
     this.clientService.getAllClients().subscribe(res => {
-      this.clients = res;
+      this.clients = res.filter(result => {
+        return result.user_id._id == id;
+      });
       
       this.collection = { count: 20, data: this.clients };
     })

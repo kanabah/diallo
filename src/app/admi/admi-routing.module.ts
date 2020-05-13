@@ -1,3 +1,6 @@
+import { VisitPromoteurForAgenceComponent } from './visit-promoteur-for-agence/visit-promoteur-for-agence.component';
+import { VisitClientForAgenceComponent } from './visit-client-for-agence/visit-client-for-agence.component';
+import { DetailsAgenceComponent } from './details-agence/details-agence.component';
 import { DetailsClientComponent } from './details-client/details-client.component';
 import { ListClientComponent } from './list-client/list-client.component';
 import { GuichetByCodeComponent } from './guichet-by-code/guichet-by-code.component';
@@ -60,8 +63,20 @@ const routes: Routes = [
         component: ListClientComponent
       },
       {
+        path: 'visit-client-for-agence/:id',
+        component: VisitClientForAgenceComponent
+      },
+      {
+        path: 'visit-promoteur-for-agence/:id',
+        component: VisitPromoteurForAgenceComponent
+      },
+      {
         path: 'details-client/:id',
         component: DetailsClientComponent
+      },
+      {
+        path: 'details-agence/:id',
+        component: DetailsAgenceComponent
       },
       {
         path: 'promoteur-list',

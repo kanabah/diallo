@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { JsService } from 'src/app/services/js.service';
 import { PrintClientService } from './../../services/print-client.service';
 import { Client } from './../../interfaces/client';
@@ -26,6 +27,8 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit {
     count: 0,
     data: []
   };
+
+  redirect: boolean = false;
   
   sumTotalOM: number = 0;
   sumTotalMoMo: number = 0;
@@ -52,7 +55,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit {
   alertSTDay: any;
   alertRechargementDay: any;
 
-  constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private jsService: JsService) {
+  constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private route: Router) {
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -73,7 +76,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit {
   
   changeEtat(id){
     this.userService.changeEtatUser(id).subscribe(res => {
-      console.log(res);
+      this.redirect = false;
     })
   }
 
@@ -128,7 +131,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit {
       });
 
       this.agenceActive = this.users.filter(result => {
-        return result.role == 'user';
+        return result.role == 'user' && result.confirm == 1;
       });
 
       this.collection = { count: 20, data: this.agenceActive };
@@ -269,5 +272,11 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit {
       this.alertRechargementDay = 'success';
     }
 
+  }
+
+  onDetails(id){
+    if(!this.redirect){
+      this.route.navigate(['/admi/details-agence', id])
+    }
   }
 }

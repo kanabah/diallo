@@ -292,6 +292,7 @@ module.exports.attriButeRole = async function(req, res){
         let user = await User.find({"_id": id});
 
         user[0].active = 1;
+        user[0].confirm = 1;
         user[0].role = role;
         user[0].agence_id = agence_id;
         user[0].save();

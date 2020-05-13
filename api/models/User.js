@@ -63,6 +63,10 @@ var userSchema = new Schema({
         type: Number,
         default: 0
     },
+    confirm:{
+        type: Number,
+        default: 0
+    },
     hash: String,
     salt: String
 },{

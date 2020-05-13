@@ -404,7 +404,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let user of collection.data |paginate: config">
+                                    <tr *ngFor="let user of collection.data |paginate: config"  (click)="onDetails(user._id)" id="pointer" title="Voir Detaille">
                                     <td>
                                         <div class="widget-content p-0">
                                             <div class="widget-content-wrapper">
@@ -425,7 +425,7 @@
                                     <td class="text-center">{{ user.email }}</td>
                                     <td class="text-center">
                                         <section class="example-section">
-                                            <mat-slide-toggle (click)="changeEtat(user._id)"
+                                            <mat-slide-toggle (click)="changeEtat(user._id); redirect=true"
                                                 class="example-margin"
                                                 [color]="color"
                                                 [checked]="user.active == 1 ? true : false"

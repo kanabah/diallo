@@ -7,13 +7,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { Observable } from 'rxjs';
 import { Client } from 'src/app/interfaces/client';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import { JsService } from 'src/app/services/js.service';
-import { controlCodeTelValidator } from 'src/app/validators/tel-required-once-validator';
-import { telUpdateClientValidator } from 'src/app/validators/tel-update-client-validator';
-import { emailUpdateClientValidator } from 'src/app/validators/email-update-client-validator';
-import { faFileUpload } from '@fortawesome/free-solid-svg-icons';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-details-client',

@@ -17,7 +17,9 @@ export class ElementNotificationComponent implements OnInit {
 
   getNewUsers(){
     this.userService.newUsers().subscribe(res => {
-      this.newUsers = res;
+      this.newUsers = res.filter(result => {
+        return result.confirm != 1;
+      });
     })
   }
 
