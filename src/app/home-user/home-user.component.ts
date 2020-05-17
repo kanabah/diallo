@@ -88,10 +88,10 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
   TotalcaisseGuichet: number = 0;
 
   ngOnInit() {
-    this.infoHome();
     this.subscription = timer(0, 10000).subscribe(res => {
-      this.getGuichets();
     });
+    this.infoHome();
+    this.getGuichets();
   }
 
   getGuichets(){

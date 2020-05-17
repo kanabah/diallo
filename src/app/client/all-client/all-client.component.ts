@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { PrintClientService } from './../../services/print-client.service';
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from 'src/app/services/client.service';
@@ -18,7 +19,7 @@ export class AllClientComponent implements OnInit {
   clis: any;
   count: any;
 
-  constructor(private clientService: ClientService, private router: Router, public print: PrintClientService) { }
+  constructor(private clientService: ClientService, private router: Router, public print: PrintClientService, public userService: UserService) { }
   
   
   ngOnInit() {
@@ -41,6 +42,8 @@ export class AllClientComponent implements OnInit {
   }
 
   allClient(){
+    console.log('Mes Clients',);
+    
     this.clientService.allClient().subscribe(res => {
       this.clients = res['clients'];
       this.nbOM = res['nbOM'] 

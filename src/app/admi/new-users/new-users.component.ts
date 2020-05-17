@@ -30,7 +30,8 @@ export class NewUsersComponent implements OnInit, OnDestroy {
   getNewUsers(){
     this.userService.newUsers().subscribe(res => {
       this.newUsers = res.filter(result => {
-        return result.confirm != 1;
+        return result;
+        // return result.confirm != 1;
       });
     })
   }

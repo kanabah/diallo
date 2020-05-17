@@ -106,19 +106,21 @@ module.exports.allClient = async function(req, res){
     try{
         let clients = await Client.find({$or: [{"user_id": req.payload._id}, {"user_id": req.payload.agence_id}]});
         let clis = await Client.aggregate([{$unwind: {path: "$commandes"}}]);
-
-          var returnInfoClient = {
+        
+        var returnInfoClient = {
             clients: clients,
             nbOM: nbOM,
             nbMoMo: nbMoMo,
             clis: clis
-          }
+        }
+        
+        console.log('My clients', clients);
         
         if(!clients){
             return res.status(404).send(new Error('Produit not found 404'));
         }else{
             return res.status(200).json(returnInfoClient);
-
+            
         }
     }catch(err){
         return res.status(500).send(new Error('Error 500'));

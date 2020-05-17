@@ -11,7 +11,7 @@ export class NavAdmiComponent implements OnInit {
   constructor(private js: JsService) { }
 
   ngOnInit() {
-    this.js.jsAdmi();
+    // this.js.jsAdmi();
   }
 
 }
