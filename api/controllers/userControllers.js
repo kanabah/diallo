@@ -286,7 +286,8 @@ module.exports.getPromoteur = async function(req, res){
 module.exports.attriButeRole = async function(req, res){
     let id = req.params.id; 
     let role = req.params.role;
-    let agence_id = req.params.agence_id == 'Select' ? '' : req.params.agence_id;
+    // let agence_id = req.params.agence_id == 'Select' ? '' : req.params.agence_id;
+    let agence_id = req.params.agence_id == 'Select' ? req.params.id  : req.params.agence_id;
     
     try{
         let user = await User.find({"_id": id});

@@ -21,7 +21,7 @@ export interface User{
     role: string;
     password: string;
     active: number;
-    // confirm: number;
+    confirm: number;
     exp: number;
     iat: number;
 }

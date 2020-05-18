@@ -131,8 +131,8 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit {
       });
 
       this.agenceActive = this.users.filter(result => {
-        // return result.role == 'user' && result.confirm == 1;
-        return result.role == 'user';
+        return result.role == 'user' && result.confirm == 1;
+        // return result.role == 'user';
       });
 
       this.collection = { count: 20, data: this.agenceActive };

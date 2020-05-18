@@ -11,27 +11,29 @@
                                 <div class="col">
                                     <ul class="nav flex-column">
                                         <li class="nav-item-header nav-item">Activité</li>
-                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Chat
-                                            <div class="ml-auto badge badge-pill badge-info">8</div>
+                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link" id="pointer">Entrer promoteur
+                                            <div class="ml-auto badge badge-pill badge-info">{{ nbEntrerPromoteur }}</div>
                                         </a></li>
-                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Recover Password</a></li>
+                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link" id="pointer">Sortie promoteur
+                                            <div class="ml-auto badge badge-pill badge-info">{{ nbSortiePromoteur }}</div>
+                                        </a></li>
                                         <li class="nav-item-header nav-item">Guichets Aujourd'hui</li>
-                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Wester Union
-                                            <div class="ml-auto badge badge-success">New({{ countWesterDay }})</div>
+                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link" id="pointer">Wester Union
+                                            <div class="ml-auto badge badge-success">{{ countWesterDay }}</div>
                                         </a></li>
-                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Money Gram
-                                            <div class="ml-auto badge badge-success">New({{ countMoneyDay }})</div>
+                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link" id="pointer">Money Gram
+                                            <div class="ml-auto badge badge-success">{{ countMoneyDay }}</div>
                                         </a></li>
-                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Wari
-                                            <div class="ml-auto badge badge-success">New({{ countWariDay }})</div>
+                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link" id="pointer">Wari
+                                            <div class="ml-auto badge badge-success">{{ countWariDay }}</div>
                                         </a></li>
-                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Total
-                                            <div class="ml-auto badge badge-danger">New({{ countWariDay + countMoneyDay + countWesterDay }})</div>
+                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link" id="pointer">Total
+                                            <div class="ml-auto badge badge-danger">{{ countWariDay + countMoneyDay + countWesterDay }}</div>
                                         </a></li>
-                                        <li class="nav-item-divider nav-item"></li>
+                                        <!-- <li class="nav-item-divider nav-item"></li>
                                         <li class="nav-item-btn nav-item">
                                             <button class="btn-wide btn-shadow btn btn-danger btn-sm">Cancel</button>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                                 <div class="col">
@@ -40,49 +42,29 @@
                                         <li class="nav-item"><a [routerLink]="['/admi/elemennts-notification/new-users']" routerLinkActive="router-link-active"  class="nav-link"><i class="nav-link-icon pe-7s-chat"> </i><span>Nouveaux Utilisateur</span>
                                             <div class="ml-auto badge badge-pill badge-info">{{ newUsers.length }}</div>
                                         </a></li>
-                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon pe-7s-wallet"> </i><span>Recover Password</span></a></li>
-                                        <li class="nav-item-header nav-item">My Account</li>
-                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon pe-7s-config"> </i><span>Settings</span>
-                                            <div class="ml-auto badge badge-success">New</div>
+                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link" id="pointer"><i class="nav-link-icon pe-7s-wallet"> </i><span>Renitialisation Mot De Passe</span></a></li>
+                                        <li class="nav-item-header nav-item">Commandes Aujourd'hui</li>
+                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link" id="pointer"><i class="nav-link-icon pe-7s-config"> </i><span>Orange Money</span>
+                                            <div class="ml-auto badge badge-success">{{ nbCommandeOM}}</div>
                                         </a></li>
-                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon pe-7s-coffee"> </i><span>Messages</span>
-                                            <div class="ml-auto badge badge-warning">512</div>
+                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link" id="pointer"><i class="nav-link-icon pe-7s-coffee"> </i><span>Mobile Money</span>
+                                            <div class="ml-auto badge badge-warning">{{ nbCommandeMoMo }}</div>
                                         </a></li>
-                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon pe-7s-box2"> </i><span>Logs</span></a></li>
-                                        <li class="nav-item-divider nav-item"></li>
+                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link" id="pointer"><i class="nav-link-icon pe-7s-coffee"> </i><span>Rechargement</span>
+                                            <div class="ml-auto badge badge-warning">{{ nbCommandeTransfert }}</div>
+                                        </a></li>
+                                        <li class="nav-item"><a href="javascript:void(0);" class="nav-link" id="pointer"><i class="nav-link-icon pe-7s-coffee"> </i><span>Start Times</span>
+                                            <div class="ml-auto badge badge-warning">{{ nbCommandeST }}</div>
+                                        </a></li>
+                                        <!-- <li class="nav-item-divider nav-item"></li>
                                         <li class="nav-item-btn nav-item">
                                             <button class="btn-pill btn btn-success btn-sm">Save</button>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </div>
                             <div class="divider"></div>
-                            <div class="text-center">
-                                <div class="dropdown btn-group">
-                                    <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-primary">Dropdown Basic</button>
-                                    <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item-header nav-item">Activity</li>
-                                            <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Chat
-                                                <div class="ml-auto badge badge-pill badge-info">8</div>
-                                            </a></li>
-                                            <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Recover Password</a></li>
-                                            <li class="nav-item-header nav-item">My Account</li>
-                                            <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Settings
-                                                <div class="ml-auto badge badge-success">New</div>
-                                            </a></li>
-                                            <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Messages
-                                                <div class="ml-auto badge badge-warning">512</div>
-                                            </a></li>
-                                            <li class="nav-item"><a href="javascript:void(0);" class="nav-link">Logs</a></li>
-                                            <li class="nav-item-divider nav-item"></li>
-                                            <li class="nav-item-btn nav-item">
-                                                <button class="btn-wide btn-shadow btn btn-danger btn-sm">Cancel</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
