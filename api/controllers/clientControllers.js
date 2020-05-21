@@ -141,6 +141,23 @@ module.exports.allCommande = async function(req, res){
     }
 }
 
+module.exports.commandesByDate = async function(req, res){
+    try{
+        console.log('Commandes vRAi',);
+        let commandes = await Client.aggregate([{$unwind: "$commandes"},  { $group : {"_id" : {$dateToString: { format: "%Y-%m-%d", date: "$commandes.dateCmd" }}, "y" : {$sum : "$commandes.somPay"} } }, {   $addFields: { x: "$_id" } }, {$project: { _id: 0 }}]);
+        
+        console.log('Commandes', commandes);
+        
+        if(!commandes){
+            return res.status(404).send(new Error('Produit not found 404'));
+        }else{
+            return res.status(200).json(commandes);
+        }
+    }catch(err){
+        return res.status(500).send(new Error('Error 500'));
+    }
+}
+
 module.exports.getClients = async function(req, res){
     try{
         let clients = await Client.find({});

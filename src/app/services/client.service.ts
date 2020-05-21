@@ -73,6 +73,12 @@ export class ClientService {
     )
   }
 
+  public commandesByDate(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.api}/commandesByDate`).pipe(
+      retry(3)
+    )
+  }
+
   public clientDetailleCommande(id): Observable<Client>{
     return this.http.get<Client>(`${this.api}/clientDetailleCommande/${id}`).pipe(
       retry(3)

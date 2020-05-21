@@ -1,3 +1,5 @@
+import { GuichetService } from './../../services/guichet.service';
+import { Subscription, timer } from 'rxjs';
 import { Router } from '@angular/router';
 import { JsService } from 'src/app/services/js.service';
 import { PrintClientService } from './../../services/print-client.service';
@@ -5,7 +7,7 @@ import { Client } from './../../interfaces/client';
 import { ClientService } from 'src/app/services/client.service';
 import { User } from './../../interfaces/user';
 import { UserService } from 'src/app/services/user.service';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 
 import CanvasJS from '../../../assets/admi/canvasjs.min';
 
@@ -14,7 +16,8 @@ import CanvasJS from '../../../assets/admi/canvasjs.min';
   templateUrl: './home-admi.component.html',
   styleUrls: ['./home-admi.component.css']
 })
-export class HomeAdmiComponent implements OnInit, AfterViewInit {
+export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
+  subscription: Subscription;
   users: User[] = [];
   agences: User[] = [];
   agenceActive: User[] = [];
@@ -28,6 +31,9 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit {
     data: []
   };
 
+  transactions: any[] = [];
+  guichets: any[] = [];
+  
   redirect: boolean = false;
   
   sumTotalOM: number = 0;
@@ -55,7 +61,139 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit {
   alertSTDay: any;
   alertRechargementDay: any;
 
-  constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private route: Router) {
+  countWester = 0;
+  countWari = 0;
+  countMoney = 0;
+
+  nbCommandeOM: number = 0;
+  nbCommandeMoMo: number = 0;
+  nbCommandeTransfert: number = 0;
+  nbCommandeST: number = 0;
+
+  countTotal: number = 1;
+  
+  someTotalCommande: number = 0;
+  someTotalGUichet: number = 0;
+  
+  dataPoints: any[] = [];
+
+  commandeArray: any[] = [];
+
+  objet: any;
+  tab: any;
+
+   getDaysInMonth(month, year) {
+    var date = new Date(year, month, 1);
+    var days = [];
+    while (date.getMonth() === month) {
+      days.push(new Date(date));
+      date.setDate(date.getDate() + 1);
+    }
+    return days;
+  }
+  
+  caclulForChart(){
+    this.someTotalCommande = 0;
+    this.someTotalGUichet = 0;
+    this.commandeArray = [];
+    var date = new Date();
+
+    this.clientService.getAllClients().subscribe(res => {
+      this.transactions = res;
+      this.transactions.forEach(result => {
+       result.commandes.forEach(element => {
+         var dateCmd = new Date(element.dateCmd);
+        if(element.typeCmd == 'OM'){
+          this.nbCommandeOM +=1;
+        }else if(element.typeCmd == 'MoMo'){
+          this.nbCommandeMoMo +=1;
+        }else if(element.typeCmd == 'ST'){
+          this.nbCommandeST +=1;
+        }else if(element.typeCmd == 'Transfert'){
+          this.nbCommandeTransfert +=1;
+        }
+
+      });
+    })
+
+    console.log('COMMANDE ARRY', this.commandeArray);
+    
+
+      this.guichetService.getGuichets().subscribe(res => {
+        this.guichets = res;
+  
+        this.guichets.forEach(element => {
+          if(element.action != 0){
+            var createdAt = new Date(element.createdAt);
+            if(element.type == 'wester'){
+              this.countWester += 1;
+            }
+    
+            if(element.type == 'wari'){
+              this.countWari += 1;
+            }
+    
+            if(element.type == 'money'){
+              this.countMoney += 1;
+            }
+
+            if(createdAt.getMonth() == date.getMonth() && createdAt.getFullYear() == date.getFullYear()){
+              this.someTotalGUichet += element.montant;
+            }
+
+          }
+        })
+
+        var total = this.someTotalGUichet + this.someTotalCommande;
+
+        this.setCalcul(this.nbCommandeOM, this.nbCommandeMoMo, this.nbCommandeST, this.nbCommandeTransfert, this.countWari, this.countWester, this.countMoney, total)
+      })
+
+    }) 
+  }
+
+  setCalcul(om, momo, st, rechargement, wari, wester, money, total){
+    var purcentOM = 0;
+    var purcentMoMo = 0;
+    var purcentST = 0;
+    var purcentRechargement = 0;
+    var purcentWari = 0;
+    var purcentWester = 0;
+    var purcentMoney = 0;
+    var date = new Date();
+
+    this.countTotal = om + momo + st + rechargement + wari + wester + money;
+
+    purcentOM = (om * 100)/this.countTotal;
+    purcentMoMo = (momo * 100)/this.countTotal;
+    purcentST = (st * 100)/this.countTotal;
+    purcentRechargement = (rechargement * 100)/this.countTotal;
+    purcentWari = (wari * 100)/this.countTotal;
+    purcentWester = (wester * 100)/this.countTotal;
+    purcentMoney = (money * 100)/this.countTotal;
+
+    console.log('PURCCENT OM', purcentOM);
+    console.log('PURCCENT MOMO', purcentMoMo);
+    console.log('PURCCENT ST', purcentST);
+    console.log('PURCCENT RECHARGEMENT', purcentRechargement);
+    console.log('PURCCENT mONEY GRAM', purcentMoney);
+    console.log('TOTAL', total);
+
+
+
+    this.dataPoints = [
+      { y: purcentOM, label: "OM" },
+      { y: purcentMoMo, label: "MoMo" },
+      { y: purcentST, label: "ST" },
+      { y: purcentRechargement, label: "Rechargement" },
+      { y: purcentWari, label: "Wari" },
+      { y: purcentWester, label: "Wester Union" },
+      { y: purcentMoney, label: "Money Gram" },
+    ]
+    
+  }
+
+  constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private route: Router, private guichetService: GuichetService) {
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -85,42 +223,94 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(){
+    this.subscription = timer(0,5000).subscribe(res => {
+      this.caclulForChart();
+      this.getChartsColumn();
+      this.getChartsDate();
+
+    })
+
   }
   
   ngOnInit() {
-    this.getChartsColumn();
     // this.jsService.jsAdmi();
+    // this.caclulForChart();
+    
     this.getAllUsers();
+    this.test();
+
+  }
+  commandesTest: any[] = [];
+  cmdTest: any[] = [];
+
+  test(){
+    var date = new Date();
+    this.clientService.commandesByDate().subscribe(res => {
+      this.commandesTest = res;
+      this.commandesTest.forEach(element => {
+        this.cmdTest.push({x: new Date(element.x), y: element.y})
+      })
+      console.log('DATE TEST', this.cmdTest);
+    })
+
+    for(var i=0; i<29; i++){
+      var dateTest = new Date(date.getFullYear(), date.getMonth(), i)
+      
+    }
   }
 
   getChartsColumn(){
-    let chart = new CanvasJS.Chart("chartContainer", {
+    let chart = new CanvasJS.Chart("chartContainer1", {
       animationEnabled: true,
       exportEnabled: true,
       title: {
-        text: "Basic Column Chart in Angular"
+        text: "Pourcentage des transactions"
       },
       data: [{
         type: "column",
-        dataPoints: [
-          { y: 71, label: "Apple" },
-          { y: 55, label: "Mango" },
-          { y: 50, label: "Orange" },
-          { y: 65, label: "Banana" },
-          { y: 95, label: "Pineapple" },
-          { y: 68, label: "Pears" },
-          { y: 28, label: "Grapes" },
-          { y: 34, label: "Lychee" },
-          { y: 14, label: "Jackfruit" }
-        ]
+        dataPoints: this.dataPoints
       }]
     });
       
     chart.render();
   }
 
-  getChartCercle(){
-    
+  getChartsDate(){
+    let chart = new CanvasJS.Chart("chartContainer2",
+    {
+      title: {
+        text: "Using formatDate inside Custom Formatter"
+      },
+      axisX: {
+        labelFormatter: function (e) {
+          return CanvasJS.formatDate( e.value, "DD MMM");
+        },
+      },
+      
+      data: [
+      {
+        type: "spline",
+        dataPoints:  this.cmdTest
+        // [
+        //   { x: new Date(2010, 0, 3), y: 10 },
+        //   { x: new Date(2010, 0, 5), y: 100 },
+        //   { x: new Date(2010, 0, 7), y: 110 },
+        //   { x: new Date(2010, 0, 9), y: 158 },
+        //   { x: new Date(2010, 0, 11), y: 34 },
+        //   { x: new Date(2010, 0, 13), y: 363 },
+        //   { x: new Date(2010, 0, 15), y: 247 },
+        //   { x: new Date(2010, 0, 17), y: 253 },
+        //   { x: new Date(2010, 0, 19), y: 269 },
+        //   { x: new Date(2010, 0, 21), y: 343 },
+        //   { x: new Date(2010, 0, 23), y: 370 },
+        //   { x: new Date(2010, 0, 25), y: 588 },
+        //   { x: new Date(2010, 0, 27), y: 900 },
+        //   { x: new Date(2010, 0, 29), y: 200 },
+        // ]
+      }
+      ]                      
+    });
+    chart.render();
   }
 
   getAllUsers(){
@@ -279,5 +469,9 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit {
     if(!this.redirect){
       this.route.navigate(['/admi/details-agence', id])
     }
+  }
+  
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 }

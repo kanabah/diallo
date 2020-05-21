@@ -65,17 +65,20 @@ export class CommandesDetailleAdmiComponent implements OnInit {
       })
 
       this.commandes = this.clients[0].commandes.filter(response => {
-        var dateCmd = new Date(response.dateCmd);
-        if(periode == 'day'){
-          return dateCmd.getDate() == date.getDate() && dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear();
-        }else if(periode == 'week'){
-          return this.week.getWeekNumber(date) == this.week.getWeekNumber(dateCmd)  && dateCmd.getFullYear() == date.getFullYear();
-        }else if(periode == 'month'){
-          return dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear();
-        }else if(periode == 'year'){
-          return dateCmd.getFullYear() == date.getFullYear();
-        }else{
-          return response;
+        if(response.delete == 0){
+
+          var dateCmd = new Date(response.dateCmd);
+          if(periode == 'day'){
+            return dateCmd.getDate() == date.getDate() && dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear();
+          }else if(periode == 'week'){
+            return this.week.getWeekNumber(date) == this.week.getWeekNumber(dateCmd)  && dateCmd.getFullYear() == date.getFullYear();
+          }else if(periode == 'month'){
+            return dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear();
+          }else if(periode == 'year'){
+            return dateCmd.getFullYear() == date.getFullYear();
+          }else{
+            return response;
+          }
         }
       });
 
