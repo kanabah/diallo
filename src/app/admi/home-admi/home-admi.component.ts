@@ -102,22 +102,21 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
       this.transactions = res;
       this.transactions.forEach(result => {
        result.commandes.forEach(element => {
-         var dateCmd = new Date(element.dateCmd);
-        if(element.typeCmd == 'OM'){
-          this.nbCommandeOM +=1;
-        }else if(element.typeCmd == 'MoMo'){
-          this.nbCommandeMoMo +=1;
-        }else if(element.typeCmd == 'ST'){
-          this.nbCommandeST +=1;
-        }else if(element.typeCmd == 'Transfert'){
-          this.nbCommandeTransfert +=1;
-        }
+        if(element.delete == 0){
 
+           var dateCmd = new Date(element.dateCmd);
+           if(element.typeCmd == 'OM'){
+             this.nbCommandeOM +=1;
+            }else if(element.typeCmd == 'MoMo'){
+              this.nbCommandeMoMo +=1;
+            }else if(element.typeCmd == 'ST'){
+              this.nbCommandeST +=1;
+            }else if(element.typeCmd == 'Transfert'){
+              this.nbCommandeTransfert +=1;
+            }
+        }
       });
     })
-
-    console.log('COMMANDE ARRY', this.commandeArray);
-    
 
       this.guichetService.getGuichets().subscribe(res => {
         this.guichets = res;
@@ -250,7 +249,6 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
       this.commandesTest.forEach(element => {
         this.cmdTest.push({x: new Date(element.x), y: element.y})
       })
-      console.log('DATE TEST', this.cmdTest);
     })
 
     for(var i=0; i<29; i++){

@@ -89,8 +89,8 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = timer(0, 10000).subscribe(res => {
+      this.infoHome();
     });
-    this.infoHome();
     this.getGuichets();
   }
 

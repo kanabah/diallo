@@ -1,6 +1,8 @@
 var Client = require('../models/Client');
 var User = require('../models/User');
+var Guichet = require('../models/Guichet');
 var Promoteur = require('../models/Promoteur');
+var _ = require('underscore');
 
 module.exports.addClient = async function(req, res){
     try{
@@ -114,8 +116,6 @@ module.exports.allClient = async function(req, res){
             clis: clis
         }
         
-        console.log('My clients', clients);
-        
         if(!clients){
             return res.status(404).send(new Error('Produit not found 404'));
         }else{
@@ -143,15 +143,30 @@ module.exports.allCommande = async function(req, res){
 
 module.exports.commandesByDate = async function(req, res){
     try{
+        var concatTab = [];
         console.log('Commandes vRAi',);
-        let commandes = await Client.aggregate([{$unwind: "$commandes"},  { $group : {"_id" : {$dateToString: { format: "%Y-%m-%d", date: "$commandes.dateCmd" }}, "y" : {$sum : "$commandes.somPay"} } }, {   $addFields: { x: "$_id" } }, {$project: { _id: 0 }}]);
+        let commandes = await Client.aggregate([{$unwind: "$commandes"}, {$match: {"commandes.delete": {$ne: 1}}}, { $group : {"_id" : {$dateToString: { format: "%Y-%m-%d", date: "$commandes.dateCmd" }}, "y" : {$sum : "$commandes.somPay"} } }, {   $addFields: { x: "$_id" } }, {$project: { _id: 0 }}, {$sort: { "x": 1 }}
+    ]);
+        let guichets = await Guichet.aggregate([{$match: {"delete": {$eq: 0}, "action": {$eq: 1}}}, { $group : {"_id" : {$dateToString: { format: "%Y-%m-%d", date: "$createdAt" }}, "y" : {$sum : "$montant"} } }, {   $addFields: { x: "$_id" } }, {$project: { _id: 0 }}, {$sort: { "x": 1 }}]);
         
-        console.log('Commandes', commandes);
+        concatTab = guichets.concat(commandes)
+
+        var resultGroupBy = _.reduce(concatTab, function(prev, curr) {
+            var found = _.find(prev, function(el) { return el.x === curr.x; });
+            found ? (found.y += curr.y) : prev.push(_.clone(curr));
+            return prev;
+        }, []);
+
+        var resultSort =_.sortBy(resultGroupBy, function(o) { return o.x; })
+        // console.log('GUICHET', _.groupBy(concatTab, 'x'));
+        console.log('GUICHET', commandes);
+
+
         
-        if(!commandes){
+        if(!resultSort){
             return res.status(404).send(new Error('Produit not found 404'));
         }else{
-            return res.status(200).json(commandes);
+            return res.status(200).json(resultSort);
         }
     }catch(err){
         return res.status(500).send(new Error('Error 500'));
@@ -274,8 +289,6 @@ module.exports.reglementList = async function(req, res){
                 return res._id == cmd_id && res.delete == 0;
             })    
 
-            // console.log('MY COMMANDES', commandes.reglement);
-            
             return res.status(200).json(commandes);
         }
 
@@ -315,8 +328,6 @@ module.exports.updateClient = async function(req, res){
         if(!client){
             return res.status(404).send(new Error('Utilisateur not found 404'));
         }else{
-            console.log('Detailele Update', req.body);
-            
             client[0].avatar = req.body.avatar == '' ? client[0].avatar : req.body.avatar;
             client[0].nom = req.body.nom;
             client[0].prenom = req.body.prenom;

@@ -106,64 +106,66 @@ export class DetailsClientComponent implements OnInit {
     var date = new Date();
 
     this.client.commandes.forEach(function(res){
-      var dateCmd = new Date(res.dateCmd);
       if(res.delete == 0){
-        sumTotalPayer += res.somPay;
-        sumTotalCredit += res.somRest;
-      }
+        var dateCmd = new Date(res.dateCmd);
+        if(res.delete == 0){
+          sumTotalPayer += res.somPay;
+          sumTotalCredit += res.somRest;
+        }
 
-      if(res.typeCmd == 'OM' && res.delete == 0){
-        somPayerOM += res.somPay;
-        somCreditOM += res.somRest;
-        nbCommandeOM +=1;
-      }
+        if(res.typeCmd == 'OM' && res.delete == 0){
+          somPayerOM += res.somPay;
+          somCreditOM += res.somRest;
+          nbCommandeOM +=1;
+        }
 
-      if(res.typeCmd == 'MoMo' && res.delete == 0){
-        somPayerMoMo += res.somPay;
-        somCreditMoMo += res.somRest;
-        nbCommandeMoMo += 1;
-      }
+        if(res.typeCmd == 'MoMo' && res.delete == 0){
+          somPayerMoMo += res.somPay;
+          somCreditMoMo += res.somRest;
+          nbCommandeMoMo += 1;
+        }
 
-      if(res.typeCmd == 'ST' && res.delete == 0){
-        somPayerST += res.somPay;
-        somCreditST += res.somRest;
-        nbCommandeST +=1;
-      }
+        if(res.typeCmd == 'ST' && res.delete == 0){
+          somPayerST += res.somPay;
+          somCreditST += res.somRest;
+          nbCommandeST +=1;
+        }
 
-      if(res.typeCmd == 'Transfert' && res.delete == 0){
-        somPayerTransfert += res.somPay;
-        somCreditTransfert += res.somRest;
-        nbCommandeTransfert +=1;
-      }
+        if(res.typeCmd == 'Transfert' && res.delete == 0){
+          somPayerTransfert += res.somPay;
+          somCreditTransfert += res.somRest;
+          nbCommandeTransfert +=1;
+        }
 
-      if(dateCmd.getDate() == date.getDate() && dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear()){
-        entrerDay += res.somPay;
-        creditDay += res.somRest;
-        countNbDay +=1;
-      }
+        if(dateCmd.getDate() == date.getDate() && dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear()){
+          entrerDay += res.somPay;
+          creditDay += res.somRest;
+          countNbDay +=1;
+        }
 
-      if(week.getWeekNumber(date) == week.getWeekNumber(dateCmd) && dateCmd.getFullYear() == date.getFullYear()){
-        entrerWeek += res.somPay;
-        creditWeek += res.somRest;
-        countNbWeek +=1;
-      }
+        if(week.getWeekNumber(date) == week.getWeekNumber(dateCmd) && dateCmd.getFullYear() == date.getFullYear()){
+          entrerWeek += res.somPay;
+          creditWeek += res.somRest;
+          countNbWeek +=1;
+        }
 
-      if(dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear()){
-        entrerMonth += res.somPay;
-        creditMonth += res.somRest;
-        countNbMonth +=1;
-      }
+        if(dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear()){
+          entrerMonth += res.somPay;
+          creditMonth += res.somRest;
+          countNbMonth +=1;
+        }
 
-      if(dateCmd.getFullYear() == date.getFullYear()){
-        entrerYear += res.somPay;
-        creditYear += res.somRest;
-        countNbYear +=1;
-      }
+        if(dateCmd.getFullYear() == date.getFullYear()){
+          entrerYear += res.somPay;
+          creditYear += res.somRest;
+          countNbYear +=1;
+        }
 
-      if(true){
-        entrerTotal += res.somPay;
-        creditTotal += res.somRest;
-        countNbTotal +=1;
+        if(true){
+          entrerTotal += res.somPay;
+          creditTotal += res.somRest;
+          countNbTotal +=1;
+        }
       }
 
     })

@@ -366,59 +366,62 @@ export class DetailsAgenceComponent implements OnInit {
 
     this.clients.forEach(response => {
       response.commandes.forEach(element => {
-        var dateCmd = new Date(element.dateCmd);
+        if(element.delete == 0){
 
-        if(element.typeCmd == 'OM'){
-          this.sumTotalOM += element.somPay;
-          this.sumCreditOM += element.somRest;
+          var dateCmd = new Date(element.dateCmd);
+          
+          if(element.typeCmd == 'OM'){
+            this.sumTotalOM += element.somPay;
+            this.sumCreditOM += element.somRest;
             this.nbCommandeOM +=1;
-        }else if(element.typeCmd == 'MoMo'){
+          }else if(element.typeCmd == 'MoMo'){
             this.sumTotalMoMo += element.somPay;
             this.sumCreditMoMo += element.somRest;
             this.nbCommandeMoMo +=1;
-        }else if(element.typeCmd == 'ST'){
+          }else if(element.typeCmd == 'ST'){
             this.sumTotalST += element.somPay;
             this.sumCreditST += element.somRest;
             this.nbCommandeST +=1;
-        }else if(element.typeCmd == 'Transfert'){
+          }else if(element.typeCmd == 'Transfert'){
             this.sumTotalTransfert += element.somPay
             this.sumCreditTransfert += element.somRest
             this.nbCommandeTransfert +=1;
-        }
-        
-        if(element.delete == 0 && dateCmd.getDate() == date.getDate() && dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear()){
+          }
+          
+          if(element.delete == 0 && dateCmd.getDate() == date.getDate() && dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear()){
             this.sumEntrerJour += element.somPay;
             this.sumCreditJour += element.somRest;
             this.countNbCmdDay += 1;
-        }
-
-        if(element.delete == 0 && this.week.getWeekNumber(dateCmd) == this.week.getWeekNumber(dateCmd) && dateCmd.getFullYear() == date.getFullYear()){
+          }
+          
+          if(element.delete == 0 && this.week.getWeekNumber(dateCmd) == this.week.getWeekNumber(dateCmd) && dateCmd.getFullYear() == date.getFullYear()){
             this.sumEntrerWeek += element.somPay;
             this.sumCreditWeek += element.somRest;
             this.countNbCmdWeek += 1;
-        }
-
-        if(element.delete == 0 && dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear()){
+          }
+          
+          if(element.delete == 0 && dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear()){
             this.sumEntrerMonth += element.somPay;
             this.sumCreditMonth += element.somRest;
             this.countNbCmdMonth +=1;
-        }
-
-        if(element.delete == 0 && dateCmd.getFullYear() == date.getFullYear()){
+          }
+          
+          if(element.delete == 0 && dateCmd.getFullYear() == date.getFullYear()){
             this.sumEntrerYear += element.somPay;
             this.sumCreditYear += element.somRest;
             this.countNbCmdYear += 1;
-        }
-
-        if(element.delete == 0){
+          }
+          
+          if(element.delete == 0){
             this.sumEntrerAll += element.somPay;
             this.sumCreditAll += element.somRest;
             this.countNbCmdAll += 1;
+          }
         }
       })
     })
   }
-
+  
   onClientsVisit(){
     this.router.navigate(['admi/visit-client-for-agence', this.idUser]);
   }
