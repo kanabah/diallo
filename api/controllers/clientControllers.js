@@ -144,9 +144,12 @@ module.exports.allCommande = async function(req, res){
 module.exports.commandesByDate = async function(req, res){
     try{
         var concatTab = [];
+        var resultFinal = [];
+        var date = new Date();
+
         console.log('Commandes vRAi',);
         let commandes = await Client.aggregate([{$unwind: "$commandes"}, {$match: {"commandes.delete": {$ne: 1}}}, { $group : {"_id" : {$dateToString: { format: "%Y-%m-%d", date: "$commandes.dateCmd" }}, "y" : {$sum : "$commandes.somPay"} } }, {   $addFields: { x: "$_id" } }, {$project: { _id: 0 }}, {$sort: { "x": 1 }}
-    ]);
+        ]);
         let guichets = await Guichet.aggregate([{$match: {"delete": {$eq: 0}, "action": {$eq: 1}}}, { $group : {"_id" : {$dateToString: { format: "%Y-%m-%d", date: "$createdAt" }}, "y" : {$sum : "$montant"} } }, {   $addFields: { x: "$_id" } }, {$project: { _id: 0 }}, {$sort: { "x": 1 }}]);
         
         concatTab = guichets.concat(commandes)
@@ -159,14 +162,57 @@ module.exports.commandesByDate = async function(req, res){
 
         var resultSort =_.sortBy(resultGroupBy, function(o) { return o.x; })
         // console.log('GUICHET', _.groupBy(concatTab, 'x'));
-        console.log('GUICHET', commandes);
-
-
+        resultFinal = resultSort.filter(function(res){
+            var dateX = new Date(res.x);
+            console.log('DATE',dateX.getMonth() - 1);
+            console.log('DATE NOW',date.getMonth() - 1);
+            
+            return  dateX.getMonth() == date.getMonth() && dateX.getFullYear() == date.getFullYear();
+            // return  dateX.getMonth() - 1 == date.getMonth() - 2 && dateX.getFullYear() == date.getFullYear();
+        });
+        console.log('GUICHET', resultFinal);
         
-        if(!resultSort){
+        if(!resultFinal){
             return res.status(404).send(new Error('Produit not found 404'));
         }else{
-            return res.status(200).json(resultSort);
+            return res.status(200).json(resultFinal);
+        }
+    }catch(err){
+        return res.status(500).send(new Error('Error 500'));
+    }
+}
+
+module.exports.commandesByDateLastMonth = async function(req, res){
+    try{
+        var concatTab = [];
+        var resultFinal = [];
+        var date = new Date();
+
+        console.log('Commandes vRAi commandesByDateLastMonth',);
+        let commandes = await Client.aggregate([{$unwind: "$commandes"}, {$match: {"commandes.delete": {$ne: 1}}}, { $group : {"_id" : {$dateToString: { format: "%Y-%m-%d", date: "$commandes.dateCmd" }}, "y" : {$sum : "$commandes.somPay"} } }, {   $addFields: { x: "$_id" } }, {$project: { _id: 0 }}, {$sort: { "x": 1 }}
+        ]);
+        let guichets = await Guichet.aggregate([{$match: {"delete": {$eq: 0}, "action": {$eq: 1}}}, { $group : {"_id" : {$dateToString: { format: "%Y-%m-%d", date: "$createdAt" }}, "y" : {$sum : "$montant"} } }, {   $addFields: { x: "$_id" } }, {$project: { _id: 0 }}, {$sort: { "x": 1 }}]);
+        
+        concatTab = guichets.concat(commandes)
+
+        var resultGroupBy = _.reduce(concatTab, function(prev, curr) {
+            var found = _.find(prev, function(el) { return el.x === curr.x; });
+            found ? (found.y += curr.y) : prev.push(_.clone(curr));
+            return prev;
+        }, []);
+
+        var resultSort =_.sortBy(resultGroupBy, function(o) { return o.x; })
+        // console.log('GUICHET', _.groupBy(concatTab, 'x'));
+        resultFinal = resultSort.filter(function(res){
+            var dateX = new Date(res.x);
+            return  dateX.getMonth() - 1 == date.getMonth() - 2 && dateX.getFullYear() == date.getFullYear();
+        });
+        console.log('GUICHET LAST MONTH', resultFinal);
+        
+        if(!resultFinal){
+            return res.status(404).send(new Error('Produit not found 404'));
+        }else{
+            return res.status(200).json(resultFinal);
         }
     }catch(err){
         return res.status(500).send(new Error('Error 500'));
@@ -644,7 +690,7 @@ module.exports.onAujourdhui = async function(req, res){
         let client = await Client.find({"_id": client_id});
         commandes = client[0].commandes.filter(function(res){
             return  res.delete == 0 && res.dateCmd.getDate() == date.getDate() && res.dateCmd.getMonth() == date.getMonth() && res.dateCmd.getFullYear() == date.getFullYear();
-        })  
+        });
 
         return res.status(200).json(commandes);
     }catch(err){

@@ -25,6 +25,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
   cmds: any[] = [];
   commandes: any[] = [];
   clients: Client[] = [];
+  clientForCommandes: Client[] = [];
   config: any;
   collection : any = {
     count: 0,
@@ -82,14 +83,70 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
   objet: any;
   tab: any;
 
-   getDaysInMonth(month, year) {
-    var date = new Date(year, month, 1);
-    var days = [];
-    while (date.getMonth() === month) {
-      days.push(new Date(date));
-      date.setDate(date.getDate() + 1);
-    }
-    return days;
+  commandesTest: any[] = [];
+  cmdTest: any[] = [];
+  commandesFilters: any[] = [];
+  commandesResult: any[] = [];
+  guichFilters: any[] = [];
+  TotalSumCommande: number = 0;
+  TotalSumGuichet: number = 0;
+
+  purcentCommande: number = 0;
+  purcentGuichet: number = 0;
+  alertPurcenCommande: any;
+  alertPurcenGuichet: any;
+
+  month: boolean = true;
+
+  getClients(){
+    var total = 1;
+    this.clientService.getAllClients().subscribe(res => {
+      this.clientForCommandes = res;
+
+      this.commandesFilters = res;
+      this.commandesFilters.forEach(result => {
+        result.commandes.forEach(element => {
+          if(element.delete == 0){
+            this.TotalSumCommande += element.somPay;
+          }
+        })
+      });
+
+      this.guichetService.getGuichets().subscribe(result => {
+        this.guichFilters = result;
+
+        this.guichFilters.forEach(response => {
+          if(response.action == 1 && response.delete == 0){
+            this.TotalSumGuichet += response.montant;
+          }
+        })
+        total = this.TotalSumGuichet + this.TotalSumCommande;
+        
+        this.purcentCommande = this.roundDown((this.TotalSumCommande * 100)/total, 0);
+        this.purcentGuichet = this.roundDown((this.TotalSumGuichet * 100)/total, 0);
+        
+        console.log('MY Som Tttal GUICHETS',  this.purcentCommande | 2);
+        //PURCENT MoMo
+        if(this.purcentCommande <= 15){
+          this.alertPurcenCommande = 'danger';
+        }else if(this.purcentCommande >= 16 && this.purcentCommande <= 40){
+          this.alertPurcenCommande = 'warning'
+        }else if(this.purcentCommande > 40 ){
+          this.alertPurcenCommande = 'success';
+        }
+      });
+
+      
+
+      this.clientForCommandes.sort((n1: any,n2: any) =>  n2.nbCmd - n1.nbCmd);
+      console.log('MY Som Tttal COMMANDES', this.alertPurcenCommande);
+      
+    })
+  }
+
+  roundDown(number, decimals) {
+    decimals = decimals || 0;
+    return ( Math.floor( number * Math.pow(10, decimals) ) / Math.pow(10, decimals) );
   }
   
   caclulForChart(){
@@ -171,12 +228,12 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
     purcentWester = (wester * 100)/this.countTotal;
     purcentMoney = (money * 100)/this.countTotal;
 
-    console.log('PURCCENT OM', purcentOM);
-    console.log('PURCCENT MOMO', purcentMoMo);
-    console.log('PURCCENT ST', purcentST);
-    console.log('PURCCENT RECHARGEMENT', purcentRechargement);
-    console.log('PURCCENT mONEY GRAM', purcentMoney);
-    console.log('TOTAL', total);
+    // console.log('PURCCENT OM', purcentOM);
+    // console.log('PURCCENT MOMO', purcentMoMo);
+    // console.log('PURCCENT ST', purcentST);
+    // console.log('PURCCENT RECHARGEMENT', purcentRechargement);
+    // console.log('PURCCENT mONEY GRAM', purcentMoney);
+    // console.log('TOTAL', total);
 
 
 
@@ -190,6 +247,15 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
       { y: purcentMoney, label: "Money Gram" },
     ]
     
+  }
+
+  
+  thisMonth(){
+    this.month = true;
+  }
+
+  lastMonth(){
+    this.month = false;
   }
 
   constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private route: Router, private guichetService: GuichetService) {
@@ -226,9 +292,9 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
       this.caclulForChart();
       this.getChartsColumn();
       this.getChartsDate();
-
+      this.chartByDate();      
     })
-
+    
   }
   
   ngOnInit() {
@@ -236,24 +302,26 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.caclulForChart();
     
     this.getAllUsers();
-    this.test();
-
+    this.getClients();
+    
   }
-  commandesTest: any[] = [];
-  cmdTest: any[] = [];
-
-  test(){
-    var date = new Date();
-    this.clientService.commandesByDate().subscribe(res => {
-      this.commandesTest = res;
-      this.commandesTest.forEach(element => {
-        this.cmdTest.push({x: new Date(element.x), y: element.y})
+  
+  chartByDate(){
+    this.cmdTest = [];
+    if(this.month){
+      this.clientService.commandesByDate().subscribe(res => {
+        this.commandesTest = res;
+        this.commandesTest.forEach(element => {
+          this.cmdTest.push({x: new Date(element.x), y: element.y})
+        })
       })
-    })
-
-    for(var i=0; i<29; i++){
-      var dateTest = new Date(date.getFullYear(), date.getMonth(), i)
-      
+    }else{
+      this.clientService.commandesByDateLastMonth().subscribe(res => {
+        this.commandesTest = res;
+        this.commandesTest.forEach(element => {
+          this.cmdTest.push({x: new Date(element.x), y: element.y})
+        })
+      })
     }
   }
 
@@ -277,7 +345,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
     let chart = new CanvasJS.Chart("chartContainer2",
     {
       title: {
-        text: "Using formatDate inside Custom Formatter"
+        text: "Variations des entrer par mois"
       },
       axisX: {
         labelFormatter: function (e) {

@@ -40,6 +40,8 @@ clientRoutes.route('/allCommande').get(auth,ctrClient.allCommande);
 
 clientRoutes.route('/commandesByDate').get(auth,ctrClient.commandesByDate);
 
+clientRoutes.route('/commandesByDateLastMonth').get(auth,ctrClient.commandesByDateLastMonth);
+
 clientRoutes.route('/detaille/:id').get(auth,ctrClient.clientDettaille);
 
 clientRoutes.route('/getClient/:id').get(auth,ctrClient.getClient);
