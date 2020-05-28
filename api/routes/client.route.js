@@ -26,6 +26,8 @@ clientRoutes.route('/addClient').post(auth,ctrClient.addClient);
 
 clientRoutes.route('/telExist/:tel').get(auth,ctrClient.telExist);
 
+clientRoutes.route('/getClientByTel/:tel').get(auth,ctrClient.getClientByTel);
+
 clientRoutes.route('/telExistByAdmi/:tel').get(auth,ctrClient.telExistByAdmi);
 
 clientRoutes.route('/telExistAddClient/:tel').get(auth,ctrClient.telExistAddClient);

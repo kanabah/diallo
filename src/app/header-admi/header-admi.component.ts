@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { SnackBarService } from './../services/snack-bar.service';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription, timer } from 'rxjs';
 import { JsService } from 'src/app/services/js.service';
 import { UserService } from './../services/user.service';
@@ -22,6 +25,7 @@ export class HeaderAdmiComponent implements OnInit, OnDestroy {
   guichets: Guichet[] = [];
   clients: Client[] = [];
   commandes: Client[] = [];
+  client: Client;
 
   promoteurs: Promoteur[] = [];
 
@@ -37,7 +41,35 @@ export class HeaderAdmiComponent implements OnInit, OnDestroy {
   nbEntrerPromoteur: number = 0;
   nbSortiePromoteur: number = 0;
 
-  constructor(private guichetService: GuichetService, private clientService: ClientService, private promoteurService: PromoteurService, private js: JsService, public userService: UserService) { }
+  border: boolean = false;
+
+  constructor(private guichetService: GuichetService, private clientService: ClientService, private promoteurService: PromoteurService, private js: JsService, public userService: UserService, private fb: FormBuilder, private snackBar: SnackBarService, private router: Router) { }
+
+  controlForm = this.fb.group({
+    recherche: ['', [Validators.required]]
+  })
+
+  onRecherhe(){
+    if(this.recherche.value){
+      this.clientService.getClientByTel(this.recherche.value).subscribe(res => {
+        this.client = res;
+        console.log('Result', res);
+        if(!this.client){
+          this.border = true;
+          this.snackBar.openSnackBar("Cet numero de telephone client n'existe pas!!!", "Quitter")
+        }else{
+          this.border = false;
+          this.router.navigate(['admi/result-recherche-client-by-admi', this.client._id]);
+        }
+        
+      })
+    }
+    
+  }
+
+  get recherche(){
+    return this,this.controlForm.get('recherche');
+  }
 
   ngOnInit() {
     this.subscription = timer(0, 10000).subscribe(res => {

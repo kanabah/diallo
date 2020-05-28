@@ -29,15 +29,18 @@
                     </span>
                 </button>
             </span>
-        </div>    <div class="app-header__content">
+        </div>   
+         <div class="app-header__content">
             <div class="app-header-left">
-                <div class="search-wrapper">
-                    <div class="input-holder">
-                        <input type="text" class="search-input" placeholder="Type to search">
-                        <button class="search-icon"><span></span></button>
+                <form [formGroup]="controlForm" (ngSubmit)="onRecherhe()">
+                    <div class="search-wrapper">
+                        <div class="input-holder" [id]="border == true ? 'border' : ''">
+                            <input type="text"  formControlName="recherche" class="search-input" placeholder="Recherche client">
+                            <button class="search-icon" type="submit"><span></span></button>
+                        </div>
+                        <button class="close" (click)="border=false"></button>
                     </div>
-                    <button class="close"></button>
-                </div>
+                </form>
                 <ul class="header-menu nav">
                     <li class="nav-item">
                         <a [routerLink]="['/admi/elemennts-notification']" routerLinkActive="router-link-active"  class="nav-link">
@@ -47,17 +50,12 @@
                     </li>
                     <li class="btn-group nav-item">
                         <a href="javascript:void(0);" class="nav-link">
-                            <i class="nav-link-icon fa fa-edit"></i>
-                            Projects
+                            <i class="nav-link-icon fa fa-question-circle"></i>
+                            Guide
                         </a>
                     </li>
-                    <li class="dropdown nav-item">
-                        <a href="javascript:void(0);" class="nav-link">
-                            <i class="nav-link-icon fa fa-cog"></i>
-                            Settings
-                        </a>
-                    </li>
-                </ul>        </div>
+                </ul>        
+            </div>
             <div class="app-header-right">
                 <div class="header-btn-lg pr-0">
                     <div class="widget-content p-0">

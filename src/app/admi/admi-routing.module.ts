@@ -1,3 +1,4 @@
+import { ResultRechercheClientByAdmiComponent } from './result-recherche-client-by-admi/result-recherche-client-by-admi.component';
 import { VisitPromoteurForAgenceComponent } from './visit-promoteur-for-agence/visit-promoteur-for-agence.component';
 import { VisitClientForAgenceComponent } from './visit-client-for-agence/visit-client-for-agence.component';
 import { DetailsAgenceComponent } from './details-agence/details-agence.component';
@@ -53,6 +54,10 @@ const routes: Routes = [
       {
         path: 'guichet',
         component: AddGuichetsComponent
+      },
+      {
+        path: 'result-recherche-client-by-admi/:id',
+        component: ResultRechercheClientByAdmiComponent
       },
       {
         path: 'guichet-by-code',

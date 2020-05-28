@@ -25,6 +25,12 @@ export class ClientService {
     )
   }
 
+  public getClientByTel(tel: number): Observable<any>{
+    return this.http.get<any>(`${this.api}/getClientByTel/${tel}`).pipe(
+      retry(3),
+    )
+  }
+
   public telExistByAdmi(tel: number): Observable<any>{
     return this.http.get<any>(`${this.api}/telExistByAdmi/${tel}`).pipe(
       retry(3),
