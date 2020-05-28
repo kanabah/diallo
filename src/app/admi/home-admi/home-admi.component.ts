@@ -96,18 +96,32 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
   alertPurcenCommande: any;
   alertPurcenGuichet: any;
 
+  nombreCmd: number = 0;
+  nombreGuichet: number = 0;
+
+  purcentageCmd: number = 0;
+  purcentageGuichet: number = 0;
+  alertPourcentageCommandes: any;
+  alertPourcentageGuichet: any;
+
+  totalEspeceMonth: number = 0;
   month: boolean = true;
 
   getClients(){
+    var date = new Date();
+    
     var total = 1;
+    var totalCmd = 1;
     this.clientService.getAllClients().subscribe(res => {
       this.clientForCommandes = res;
 
       this.commandesFilters = res;
       this.commandesFilters.forEach(result => {
         result.commandes.forEach(element => {
-          if(element.delete == 0){
+          var dateCmd = new Date(element.dateCmd);
+          if(element.delete == 0 && dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear()){
             this.TotalSumCommande += element.somPay;
+            this.nombreCmd += 1;
           }
         })
       });
@@ -116,17 +130,27 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
         this.guichFilters = result;
 
         this.guichFilters.forEach(response => {
-          if(response.action == 1 && response.delete == 0){
+          var createdAt = new Date(response.createdAt);
+          if(response.action == 1 && response.delete == 0 && createdAt.getMonth() == date.getMonth() && createdAt.getFullYear() == date.getFullYear()){
             this.TotalSumGuichet += response.montant;
+            this.nombreGuichet += 1;
           }
         })
+
+        //CLCULE POUR LES POURCENTAGE EN NOMBRE
+        totalCmd = this.nombreCmd + this.nombreGuichet;
+        totalCmd = totalCmd == 0 ? 1 : totalCmd;
+        this.purcentageCmd = this.roundDown((this.nombreCmd * 100)/totalCmd, 0);
+        this.purcentageGuichet = this.roundDown((this.nombreGuichet * 100)/totalCmd, 0);
+
+        //CLCULE POUR LES POURCENTAGE EN ESPECE
         total = this.TotalSumGuichet + this.TotalSumCommande;
-        
+        total = total == 0 ? 1 : total;
+        this.totalEspeceMonth = 25;
         this.purcentCommande = this.roundDown((this.TotalSumCommande * 100)/total, 0);
         this.purcentGuichet = this.roundDown((this.TotalSumGuichet * 100)/total, 0);
         
-        console.log('MY Som Tttal GUICHETS',  this.purcentCommande | 2);
-        //PURCENT MoMo
+        //PURCENT COmmandes Espece
         if(this.purcentCommande <= 15){
           this.alertPurcenCommande = 'danger';
         }else if(this.purcentCommande >= 16 && this.purcentCommande <= 40){
@@ -134,12 +158,41 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
         }else if(this.purcentCommande > 40 ){
           this.alertPurcenCommande = 'success';
         }
+
+        //PURCENT Guichet Espece
+        if(this.purcentGuichet <= 15){
+          this.alertPurcenGuichet = 'danger';
+        }else if(this.purcentGuichet >= 16 && this.purcentGuichet <= 40){
+          this.alertPurcenGuichet = 'warning'
+        }else if(this.purcentGuichet > 40 ){
+          this.alertPurcenGuichet = 'success';
+        }
+
+
+        //PURCENT Quantite Commandes
+        if(this.purcentageCmd <= 15){
+          this.alertPourcentageCommandes = 'danger';
+        }else if(this.purcentageCmd >= 16 && this.purcentageCmd <= 40){
+          this.alertPourcentageCommandes = 'warning'
+        }else if(this.purcentageCmd > 40 ){
+          this.alertPourcentageCommandes = 'success';
+        }
+
+        //PURCENT Quantite Guichet
+        if(this.purcentageGuichet <= 15){
+          this.alertPourcentageGuichet = 'danger';
+        }else if(this.purcentageGuichet >= 16 && this.purcentageGuichet <= 40){
+          this.alertPourcentageGuichet = 'warning'
+        }else if(this.purcentageGuichet > 40 ){
+          this.alertPourcentageGuichet = 'success';
+        }
+
       });
 
       
 
       this.clientForCommandes.sort((n1: any,n2: any) =>  n2.nbCmd - n1.nbCmd);
-      console.log('MY Som Tttal COMMANDES', this.alertPurcenCommande);
+      // console.log('MY Som Tttal COMMANDES', this.alertPurcenCommande);
       
     })
   }
@@ -302,7 +355,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.caclulForChart();
     
     this.getAllUsers();
-    this.getClients();
+    // this.getClients();
     
   }
   
