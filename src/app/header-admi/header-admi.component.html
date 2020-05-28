@@ -41,7 +41,7 @@
                 <ul class="header-menu nav">
                     <li class="nav-item">
                         <a [routerLink]="['/admi/elemennts-notification']" routerLinkActive="router-link-active"  class="nav-link">
-                            <i class="nav-link-icon fa fa-database"> </i>
+                            <i class="nav-link-icon fa fa-bell"> </i>
                             Notitications<span class="badge badge-success">({{ countWesterDay + countWariDay + countMoneyDay + nbCommandeOM + nbCommandeMoMo + nbCommandeTransfert + nbCommandeST + nbEntrerPromoteur + nbSortiePromoteur + newUsers.length}})</span>
                         </a>
                     </li>
@@ -65,7 +65,7 @@
                             <div class="widget-content-left">
                                 <div class="btn-group">
                                     <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                        <img width="42" class="rounded-circle" src="assets/admi/images/avatars/1.jpg" alt="">
+                                        <img width="42" class="rounded-circle" src="assets/user/img/avatar/men.png" alt="">
                                         <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                     </a>
                                     <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
@@ -80,20 +80,21 @@
                             </div>
                             <div class="widget-content-left  ml-3 header-user-info">
                                 <div class="widget-heading">
-                                    Alina Mclourd
+                                    {{ userService.getUserDetails().name }}
                                 </div>
                                 <div class="widget-subheading">
-                                    VP People Manager
+                                    Administration
                                 </div>
                             </div>
-                            <div class="widget-content-right header-user-info ml-3">
+                            <!-- <div class="widget-content-right header-user-info ml-3">
                                 <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
                                     <i class="fa text-white fa-calendar pr-1 pl-1"></i>
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
-                </div>        </div>
+                </div>        
+            </div>
         </div>
     </div>        
     <div class="ui-theme-settings">

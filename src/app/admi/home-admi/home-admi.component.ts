@@ -146,7 +146,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
         //CLCULE POUR LES POURCENTAGE EN ESPECE
         total = this.TotalSumGuichet + this.TotalSumCommande;
         total = total == 0 ? 1 : total;
-        this.totalEspeceMonth = 25;
+        this.totalEspeceMonth = total;
         this.purcentCommande = this.roundDown((this.TotalSumCommande * 100)/total, 0);
         this.purcentGuichet = this.roundDown((this.TotalSumGuichet * 100)/total, 0);
         
@@ -355,7 +355,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.caclulForChart();
     
     this.getAllUsers();
-    // this.getClients();
+    this.getClients();
     
   }
   

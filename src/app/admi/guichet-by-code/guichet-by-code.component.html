@@ -2,7 +2,7 @@
     <app-nav-admi></app-nav-admi>
     <div class="app-main__outer">
        <div class="app-main__inner">  
-            <app-title-page></app-title-page>         
+            <app-title-page title="Guichet par code" subTitle="Il sagit d'une recherche periodique pour les transaction guichet par code effectuer par une agence particulier." icons="pe-7s-search icon-gradient bg-mean-fruit"></app-title-page>         
            <div class="row">
                <div class="col-md-12">
                    <div class="main-card mb-3 card">
@@ -17,13 +17,13 @@
                             <form [formGroup]="formControl" (ngSubmit)="onSubmit()">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Telphone Agence</label>
-                                    <input type="text" class="form-control" formControlName="tel" id="exampleInputEmail1" [id]="getTelSuccess() ? 'successForm' : getTelError() ? 'errorForm' : ''" aria-describedby="emailHelp" placeholder="Agence">
+                                    <input type="text" class="form-control" formControlName="tel" id="exampleInputEmail1" [id]="getTelSuccess() ? 'successForm' : getTelError() ? 'errorForm' : ''" aria-describedby="emailHelp" placeholder="Telephone de l'agence.">
                                     <span *ngIf="getTelError()" class="text text-danger"><small>{{ getTelError() }}</small></span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="code">Code</label>
-                                    <input type="text" class="form-control" formControlName="code" id="code" [id]="getCodeSuccess() ? 'successForm' : getCodeError() ? 'errorForm' : ''" aria-describedby="emailHelp" placeholder="Agence">
+                                    <input type="text" class="form-control" formControlName="code" id="code" [id]="getCodeSuccess() ? 'successForm' : getCodeError() ? 'errorForm' : ''" aria-describedby="emailHelp" placeholder="Code de la transaction.">
                                     <span *ngIf="getCodeError()" class="text text-danger"><small>{{ getCodeError() }}</small></span>
                                 </div>
                                 

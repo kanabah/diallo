@@ -2,7 +2,7 @@
     <app-nav-admi></app-nav-admi>  
      <div class="app-main__outer">
         <div class="app-main__inner">
-            <app-title-page></app-title-page>           
+            <app-title-page title="Tableaux De Bord" subTitle="Presentation de la chart graphique, des nombres des acteurs de l'application et autre." icons="pe-7s-home icon-gradient bg-mean-fruit"></app-title-page>           
              <div class="row">
                 <div class="col-md-6 col-xl-4">
                     <div class="card mb-3 widget-content bg-midnight-bloom">
@@ -139,7 +139,7 @@
                                     <div class="widget-chart-content text-center mt-5">
                                         <div class="widget-description mt-0 text-warning">
                                             <i class="fa fa-arrow-left"></i>
-                                            <span class="pl-1">{{ totalEspeceMonth }} GNF</span>
+                                            <span class="pl-1">{{ totalEspeceMonth | currency:'':''}} GNF</span>
                                             <span class="text-muted opacity-8 pl-1">increased server resources</span>
                                         </div>
                                     </div>

@@ -2,7 +2,7 @@
     <app-nav-admi></app-nav-admi>
     <div class="app-main__outer">
        <div class="app-main__inner">  
-            <app-title-page></app-title-page>         
+            <app-title-page title="Liste des attributions" subTitle="Il sagit de la liste de l'ensemble d'attribution guichet de toute les agences." icons="pe-7s-eyedropper icon-gradient bg-mean-fruit"></app-title-page>         
            <div class="row">
                <div class="col-md-12">
                    <div class="main-card mb-3 card">
@@ -41,10 +41,9 @@
                                 <td class="text-center">{{ guichet.description }}</td>
                                 <td class="text-center">{{ guichet.montant | currency:'':'' }}</td>
                                 <td class="text-center">{{ guichet.createdAt | date }}</td>
-                                <td>
-                                    <button data-toggle="tooltip" (click)="redirectMod(guichet._id)" title="Modification" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Mod </button>
-                                    <button data-toggle="tooltip" (click)="deleteGuichet(guichet._id)" title="Supresion" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i>Sup</button>
-                                            
+                                <td class="page-title-icon">
+                                    <span data-toggle="tooltip" (click)="redirectMod(guichet._id)" title="Modification" class="pd-setting-ed"><i class="fa fa-pencil-square-o fa-2x text-success" aria-hidden="true"></i> </span> &nbsp;&nbsp;
+                                    <span data-toggle="tooltip" (click)="deleteGuichet(guichet._id)" title="Supresion" class="pd-setting-ed"><i class="fa fa-trash fa-2x text-danger" aria-hidden="true"></i></span>
                                 </td>
                             </tr>
                             </tbody>

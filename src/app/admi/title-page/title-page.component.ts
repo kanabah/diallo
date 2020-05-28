@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { PrintClientService } from './../../services/print-client.service';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-title-page',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./title-page.component.css']
 })
 export class TitlePageComponent implements OnInit {
-
-  constructor() { }
+  @Input() title: string;
+  @Input() subTitle: string;
+  @Input() image: string;
+  @Input() icons: string;
+  constructor(public print: PrintClientService) { }
 
   ngOnInit() {
   }

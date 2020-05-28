@@ -37,7 +37,7 @@ export class HeaderAdmiComponent implements OnInit, OnDestroy {
   nbEntrerPromoteur: number = 0;
   nbSortiePromoteur: number = 0;
 
-  constructor(private guichetService: GuichetService, private clientService: ClientService, private promoteurService: PromoteurService, private js: JsService, private userService: UserService) { }
+  constructor(private guichetService: GuichetService, private clientService: ClientService, private promoteurService: PromoteurService, private js: JsService, public userService: UserService) { }
 
   ngOnInit() {
     this.subscription = timer(0, 10000).subscribe(res => {

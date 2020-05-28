@@ -2,12 +2,16 @@
     <div class="page-title-wrapper">
         <div class="page-title-heading">
             <div class="page-title-icon">
-                <i class="pe-7s-car icon-gradient bg-mean-fruit">
-                </i>
+                <!-- <i class="pe-7s-car icon-gradient bg-mean-fruit" *ngIf="!image">
+                </i> -->
+                <i class="{{ icons }}" *ngIf="!image"></i>
+                <img src="{{ print.printAvatar(image) }}" alt="Image" alt="Image" *ngIf="image" id="idImage">
             </div>
             <div>
-                Nouveaux Utilisateurs
-                <div class="page-title-subheading">This is an example dashboard created using build-in elements and components.
+                {{ title }} 
+                <!-- //This is an example dashboard created using build-in elements and components -->
+                <div class="page-title-subheading">
+                    {{ subTitle}}
                 </div>
             </div>
         </div>
@@ -24,22 +28,13 @@
                 </button>
                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon lnr-inbox"></i>
-                                <span>
-                                    Inbox
-                                </span>
-                                <div class="ml-auto badge badge-pill badge-secondary">86</div>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
+                       
+                        <li class="nav-item" class="d-block d-sm-block d-md-none">
+                            <a [routerLink]="['/admi/elemennts-notification']" routerLinkActive="router-link"  class="nav-link">
                                 <i class="nav-link-icon lnr-book"></i>
                                 <span>
-                                    Book
+                                    Notification
                                 </span>
-                                <div class="ml-auto badge badge-pill badge-danger">5</div>
                             </a>
                         </li>
                         <li class="nav-item">
