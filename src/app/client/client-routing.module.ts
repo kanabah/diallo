@@ -1,3 +1,4 @@
+import { ResultSerachClientByAgenceOrPromoteurComponent } from './result-serach-client-by-agence-or-promoteur/result-serach-client-by-agence-or-promoteur.component';
 import { RaportGuichetPeriodeComponent } from './raport-guichet-periode/raport-guichet-periode.component';
 import { UpdateTransactionComponent } from './update-transaction/update-transaction.component';
 import { GuichetListUserComponent } from './guichet-list-user/guichet-list-user.component';
@@ -72,6 +73,10 @@ const routes: Routes = [
       {
         path: 'all/detaille/:id',
         component: DetailleClientComponent
+      },
+      {
+        path: 'result-serach-client-by-agence-or-promoteur/:id',
+        component: ResultSerachClientByAgenceOrPromoteurComponent
       },
       {
         path: 'commandes/all',

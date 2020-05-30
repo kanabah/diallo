@@ -34,9 +34,10 @@ import { DetailsAgenceComponent } from './details-agence/details-agence.componen
 import { VisitClientForAgenceComponent } from './visit-client-for-agence/visit-client-for-agence.component';
 import { VisitPromoteurForAgenceComponent } from './visit-promoteur-for-agence/visit-promoteur-for-agence.component';
 import { ResultRechercheClientByAdmiComponent } from './result-recherche-client-by-admi/result-recherche-client-by-admi.component';
+import { CompteAdmiComponent } from './compte-admi/compte-admi.component';
 
 @NgModule({
-  declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent, FooterAdmiComponent, AddGuichetsComponent, GuichetListComponent, UpdateGuichetComponent, ListGuichetProductionAgenceComponent, CommandesListAdmiComponent, CommandesDetailleAdmiComponent, RechercheCommandeByAgenceComponent, CommandeRechercheByClientComponent, GuichetByAgenceComponent, PromoteurListComponent, ProductionPromoteurAdmiComponent, ListDebitPromoteurAdmiComponent, ProductionPromoteurByDateComponent, GuichetByCodeComponent, ListClientComponent, DetailsClientComponent, DetailsAgenceComponent, VisitClientForAgenceComponent, VisitPromoteurForAgenceComponent, ResultRechercheClientByAdmiComponent],
+  declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent, FooterAdmiComponent, AddGuichetsComponent, GuichetListComponent, UpdateGuichetComponent, ListGuichetProductionAgenceComponent, CommandesListAdmiComponent, CommandesDetailleAdmiComponent, RechercheCommandeByAgenceComponent, CommandeRechercheByClientComponent, GuichetByAgenceComponent, PromoteurListComponent, ProductionPromoteurAdmiComponent, ListDebitPromoteurAdmiComponent, ProductionPromoteurByDateComponent, GuichetByCodeComponent, ListClientComponent, DetailsClientComponent, DetailsAgenceComponent, VisitClientForAgenceComponent, VisitPromoteurForAgenceComponent, ResultRechercheClientByAdmiComponent, CompteAdmiComponent],
   entryComponents: [
     ConfirmPasswordComponent,
     AttributeRoleComponent

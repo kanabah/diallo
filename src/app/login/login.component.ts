@@ -1,3 +1,4 @@
+import { ResourcesService } from './../services/resources.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   passwordIncorect: boolean = true;
   etatPadding: boolean = true;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private load: ResourcesService) { }
 
   ngOnInit() {
   }
@@ -26,8 +27,10 @@ export class LoginComponent implements OnInit {
         this.etatPadding = true;
       }else{
         if(this.userService.getUserDetails().role != 'admi'){
+          // this.load.loadUser();
           this.router.navigate(['/']);
         }else{
+          // this.load.loadAdmi();
           this.router.navigate(['/admi/home']);
         }
       }

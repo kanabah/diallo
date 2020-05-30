@@ -1,0 +1,16 @@
+#changPassword{
+    margin-left: 40px;
+}
+
+#errorForm{
+    border: 1px solid red;
+  }
+  
+  #successForm{
+    border: 1px solid green;
+  }
+  
+  #successNotStyl{
+    border: 1px solid none;
+  }
+  

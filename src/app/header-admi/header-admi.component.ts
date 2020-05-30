@@ -50,7 +50,9 @@ export class HeaderAdmiComponent implements OnInit, OnDestroy {
   })
 
   onRecherhe(){
-    if(this.recherche.value){
+    var myValue = 0;
+    myValue = +this.recherche.value;
+    if(myValue && typeof myValue === 'number'){
       this.clientService.getClientByTel(this.recherche.value).subscribe(res => {
         this.client = res;
         console.log('Result', res);
@@ -63,6 +65,9 @@ export class HeaderAdmiComponent implements OnInit, OnDestroy {
         }
         
       })
+    }else{
+      this.border = true;
+      this.snackBar.openSnackBar("Cet numero de telephone client n'existe pas!!!", "Quitter")
     }
     
   }
@@ -89,8 +94,8 @@ export class HeaderAdmiComponent implements OnInit, OnDestroy {
       this.getCommandes();
       this.getPromoteurs();
       this.getGuichets();
-      this.js.jsAdmi();
     })
+    this.js.jsAdmi();
   }
 
   getGuichets(){
@@ -173,6 +178,10 @@ export class HeaderAdmiComponent implements OnInit, OnDestroy {
 
   logout(){
     this.userService.logout();
+  }
+
+  onCompte(id){
+    this.router.navigate(['/admi/compte-admi', id])
   }
 
   ngOnDestroy(){

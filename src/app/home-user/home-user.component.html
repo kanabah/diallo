@@ -1,38 +1,7 @@
 <!-- DEBUT HOME_AGENCE -->
 <div *ngIf="userService.getUserDetails().role == 'user'">
     <!-- ====================START SEARCH========================== -->
-<div class="all-content-wrapper">
-    <div class="breadcome-area">
-        <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="breadcome-list">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="breadcome-heading">
-                                <form role="search" class="sr-input-func">
-                                    <input type="text" placeholder="Search..." class="search-int form-control">
-                                    <a href="#"><i class="fa fa-search"></i></a>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <ul class="breadcome-menu">
-                                <li>
-                                    <a href="#">Home</a> <span class="bread-slash">/</span>
-                                </li>
-                                <li>
-                                    <span class="bread-blod">Tableaux De Bord</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+<app-search-bar home="Home" title="Tableaux De Bord"></app-search-bar>
 
 <!-- ===================END SEARCH========================================== -->
 <div class="all-content-wrapper" *ngIf="infoTotal">
@@ -187,7 +156,7 @@
                                 <h4>Wester Union</h4>
                             </div>
                             <div class="stats-icon pull-right">
-                                <i class="educate-icon educate-apps"></i>
+                                <img src="assets/user/img/guichet/western.png" id="imgGuichet" alt="">
                             </div>
                             <div class="m-t-xl widget-cl-1">
                                 <h1 class="text-info">{{ caisseWester |  currency:'':'' }} <small>(GNF)</small> </h1>
@@ -209,7 +178,7 @@
                                 <h4>Money Gram</h4>
                             </div>
                             <div class="stats-icon pull-right">
-                                <i class="educate-icon educate-professor"></i>
+                                <img src="assets/user/img/guichet/money2.png" id="imgGuichet" alt="">
                             </div>
                             <div class="m-t-xl widget-cl-2">
                                 <h1 class="text-info">{{ caisseMoney |  currency:'':'' }}<small>(GNF)</small></h1>
@@ -231,7 +200,7 @@
                                 <h4>Wari</h4>
                             </div>
                             <div class="stats-icon pull-right">
-                                <i class="educate-icon educate-department"></i>
+                                <img src="assets/user/img/guichet/wari.jpg" id="imgGuichet" alt="">
                             </div>
                             <div class="m-t-xl widget-cl-3">
                                 <h1 class="text-info">{{ caisseWari |  currency:'':'' }}<small>(GNF)</small></h1>
@@ -253,7 +222,7 @@
                                 <h4>Total Guichet</h4>
                             </div>
                             <div class="stats-icon pull-right">
-                                <i class="educate-icon educate-message"></i>
+                                <img src="assets/user/img/guichet/total.png" id="imgGuichet" alt="">
                             </div>
                             <div class="m-t-xl widget-cl-4">
                                 <h1 class="text-info">{{ TotalcaisseGuichet | currency:'':''}} <small>(GNF)</small> </h1>
@@ -325,36 +294,7 @@
 <!-- DEBUT HOME_PROMOTEUR -->
 <div *ngIf="userService.getUserDetails().role == 'promoteur'">
     <!-- ====================START SEARCH========================== -->
-<div class="all-content-wrapper">
-    <div class="breadcome-area">
-        <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="breadcome-list">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="breadcome-heading">
-                                <form role="search" class="sr-input-func">
-                                    <input type="text" placeholder="Search..." class="search-int form-control">
-                                    <a href="#"><i class="fa fa-search"></i></a>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <ul class="breadcome-menu">
-                                <li><a href="#">Home</a> <span class="bread-slash">/</span>
-                                </li>
-                                <li><span class="bread-blod">Tableaux De Bord</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+    <app-search-bar home="Home" title="Tableaux De Bord"></app-search-bar>
 
 <!-- ===================END SEARCH========================================== -->
 <div class="all-content-wrapper" *ngIf="infoTotal">

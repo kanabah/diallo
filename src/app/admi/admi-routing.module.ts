@@ -1,3 +1,4 @@
+import { CompteAdmiComponent } from './compte-admi/compte-admi.component';
 import { ResultRechercheClientByAdmiComponent } from './result-recherche-client-by-admi/result-recherche-client-by-admi.component';
 import { VisitPromoteurForAgenceComponent } from './visit-promoteur-for-agence/visit-promoteur-for-agence.component';
 import { VisitClientForAgenceComponent } from './visit-client-for-agence/visit-client-for-agence.component';
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'elemennts-notification',
         component: ElementNotificationComponent,
+      },
+      {
+        path: 'compte-admi/:id',
+        component: CompteAdmiComponent,
       },
       {
         path: 'commande-recherche-by-agence',

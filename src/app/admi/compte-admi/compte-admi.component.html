@@ -1,0 +1,66 @@
+<div class="app-main">
+    <app-nav-admi></app-nav-admi>
+    <div class="app-main__outer">
+        <div class="app-main__inner">
+            <app-title-page title="Mon Compte" subTitle="Affichage de toute les informations lier a votre compte, et une possibiliter des les modifier." icons="pe-7s-display1 icon-gradient bg-mean-fruit"></app-title-page>            
+             <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+                <li class="nav-item">
+                    <a role="tab" class="nav-link active" id="tab-0" data-toggle="tab" href="#tab-content-0">
+                        <span>Informations</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a role="tab" class="nav-link" id="tab-1" data-toggle="tab" href="#tab-content-1">
+                        <span>Modification</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body"><h5 class="card-title">Information Cards</h5>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane tabs-animation fade" id="tab-content-1" role="tabpanel">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <form [formGroup]="registerForm" (ngSubmit)="onUpdateUser()">
+                                <div class="form-group">
+                                    <label>Nom et prenom</label>
+                                    <input class="form-control" [id]="getNameSuccess() ? 'successForm' : getNameError() ? 'errorForm' : ''" formControlName="name" placeholder="Nom complet de l'agent">
+                                    <span *ngIf="getNameError()" class="text text-danger"><small>{{ getNameError() }}</small></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="form-control" [id]="getEmailSuccess() ? 'successForm' : getEmailError() ? 'errorForm' : ''" type="email" formControlName="email" placeholder="Email de l'agence">
+                                    <span><small class="text-danger">{{ getEmailError() }}</small></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Telephone</label>
+                                    <input class="form-control" [id]="getTelSuccess() ? 'successForm' : getTelError() ? 'errorForm' : ''" formControlName="tel" placeholder="Telephone de l'agence">
+                                    <span><small class="text-danger">{{ getTelError() }}{{ ' '}}</small></span>
+                                    <span *ngIf="getEmailError"><small class="text-with">.</small></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nom Agence</label>
+                                    <input class="form-control" [id]="getNameAgenceSuccess() ? 'successForm' : getNameAgenceError() ? 'errorForm' : ''" formControlName="nameAgence" placeholder="Le nom de l'agence, EX: Agence Sangoyah">
+                                    <span><small class="text-danger">{{ getNameAgenceError() }}</small></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Adresse agence</label>
+                                    <input class="form-control" [id]="getAdressSuccess() ? 'successForm' : getAdressError() ? 'errorForm' : ''" formControlName="adress" placeholder="L'adresse ou se trouve l'agence, EX: C/Matoto Q/Sangoyah">
+                                    <span><small class="text-danger">{{ getAdressError() }}</small></span>
+                                </div>
+                                
+                                <button class="btn btn-success" [disabled]="!registerForm.valid">Enregistrer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <app-footer-admi></app-footer-admi>
+      </div>
+</div>

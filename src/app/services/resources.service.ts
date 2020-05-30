@@ -1,3 +1,4 @@
+import { timer } from 'rxjs';
 import { UserService } from './user.service';
 import { Injectable, Inject, Injector } from '@angular/core';
 import { ScriptStore, ScriptStoreAdmi } from './dynamic-loader.service';
@@ -13,8 +14,14 @@ export class ResourcesService {
     const userService = this.injector.get(UserService); 
 
     let res;
+    
+    console.log('USER LOGIN', userService.isLoggedIn());
+    // timer(0, 5000).subscribe(resultat => {
+      
       if(userService.isLoggedIn())
       {
+        console.log('CONECTER');
+        
         if(userService.getUserDetails().role != 'admi')
         {
           for(let result of ScriptStore ) {
@@ -43,9 +50,40 @@ export class ResourcesService {
           }else if (res.indexOf('js') >= 0 ) {
             this.loadJS(res);
           }
-        }
+        } 
       }
+    // })
       
+  }
+
+  public loadAdmi(){
+    const userService = this.injector.get(UserService); 
+
+    let res;
+    
+    for(let result of ScriptStoreAdmi ) {
+      res = result.src;
+      if( res.indexOf('css') >= 0 ) {
+        this.loadCSS(res);
+      }else if (res.indexOf('js') >= 0 ) {
+        this.loadJS(res);
+      }
+    }
+  }
+
+  public loadUser(){
+    const userService = this.injector.get(UserService); 
+
+    let res;
+
+    for(let result of ScriptStore ) {
+      res = result.src;
+      if( res.indexOf('css') >= 0 ) {
+        this.loadCSS(res);
+      }else if (res.indexOf('js') >= 0 ) {
+        this.loadJS(res);
+      }
+    }
   }
 
   public loadCSS( resourcePath: string ) {

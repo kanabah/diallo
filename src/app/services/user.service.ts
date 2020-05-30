@@ -52,6 +52,7 @@ export class UserService {
   }
 
   public logout(): void {
+    // this.load.loadUser();
     this.token = '';
     window.localStorage.removeItem('mean-token');
     this.router.navigateByUrl('/login');
