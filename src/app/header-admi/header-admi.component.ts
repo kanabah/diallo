@@ -12,6 +12,9 @@ import { User } from './../interfaces/user';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Guichet } from 'src/app/interfaces/guichet';
 import { Promoteur } from 'src/app/interfaces/promoteur';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-header-admi',
@@ -44,6 +47,13 @@ export class HeaderAdmiComponent implements OnInit, OnDestroy {
   border: boolean = false;
 
   constructor(private guichetService: GuichetService, private clientService: ClientService, private promoteurService: PromoteurService, private js: JsService, public userService: UserService, private fb: FormBuilder, private snackBar: SnackBarService, private router: Router) { }
+
+  generatePdf(){
+    console.log('JAI CLICKER');
+    var win = window.open('', '_blank');
+    const documentDefinition = { content: 'This is an sample PDF printed with pdfMake' };
+    pdfMake.createPdf(documentDefinition).open({}, win);
+  }
 
   controlForm = this.fb.group({
     recherche: ['', [Validators.required]]
@@ -95,7 +105,7 @@ export class HeaderAdmiComponent implements OnInit, OnDestroy {
       this.getPromoteurs();
       this.getGuichets();
     })
-    this.js.jsAdmi();
+    // this.js.jsAdmi();
   }
 
   getGuichets(){

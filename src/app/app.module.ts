@@ -29,6 +29,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { SharedModule } from './shared.module';
 import { HeaderAdmiComponent } from './header-admi/header-admi.component';
+import { GuideComponent } from './guide/guide.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { HeaderAdmiComponent } from './header-admi/header-admi.component';
     MyProfileComponent,
     UpdatePasswordComponent,
     HeaderAdmiComponent,
+    GuideComponent,
   ],
   entryComponents: [
     UpdatePasswordComponent

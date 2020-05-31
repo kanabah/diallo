@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { PrintClientService } from './../../services/print-client.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClientService } from 'src/app/services/client.service';
@@ -16,11 +17,12 @@ export class TypeAyementComponent implements OnInit {
   dataSource: any[] = [];
   commandes: any[] = [];
   client: Client;
+  clis: any[] = [];
   clients = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   params: any;
-    constructor(private clientService: ClientService, private route: ActivatedRoute, public print: PrintClientService) { }
+    constructor(private clientService: ClientService, private route: ActivatedRoute, public print: PrintClientService, public userService: UserService) { }
   
     ngOnInit() {
       this.params = this.route.snapshot.paramMap.get('typePay');
@@ -36,7 +38,12 @@ export class TypeAyementComponent implements OnInit {
   
     allCommandes(route){
       this.clientService.TypePayement(route).subscribe((resuts: Client[]) => {
-        this.clients = new MatTableDataSource(resuts);      
+        
+        this.clis = resuts.filter(response => {
+          return response.commandes['user_id'] == this.userService.getUserDetails()._id;
+        })
+        console.log('RESULT', this.clis);
+        this.clients = new MatTableDataSource(this.clis);      
         this.clients.paginator = this.paginator;
         this.clients.sort = this.sort;
       })

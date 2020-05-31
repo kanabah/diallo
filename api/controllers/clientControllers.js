@@ -1238,17 +1238,14 @@ module.exports.periodeDetailleCommande = async function(req, res){
 
 
 module.exports.TypePayement = async function(req, res){
-    // var date = new Date();
     let typePay = req.params.typePay;
-    // var month = date.getMonth() + 1;
-    // var year =  date.getFullYear();
-    // console.log('Tranche')
+    
     try{
         let typePayements = await Client.aggregate([
              {$unwind: {path: "$commandes"}},
              { $match: {"commandes.typePay": { "$eq": typePay}, "commandes.delete": { "$eq": 0}}}]).sort( { "commandes.dateCmd": -1 } );
-            // console.log('nbNomPay Tranche', typePayements  );
         
+             console.log('Type Payemenrt', typePayements);
         
         return res.status(200).json(typePayements);
     }catch(err){

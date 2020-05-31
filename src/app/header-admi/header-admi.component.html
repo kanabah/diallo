@@ -50,7 +50,7 @@
                         </a>
                     </li>
                     <li class="btn-group nav-item">
-                        <a href="javascript:void(0);" class="nav-link">
+                        <a [routerLink]="['/guide']" routerLinkActive="router-link-active"   class="nav-link">
                             <i class="nav-link-icon fa fa-question-circle"></i>
                             Guide
                         </a>
@@ -69,7 +69,7 @@
                                     </a>
                                     <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                         <button type="button" tabindex="0" (click)="onCompte(userService.getUserDetails()._id)" class="dropdown-item">Mon Compte</button>
-                                        <button type="button" tabindex="0" class="dropdown-item">Settings</button>
+                                        <button (click)="generatePdf()">Settings</button>
                                         <h6 tabindex="-1" class="dropdown-header">Header</h6>
                                         <button type="button" tabindex="0" class="dropdown-item">Actions</button>
                                         <div tabindex="-1" class="dropdown-divider"></div>

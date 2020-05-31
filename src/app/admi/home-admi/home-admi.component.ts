@@ -1,5 +1,5 @@
 import { GuichetService } from './../../services/guichet.service';
-import { Subscription, timer } from 'rxjs';
+import { Subscription, timer, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { JsService } from 'src/app/services/js.service';
 import { PrintClientService } from './../../services/print-client.service';
@@ -18,6 +18,7 @@ import CanvasJS from '../../../assets/admi/canvasjs.min';
 })
 export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription;
+  subscriptionGraph: Subscription;
   users: User[] = [];
   agences: User[] = [];
   agenceActive: User[] = [];
@@ -88,30 +89,55 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
   commandesFilters: any[] = [];
   commandesResult: any[] = [];
   guichFilters: any[] = [];
+  
   TotalSumCommande: number = 0;
   TotalSumGuichet: number = 0;
+  TotalSumCommandeLastMonth: number = 0;
+  TotalSumGuichetLastMonth: number = 0;
 
   purcentCommande: number = 0;
   purcentGuichet: number = 0;
   alertPurcenCommande: any;
   alertPurcenGuichet: any;
 
+  purcentCommandeLastMonth: number = 0;
+  purcentGuichetLastMonth: number = 0;
+  alertPurcenCommandeLastMonth: any;
+  alertPurcenGuichetLastMonth: any;
+
   nombreCmd: number = 0;
   nombreGuichet: number = 0;
+  nombreCmdLastMonth: number = 0;
+  nombreGuichetLastMonth: number = 0;
 
   purcentageCmd: number = 0;
   purcentageGuichet: number = 0;
   alertPourcentageCommandes: any;
   alertPourcentageGuichet: any;
 
+  purcentageCmdLastMonth: number = 0;
+  purcentageGuichetLastMonth: number = 0;
+  alertPourcentageCommandesLastMonth: any;
+  alertPourcentageGuichetLastMonth: any;
+
   totalEspeceMonth: number = 0;
+  totalEspeceLastMonth: number = 0;
+
   month: boolean = true;
 
   getClients(){
     var date = new Date();
+    var dateLastMonth = new Date();
+    dateLastMonth.setMonth(dateLastMonth.getMonth() - 1 );
+    var lastMonth = dateLastMonth.getMonth();
+
+    console.log('My Date', lastMonth);
+
     
     var total = 1;
     var totalCmd = 1;
+    var totalCmdLastMonth = 1;
+
     this.clientService.getAllClients().subscribe(res => {
       this.clientForCommandes = res;
 
@@ -119,6 +145,11 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
       this.commandesFilters.forEach(result => {
         result.commandes.forEach(element => {
           var dateCmd = new Date(element.dateCmd);
+          if(element.delete == 0 && dateCmd.getMonth() == dateLastMonth.getMonth() && dateCmd.getFullYear() == dateLastMonth.getFullYear()){
+            this.TotalSumCommandeLastMonth += element.somPay;
+            this.nombreCmdLastMonth += 1;
+          }
+
           if(element.delete == 0 && dateCmd.getMonth() == date.getMonth() && dateCmd.getFullYear() == date.getFullYear()){
             this.TotalSumCommande += element.somPay;
             this.nombreCmd += 1;
@@ -135,6 +166,11 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
             this.TotalSumGuichet += response.montant;
             this.nombreGuichet += 1;
           }
+          
+          if(response.action == 1 && response.delete == 0 && createdAt.getMonth() == dateLastMonth.getMonth() && createdAt.getFullYear() == dateLastMonth.getFullYear()){
+            this.TotalSumGuichetLastMonth += response.montant;
+            this.nombreGuichetLastMonth += 1;
+          }
         })
 
         //CLCULE POUR LES POURCENTAGE EN NOMBRE
@@ -143,12 +179,24 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
         this.purcentageCmd = this.roundDown((this.nombreCmd * 100)/totalCmd, 0);
         this.purcentageGuichet = this.roundDown((this.nombreGuichet * 100)/totalCmd, 0);
 
+        totalCmdLastMonth = this.nombreCmdLastMonth + this.nombreGuichetLastMonth;
+        totalCmdLastMonth = totalCmdLastMonth == 0 ? 1 : totalCmdLastMonth;
+        this.purcentageCmdLastMonth = this.roundDown((this.nombreCmdLastMonth * 100)/totalCmdLastMonth, 0);
+        this.purcentageGuichetLastMonth = this.roundDown((this.nombreGuichetLastMonth * 100)/totalCmdLastMonth, 0);
+
         //CLCULE POUR LES POURCENTAGE EN ESPECE
         total = this.TotalSumGuichet + this.TotalSumCommande;
         total = total == 0 ? 1 : total;
         this.totalEspeceMonth = total;
+
+        this.totalEspeceLastMonth = this.TotalSumGuichetLastMonth + this.TotalSumCommandeLastMonth;
+        this.totalEspeceLastMonth = this.totalEspeceLastMonth == 0 ? 1 : this.totalEspeceLastMonth;
+        
         this.purcentCommande = this.roundDown((this.TotalSumCommande * 100)/total, 0);
         this.purcentGuichet = this.roundDown((this.TotalSumGuichet * 100)/total, 0);
+
+        this.purcentCommandeLastMonth = this.roundDown((this.TotalSumCommandeLastMonth * 100)/this.totalEspeceLastMonth, 0);
+        this.purcentGuichetLastMonth = this.roundDown((this.TotalSumGuichetLastMonth * 100)/this.totalEspeceLastMonth, 0);
         
         //PURCENT COmmandes Espece
         if(this.purcentCommande <= 15){
@@ -168,6 +216,24 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
           this.alertPurcenGuichet = 'success';
         }
 
+        //PURCENT COmmandes Espece LAST MONTH
+        if(this.purcentCommandeLastMonth <= 15){
+          this.alertPurcenCommandeLastMonth = 'danger';
+        }else if(this.purcentCommandeLastMonth >= 16 && this.purcentCommandeLastMonth <= 40){
+          this.alertPurcenCommandeLastMonth = 'warning'
+        }else if(this.purcentCommandeLastMonth > 40 ){
+          this.alertPurcenCommandeLastMonth = 'success';
+        }
+
+        //PURCENT Guichet Espece LAST MONTH
+        if(this.purcentGuichetLastMonth <= 15){
+          this.alertPurcenGuichetLastMonth = 'danger';
+        }else if(this.purcentGuichetLastMonth >= 16 && this.purcentGuichetLastMonth <= 40){
+          this.alertPurcenGuichetLastMonth = 'warning'
+        }else if(this.purcentGuichetLastMonth > 40 ){
+          this.alertPurcenGuichetLastMonth = 'success';
+        }
+
 
         //PURCENT Quantite Commandes
         if(this.purcentageCmd <= 15){
@@ -185,6 +251,24 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
           this.alertPourcentageGuichet = 'warning'
         }else if(this.purcentageGuichet > 40 ){
           this.alertPourcentageGuichet = 'success';
+        }
+
+        //PURCENT Quantite Commandes LAST MONTH
+        if(this.purcentageCmdLastMonth <= 15){
+          this.alertPourcentageCommandesLastMonth = 'danger';
+        }else if(this.purcentageCmdLastMonth >= 16 && this.purcentageCmdLastMonth <= 40){
+          this.alertPourcentageCommandesLastMonth = 'warning'
+        }else if(this.purcentageCmdLastMonth > 40 ){
+          this.alertPourcentageCommandesLastMonth = 'success';
+        }
+
+        //PURCENT Quantite Guichet LAST MONTH
+        if(this.purcentageGuichetLastMonth <= 15){
+          this.alertPourcentageGuichetLastMonth = 'danger';
+        }else if(this.purcentageGuichetLastMonth >= 16 && this.purcentageGuichetLastMonth <= 40){
+          this.alertPourcentageGuichetLastMonth = 'warning'
+        }else if(this.purcentageGuichetLastMonth > 40 ){
+          this.alertPourcentageGuichetLastMonth = 'success';
         }
 
       });
@@ -341,11 +425,32 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(){
-    this.subscription = timer(0,5000).subscribe(res => {
+    this.subscription = timer(0,3000).subscribe(res => {
+      this.getChartsDate();
+      this.chartByDate();
+    })
+
+    this.subscriptionGraph = timer(0, 60000).subscribe(res => {
+      this.caclulForChart();
+      this.getChartsColumn();
+    })
+    const observable = new Observable(subscriber => {
+      subscriber.next(1);
+      subscriber.next(2);
+      subscriber.next(3);
+      setTimeout(() => {
+        subscriber.next(4);
+        subscriber.complete();
+      }, 1000);
+    });
+
+    observable.subscribe(res => {
+      console.log('JE SUIS LA REPONSE');
+      // this.cmdTest = [];
       this.caclulForChart();
       this.getChartsColumn();
       this.getChartsDate();
-      this.chartByDate();      
+      // this.chartByDate();
     })
     
   }
@@ -353,6 +458,8 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     // this.jsService.jsAdmi();
     // this.caclulForChart();
+    
+    
     
     this.getAllUsers();
     this.getClients();
@@ -592,5 +699,6 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
   
   ngOnDestroy(){
     this.subscription.unsubscribe();
+    this.subscriptionGraph.unsubscribe();
   }
 }

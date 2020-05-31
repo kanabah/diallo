@@ -1,3 +1,4 @@
+import { GuideComponent } from './guide/guide.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'user/profile', component: MyProfileComponent},
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
   { path: 'register', component: RegisterComponent},
+  { path: 'guide', component: GuideComponent},
   { path: '', redirectTo: '/home',pathMatch: 'full', canActivate: [AuthGuard]},
   { path: 'error', component: GlobalErrorComponent},
   { path: '**', component: NotFoundComponent},

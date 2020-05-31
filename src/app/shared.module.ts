@@ -1,3 +1,4 @@
+import { NavAdmiComponent } from './admi/nav-admi/nav-admi.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { NgModule } from '@angular/core';
