@@ -57,14 +57,29 @@
                                                                 <input formControlName="entreprise" type="text" class="form-control" placeholder="Nom Entreprise">
                                                             </div>
 
-                                                            <div class="form-group">
-                                                                <!-- <input type="file" class="custom-file-input" name="avatar" (change)="onFileChange($event)"> -->
+                                                            <!-- <div class="form-group">
                                                                 <label class="btn btn-default btn-file btn-lg" style="width: 800px;">
                                                                         <fa-icon [icon]="faFileUpload"></fa-icon>Photo DE Profile client <input type="file" name="avatar" required (change)="onFileChange($event)" style="display: none;">
                                                                 </label>        
+                                                            </div> -->
+
+                                                            <div class="form-group">
+                                                                <input type="file" name="avatar" (change)="fileProgress($event)" />
                                                             </div>
-
-
+                                                            <div *ngIf="fileUploadProgress">
+                                                                <!-- Upload progress: {{ fileUploadProgress }} -->
+                                                                <div class="progress">
+                                                                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" [style.width.%]="valueProgress" [attr.aria-valuenow]="valueProgress"  aria-valuemin="0" aria-valuemax="100">{{ valueProgress }}%</div>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="image-preview mb-3" *ngIf="previewUrl">
+                                                                <img [src]="previewUrl" id="printImage" />                 
+                                                            </div>
+                                                 
+                                                            <div class="mb-3" *ngIf="uploadedFilePath">
+                                                                {{uploadedFilePath}}
+                                                            </div>
+                                                            
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             

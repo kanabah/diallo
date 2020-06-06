@@ -6,6 +6,8 @@ var _ = require('underscore');
 
 module.exports.addClient = async function(req, res){
     try{
+        console.log('CLIENT BODY', req.body);
+        
         let client = Client.insertMany(req.body);
 
         if(client){

@@ -249,7 +249,10 @@ export class ClientService {
 
   //====UPLOADE IMAGE
   public upload(data) {
-    return this.http.post<any>(`${this.api}/avatar`, data).pipe(
+    return this.http.post<any>(`${this.api}/avatar`, data, {
+      reportProgress: true,
+      observe: 'events' 
+    }).pipe(
       retry(3),
     );
   }

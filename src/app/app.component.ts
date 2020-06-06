@@ -1,3 +1,5 @@
+import { timer, Observable } from 'rxjs';
+import { ResourcesService } from './services/resources.service';
 import { Component, OnInit } from '@angular/core';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 import { NavigationCancel,
@@ -16,7 +18,7 @@ import { JsService } from './services/js.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private _loadingBar: SlimLoadingBarService, private _router: Router, public userService: UserService, private js: JsService) {
+  constructor(private _loadingBar: SlimLoadingBarService, private _router: Router, public userService: UserService, private js: JsService, private load: ResourcesService) {
     this._router.events.subscribe((event: Event) => {
       this.navigationInterceptor(event);
     });
@@ -37,5 +39,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
+    // const observable = new Observable(subscriber => {
+    //   subscriber.next(1);
+    //   subscriber.next(2);
+    //   subscriber.next(3);
+    //   setTimeout(() => {
+    //     subscriber.next(4);
+    //     subscriber.complete();
+    //   }, 1000);
+    // });
+
+    // observable.subscribe(res => {
+    // })
+      
   }
 }

@@ -1,7 +1,7 @@
-import { timer } from 'rxjs';
+import { timer, Observable } from 'rxjs';
 import { UserService } from './user.service';
 import { Injectable, Inject, Injector } from '@angular/core';
-import { ScriptStore, ScriptStoreAdmi } from './dynamic-loader.service';
+import { ScriptStore, ScriptStoreAdmi, ScriptNull } from './dynamic-loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -42,16 +42,17 @@ export class ResourcesService {
             }
           }
         }
-      }else{
-        for(let result of ScriptStore ) {
-          res = result.src;
-          if( res.indexOf('css') >= 0 ) {
-            this.loadCSS(res);
-          }else if (res.indexOf('js') >= 0 ) {
-            this.loadJS(res);
-          }
-        } 
       }
+      // else{
+      //   for(let result of ScriptStore ) {
+      //       res = result.src;
+      //       if( res.indexOf('css') >= 0 ) {
+      //         this.loadCSS(res);
+      //       }else if (res.indexOf('js') >= 0 ) {
+      //         this.loadJS(res);
+      //       }
+      //     }
+      // }
     // })
       
   }
@@ -77,6 +78,21 @@ export class ResourcesService {
     let res;
 
     for(let result of ScriptStore ) {
+      res = result.src;
+      if( res.indexOf('css') >= 0 ) {
+        this.loadCSS(res);
+      }else if (res.indexOf('js') >= 0 ) {
+        this.loadJS(res);
+      }
+    }
+  }
+
+  public loadNull(){
+    const userService = this.injector.get(UserService); 
+
+    let res;
+
+    for(let result of ScriptNull ) {
       res = result.src;
       if( res.indexOf('css') >= 0 ) {
         this.loadCSS(res);

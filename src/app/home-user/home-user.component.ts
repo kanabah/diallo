@@ -1,9 +1,10 @@
+import { ResourcesService } from './../services/resources.service';
 import { PromoteurService } from './../services/promoteur.service';
 import { User } from './../interfaces/user';
 import { GuichetService } from './../services/guichet.service';
 import { UserService } from './../services/user.service';
 import { PrintClientService } from './../services/print-client.service';
-import { Subscription, timer } from 'rxjs';
+import { Subscription, timer, Observable } from 'rxjs';
 import { ClientService } from './../services/client.service';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { JsService } from '../services/js.service';
@@ -34,7 +35,7 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
   userDetails: User;
   promoteurs: Promoteur[] = [];
 
-  constructor(private js: JsService, public dialog: MatDialog, private clientService: ClientService, public print: PrintClientService, public userService : UserService, private guichetService: GuichetService, private promoteurService: PromoteurService) { }
+  constructor(private js: JsService, public dialog: MatDialog, private clientService: ClientService, public print: PrintClientService, public userService : UserService, private guichetService: GuichetService, private promoteurService: PromoteurService, private load: ResourcesService) { }
   infoTotal: any;
   purcentDay: any = 0;
   purcentMonth: any = 0;
@@ -92,6 +93,20 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
       this.infoHome();
     });
     this.getGuichets();
+
+    // const observable = new Observable(subscriber => {
+    //   subscriber.next(1);
+    //   subscriber.next(2);
+    //   subscriber.next(3);
+    //   setTimeout(() => {
+    //     subscriber.next(4);
+    //     subscriber.complete();
+    //   }, 1000);
+    // });
+
+    // observable.subscribe(res => {
+    //   this.load.loadUser()
+    // })
   }
 
   getGuichets(){
@@ -345,9 +360,25 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngAfterViewInit(){
-    setTimeout(() => {
-      // this.js.jsHomeUser();
-    }, 1000)
+    // setTimeout(() => {
+    //   // this.js.jsHomeUser();
+    // }, 1000)
+
+    
+    // const observable = new Observable(subscriber => {
+    //   subscriber.next(1);
+    //   subscriber.next(2);
+    //   subscriber.next(3);
+    //   setTimeout(() => {
+    //     subscriber.next(4);
+    //     subscriber.complete();
+    //   }, 1000);
+    // });
+
+    // observable.subscribe(res => {
+    //   // this.chartByDate();
+    //   this.load.loadUser()
+    // })
   }
 
   printFirstNameAndLastName(prenom, nom){

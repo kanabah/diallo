@@ -12,6 +12,7 @@ import { controlCodeTelValidator } from 'src/app/validators/tel-required-once-va
 import { telUpdateClientValidator } from 'src/app/validators/tel-update-client-validator';
 import { emailUpdateClientValidator } from 'src/app/validators/email-update-client-validator';
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-detaille-client',
@@ -52,6 +53,36 @@ export class DetailleClientComponent implements OnInit {
 
   faFileUpload = faFileUpload;
   etatPadding: boolean = true;
+
+  fileData: File = null;
+  previewUrl:any = null;
+  fileUploadProgress: string = null;
+  uploadedFilePath: string = null;
+  valueProgress: number = 0;
+
+  fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+    this.preview();
+    if (fileInput.target.files.length > 0) {
+      const file = fileInput.target.files[0];
+      this.clientForm.get('avatar').setValue(file);
+      
+    }
+  }
+
+  preview() {
+    // Show preview 
+    var mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+
+    var reader = new FileReader();      
+    reader.readAsDataURL(this.fileData); 
+    reader.onload = (_event) => { 
+      this.previewUrl = reader.result; 
+    }
+  }
 
   constructor(private clientService: ClientService, private route: ActivatedRoute, private js: JsService, private fb:FormBuilder, private _snackBar: MatSnackBar, private router: Router, public print: PrintClientService) { }
   ngOnInit() {
@@ -220,7 +251,7 @@ export class DetailleClientComponent implements OnInit {
   onUpdateClient(){
     this.etatPadding = false;
     const formData = new FormData();
-    formData.append('file', this.avatar.value);
+    formData.append('file', this.fileData);
 
     if((!this.telOrange.value)  && (!this.telMtn.value)  && (!this.telCelcom.value)){
       this.etatPadding = true;
@@ -262,11 +293,20 @@ export class DetailleClientComponent implements OnInit {
 
       if(this.okCelecom || this.okMtn || this.okOrange){
       this.clientService.upload(formData).subscribe(res => {
-        this.avatar.setValue(res);
-          this.clientService.updateClient(this.route.snapshot.paramMap.get('id'), this.clientForm.value).subscribe(res => {
-            this.openSnackBar('Modification reuissie', 'Fermer');
-            this.router.navigate(['/client/all'])
-          })
+        
+        if(res.type === HttpEventType.UploadProgress) {
+          this.valueProgress = Math.round(res.loaded / res.total * 100);
+          this.fileUploadProgress = Math.round(res.loaded / res.total * 100) + '%';
+          console.log(this.fileUploadProgress);
+        } else if(res.type === HttpEventType.Response) {
+          this.fileUploadProgress = '';
+          this.avatar.setValue(res.body);
+        
+            this.clientService.updateClient(this.route.snapshot.paramMap.get('id'), this.clientForm.value).subscribe(res => {
+              this.openSnackBar('Modification reuissie', 'Fermer');
+              this.router.navigate(['/client/all'])
+            })
+          }
         })
       }
     }

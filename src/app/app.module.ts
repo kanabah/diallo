@@ -1,3 +1,4 @@
+import { DesignService } from './services/design.service';
 import { AdmiModule } from './admi/admi.module';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { PromoteurModule } from './promoteur/promoteur.module';
@@ -69,11 +70,11 @@ import { GuideComponent } from './guide/guide.component';
     {
       provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
     },
-    ResourcesService,
+    ResourcesService, DesignService,
     {
       provide: APP_INITIALIZER,
       useFactory: ResourceProviderFactory,
-      deps: [ ResourcesService ],
+      deps: [ ResourcesService, DesignService ],
       multi: true
     },
     GlobalErrorHandlerService,

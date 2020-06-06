@@ -1,3 +1,4 @@
+import { ResourcesService } from './resources.service';
 import { baseUrl } from './backend';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -7,6 +8,7 @@ import { Router } from '@angular/router';
 import { User } from '../interfaces/user';
 import { retry } from 'rxjs/operators';
 import { TokenResponse } from '../interfaces/tokenResponse';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class UserService {
   api = `${baseUrl}users`;
   private token: string;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private location: Location) { }
 
   public getUserDetails(): User {
     const token = this.getToken();
@@ -52,10 +54,13 @@ export class UserService {
   }
 
   public logout(): void {
-    // this.load.loadUser();
     this.token = '';
     window.localStorage.removeItem('mean-token');
-    this.router.navigateByUrl('/login');
+    // this.load.loadNull();
+    // this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+      this.router.navigate([this.location.path()]);
+    }); 
   }
 
   public register(user: User): Observable<User>{

@@ -1,3 +1,4 @@
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { UserService } from './../../services/user.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -20,20 +21,54 @@ export class AddClientComponent implements OnInit {
   faFileUpload = faFileUpload;
   etatPadding: boolean = true;
 
-  constructor(private fb: FormBuilder, private clientService: ClientService, private _snackBar: MatSnackBar, private router: Router, private userService: UserService) { }
+  fileData: File = null;
+  previewUrl:any = null;
+  fileUploadProgress: string = null;
+  uploadedFilePath: string = null;
+  valueProgress: number = 0;
+
+  constructor(private fb: FormBuilder, private clientService: ClientService, private _snackBar: MatSnackBar, private router: Router, private userService: UserService) { 
+  }
 
   ngOnInit() {
     
   }
 
-  //================DEBUT UPLOADE IMAGE AVATAR============================================
-  onFileChange(event) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.clientForm.get('avatar').setValue(file);
-      
+  fileProgress(fileInput: any) {
+      this.fileData = <File>fileInput.target.files[0];
+      this.preview();
+      if (fileInput.target.files.length > 0) {
+        const file = fileInput.target.files[0];
+        this.clientForm.get('avatar').setValue(file);
+        
+      }
+  }
+
+  preview() {
+    // Show preview 
+    var mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+
+    var reader = new FileReader();      
+    reader.readAsDataURL(this.fileData); 
+    reader.onload = (_event) => { 
+      this.previewUrl = reader.result; 
     }
   }
+
+  //================DEBUT UPLOADE IMAGE AVATAR============================================
+  // onFileChange(event) {
+  //   if (event.target.files.length > 0) {
+  //     const file = event.target.files[0];
+  //     this.clientForm.get('avatar').setValue(file);
+      
+  //   }
+  // }
+
+
+
   //================FIN UPLOADE IMAGE AVATAR============================================
   okOrange: boolean = false;
   okMtn: boolean = false;
@@ -41,8 +76,17 @@ export class AddClientComponent implements OnInit {
 
   onSubmit(){
     this.etatPadding = false;
+    // const formData = new FormData();
+    // formData.append('file', this.clientForm.get('avatar').value);
+
     const formData = new FormData();
-    formData.append('file', this.clientForm.get('avatar').value);
+      formData.append('file', this.fileData);
+      // this.http.post('url/to/your/api', formData)
+      //   .subscribe(res => {
+      //     console.log(res);
+      //     this.uploadedFilePath = res.data.filePath;
+      //     alert('SUCCESS !!');
+      //   })
   
     if((!this.telOrange.value)  && (!this.telMtn.value)  && (!this.telCelcom.value)){
       this.openSnackBar('Vous devez saisir au moins un numero de telephone!!', 'Fermer');
@@ -71,21 +115,30 @@ export class AddClientComponent implements OnInit {
           this.etatPadding = true;
         }
       }
-
+      
       if(this.okCelecom || this.okMtn || this.okOrange){
         this.clientService.upload(formData).subscribe(res => {
-          this.avatar.setValue(res);
-          if(this.userService.getUserDetails().role == 'promoteur'){
-            this.user_id.setValue(this.userService.getUserDetails().agence_id);
-            this.promoteur.setValue(1);
-          }else{  
-            this.user_id.setValue(this.userService.getUserDetails()._id)
-          }
 
-          this.clientService.addClient(this.clientForm.value).subscribe(res => {
-            this.openSnackBar('Client ajouter avec success', 'Fermer');
-            this.router.navigate(['/']);
-          })
+          if(res.type === HttpEventType.UploadProgress) {
+            this.valueProgress = Math.round(res.loaded / res.total * 100);
+            this.fileUploadProgress = Math.round(res.loaded / res.total * 100) + '%';
+            console.log(this.fileUploadProgress);
+          } else if(res.type === HttpEventType.Response) {
+            this.fileUploadProgress = '';
+            this.avatar.setValue(res.body);
+
+            if(this.userService.getUserDetails().role == 'promoteur'){
+              this.user_id.setValue(this.userService.getUserDetails().agence_id);
+              this.promoteur.setValue(1);
+            }else{  
+              this.user_id.setValue(this.userService.getUserDetails()._id)
+            }
+            
+            this.clientService.addClient(this.clientForm.value).subscribe(res => {
+              this.openSnackBar('Client ajouter avec success', 'Fermer');
+              this.router.navigate(['/']);
+            })
+          }
         });
       }else{
         // this.etatPadding = true;

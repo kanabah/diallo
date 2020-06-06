@@ -146,3 +146,7 @@ export const ScriptJsDetaille: Path[] = [
   // { src: "assets/user/js/tawk-chat.js"}, //fin
   { src: "assets/user/js/tab.js"},
 ]
+
+export const ScriptNull: Path[] = [
+  {"src": ''}
+]

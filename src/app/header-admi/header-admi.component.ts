@@ -105,7 +105,7 @@ export class HeaderAdmiComponent implements OnInit, OnDestroy {
       this.getPromoteurs();
       this.getGuichets();
     })
-    // this.js.jsAdmi();
+    this.js.jsAdmi();
   }
 
   getGuichets(){

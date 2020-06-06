@@ -11,3 +11,8 @@
 #successNotStyl{
   border: 1px solid none;
 }
+
+#printImage{
+  max-width: 100%;
+  max-height: 200px;
+}

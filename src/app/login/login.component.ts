@@ -1,5 +1,7 @@
+import { DesignService } from './../services/design.service';
+import { Observable, timer } from 'rxjs';
 import { ResourcesService } from './../services/resources.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
@@ -10,13 +12,60 @@ import { emailValidatorRegister } from '../validators/email-validator-register';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   passwordIncorect: boolean = true;
   etatPadding: boolean = true;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private load: ResourcesService) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private load: ResourcesService, private styleService : DesignService) { }
 
   ngOnInit() {
+    // const observable = new Observable(subscriber => {
+    //   subscriber.next(1);
+    //   subscriber.next(2);
+    //   subscriber.next(3);
+    //   setTimeout(() => {
+    //     subscriber.next(4);
+    //     subscriber.complete();
+    //   }, 1000);
+    // });
+    // timer(0, 5000).subscribe(result => {
+    //   this.load.loadResources()
+    //   console.log('BONJOUR');
+      
+    //   this.load.loadNull()
+    // })
+    // observable.subscribe(res => {
+    //   // timer(0, 1000).subscribe(result => {
+    //     // })
+    //   })
+    
+  }
+  
+  ngOnDestroy(){
+    this.styleService.removeStyle('red-theme');
+  }
+    
+  ngAfterViewInit(){
+
+      
+    // const observable = new Observable(subscriber => {
+    //   subscriber.next(1);
+    //   subscriber.next(2);
+    //   subscriber.next(3);
+    //   setTimeout(() => {
+    //     subscriber.next(4);
+    //     subscriber.complete();
+    //   }, 1000);
+    // });
+
+    // observable.subscribe(res => {
+    //   // this.chartByDate();
+    //   this.load.loadNull()
+    // })
+    
+    //   timer(0, 3000).subscribe(result => {
+    //     this.load.loadResources()
+    //   })
   }
 
   onLogin(){
@@ -30,7 +79,6 @@ export class LoginComponent implements OnInit {
           // this.load.loadUser();
           this.router.navigate(['/']);
         }else{
-          // this.load.loadAdmi();
           this.router.navigate(['/admi/home']);
         }
       }
