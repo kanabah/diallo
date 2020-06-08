@@ -58,17 +58,6 @@ export class AddClientComponent implements OnInit {
     }
   }
 
-  //================DEBUT UPLOADE IMAGE AVATAR============================================
-  // onFileChange(event) {
-  //   if (event.target.files.length > 0) {
-  //     const file = event.target.files[0];
-  //     this.clientForm.get('avatar').setValue(file);
-      
-  //   }
-  // }
-
-
-
   //================FIN UPLOADE IMAGE AVATAR============================================
   okOrange: boolean = false;
   okMtn: boolean = false;
@@ -76,17 +65,8 @@ export class AddClientComponent implements OnInit {
 
   onSubmit(){
     this.etatPadding = false;
-    // const formData = new FormData();
-    // formData.append('file', this.clientForm.get('avatar').value);
-
     const formData = new FormData();
-      formData.append('file', this.fileData);
-      // this.http.post('url/to/your/api', formData)
-      //   .subscribe(res => {
-      //     console.log(res);
-      //     this.uploadedFilePath = res.data.filePath;
-      //     alert('SUCCESS !!');
-      //   })
+    formData.append('file', this.fileData);
   
     if((!this.telOrange.value)  && (!this.telMtn.value)  && (!this.telCelcom.value)){
       this.openSnackBar('Vous devez saisir au moins un numero de telephone!!', 'Fermer');

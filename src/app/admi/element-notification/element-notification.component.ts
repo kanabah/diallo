@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PromoteurService } from './../../services/promoteur.service';
 import { Client } from 'src/app/interfaces/client';
 import { ClientService } from 'src/app/services/client.service';
@@ -34,7 +35,7 @@ export class ElementNotificationComponent implements OnInit {
   nbEntrerPromoteur: number = 0;
   nbSortiePromoteur: number = 0;
 
-  constructor(private userService: UserService, private guichetService: GuichetService, private clientService: ClientService, private promoteurService: PromoteurService) { }
+  constructor(private userService: UserService, private guichetService: GuichetService, private clientService: ClientService, private promoteurService: PromoteurService, private spiner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getNewUsers();
@@ -71,10 +72,12 @@ export class ElementNotificationComponent implements OnInit {
   }
 
   getNewUsers(){
+    this.spiner.show()
     this.userService.newUsers().subscribe(res => {
       this.newUsers = res.filter(result => {
         return result.confirm != 1;
       });
+      this.spiner.hide();
     })
   }
 

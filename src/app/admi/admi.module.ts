@@ -1,6 +1,6 @@
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdmiRoutingModule } from './admi-routing.module';
@@ -35,6 +35,7 @@ import { VisitClientForAgenceComponent } from './visit-client-for-agence/visit-c
 import { VisitPromoteurForAgenceComponent } from './visit-promoteur-for-agence/visit-promoteur-for-agence.component';
 import { ResultRechercheClientByAdmiComponent } from './result-recherche-client-by-admi/result-recherche-client-by-admi.component';
 import { CompteAdmiComponent } from './compte-admi/compte-admi.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [AdmiComponent, ElementNotificationComponent, HomeAdmiComponent, NewUsersComponent, NavAdmiComponent, TitlePageComponent, ConfirmPasswordComponent, AttributeRoleComponent, FooterAdmiComponent, AddGuichetsComponent, GuichetListComponent, UpdateGuichetComponent, ListGuichetProductionAgenceComponent, CommandesListAdmiComponent, CommandesDetailleAdmiComponent, RechercheCommandeByAgenceComponent, CommandeRechercheByClientComponent, GuichetByAgenceComponent, PromoteurListComponent, ProductionPromoteurAdmiComponent, ListDebitPromoteurAdmiComponent, ProductionPromoteurByDateComponent, GuichetByCodeComponent, ListClientComponent, DetailsClientComponent, DetailsAgenceComponent, VisitClientForAgenceComponent, VisitPromoteurForAgenceComponent, ResultRechercheClientByAdmiComponent, CompteAdmiComponent],
@@ -47,7 +48,9 @@ import { CompteAdmiComponent } from './compte-admi/compte-admi.component';
     AdmiRoutingModule,
     ReactiveFormsModule,
     DemoMaterialModule,
-    NgxPaginationModule
-  ]
+    NgxPaginationModule,
+    NgxSpinnerModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AdmiModule { }

@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ResourcesService } from './../../services/resources.service';
 import { GuichetService } from './../../services/guichet.service';
 import { Subscription, timer, Observable } from 'rxjs';
@@ -396,7 +397,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
     this.month = false;
   }
 
-  constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private route: Router, private guichetService: GuichetService, private load: ResourcesService) {
+  constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private route: Router, private guichetService: GuichetService, private load: ResourcesService, private spinner: NgxSpinnerService) {
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -542,6 +543,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getAllUsers(){
+    this.spinner.show(); 
     this.userService.getUsers().subscribe(res => {
       this.users = res;
       this.agences = this.users.filter(result => {
@@ -558,6 +560,8 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
       this.promoteurs = this.users.filter(result => {
         return result.role == 'promoteur' && result.active == 1;
       })
+
+      this.spinner.hide();
     });
 
     this.clientService.getClients().subscribe(res => {

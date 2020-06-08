@@ -40,7 +40,7 @@
                                 
                                 </div>
                                 
-                                <button type="Ajouter" [disabled]="formControl.invalid" class="btn btn-primary">Valider</button>
+                                <button type="submit" [disabled]="formControl.invalid || formControl.pending || !etatPadding" class="btn btn-primary">{{ !etatPadding ? 'Patienter...': 'Valider'}}</button>
                             </form>
                         </div>
 
@@ -78,11 +78,6 @@
                                     <td class="text-center"><span class=" badge badge-danger">{{ getCreditClient(client._id).somRestST | currency:'':'' }}</span></td>
                                     <td class="text-center"><span class=" badge badge-danger">{{ getCreditClient(client._id).somRestTransfert | currency:'':'' }}</span></td>
                                     <td class="text-center"><span class=" badge badge-danger">{{ getCreditClient(client._id).somRestTotal | currency:'':'' }}</span></td>
-                                    <!-- <td>
-                                        <button data-toggle="tooltip" (click)="redirectMod(guichet._id)" title="Modification" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Mod </button>
-                                        <button data-toggle="tooltip" (click)="deleteGuichet(guichet._id)" title="Supresion" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i>Sup</button>
-                                                
-                                    </td> -->
                                 </tr>
                                 </tbody>
                             </table>
@@ -95,6 +90,7 @@
                </div>
            </div>
         </div>
+        <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-square-spin" [fullScreen] = "true"><p style="color: white" > Chargement... </p></ngx-spinner>
         <app-footer-admi></app-footer-admi>
     </div>
 </div>

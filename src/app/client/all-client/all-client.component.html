@@ -34,9 +34,10 @@
                     </div>
                 </div>    
             </div>
+            <app-spiner [ok]="clients"></app-spiner>
             <div class="custom-pagination">
                 <ul class="pagination">
-                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </ul>
             </div>
         </div>

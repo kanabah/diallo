@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { GuichetService } from './../../services/guichet.service';
 import { User } from './../../interfaces/user';
 import { Promoteur } from './../../interfaces/promoteur';
@@ -155,7 +156,7 @@ export class DetailsAgenceComponent implements OnInit {
   totalSortieDay: number = 0;
   
 
-  constructor(private clientService: ClientService, private route: ActivatedRoute, private userService: UserService, private fb:FormBuilder, private _snackBar: MatSnackBar, private router: Router, public print: PrintClientService, private week: WeekService, private guichetService: GuichetService) { }
+  constructor(private clientService: ClientService, private route: ActivatedRoute, private userService: UserService, private fb:FormBuilder, private _snackBar: MatSnackBar, private router: Router, public print: PrintClientService, private week: WeekService, private guichetService: GuichetService, private spiner: NgxSpinnerService) { }
   ngOnInit() {
     var id = this.route.snapshot.paramMap.get('id');
 
@@ -166,6 +167,7 @@ export class DetailsAgenceComponent implements OnInit {
   }
 
   getGuichets(id){
+    this.spiner.show();
     var date = new Date();
     this.guichetService.getGuichets().subscribe(res => {
       this.guichetsFilters = res;
@@ -327,8 +329,7 @@ export class DetailsAgenceComponent implements OnInit {
         
         this.calculSoldeMoney = this.sumDepotMoney + this.soldeMoneyDepot - this.sumRetraitMoney;
       })
-
-      console.log('Guichets DAY', this.soldeWesterDepot);
+      this.spiner.hide();
       
     })
   }

@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription, timer } from 'rxjs';
 import { JsService } from 'src/app/services/js.service';
 import { AttributeRoleComponent } from './../attribute-role/attribute-role.component';
@@ -18,7 +19,7 @@ export class NewUsersComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   newUsers: User[] = [];
   faUserPlus = faUserPlus;
-  constructor(private dialog: MatDialog,private userService: UserService, public print: PrintClientService, private jsService: JsService) { }
+  constructor(private dialog: MatDialog,private userService: UserService, public print: PrintClientService, private jsService: JsService, private spiner: NgxSpinnerService) { }
 
   ngOnInit() {
     // this.jsService.jsAdmi();
@@ -28,11 +29,13 @@ export class NewUsersComponent implements OnInit, OnDestroy {
   }
 
   getNewUsers(){
+    this.spiner.show();
     this.userService.newUsers().subscribe(res => {
       this.newUsers = res.filter(result => {
         return result;
         // return result.confirm != 1;
       });
+      this.spiner.hide();
     })
   }
 

@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { User } from './../../interfaces/user';
 import { updateTelUserValidator } from 'src/app/validators/update-tel-user.validators';
 import { UpdatePasswordComponent } from './../../update-password/update-password.component';
@@ -17,8 +18,9 @@ import { updateEmailUserValidator } from 'src/app/validators/update-email-user.v
 })
 export class CompteAdmiComponent implements OnInit {
   user: User;
+  etatPadding: boolean = true;
 
-  constructor(public dialog: MatDialog, public print: PrintClientService, public userService: UserService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private snackBar: SnackBarService) { }
+  constructor(public dialog: MatDialog, public print: PrintClientService, public userService: UserService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private snackBar: SnackBarService, private spiner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getUser();
@@ -32,6 +34,7 @@ export class CompteAdmiComponent implements OnInit {
   }
 
   onUpdateUser(){
+    this.etatPadding = false;
     this.userService.updateUser(this.userService.getUserDetails()._id, this.registerForm.value).subscribe(res => {
       this.snackBar.openSnackBar('Modification Reuissie', 'Fermer');
       this.router.navigate(['/admi/home']);
@@ -39,10 +42,11 @@ export class CompteAdmiComponent implements OnInit {
   }
 
   getUser(){
+    this.spiner.show();
     this.userService.profile().subscribe(res => {
-      console.log('User Profile', res);
       this.user = res;
       this.initialiseForms();
+      this.spiner.hide();
     })
   }
 

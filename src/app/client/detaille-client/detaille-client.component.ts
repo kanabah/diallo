@@ -23,6 +23,7 @@ export class DetailleClientComponent implements OnInit {
   client$: Observable<Client>;
   client: Client;
   sumTotalPayer: number = 0;
+  spiner: any[] = [];
 
   purcentOm: number = 0;
   purcentST: any = 0;
@@ -90,7 +91,7 @@ export class DetailleClientComponent implements OnInit {
     this.detaille();  
     this.client$.subscribe(res => {
       this.client = res;
-      
+      this.spiner = ['je', 'suis', 'cool'];
       this.initialiseForms();
       this.calculTransactionClient()    
     })

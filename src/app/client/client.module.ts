@@ -41,9 +41,10 @@ import { UpdateTransactionComponent } from './update-transaction/update-transact
 import { DeleteCoterUserComponent } from './delete-coter-user/delete-coter-user.component';
 import { RaportGuichetPeriodeComponent } from './raport-guichet-periode/raport-guichet-periode.component';
 import { ResultSerachClientByAgenceOrPromoteurComponent } from './result-serach-client-by-agence-or-promoteur/result-serach-client-by-agence-or-promoteur.component';
+import { SpinerComponent } from './spiner/spiner.component';
 
 @NgModule({
-  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, TypeAyementComponent, CommandeCreditComponent, CommandeCreditDettailleComponent, ListPromoteurComponent, AttributeEspeceComponent, TransactionGuichetComponent, GuichetListUserComponent, UpdateTransactionComponent, DeleteCoterUserComponent, RaportGuichetPeriodeComponent, ResultSerachClientByAgenceOrPromoteurComponent],
+  declarations: [ClientComponent, AddClientComponent, AllClientComponent, DetailleClientComponent, DialogContentAddCommandeOrangeMoneyComponent, DialogContentAddCommandeMobileMoneyComponent, CommandeAllComponent, CommandeDetailComponent, DialogReglementComponent, DialogDeleteCommandeComponent, ReglementListComponent, DeleteReglementComponent, UpdateCommandeComponent, DialogContentAddTransfertComponent, DialogContentAddStartTimesComponent, PeriodeCommandeComponent, PeriodeCommandeDetailleComponent, TypeAyementComponent, CommandeCreditComponent, CommandeCreditDettailleComponent, ListPromoteurComponent, AttributeEspeceComponent, TransactionGuichetComponent, GuichetListUserComponent, UpdateTransactionComponent, DeleteCoterUserComponent, RaportGuichetPeriodeComponent, ResultSerachClientByAgenceOrPromoteurComponent, SpinerComponent],
   entryComponents: [
     DialogContentAddCommandeOrangeMoneyComponent,
     DialogContentAddCommandeMobileMoneyComponent,

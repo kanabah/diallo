@@ -5,7 +5,7 @@
             <app-title-page title="Detaille commande" subTitle="Ici il sagit des detailles des commande effectuer par ce client par l'agence concerner." icons="pe-7s-map icon-gradient bg-mean-fruit"></app-title-page>         
            <div class="row">
                <div class="col-md-12">
-                   <div class="main-card mb-3 card">
+                   <div class="main-card mb-3 card" *ngIf="client">
                        <div class="card-header">
                             <img src="{{ print.printAvatar(client.avatar) }}"  id="rounded-circle" alt="Profile"> &nbsp; Commandes Detaille pour le client <span class="badge badge-success">{{ client.nom }} {{ client.prenom }}</span>
                             <br><span  class="d-block d-sm-block d-md-none text-primary" (click)="onRetour()">Retour</span>
@@ -46,6 +46,7 @@
                </div>
            </div>
         </div>
+        <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-square-spin" [fullScreen] = "true"><p style="color: white" > Chargement... </p></ngx-spinner>
         <app-footer-admi></app-footer-admi>
     </div>
 </div>

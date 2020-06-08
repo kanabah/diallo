@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmPasswordComponent } from './../confirm-password/confirm-password.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PrintClientService } from './../../services/print-client.service';
@@ -21,7 +22,7 @@ export class GuichetListComponent implements OnInit {
     data: []
   };
 
-  constructor(private guichetService: GuichetService, public print: PrintClientService, private dialog: MatDialog, private router: Router) {
+  constructor(private guichetService: GuichetService, public print: PrintClientService, private dialog: MatDialog, private router: Router, private spiner: NgxSpinnerService) {
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -54,6 +55,7 @@ export class GuichetListComponent implements OnInit {
   }
 
   getGuichets(){
+    this.spiner.show();
     this.guichetService.getGuichets().subscribe(res => {
       this.guichets = res;
       this.guichetList = this.guichets.filter(result => {
@@ -62,6 +64,7 @@ export class GuichetListComponent implements OnInit {
 
       this.guichetList.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
       this.collection = { count: 20, data: this.guichetList };
+      this.spiner.hide(); 
     })
   }
 

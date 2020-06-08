@@ -51,7 +51,6 @@ export class GuichetListUserComponent implements OnInit {
         return this.guichetService.getGuichets();
       })
       ).subscribe(res => {
-        console.log('Guichet', res);
         this.guichetFilter = res;
         this.resultFilterGuichet = this.guichetFilter.filter(result => {
         return result.delete == 0 && result.type == this.type && result.action != 0 && result.user_id._id == this.userService.getUserDetails()._id;

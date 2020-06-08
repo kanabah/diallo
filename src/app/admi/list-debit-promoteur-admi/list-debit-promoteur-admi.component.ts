@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Location } from '@angular/common';
 import { User } from './../../interfaces/user';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +19,7 @@ export class ListDebitPromoteurAdmiComponent implements OnInit {
     data: []
   };
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private location: Location) { 
+  constructor(private userService: UserService, private route: ActivatedRoute, private location: Location, private spiner: NgxSpinnerService) { 
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -46,9 +47,11 @@ export class ListDebitPromoteurAdmiComponent implements OnInit {
   }
 
   getDebitAgence(id){
+    this.spiner.show();
     this.userService.getUser(id).subscribe((res : User) => {
       this.attributions = res.soldActuel;
-
+      
+      this.spiner.hide();
       this.attributions.sort((a: any, b: any) => a.date < b.date ? 1 : a.date > b.date ? -1 : 0);
         this.collection = { count: 20, data: this.attributions };
     });

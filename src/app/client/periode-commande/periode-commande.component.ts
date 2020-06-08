@@ -18,6 +18,7 @@ import { fromEvent } from 'rxjs';
 export class PeriodeCommandeComponent implements OnInit {
   dataSource: any[] = [];
   commandes: any[] = [];
+  commandesOups: any[] = [];
   client: Client;
   clients = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -75,6 +76,7 @@ export class PeriodeCommandeComponent implements OnInit {
       this.clients.paginator = this.paginator;
       this.clients.sort = this.sort;
       this.clientNumber = resuts['clientNumber'];
+      this.commandesOups = resuts['clients'];
     })
   }
 

@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { switchMap } from 'rxjs/operators';
 import { ConfirmPasswordComponent } from './../confirm-password/confirm-password.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,7 +25,7 @@ export class ListGuichetProductionAgenceComponent implements OnInit {
 
   type: string;
 
-  constructor(private guichetService: GuichetService, public print: PrintClientService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
+  constructor(private guichetService: GuichetService, public print: PrintClientService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute, private spiner: NgxSpinnerService) {
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -56,19 +57,8 @@ export class ListGuichetProductionAgenceComponent implements OnInit {
     this.getGuichets();
   }
 
-  // getGuichets(){
-  //   this.guichetService.getGuichets().subscribe(res => {
-  //     this.guichets = res;
-  //     this.guichetList = this.guichets.filter(result => {
-  //       return result.delete == 0 && result.action != 0;
-  //     })
-
-  //     this.guichetList.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
-  //     this.collection = { count: 20, data: this.guichetList };
-  //   })
-  // }
-
   getGuichets(){
+    this.spiner.show();
     this.route.paramMap.pipe(
       switchMap(params => {
         this.type = params.get('type');
@@ -80,6 +70,7 @@ export class ListGuichetProductionAgenceComponent implements OnInit {
         return result.delete == 0 && result.action != 0 && result.type == this.type;
       });
 
+      this.spiner.hide();
       this.guichetList.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
       this.collection = { count: 20, data: this.guichetList };
     });

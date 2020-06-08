@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PrintClientService } from './../../services/print-client.service';
 import { Component, OnInit } from '@angular/core';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-list-client',
@@ -21,7 +22,7 @@ export class ListClientComponent implements OnInit {
     data: []
   };
 
-  constructor(private dialog: MatDialog,private clientService: ClientService, public print: PrintClientService, private route: Router) { 
+  constructor(private dialog: MatDialog,private clientService: ClientService, public print: PrintClientService, private route: Router, private spinner: NgxSpinnerService) { 
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -49,9 +50,10 @@ export class ListClientComponent implements OnInit {
   }
 
   getAllClients(){
+    this.spinner.show(); 
     this.clientService.getAllClients().subscribe(res => {
       this.clients = res;
-      
+      this.spinner.hide(); 
       this.collection = { count: 20, data: this.clients };
     })
   }

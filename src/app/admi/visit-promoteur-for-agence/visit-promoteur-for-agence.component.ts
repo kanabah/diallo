@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute } from '@angular/router';
 import { PromoteurService } from './../../services/promoteur.service';
 import { AttributeRoleComponent } from './../attribute-role/attribute-role.component';
@@ -28,7 +29,7 @@ export class VisitPromoteurForAgenceComponent implements OnInit {
     count: 0,
     data: []
   };
-  constructor(private dialog: MatDialog,private userService: UserService, public print: PrintClientService, private promoteurService: PromoteurService, private route: ActivatedRoute) { 
+  constructor(private dialog: MatDialog,private userService: UserService, public print: PrintClientService, private promoteurService: PromoteurService, private route: ActivatedRoute, private spiner: NgxSpinnerService) { 
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -53,8 +54,10 @@ export class VisitPromoteurForAgenceComponent implements OnInit {
   ngOnInit() {
     var id = this.route.snapshot.paramMap.get('id');
     
+    this.spiner.show();
     this.promoteurService.getPromoteurs().subscribe(res => {
       this.promoteurs = res;
+      this.spiner.hide();
     })
     this.getUsers(id);
   }

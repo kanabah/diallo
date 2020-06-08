@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { WeekService } from './../../services/week.service';
 import { PrintClientService } from './../../services/print-client.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -54,14 +55,15 @@ export class DetailsClientComponent implements OnInit {
   nbCommandeST = 0;
   nbCommandeTransfert = 0;
 
-  constructor(private clientService: ClientService, private route: ActivatedRoute, private js: JsService, private fb:FormBuilder, private _snackBar: MatSnackBar, private router: Router, public print: PrintClientService, private week: WeekService) { }
+  constructor(private clientService: ClientService, private route: ActivatedRoute, private js: JsService, private fb:FormBuilder, private _snackBar: MatSnackBar, private router: Router, public print: PrintClientService, private week: WeekService, private spiner: NgxSpinnerService) { }
   ngOnInit() {
     var id = this.route.snapshot.paramMap.get('id');
     // this.detaille();  
+    this.spiner.show();
     this.clientService.getClient(id).subscribe(res => {
       this.client = res;
-      console.log('somPayOrangeMoney', this.client);
       this.calculTransactionClient(this.week);
+      this.spiner.hide();
       
     })
   }

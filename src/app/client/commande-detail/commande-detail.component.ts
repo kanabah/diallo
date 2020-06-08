@@ -27,6 +27,7 @@ export class CommandeDetailComponent implements OnInit, OnDestroy {
     count: 0,
     data: []
   };
+  spiner: any[] = [];
   subscription: Subscription;
   commandes: any;
   periode: string = 'total';
@@ -66,7 +67,7 @@ export class CommandeDetailComponent implements OnInit, OnDestroy {
 
       this.clientService.clientDetailleCommande(this.route.snapshot.paramMap.get('id')).subscribe(res => {
         this.client = res;
-        
+        this.spiner = ['je', 'suis', 'cool'];
         this.commandes = res.commandes.filter(function(res){
           return res.delete == 0;
         })

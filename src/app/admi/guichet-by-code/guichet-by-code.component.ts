@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { GuichetService } from './../../services/guichet.service';
 import { WeekService } from './../../services/week.service';
 import { Router } from '@angular/router';
@@ -34,7 +35,7 @@ export class GuichetByCodeComponent implements OnInit {
     data: []
   };
 
-  constructor(private fb: FormBuilder, private userService: UserService, private clientService: ClientService, public print: PrintClientService, private router: Router, private week: WeekService, private guichetService: GuichetService) { 
+  constructor(private fb: FormBuilder, private userService: UserService, private clientService: ClientService, public print: PrintClientService, private router: Router, private week: WeekService, private guichetService: GuichetService, private spiner: NgxSpinnerService) { 
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -77,6 +78,7 @@ export class GuichetByCodeComponent implements OnInit {
         this.passwordIncorect = false;
         this.etatPadding = true;
       }else{
+        this.spiner.show();
         this.recherche = false;
         let date = new Date();
         this.guichetService.getGuichets().subscribe(res => {
@@ -87,7 +89,8 @@ export class GuichetByCodeComponent implements OnInit {
               return result.code == this.code.value;
             }
           })
-         
+          
+          this.spiner.hide();
           this.guichets.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
           this.collection = { count: 20, data: this.guichets };
         })

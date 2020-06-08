@@ -185,27 +185,6 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
       this.totalDayRetrait = this.retraitDayWester + this.retraitDayWari + this.retraitDayMoney;
 
       this.TotalcaisseGuichet = this.caisseWester + this.caisseWari + this.caisseMoney;
-
-      // console.log('DepotDay Wster', this.depotDayWester);
-      // console.log('DepotDay Wari', this.depotDayWari);
-      // console.log('DepotDay Money Gram', this.depotDayMoney);
-
-      // console.log('retraitDay Wster', this.retraitDayWester);
-      // console.log('retraitDay Wari', this.retraitDayWari);
-      // console.log('retraitDay Money Gram', this.retraitDayMoney);
-
-      // console.log('Depot Wster', this.depotWester);
-      // console.log('Depot Wari', this.depotWari);
-      // console.log('Depot Money Gram', this.depotMoney);
-
-      // console.log('retrait Wster', this.retraitWester);
-      // console.log('retrait Wari', this.retraitWari);
-      // console.log('retrait Money Gram', this.retraitMoney);
-
-      // console.log('caisse Wster', this.caisseWester);
-      // console.log('caisse Wari', this.caisseWari);
-      // console.log('caisse Money Gram', this.caisseMoney);
-      
     })
   }
   

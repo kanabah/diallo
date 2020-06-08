@@ -1,4 +1,3 @@
-import { DesignService } from './../services/design.service';
 import { Observable, timer } from 'rxjs';
 import { ResourcesService } from './../services/resources.service';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
@@ -16,7 +15,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   passwordIncorect: boolean = true;
   etatPadding: boolean = true;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private load: ResourcesService, private styleService : DesignService) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private load: ResourcesService) { }
 
   ngOnInit() {
     // const observable = new Observable(subscriber => {
@@ -42,7 +41,6 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   
   ngOnDestroy(){
-    this.styleService.removeStyle('red-theme');
   }
     
   ngAfterViewInit(){

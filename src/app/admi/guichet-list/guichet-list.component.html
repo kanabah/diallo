@@ -42,8 +42,8 @@
                                 <td class="text-center">{{ guichet.montant | currency:'':'' }}</td>
                                 <td class="text-center">{{ guichet.createdAt | date }}</td>
                                 <td class="page-title-icon">
-                                    <span data-toggle="tooltip" (click)="redirectMod(guichet._id)" title="Modification" class="pd-setting-ed"><i class="fa fa-pencil-square-o fa-2x text-success" aria-hidden="true"></i> </span> &nbsp;&nbsp;
-                                    <span data-toggle="tooltip" (click)="deleteGuichet(guichet._id)" title="Supresion" class="pd-setting-ed"><i class="fa fa-trash fa-2x text-danger" aria-hidden="true"></i></span>
+                                    <span id="pointer" data-toggle="tooltip" (click)="redirectMod(guichet._id)"  class="pd-setting-ed"><i class="fa fa-pencil-square-o fa-2x text-success" aria-hidden="true"></i> </span> &nbsp;&nbsp;
+                                    <span id="pointer" data-toggle="tooltip" (click)="deleteGuichet(guichet._id)" class="pd-setting-ed"><i class="fa fa-trash fa-2x text-danger" aria-hidden="true"></i></span>
                                 </td>
                             </tr>
                             </tbody>
@@ -56,6 +56,7 @@
                </div>
            </div>
         </div>
+        <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-square-spin" [fullScreen] = "true"><p style="color: white" > Chargement... </p></ngx-spinner>
         <app-footer-admi></app-footer-admi>
     </div>
 </div>

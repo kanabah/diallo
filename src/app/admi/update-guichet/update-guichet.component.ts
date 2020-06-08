@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Guichet } from 'src/app/interfaces/guichet';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
@@ -24,7 +25,7 @@ export class UpdateGuichetComponent implements OnInit {
   guichets: Guichet[] = [];
   guichet: any;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private guichetService: GuichetService, private snackBar: SnackBarService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private guichetService: GuichetService, private snackBar: SnackBarService, private route: ActivatedRoute, private router: Router, private spiner: NgxSpinnerService) { }
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
@@ -33,6 +34,7 @@ export class UpdateGuichetComponent implements OnInit {
   }
 
   getGuichetById(id){
+    this.spiner.show();
     this.guichetService.getGuichets().subscribe(res => {
       this.guichets = res;
       this.guichet = this.guichets.filter(result => {
@@ -40,6 +42,7 @@ export class UpdateGuichetComponent implements OnInit {
       })
 
       this.initialiseForms();
+      this.spiner.hide();
     });
 
     

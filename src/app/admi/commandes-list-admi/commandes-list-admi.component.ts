@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { WeekService } from './../../services/week.service';
 import { switchMap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -23,7 +24,7 @@ export class CommandesListAdmiComponent implements OnInit {
     data: []
   };
 
-  constructor(private clientService: ClientService, public print: PrintClientService, private router: Router, private route: ActivatedRoute, private week: WeekService) {
+  constructor(private clientService: ClientService, public print: PrintClientService, private router: Router, private route: ActivatedRoute, private week: WeekService, private spinner: NgxSpinnerService) {
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -52,6 +53,7 @@ export class CommandesListAdmiComponent implements OnInit {
   }
 
   getClients(){
+    this.spinner.show(); 
     this.route.paramMap.pipe(
     switchMap(params => {
       this.periode = params.get('periode');
@@ -98,6 +100,7 @@ export class CommandesListAdmiComponent implements OnInit {
 
         this.clients.sort((a: any, b: any) => a.deteCmdUpdate < b.deteCmdUpdate ? 1 : a.deteCmdUpdate > b.deteCmdUpdate ? -1 : 0);
         this.collection = { count: 20, data: this.clients };
+        this.spinner.hide();
     });
   }
 

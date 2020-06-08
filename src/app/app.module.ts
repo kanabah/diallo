@@ -1,4 +1,3 @@
-import { DesignService } from './services/design.service';
 import { AdmiModule } from './admi/admi.module';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { PromoteurModule } from './promoteur/promoteur.module';
@@ -31,6 +30,7 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
 import { SharedModule } from './shared.module';
 import { HeaderAdmiComponent } from './header-admi/header-admi.component';
 import { GuideComponent } from './guide/guide.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -64,17 +64,18 @@ import { GuideComponent } from './guide/guide.component';
     DemoMaterialModule,
     FontAwesomeModule,
     OrderModule,
-    SharedModule
+    SharedModule,
+    NgxSpinnerModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
     },
-    ResourcesService, DesignService,
+    ResourcesService,
     {
       provide: APP_INITIALIZER,
       useFactory: ResourceProviderFactory,
-      deps: [ ResourcesService, DesignService ],
+      deps: [ ResourcesService ],
       multi: true
     },
     GlobalErrorHandlerService,

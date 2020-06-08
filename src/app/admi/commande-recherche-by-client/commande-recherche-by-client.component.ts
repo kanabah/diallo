@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { WeekService } from './../../services/week.service';
 import { returnInfoClientByAdmiValidator } from 'src/app/validators/return-info-client-by-admi.validators';
 import { controlCodeTelValidator } from 'src/app/validators/tel-required-once-validator';
@@ -34,7 +35,7 @@ export class CommandeRechercheByClientComponent implements OnInit {
     data: []
   };
 
-  constructor(private fb: FormBuilder, private userService: UserService, private clientService: ClientService, public print: PrintClientService, private router: Router, private week: WeekService) { 
+  constructor(private fb: FormBuilder, private userService: UserService, private clientService: ClientService, public print: PrintClientService, private router: Router, private week: WeekService, private spiner: NgxSpinnerService) { 
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -78,6 +79,7 @@ export class CommandeRechercheByClientComponent implements OnInit {
         this.passwordIncorect = false;
         this.etatPadding = true;
       }else{
+        this.spiner.show();
         this.recherche = false;
         let date = new Date();
         this.clientService.getAllClients().subscribe(res => {
@@ -102,7 +104,7 @@ export class CommandeRechercheByClientComponent implements OnInit {
             }
           })
 
-
+          this.spiner.hide();
           this.commandes.sort((a: any, b: any) => a.dateCmd < b.dateCmd ? 1 : a.dateCmd > b.dateCmd ? -1 : 0);
           this.collection = { count: 20, data: this.commandes };
         })

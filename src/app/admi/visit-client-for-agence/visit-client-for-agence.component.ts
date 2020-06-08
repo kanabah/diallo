@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Client } from 'src/app/interfaces/client';
 import { ClientService } from 'src/app/services/client.service';
@@ -21,7 +22,7 @@ export class VisitClientForAgenceComponent implements OnInit {
     data: []
   };
 
-  constructor(private dialog: MatDialog,private clientService: ClientService, public print: PrintClientService, private route: Router, private router: ActivatedRoute) { 
+  constructor(private dialog: MatDialog,private clientService: ClientService, public print: PrintClientService, private route: Router, private router: ActivatedRoute, private spiner: NgxSpinnerService) { 
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -50,11 +51,12 @@ export class VisitClientForAgenceComponent implements OnInit {
   }
 
   getAllClients(id){
+    this.spiner.show();
     this.clientService.getAllClients().subscribe(res => {
       this.clients = res.filter(result => {
         return result.user_id._id == id;
       });
-      
+      this.spiner.hide();
       this.collection = { count: 20, data: this.clients };
     })
   }

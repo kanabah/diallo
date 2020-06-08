@@ -78,7 +78,9 @@
                                 <!-- Position Column -->
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                            </table>                                      
+                            </table> 
+
+                            <app-spiner [ok]="users"></app-spiner>                                     
                             <mat-paginator [pageSizeOptions]="[10, 20, 35, 100]"></mat-paginator>
                         </div>
                     </div>

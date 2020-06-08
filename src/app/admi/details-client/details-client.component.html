@@ -1,7 +1,7 @@
 <div class="app-main">  
     <app-nav-admi></app-nav-admi>
-    <div class="app-main__outer" *ngIf="client">
-       <div class="app-main__inner">  
+    <div class="app-main__outer" >
+        <div class="app-main__inner" *ngIf="client">  
             <app-title-page [title]="client.prenom" subTitle="Les details qui concerne toute les transaction du ce client dans notre base de donnée." [image]="client.avatar"></app-title-page>         
             <div class="row">
                 <div class="col-md-6">
@@ -60,6 +60,7 @@
                 </div>
             </div>
         </div>
+        <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-square-spin" [fullScreen] = "true"><p style="color: white" > Chargement... </p></ngx-spinner>
         <app-footer-admi></app-footer-admi>
     </div>
 </div>

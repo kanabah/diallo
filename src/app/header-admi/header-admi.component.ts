@@ -62,22 +62,25 @@ export class HeaderAdmiComponent implements OnInit, OnDestroy {
   onRecherhe(){
     var myValue = 0;
     myValue = +this.recherche.value;
-    if(myValue && typeof myValue === 'number'){
-      this.clientService.getClientByTel(this.recherche.value).subscribe(res => {
-        this.client = res;
-        console.log('Result', res);
-        if(!this.client){
-          this.border = true;
-          this.snackBar.openSnackBar("Cet numero de telephone client n'existe pas!!!", "Quitter")
-        }else{
-          this.border = false;
-          this.router.navigate(['admi/result-recherche-client-by-admi', this.client._id]);
-        }
-        
-      })
-    }else{
-      this.border = true;
-      this.snackBar.openSnackBar("Cet numero de telephone client n'existe pas!!!", "Quitter")
+    console.log('MY VALUE', myValue);
+    if(myValue != 0){
+      if(myValue && typeof myValue === 'number'){
+        this.clientService.getClientByTel(this.recherche.value).subscribe(res => {
+          this.client = res;
+          console.log('Result', res);
+          if(!this.client){
+            this.border = true;
+            this.snackBar.openSnackBar("Cet numero de telephone client n'existe pas!!!", "Quitter")
+          }else{
+            this.border = false;
+            this.router.navigate(['admi/result-recherche-client-by-admi', this.client._id]);
+          }
+          
+        })
+      }else{
+        this.border = true;
+        this.snackBar.openSnackBar("Cet numero de telephone client n'existe pas!!!", "Quitter")
+      }
     }
     
   }

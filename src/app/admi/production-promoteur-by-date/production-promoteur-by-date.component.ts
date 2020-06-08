@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PromoteurService } from './../../services/promoteur.service';
 import { WeekService } from './../../services/week.service';
 import { controlCodeTelValidator } from 'src/app/validators/tel-required-once-validator';
@@ -35,7 +36,7 @@ export class ProductionPromoteurByDateComponent implements OnInit {
     data: []
   };
 
-  constructor(private fb: FormBuilder, private userService: UserService, private promoteurService: PromoteurService, public print: PrintClientService, private location: Location, private week: WeekService) { 
+  constructor(private fb: FormBuilder, private userService: UserService, private promoteurService: PromoteurService, public print: PrintClientService, private location: Location, private week: WeekService, private spiner: NgxSpinnerService) { 
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -80,6 +81,7 @@ export class ProductionPromoteurByDateComponent implements OnInit {
         this.passwordIncorect = false;
         this.etatPadding = true;
       }else{
+        this.spiner.show();
         this.recherche = false;
         let date = new Date(this.date.value);
         this.promoteurService.getPromoteurs().subscribe(res => {
@@ -97,6 +99,7 @@ export class ProductionPromoteurByDateComponent implements OnInit {
                 }
               }
             }
+            this.spiner.hide();
           });
           console.log('getPromoteurs', this.promoteurs);
 

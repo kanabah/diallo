@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PromoteurService } from './../../services/promoteur.service';
 import { JsService } from 'src/app/services/js.service';
 import { AttributeRoleComponent } from './../attribute-role/attribute-role.component';
@@ -28,7 +29,7 @@ export class PromoteurListComponent implements OnInit {
     count: 0,
     data: []
   };
-  constructor(private dialog: MatDialog,private userService: UserService, public print: PrintClientService, private promoteurService: PromoteurService) { 
+  constructor(private dialog: MatDialog,private userService: UserService, public print: PrintClientService, private promoteurService: PromoteurService, private spiner: NgxSpinnerService) { 
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -58,6 +59,7 @@ export class PromoteurListComponent implements OnInit {
   }
 
   getUsers(){
+    this.spiner.show();
     this.userService.getUsers().subscribe(res => {
       this.userFilters = res;
       
@@ -65,6 +67,7 @@ export class PromoteurListComponent implements OnInit {
         return result.role == 'promoteur';
       });
       
+      this.spiner.hide();
       this.users.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
       this.collection = { count: 20, data: this.users };
     })

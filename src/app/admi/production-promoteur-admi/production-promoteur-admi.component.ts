@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Location } from '@angular/common';
 import { Promoteur } from 'src/app/interfaces/promoteur';
 import { UserService } from 'src/app/services/user.service';
@@ -26,7 +27,7 @@ export class ProductionPromoteurAdmiComponent implements OnInit {
   };
 
 
-  constructor(private promoteurService: PromoteurService, public print: PrintClientService, private route: ActivatedRoute, private userService: UserService, private location: Location) { 
+  constructor(private promoteurService: PromoteurService, public print: PrintClientService, private route: ActivatedRoute, private userService: UserService, private location: Location, private spiner: NgxSpinnerService) { 
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -50,6 +51,7 @@ export class ProductionPromoteurAdmiComponent implements OnInit {
   }
 
   getPromoteurs(id){
+    this.spiner.show();
     this.promoteurService.getPromoteurs().subscribe(res => {
       this.promoteurFilters = res;
 
@@ -57,12 +59,10 @@ export class ProductionPromoteurAdmiComponent implements OnInit {
         return result.user_id == id;
       });
 
-      console.log('Promoteurs Deta', this.promoteurs);
-      
-
+      this.spiner.hide();
       this.promoteurs.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
         this.collection = { count: 20, data: this.promoteurs  };
-    })
+    })  
 
     this.userService.getUser(id).subscribe(res => {
       this.user = res;
