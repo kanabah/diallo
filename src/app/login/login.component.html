@@ -1,4 +1,4 @@
-<div class="error-pagewrap abfBackground">
+<!-- <div class="error-pagewrap abfBackground">
     <div class="error-page-int">
         <div class="text-center m-b-md custom-login">
             <h3> <span id="text">CONEXION A L'APPLICATION</span></h3>
@@ -33,4 +33,32 @@
             <p id="text">Copyright © 2019. All rights reserved. Developed by <span class="text-primary">KANA BAH</span></p>
         </div>
     </div>   
+</div> -->
+
+<div id="abf-form">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" >
+        <div class="imgcontainer">
+            <img src="assets/user/img/logo/abf.jpeg" alt="Avatar" class="avatar" id="abfImage">
+        </div>
+        
+        <div class="container">
+            <label for="uname"><b>Email</b></label>
+            <input type="text" [id]="getEmailSuccess() ? 'successForm' : getEmailError() ? 'errorForm' : ''" placeholder="example@gmail.com" formControlName="email" title="Svp entrer votre email" value="" class="form-control"  required>
+            <span><small class="text-danger">{{ getEmailError() }}</small></span><br>
+            <label for="psw"><b>Mot de passe</b></label>
+            <input type="password" [id]="getPasswordSuccess() ? 'successForm' : getPasswordError() ? 'errorForm' : ''" title="Svp entrer votre mot de passe" placeholder="******" required="" value="" formControlName="password">
+            <span><small class="text-danger">{{ getPasswordError() }}</small></span>
+            <span *ngIf="!passwordIncorect"><small class="text-danger">Mot de passe incorect</small></span><br>
+            
+            <button type="submit">Valider</button>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Se souvenir
+            </label>
+        </div>
+        
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" (click)="onGoToRegister()" class="cancelbtn">Enregistrement</button>
+            <span class="psw">Oublié <a href="#">mot de passe?</a></span>
+        </div>
+    </form>
 </div>

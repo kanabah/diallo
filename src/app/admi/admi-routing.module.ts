@@ -1,3 +1,4 @@
+import { AuthGuardAdmi } from './../guards/auth-admi.guards';
 import { CompteAdmiComponent } from './compte-admi/compte-admi.component';
 import { ResultRechercheClientByAdmiComponent } from './result-recherche-client-by-admi/result-recherche-client-by-admi.component';
 import { VisitPromoteurForAgenceComponent } from './visit-promoteur-for-agence/visit-promoteur-for-agence.component';
@@ -30,7 +31,7 @@ import { RechercheCommandeByAgenceComponent } from './recherche-commande-by-agen
 const routes: Routes = [
   {
     path: 'admi',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuardAdmi],
     children: [
       {
         path: 'home',

@@ -19,6 +19,7 @@ export class ListDepotAgenceComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   resultFilterDay: any;
+  clients: any[] = [];
 
   constructor(private userService: UserService, public print: PrintClientService, private dialog: MatDialog) { }
 
@@ -49,6 +50,7 @@ export class ListDepotAgenceComponent implements OnInit {
       this.caisses = new MatTableDataSource(resuts.soldSortie);
       this.caisses.paginator = this.paginator;
       this.caisses.sort = this.sort;
+      this.clients = ['sali', 'bon'];
     });
   }
 

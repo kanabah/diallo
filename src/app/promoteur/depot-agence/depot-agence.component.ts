@@ -86,6 +86,8 @@ export class DepotAgenceComponent implements OnInit {
       })
       
       this.resultAfterCalcul = sumEntrer + montantSoldActuel - sumSortie - montantSoldSortie;
+      console.log('AFTER CALCUL', this.resultAfterCalcul);
+      
     return this.resultAfterCalcul;
   }
 

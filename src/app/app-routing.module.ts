@@ -1,3 +1,5 @@
+import { AuthUserOrPromoteurGuard } from './guards/auth-user-or-promoteur.guards';
+import { AuthGuardAdmi } from './guards/auth-admi.guards';
 import { GuideComponent } from './guide/guide.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { NgModule } from '@angular/core';
@@ -12,11 +14,11 @@ import { NotAuthGuard } from './guards/not-auth.guard';
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeUserComponent, canActivate: [AuthGuard]},
+  { path: 'home', component: HomeUserComponent, canActivate: [AuthUserOrPromoteurGuard]},
   { path: 'user/profile', component: MyProfileComponent},
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
   { path: 'register', component: RegisterComponent},
-  { path: 'guide', component: GuideComponent},
+  { path: 'guide', canActivate: [AuthGuardAdmi], component: GuideComponent},
   { path: '', redirectTo: '/home',pathMatch: 'full', canActivate: [AuthGuard]},
   { path: 'error', component: GlobalErrorComponent},
   { path: '**', component: NotFoundComponent},

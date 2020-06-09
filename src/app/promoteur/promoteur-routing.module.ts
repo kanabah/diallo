@@ -16,12 +16,13 @@ import { AuthGuard } from './../guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EntrerCaisseComponent } from './entrer-caisse/entrer-caisse.component';
+import { AuthGuardPromoteur } from '../guards/auth-promoteur.guards';
 
 
 const routes: Routes = [
   {
     path: 'promoteur',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuardPromoteur],
     children: [
       {
         path: 'enter/checkout',
@@ -52,10 +53,6 @@ const routes: Routes = [
         component: ListDebitAgenceComponent
       },
       {
-        path: 'production-periode',
-        component: ProductionPromoteurPeriodeComponent
-      },
-      {
         path: 'depot-agence',
         component: DepotAgenceComponent
       },
@@ -68,16 +65,8 @@ const routes: Routes = [
         component: UpdateDepotAgenceComponent
       },
       {
-        path: 'attribution-list/:id',
-        component: AttributionListComponent
-      },
-      {
         path: 'attribution-update/:id/:user_id',
         component: AttributionUpdateComponent
-      },
-      {
-        path: 'production/total/:id',
-        component: ProductionPromoteurTotalComponent
       },
       {
         path: 'list/caisses/update/:id',

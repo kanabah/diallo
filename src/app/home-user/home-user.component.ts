@@ -94,19 +94,19 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.getGuichets();
 
-    // const observable = new Observable(subscriber => {
-    //   subscriber.next(1);
-    //   subscriber.next(2);
-    //   subscriber.next(3);
-    //   setTimeout(() => {
-    //     subscriber.next(4);
-    //     subscriber.complete();
-    //   }, 1000);
-    // });
+    const observable = new Observable(subscriber => {
+      subscriber.next(1);
+      subscriber.next(2);
+      subscriber.next(3);
+      setTimeout(() => {
+        subscriber.next(4);
+        subscriber.complete();
+      }, 1000);
+    });
 
-    // observable.subscribe(res => {
-    //   this.load.loadUser()
-    // })
+    observable.subscribe(res => {
+      this.load.loadUser()
+    })
   }
 
   getGuichets(){

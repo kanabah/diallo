@@ -20,7 +20,7 @@ export class PrintClientService {
     if(avatar){
       return `${baseUrl}${avatar}`;
     }else{
-      return 'assets/user/img/avatar/avatar.png';
+      return 'assets/user/img/avatar/avatar7.png';
     }
   }
 }

@@ -2,7 +2,7 @@
 
     <div class="app-header header-shadow">
         <div class="app-header__logo">
-            <div class="logo-src"></div>
+            <div id="abfLogo">Abf Service</div>
             <div class="header__pane ml-auto">
                 <div>
                     <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -69,9 +69,6 @@
                                     </a>
                                     <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                         <button type="button" tabindex="0" (click)="onCompte(userService.getUserDetails()._id)" class="dropdown-item">Mon Compte</button>
-                                        <button (click)="generatePdf()">Settings</button>
-                                        <h6 tabindex="-1" class="dropdown-header">Header</h6>
-                                        <button type="button" tabindex="0" class="dropdown-item">Actions</button>
                                         <div tabindex="-1" class="dropdown-divider"></div>
                                         <button type="button" (click)="logout()" tabindex="0" class="dropdown-item">Deconnexion</button>
                                     </div>

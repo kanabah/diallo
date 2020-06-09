@@ -57,10 +57,12 @@ export class UserService {
     this.token = '';
     window.localStorage.removeItem('mean-token');
     // this.load.loadNull();
-    // this.router.navigateByUrl('/login');
-    this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-      this.router.navigate([this.location.path()]);
-    }); 
+    this.router.navigateByUrl('/login');
+    window.location.reload()
+    // this.router.navigate([{outlets: {primary: 'path' ,notloggedin: 'path'}}]);
+    // this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+    //   this.router.navigate([this.location.path()]);
+    // }); 
   }
 
   public register(user: User): Observable<User>{

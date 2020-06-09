@@ -1,10 +1,11 @@
-import { Observable, timer } from 'rxjs';
+import { Observable, timer, Subscription } from 'rxjs';
 import { ResourcesService } from './../services/resources.service';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { emailValidatorRegister } from '../validators/email-validator-register';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -14,33 +15,39 @@ import { emailValidatorRegister } from '../validators/email-validator-register';
 export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   passwordIncorect: boolean = true;
   etatPadding: boolean = true;
+  color: boolean = true;
+  subcription: Subscription;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private load: ResourcesService) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private load: ResourcesService, private location: Location) { }
 
   ngOnInit() {
-    // const observable = new Observable(subscriber => {
-    //   subscriber.next(1);
-    //   subscriber.next(2);
-    //   subscriber.next(3);
-    //   setTimeout(() => {
-    //     subscriber.next(4);
-    //     subscriber.complete();
-    //   }, 1000);
-    // });
-    // timer(0, 5000).subscribe(result => {
-    //   this.load.loadResources()
-    //   console.log('BONJOUR');
+    const observable = new Observable(subscriber => {
+      subscriber.next(1);
+      subscriber.next(2);
+      subscriber.next(3);
+      setTimeout(() => {
+        subscriber.next(4);
+        subscriber.complete();
+      }, 1000);
+    });
+
+    observable.subscribe(res => {
+      console.log('JE SUIS LA REPONSE');
+      // this.cmdTest = [];
+      // this.chartByDate();
       
-    //   this.load.loadNull()
-    // })
-    // observable.subscribe(res => {
-    //   // timer(0, 1000).subscribe(result => {
-    //     // })
-    //   })
+    })
+
+    // this.refresh();
     
+  }
+
+  onGoToRegister(){
+    this.router.navigate(["/register"]);
   }
   
   ngOnDestroy(){
+    // this.subcription.unsubscribe();
   }
     
   ngAfterViewInit(){

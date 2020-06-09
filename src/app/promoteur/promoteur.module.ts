@@ -1,3 +1,4 @@
+import { SpinerPromoteurComponent } from './spiner-promoteur/spiner-promoteur.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -28,7 +29,7 @@ import { UpdateDepotAgenceComponent } from './update-depot-agence/update-depot-a
 
 
 @NgModule({
-  declarations: [PromoteurComponent, EntrerCaisseComponent, SortieCaisseComponent, ListEntrerCaisseComponent, UpdateCaissePromoteurComponent, ListSortieCaisseComponent, DialogDeleteCaisseComponent, ListEntrerJourComponent, ListSortieJourComponent, ListDebitAgenceComponent, ProductionPromoteurTotalComponent, ProductionPromoteurPeriodeComponent, AttributionListComponent, AttributionUpdateComponent, DeleteConfirmCoteAgenceComponent, DepotAgenceComponent, ListDepotAgenceComponent, UpdateDepotAgenceComponent],
+  declarations: [PromoteurComponent, EntrerCaisseComponent, SortieCaisseComponent, ListEntrerCaisseComponent, UpdateCaissePromoteurComponent, ListSortieCaisseComponent, DialogDeleteCaisseComponent, ListEntrerJourComponent, ListSortieJourComponent, ListDebitAgenceComponent, ProductionPromoteurTotalComponent, ProductionPromoteurPeriodeComponent, AttributionListComponent, AttributionUpdateComponent, DeleteConfirmCoteAgenceComponent, DepotAgenceComponent, ListDepotAgenceComponent, UpdateDepotAgenceComponent, SpinerPromoteurComponent],
   entryComponents: [
     DialogDeleteCaisseComponent,
     DeleteConfirmCoteAgenceComponent

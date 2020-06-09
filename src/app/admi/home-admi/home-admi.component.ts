@@ -432,7 +432,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
       this.chartByDate();
     })
 
-    this.subscriptionGraph = timer(0, 60000).subscribe(res => {
+    this.subscriptionGraph = timer(0, 20000).subscribe(res => {
       this.caclulForChart();
       this.getChartsColumn();
     })

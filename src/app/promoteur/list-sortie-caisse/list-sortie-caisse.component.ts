@@ -21,7 +21,8 @@ export class ListSortieCaisseComponent implements OnInit {
   caisses = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-
+  clients: any[] = [];
+  
   constructor(private dialog: MatDialog,private promoteurService: PromoteurService, public print: PrintClientService, private router: Router) { }
 
   ngOnInit() {
@@ -51,6 +52,7 @@ export class ListSortieCaisseComponent implements OnInit {
       this.caisses = new MatTableDataSource(resuts);
       this.caisses.paginator = this.paginator;
       this.caisses.sort = this.sort;
+      this.clients = resuts;
     });
   }
   

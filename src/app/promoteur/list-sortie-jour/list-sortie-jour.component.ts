@@ -21,6 +21,7 @@ export class ListSortieJourComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   resultFilterDay: any;
+  clients: any[] = [];
 
   constructor(private dialog: MatDialog,private promoteurService: PromoteurService, public print: PrintClientService, private router: Router) { }
 
@@ -42,7 +43,8 @@ export class ListSortieJourComponent implements OnInit {
         var dateAdd = new Date(res.createdAt);
           return dateAdd.getDate() == date.getDate() && dateAdd.getMonth() == date.getMonth() && dateAdd.getFullYear() == date.getFullYear();
       });
-
+      this.clients = resuts;
+      
       this.resultFilterDay.sort((a: any, b: any) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
       this.caisses = new MatTableDataSource(this.resultFilterDay);
       this.caisses.paginator = this.paginator;

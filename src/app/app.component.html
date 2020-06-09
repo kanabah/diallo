@@ -1,4 +1,5 @@
 <!-- <link rel="stylesheet" href="../assets/user/style.css"> -->
+<!-- <router-outlet name="loggedin"></router-outlet> -->
 <ng2-slim-loading-bar color="red"></ng2-slim-loading-bar>
 <app-header-user *ngIf="userService.isLoggedIn() && (userService.getUserDetails().role == 'user' || userService.getUserDetails().role == 'promoteur')"></app-header-user>
 <app-header-admi *ngIf="userService.isLoggedIn() && (userService.getUserDetails().role == 'admi')"></app-header-admi>

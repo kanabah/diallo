@@ -1,3 +1,4 @@
+import { ResourcesService } from './../services/resources.service';
 import { controlCodeTelValidator } from 'src/app/validators/tel-required-once-validator';
 import { passwordValidator } from './../validators/password-register-validators';
 import { UserService } from './../services/user.service';
@@ -16,9 +17,15 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   etatPadding: boolean = true;
 
-  constructor(private fb:FormBuilder, private userService: UserService, private snackBra: SnackBarService, private router: Router) { }
+  constructor(private fb:FormBuilder, private userService: UserService, private snackBra: SnackBarService, private router: Router, private load: ResourcesService) { }
 
   ngOnInit() {
+    this.load.loadUser();
+  }
+
+  onRedirectToLogin(){
+    this.router.navigateByUrl('/login');
+    // window.location.reload();
   }
 
   onRegister(){
