@@ -61,7 +61,7 @@ export class AttributionListComponent implements OnInit {
     });
   }
 
-  deleteDebit(id){
+  deleteDebit(id, ok){
     this.dialog.open(DeleteConfirmCoteAgenceComponent, {
       data: {"id": id, "user_id": this.user_id, "object": 'delete-debit'}
     });
