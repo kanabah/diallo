@@ -27,12 +27,14 @@ export class RegisterComponent implements OnInit {
     this.router.navigateByUrl('/login');
     // window.location.reload();
   }
-
+  
   onRegister(){
     this.etatPadding = false;
     this.userService.register(this.registerForm.value).subscribe(res => {
       this.router.navigate(['/login']);
       this.snackBra.openSnackBar('Compte Creer Avec Success!!!', 'Fermer');
+      window.location.reload();
+
     })
   }
 

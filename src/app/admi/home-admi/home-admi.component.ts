@@ -397,7 +397,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
     this.month = false;
   }
 
-  constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private route: Router, private guichetService: GuichetService, private load: ResourcesService, private spinner: NgxSpinnerService) {
+  constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private route: Router, private guichetService: GuichetService, private load: ResourcesService, private spinner: NgxSpinnerService, private js: JsService) {
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -453,12 +453,13 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
       this.getChartsColumn();
       this.getChartsDate();
       // this.chartByDate();
-      this.load.loadAdmi()
+      this.load.loadAdmi();
     })
     
   }
   
   ngOnInit() {
+    // this.js.jsAdmi();
     // this.jsService.jsAdmi();
     // this.caclulForChart();
     

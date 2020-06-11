@@ -15,7 +15,7 @@ export class TitlePageComponent implements OnInit {
   constructor(public print: PrintClientService, private js: JsService) { }
 
   ngOnInit() {
-    // this.js.jsAdmiTitle()
+    this.js.jsAdmiTitle()
   }
 
 }
