@@ -1,5 +1,5 @@
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ResourcesService } from './../../services/resources.service';
+// import { ResourcesService } from './../../services/resources.service';
 import { GuichetService } from './../../services/guichet.service';
 import { Subscription, timer, Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -397,7 +397,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
     this.month = false;
   }
 
-  constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private route: Router, private guichetService: GuichetService, private load: ResourcesService, private spinner: NgxSpinnerService, private js: JsService) {
+  constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private route: Router, private guichetService: GuichetService, private spinner: NgxSpinnerService, private js: JsService) {
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -453,7 +453,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
       this.getChartsColumn();
       this.getChartsDate();
       // this.chartByDate();
-      this.load.loadAdmi();
+      // this.load.loadAdmi();
     })
     
   }

@@ -1,5 +1,4 @@
 import { Observable, timer, Subscription } from 'rxjs';
-import { ResourcesService } from './../services/resources.service';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
@@ -18,7 +17,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   color: boolean = true;
   subcription: Subscription;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private load: ResourcesService, private location: Location) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private location: Location) { }
 
   ngOnInit() {
     const observable = new Observable(subscriber => {

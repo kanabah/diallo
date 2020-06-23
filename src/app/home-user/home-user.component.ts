@@ -1,4 +1,4 @@
-import { ResourcesService } from './../services/resources.service';
+// import { ResourcesService } from './../services/resources.service';
 import { PromoteurService } from './../services/promoteur.service';
 import { User } from './../interfaces/user';
 import { GuichetService } from './../services/guichet.service';
@@ -35,7 +35,7 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
   userDetails: User;
   promoteurs: Promoteur[] = [];
 
-  constructor(private js: JsService, public dialog: MatDialog, private clientService: ClientService, public print: PrintClientService, public userService : UserService, private guichetService: GuichetService, private promoteurService: PromoteurService, private load: ResourcesService) { }
+  constructor(private js: JsService, public dialog: MatDialog, private clientService: ClientService, public print: PrintClientService, public userService : UserService, private guichetService: GuichetService, private promoteurService: PromoteurService) { }
   infoTotal: any;
   purcentDay: any = 0;
   purcentMonth: any = 0;
@@ -105,7 +105,7 @@ export class HomeUserComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     observable.subscribe(res => {
-      this.load.loadUser()
+      // this.load.loadUser()
     })
   }
 
