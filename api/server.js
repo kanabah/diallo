@@ -8,12 +8,6 @@ helmet = require("helmet"),
 mongoose = require('mongoose'),
 config = require('./DB');
 
-// var privateKey  = fs.readFileSync('/home/abfgrup/ssl/keys/c8623_ee753_d616ac42867c5843a60743bca9679c69.key', 'utf8');
-// var certificate = fs.readFileSync('/home/abfgrup/ssl/certs/abf_grup_com_c8623_ee753_1590600121_4be0e232f39ea057c10617c6d1bce4aa.crt', 'utf8');
-
-// var privateKey  = fs.readFileSync('/etc/apache2/conf.d/ssl.key/server.key', 'utf8');
-// var certificate = fs.readFileSync('/etc/apache2/conf.d/ssl.crt/server.crt', 'utf8');
-
 const app = express();
 app.use(express.static(path.join(__dirname, '')));
 
@@ -44,10 +38,6 @@ const port = process.env.PORT || 5202;
 // const port = process.env.PORT || 4001;
 
 app.listen(port, () => console.log('Listen Server in port ', port));
-// const options = {
-//   key: privateKey,
-//   cert: certificate
-// };
 
 https.createServer(options, app).listen(port, function(){
   console.log('Listening on port ' + port);

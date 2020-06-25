@@ -253,7 +253,7 @@ export class ClientService {
       reportProgress: true,
       observe: 'events' 
     }).pipe(
-      retry(3),
+      retry(6),
     );
   }
 

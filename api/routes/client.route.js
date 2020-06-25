@@ -100,6 +100,8 @@ clientRoutes.route('/addCommande/:id/user_id/:user_id').put(auth,ctrClient.addCo
 
 //UPLOAD IMAGE AVATAR
 clientRoutes.route('/avatar').post(upload.single('file'), (req, res) => {
+    console.log('MY DATA', upload.single('file'));
+    
     if (req.file) {
         console.log('RESULT iMAGE', req.file);
         
