@@ -8,8 +8,8 @@ import { Client } from './../../interfaces/client';
 import { UserService } from './../../services/user.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { telAgenceValidator } from 'src/app/validators/tel-agence-validators';
 import { Guichet } from 'src/app/interfaces/guichet';
+import { telGuichetValidator } from 'src/app/validators/tel-guichet-validators';
 
 @Component({
   selector: 'app-guichet-by-agence',
@@ -192,7 +192,7 @@ export class GuichetByAgenceComponent implements OnInit {
       validators: [Validators.required,
         Validators.pattern(/^[0-9+]{9,9}$/)
      ],
-      asyncValidators: [telAgenceValidator(this.userService)],
+      asyncValidators: [telGuichetValidator(this.userService)],
       updateOn: 'blur'}
     ],
     periode: ['tout', [Validators.required]],

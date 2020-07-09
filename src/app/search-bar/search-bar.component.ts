@@ -29,7 +29,7 @@ export class SearchBarComponent implements OnInit {
   onRecherhe(){
     var myValue = 0;
     myValue = +this.recherche.value;
-    if(myValue && typeof myValue === 'number'){
+    if(myValue && typeof myValue === 'number' && this.userService.getUserDetails().role != 'guichet'){
       this.clientService.getClientByTel(myValue).subscribe(res => {
         this.client = res;
         if(true){

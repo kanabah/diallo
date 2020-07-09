@@ -6,59 +6,59 @@
 <!-- ===================END SEARCH========================================== -->
 <div class="all-content-wrapper" *ngIf="infoTotal">
   
-<div class="analytics-sparkle-area">
-        <div class="container-fluid">
-            <div class="row" >
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="analytics-sparkle-line reso-mg-b-30">
-                        <div class="analytics-content">
-                            <h5>Orange Money<small>(GNF)</small></h5>
-                            <h2><span >{{ infoTotal['sumTotalOM'] | currency:'':'' }}</span><span></span> <span class="tuition-fees"><button type="button" (click)="openDialog()" class="btn btn-custon-two btn-primary btn-xs">Ajout</button></span></h2>
-                            <span class="text-{{ alertOM }}">{{ infoTotal['pourcentOM'] }}%</span>
-                            <div class="progress m-b-0">
-                                <div class="progress-bar progress-bar-{{ alertOM }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentOM']"> <span class="sr-only">20% Complete</span> </div>
+    <div class="analytics-sparkle-area">
+            <div class="container-fluid">
+                <div class="row" >
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="analytics-sparkle-line reso-mg-b-30">
+                            <div class="analytics-content">
+                                <h5>Orange Money<small>(GNF)</small></h5>
+                                <h2><span >{{ infoTotal['sumTotalOM'] | currency:'':'' }}</span><span></span> <span class="tuition-fees"><button type="button" (click)="openDialog()" class="btn btn-custon-two btn-primary btn-xs">Ajout</button></span></h2>
+                                <span class="text-{{ alertOM }}">{{ infoTotal['pourcentOM'] }}%</span>
+                                <div class="progress m-b-0">
+                                    <div class="progress-bar progress-bar-{{ alertOM }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentOM']"> <span class="sr-only">20% Complete</span> </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="analytics-sparkle-line reso-mg-b-30">
-                        <div class="analytics-content">
-                            <h5>Mobile Money <small>(GNF)</small></h5>
-                            <h2><span>{{ infoTotal['sumTotalMoMo'] | currency:'':'' }}</span> <span class="tuition-fees"><button type="button" (click)="openDialogMoMo()" class="btn btn-custon-two btn-primary btn-xs">Ajout</button></span></h2>
-                            <span class="text-{{ alertMoMo }}">{{ infoTotal['pourcentMoMo'] }}%</span>
-                            <div class="progress m-b-0">
-                                <div class="progress-bar progress-bar-{{ alertMoMo }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentMoMo']"> <span class="sr-only">230% Complete</span> </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="analytics-sparkle-line reso-mg-b-30">
+                            <div class="analytics-content">
+                                <h5>Mobile Money <small>(GNF)</small></h5>
+                                <h2><span>{{ infoTotal['sumTotalMoMo'] | currency:'':'' }}</span> <span class="tuition-fees"><button type="button" (click)="openDialogMoMo()" class="btn btn-custon-two btn-primary btn-xs">Ajout</button></span></h2>
+                                <span class="text-{{ alertMoMo }}">{{ infoTotal['pourcentMoMo'] }}%</span>
+                                <div class="progress m-b-0">
+                                    <div class="progress-bar progress-bar-{{ alertMoMo }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentMoMo']"> <span class="sr-only">230% Complete</span> </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
-                        <div class="analytics-content">
-                            <h5>Start Times<small>(GNF)</small></h5>
-                            <h2><span>{{ infoTotal['sumTotalST'] | currency:'':'' }}</span><span class="tuition-fees"><button type="button" (click)="openStartTimes()" class="btn btn-custon-two btn-primary btn-xs">Ajout</button></span></h2>
-                            <span class="text-{{ alertST }}">{{ infoTotal['pourcentST'] }}%</span>
-                            <div class="progress m-b-0">
-                                <div class="progress-bar progress-bar-{{ alertST }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentST']"> <span class="sr-only">20% Complete</span> </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
+                            <div class="analytics-content">
+                                <h5>Start Times<small>(GNF)</small></h5>
+                                <h2><span>{{ infoTotal['sumTotalST'] | currency:'':'' }}</span><span class="tuition-fees"><button type="button" (click)="openStartTimes()" class="btn btn-custon-two btn-primary btn-xs">Ajout</button></span></h2>
+                                <span class="text-{{ alertST }}">{{ infoTotal['pourcentST'] }}%</span>
+                                <div class="progress m-b-0">
+                                    <div class="progress-bar progress-bar-{{ alertST }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentST']"> <span class="sr-only">20% Complete</span> </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="analytics-sparkle-line table-mg-t-pro dk-res-t-pro-30">
-                        <div class="analytics-content">
-                            <h5>Rechargement Espece<small>(GNF)</small></h5>
-                            <h2><span>{{ infoTotal['sumTotalTransfert'] | currency:'':'' }}</span> <span class="tuition-fees"><button type="button" (click)="openTransfert()" class="btn btn-custon-two btn-primary btn-xs">Ajout</button></span></h2>
-                            <span class="text-{{ alertTransfert }}">{{ infoTotal['pourcentTransfert'] }}%</span>
-                            <div class="progress m-b-0">
-                                <div class="progress-bar progress-bar-{{ alertTransfert }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentTransfert']"> <span class="sr-only">230% Complete</span> </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="analytics-sparkle-line table-mg-t-pro dk-res-t-pro-30">
+                            <div class="analytics-content">
+                                <h5>Rechargement Espece<small>(GNF)</small></h5>
+                                <h2><span>{{ infoTotal['sumTotalTransfert'] | currency:'':'' }}</span> <span class="tuition-fees"><button type="button" (click)="openTransfert()" class="btn btn-custon-two btn-primary btn-xs">Ajout</button></span></h2>
+                                <span class="text-{{ alertTransfert }}">{{ infoTotal['pourcentTransfert'] }}%</span>
+                                <div class="progress m-b-0">
+                                    <div class="progress-bar progress-bar-{{ alertTransfert }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width.%]="infoTotal['pourcentTransfert']"> <span class="sr-only">230% Complete</span> </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
     
     <div class="courses-area mg-b-15" id="decal">
@@ -146,100 +146,6 @@
         </div>
     </div>
 
-    <div class="widgets-programs-area" id="decalButom">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hpanel widget-int-shape responsive-mg-b-30">
-                        <div class="panel-body">
-                            <div class="stats-title pull-left">
-                                <h4>Wester Union</h4>
-                            </div>
-                            <div class="stats-icon pull-right">
-                                <img src="assets/user/img/guichet/western.png" id="imgGuichet" alt="">
-                            </div>
-                            <div class="m-t-xl widget-cl-1">
-                                <h1 class="text-info">{{ caisseWester |  currency:'':'' }} <small>(GNF)</small> </h1>
-                                <hr>
-                                <p>
-                                    <span><strong>Depot Jour:</strong></span> <span class="pull-right"><i><small>{{ depotDayWester |  currency:'':'' }}</small></i></span><br>
-                                    <span><strong>Retrait Jour:</strong></span> <span class="pull-right"><i><small>{{ retraitDayWester |  currency:'':'' }}</small></i></span><br>
-                                    <span><strong>Depot Total:</strong></span> <span class="pull-right"><i>{{ depotWester |  currency:'':'' }}</i></span><br>
-                                    <span><strong>Retrait Total:</strong></span> <span class="pull-right"><i>{{ retraitWester |  currency:'':'' }}</i></span><br>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hpanel widget-int-shape responsive-mg-b-30">
-                        <div class="panel-body">
-                            <div class="stats-title pull-left">
-                                <h4>Money Gram</h4>
-                            </div>
-                            <div class="stats-icon pull-right">
-                                <img src="assets/user/img/guichet/money2.png" id="imgGuichet" alt="">
-                            </div>
-                            <div class="m-t-xl widget-cl-2">
-                                <h1 class="text-info">{{ caisseMoney |  currency:'':'' }}<small>(GNF)</small></h1>
-                                <hr>
-                                <p>
-                                    <span><strong>Depot Jour:</strong></span> <span class="pull-right"><i><small>{{ depotDayMoney |  currency:'':'' }}</small></i></span><br>
-                                    <span><strong>Retrait Jour:</strong></span> <span class="pull-right"><i><small>{{ retraitDayMoney |  currency:'':'' }}</small></i></span><br>
-                                    <span><strong>Depot Total:</strong></span> <span class="pull-right"><i>{{ depotMoney |  currency:'':'' }}</i></span><br>
-                                    <span><strong>Retrait Total:</strong></span> <span class="pull-right"><i>{{ retraitMoney |  currency:'':'' }}</i></span><br>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hpanel widget-int-shape responsive-mg-b-30 res-tablet-mg-t-30 dk-res-t-pro-30">
-                        <div class="panel-body">
-                            <div class="stats-title pull-left">
-                                <h4>Wari</h4>
-                            </div>
-                            <div class="stats-icon pull-right">
-                                <img src="assets/user/img/guichet/wari.jpg" id="imgGuichet" alt="">
-                            </div>
-                            <div class="m-t-xl widget-cl-3">
-                                <h1 class="text-info">{{ caisseWari |  currency:'':'' }}<small>(GNF)</small></h1>
-                                <hr>
-                                <p>
-                                    <span><strong>Depot Jour:</strong></span> <span class="pull-right"><i><small>{{ depotDayWari |  currency:'':'' }}</small></i></span><br>
-                                    <span><strong>Retrait Jour:</strong></span> <span class="pull-right"><i><small>{{ retraitDayWari |  currency:'':'' }}</small></i></span><br>
-                                    <span><strong>Depot Total:</strong></span> <span class="pull-right"><i>{{ depotWari |  currency:'':'' }}</i></span><br>
-                                    <span><strong>Retrait Total:</strong></span> <span class="pull-right"><i>{{ retraitWari |  currency:'':'' }}</i></span><br>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
-                        <div class="panel-body">
-                            <div class="stats-title pull-left">
-                                <h4>Total Guichet</h4>
-                            </div>
-                            <div class="stats-icon pull-right">
-                                <img src="assets/user/img/guichet/total.png" id="imgGuichet" alt="">
-                            </div>
-                            <div class="m-t-xl widget-cl-4">
-                                <h1 class="text-info">{{ TotalcaisseGuichet | currency:'':''}} <small>(GNF)</small> </h1>
-                                <hr>
-                                <p>
-                                    <span><strong>Depot Jour:</strong></span> <span class="pull-right"><i><small>{{ totalDayDepot |  currency:'':'' }}</small></i></span><br>
-                                    <span><strong>Retrait Jour:</strong></span> <span class="pull-right"><i><small>{{ totalDayRetrait |  currency:'':'' }}</small></i></span><br>
-                                    <span><strong>Depot Total:</strong></span> <span class="pull-right"><i>{{ totalDepot |  currency:'':'' }}</i></span><br>
-                                    <span><strong>Retrait Total:</strong></span> <span class="pull-right"><i>{{ totalRetrait |  currency:'':'' }}</i></span><br>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="traffic-analysis-area" id="declButton">
         <div class="container-fluid">
@@ -285,6 +191,108 @@
     </div>    
 </div>
 
+</div>
+
+
+
+<div *ngIf="userService.getUserDetails().role == 'guichet'">
+    <app-search-bar home="Home" title="Tableaux De Bord"></app-search-bar>
+    <div class="all-content-wrapper" *ngIf="infoTotal">
+        <div class="widgets-programs-area" id="decalButom">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="stats-title pull-left">
+                                    <h4>Wester Union</h4>
+                                </div>
+                                <div class="stats-icon pull-right">
+                                    <img src="assets/user/img/guichet/western.png" id="imgGuichet" alt="">
+                                </div>
+                                <div class="m-t-xl widget-cl-1">
+                                    <h1 class="text-info">{{ caisseWester |  currency:'':'' }} <small>(GNF)</small> </h1>
+                                    <hr>
+                                    <p>
+                                        <span><strong>Depot Jour:</strong></span> <span class="pull-right"><i><small>{{ depotDayWester |  currency:'':'' }}</small></i></span><br>
+                                        <span><strong>Retrait Jour:</strong></span> <span class="pull-right"><i><small>{{ retraitDayWester |  currency:'':'' }}</small></i></span><br>
+                                        <span><strong>Depot Total:</strong></span> <span class="pull-right"><i>{{ depotWester |  currency:'':'' }}</i></span><br>
+                                        <span><strong>Retrait Total:</strong></span> <span class="pull-right"><i>{{ retraitWester |  currency:'':'' }}</i></span><br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30">
+                            <div class="panel-body">
+                                <div class="stats-title pull-left">
+                                    <h4>Money Gram</h4>
+                                </div>
+                                <div class="stats-icon pull-right">
+                                    <img src="assets/user/img/guichet/money2.png" id="imgGuichet" alt="">
+                                </div>
+                                <div class="m-t-xl widget-cl-2">
+                                    <h1 class="text-info">{{ caisseMoney |  currency:'':'' }}<small>(GNF)</small></h1>
+                                    <hr>
+                                    <p>
+                                        <span><strong>Depot Jour:</strong></span> <span class="pull-right"><i><small>{{ depotDayMoney |  currency:'':'' }}</small></i></span><br>
+                                        <span><strong>Retrait Jour:</strong></span> <span class="pull-right"><i><small>{{ retraitDayMoney |  currency:'':'' }}</small></i></span><br>
+                                        <span><strong>Depot Total:</strong></span> <span class="pull-right"><i>{{ depotMoney |  currency:'':'' }}</i></span><br>
+                                        <span><strong>Retrait Total:</strong></span> <span class="pull-right"><i>{{ retraitMoney |  currency:'':'' }}</i></span><br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape responsive-mg-b-30 res-tablet-mg-t-30 dk-res-t-pro-30">
+                            <div class="panel-body">
+                                <div class="stats-title pull-left">
+                                    <h4>Wari</h4>
+                                </div>
+                                <div class="stats-icon pull-right">
+                                    <img src="assets/user/img/guichet/wari.jpg" id="imgGuichet" alt="">
+                                </div>
+                                <div class="m-t-xl widget-cl-3">
+                                    <h1 class="text-info">{{ caisseWari |  currency:'':'' }}<small>(GNF)</small></h1>
+                                    <hr>
+                                    <p>
+                                        <span><strong>Depot Jour:</strong></span> <span class="pull-right"><i><small>{{ depotDayWari |  currency:'':'' }}</small></i></span><br>
+                                        <span><strong>Retrait Jour:</strong></span> <span class="pull-right"><i><small>{{ retraitDayWari |  currency:'':'' }}</small></i></span><br>
+                                        <span><strong>Depot Total:</strong></span> <span class="pull-right"><i>{{ depotWari |  currency:'':'' }}</i></span><br>
+                                        <span><strong>Retrait Total:</strong></span> <span class="pull-right"><i>{{ retraitWari |  currency:'':'' }}</i></span><br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="hpanel widget-int-shape res-tablet-mg-t-30 dk-res-t-pro-30">
+                            <div class="panel-body">
+                                <div class="stats-title pull-left">
+                                    <h4>Total Guichet</h4>
+                                </div>
+                                <div class="stats-icon pull-right">
+                                    <img src="assets/user/img/guichet/total.png" id="imgGuichet" alt="">
+                                </div>
+                                <div class="m-t-xl widget-cl-4">
+                                    <h1 class="text-info">{{ TotalcaisseGuichet | currency:'':''}} <small>(GNF)</small> </h1>
+                                    <hr>
+                                    <p>
+                                        <span><strong>Depot Jour:</strong></span> <span class="pull-right"><i><small>{{ totalDayDepot |  currency:'':'' }}</small></i></span><br>
+                                        <span><strong>Retrait Jour:</strong></span> <span class="pull-right"><i><small>{{ totalDayRetrait |  currency:'':'' }}</small></i></span><br>
+                                        <span><strong>Depot Total:</strong></span> <span class="pull-right"><i>{{ totalDepot |  currency:'':'' }}</i></span><br>
+                                        <span><strong>Retrait Total:</strong></span> <span class="pull-right"><i>{{ totalRetrait |  currency:'':'' }}</i></span><br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

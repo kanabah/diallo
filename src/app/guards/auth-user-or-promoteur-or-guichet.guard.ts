@@ -6,13 +6,13 @@ import { UserService } from '../services/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthUserOrPromoteurGuard implements CanActivate  {
+export class AuthUserOrPromoteurOrGuichetGuard implements CanActivate  {
   constructor(private userService: UserService, private router: Router){}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
     let url = state.url;
     if(this.userService.isLoggedIn()){
-      if(this.userService.getUserDetails().role == 'user' || this.userService.getUserDetails().role == 'promoteur'){
+      if(this.userService.getUserDetails().role == 'user' || this.userService.getUserDetails().role == 'promoteur' || this.userService.getUserDetails().role == 'guichet'){
         return true;
       }else{
           this.router.navigate(['/home']);

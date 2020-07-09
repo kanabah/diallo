@@ -36,9 +36,19 @@ export class RaportGuichetPeriodeComponent implements OnInit {
     this.getGuichet();
     
   }
+
+  getType(type){
+    if(type == 'wester'){
+      return 'Wester Union';
+    }else if(type == 'money'){
+      return 'Money Gram';
+    }else if(type == 'wari'){
+      return 'Wari';
+    }
+  }
   
   //DATA TABLE
-  displayedColumns: string[] = ['action', 'code', 'montant', 'tel','description', 'createdAt'];
+  displayedColumns: string[] = ['type', 'action', 'code', 'montant', 'tel','description', 'createdAt'];
   
   applyFilter(filterValue: string) {
     this.guichets.filter = filterValue.trim().toLowerCase();

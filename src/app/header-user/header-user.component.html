@@ -16,16 +16,17 @@
                                 <span class="mini-click-non"><span class="educate-icon educate-home icon-wrap"></span>Home</span>
 							</a>
                         </li>
-
-                        <li>
-                            <a class="has-arrow" data-toggle="collapse" data-target="#demoevent" ><span class="educate-icon educate-professor icon-wrap"></span>Client <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                            <ul id="demoevent" class="collapse dropdown-header-top">
-                                <li><a title="Ajout Client" [routerLink]="['/client/add']" routerLinkActive="router-link-active">Ajout</a>
-                                </li>
-                                <li><a title="Liste des clients" [routerLink]="['/client/all']" routerLinkActive="router-link-active">Liste</a>
-                                </li>
-                            </ul>
-                        </li>
+                        <div *ngIf="userService.getUserDetails().role != 'guichet'">
+                            <li>
+                                <a class="has-arrow" data-toggle="collapse" data-target="#demoevent" ><span class="educate-icon educate-professor icon-wrap"></span>Client <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                <ul id="demoevent" class="collapse dropdown-header-top">
+                                    <li><a title="Ajout Client" [routerLink]="['/client/add']" routerLinkActive="router-link-active">Ajout</a>
+                                    </li>
+                                    <li><a title="Liste des clients" [routerLink]="['/client/all']" routerLinkActive="router-link-active">Liste</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
                         
                         <!-- DEBUT TESTE SI C'EST UN PROMOTEUR -->
                         <div *ngIf="userService.getUserDetails().role == 'promoteur'">
@@ -58,6 +59,21 @@
                             </li>
                         </div>
                         <!-- FIN TESTE SI C'EST UN PROMOTEUR -->
+
+                        <!-- DEBUT TESTE SI C'EST UN GUICHET -->
+                        <div *ngIf="userService.getUserDetails().role == 'guichet'">
+                            <!-- <li> -->
+                                <!-- <a class="has-arrow" data-toggle="collapse" data-target="#guichetNav" ><span class="educate-icon educate-professor icon-wrap"></span>Guichet <span class="admin-project-icon edu-icon edu-down-arrow"></span></a> -->
+                                <!-- <ul id="guichetNav" class="collapse dropdown-header-top"> -->
+                                    <li><a title="Ajouter Une transaction de guichet" [routerLink]="['/guichet/transaction']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro"> <span class="educate-icon educate-professor icon-wrap"></span>Transaction</span></a></li>
+                                    <li><a title="Liste des transaction wari" [routerLink]="['/guichet/transaction/list', 'wari']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro"> <span class="educate-icon educate-professor icon-wrap"></span>Warie</span></a></li>
+                                    <li><a title="Liste des transaction Ester Union" [routerLink]="['/guichet/transaction/list', 'wester']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro"> <span class="educate-icon educate-professor icon-wrap"></span>Wester Union</span></a></li>
+                                    <li><a title="Liste des transaction Money Gram" [routerLink]="['/guichet/transaction/list', 'money']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro"> <span class="educate-icon educate-professor icon-wrap"></span>Money Gram</span></a></li>
+                                    <li><a title="Raport Des transaction" [routerLink]="['/guichet/transaction/raport', 'day']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro"> <span class="educate-icon educate-professor icon-wrap"></span>Raport</span></a></li>
+                                <!-- </ul> -->
+                            <!-- </li> -->
+                        </div>
+                        <!-- FIN TESTE SI C'EST UN GUICHET -->
                         
                         <!-- DEBUT TESTE SI C'EST UN UTILISATEUR -->
                         <div *ngIf="userService.getUserDetails().role == 'user'">
@@ -86,17 +102,6 @@
                                     <li><a title="Les Promoteurs" [routerLink]="['/promoteur/list']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Liste</span></a></li>
                                     <li><a title="Les Promoteurs" [routerLink]="['/promoteur/attribute-espece']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Attribution</span></a></li>
                                     <li><a title="Les Promoteurs" [routerLink]="['/promoteur/production-periode']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Production</span></a></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a class="has-arrow" data-toggle="collapse" data-target="#guichetNav" ><span class="educate-icon educate-professor icon-wrap"></span>Guichet <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                <ul id="guichetNav" class="collapse dropdown-header-top">
-                                    <li><a title="Ajouter Une transaction de guichet" [routerLink]="['/guichet/transaction']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Transaction</span></a></li>
-                                    <li><a title="Liste des transaction wari" [routerLink]="['/guichet/transaction/list', 'wari']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Warie</span></a></li>
-                                    <li><a title="Liste des transaction Ester Union" [routerLink]="['/guichet/transaction/list', 'wester']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Wester Union</span></a></li>
-                                    <li><a title="Liste des transaction Money Gram" [routerLink]="['/guichet/transaction/list', 'money']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Money Gram</span></a></li>
-                                    <li><a title="Raport Des transaction" [routerLink]="['/guichet/transaction/raport', 'day']" routerLinkActive="router-link-active"  ><span class="mini-sub-pro">Raport</span></a></li>
                                 </ul>
                             </li>
 
@@ -228,27 +233,91 @@
                                         <mat-icon>reorder</mat-icon>
                                       </button>
                                       <mat-menu #menu="matMenu">
+                                        <div *ngIf="userService.getUserDetails().role != 'guichet'"> 
 
-                                        <button mat-menu-item [routerLink]="['/']" >
-                                          <mat-icon>home</mat-icon>
-                                          <span>Home</span>
-                                        </button>
+                                            <button mat-menu-item [routerLink]="['/']" >
+                                                <mat-icon>home</mat-icon>
+                                                <span>Home</span>
+                                            </button>
 
-                                        <button mat-menu-item [routerLink]="['/client/add']" routerLinkActive="router-link-active" >
-                                          <mat-icon>group_add</mat-icon>
-                                          <span>Ajout Client</span>
-                                        </button>
+                                            <button mat-menu-item [routerLink]="['/client/add']" routerLinkActive="router-link-active" >
+                                                <mat-icon>group_add</mat-icon>
+                                                <span>Ajout Client</span>
+                                            </button>
 
-                                        <button mat-menu-item [routerLink]="['/client/all']" routerLinkActive="router-link-active" >
-                                          <mat-icon>person_pin</mat-icon>
-                                          <span>Liste Client</span>
-                                        </button>
+                                            <button mat-menu-item [routerLink]="['/client/all']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Liste Client</span>
+                                            </button>
 
-                                        <button mat-menu-item [routerLink]="['/client/all']" routerLinkActive="router-link-active" >
-                                          <mat-icon>person_pin</mat-icon>
-                                          <span>Liste Client</span>
-                                        </button>
+                                        </div>
 
+                                        <div *ngIf="userService.getUserDetails().role == 'guichet'"> 
+
+                                            <button mat-menu-item [routerLink]="['/guichet/transaction']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Transaction</span>
+                                            </button>
+
+                                            <button mat-menu-item [routerLink]="['/guichet/transaction/list/wari']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Warie</span>
+                                            </button>
+
+                                            <button mat-menu-item [routerLink]="['/guichet/transaction/list/wester']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Western Union</span>
+                                            </button>
+
+                                            <button mat-menu-item [routerLink]="['/guichet/transaction/list/money']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Money Gram</span>
+                                            </button>
+
+                                            <button mat-menu-item [routerLink]="['/guichet/transaction/raport/day']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Raport</span>
+                                            </button>
+
+                                        </div>
+
+                                        <div *ngIf="userService.getUserDetails().role == 'promoteur'">
+
+                                            <button mat-menu-item [routerLink]="['/promoteur/list/enter']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Liste entrer</span>
+                                            </button>
+
+                                            <button mat-menu-item [routerLink]="['/promoteur/list/sortie']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Liste sortie</span>
+                                            </button>
+
+                                            <button mat-menu-item [routerLink]="['/promoteur/list/enterJour']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Liste entrer jour</span>
+                                            </button>
+
+                                            <button mat-menu-item [routerLink]="['/promoteur/list/sortieJour']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Liste sortie jour</span>
+                                            </button>
+
+                                            <button mat-menu-item [routerLink]="['/promoteur/list/debit']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Liste debit</span>
+                                            </button>
+
+                                            <button mat-menu-item [routerLink]="['/promoteur/depot-agence']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Depot agence</span>
+                                            </button>
+
+                                            <button mat-menu-item [routerLink]="['/promoteur/list-depot-agence']" routerLinkActive="router-link-active" >
+                                                <mat-icon>person_pin</mat-icon>
+                                                <span>Liste depot</span>
+                                            </button>
+                                        </div>
                                         <!-- DEBUT TEST SI C'EST UN UTILISATEUR QUI CE CONNECTE -->
                                         <div *ngIf="userService.getUserDetails().role == 'user'"> 
                                             

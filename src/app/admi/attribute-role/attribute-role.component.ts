@@ -35,6 +35,12 @@ export class AttributeRoleComponent implements OnInit {
       this.agence_id.setValidators(null);
       this.agence_id.setValue('')
     }
+
+    if(event.target.value === 'guichet'){
+      this.promoteur = false;
+      this.agence_id.setValidators(null);
+      this.agence_id.setValue('')
+    }
   }
 
   controlForm = this.fb.group({

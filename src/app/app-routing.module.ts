@@ -1,3 +1,4 @@
+import { AuthUserOrPromoteurOrGuichetGuard } from './guards/auth-user-or-promoteur-or-guichet.guard';
 import { AuthUserOrPromoteurGuard } from './guards/auth-user-or-promoteur.guards';
 import { AuthGuardAdmi } from './guards/auth-admi.guards';
 import { GuideComponent } from './guide/guide.component';
@@ -14,7 +15,7 @@ import { NotAuthGuard } from './guards/not-auth.guard';
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeUserComponent, canActivate: [AuthUserOrPromoteurGuard]},
+  { path: 'home', component: HomeUserComponent, canActivate: [AuthUserOrPromoteurOrGuichetGuard]},
   { path: 'user/profile', component: MyProfileComponent},
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
   { path: 'register', component: RegisterComponent},

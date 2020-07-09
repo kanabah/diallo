@@ -1,3 +1,4 @@
+import { AuthGuardGuichet } from './../guards/auth-guichet.guards';
 import { AttributionListComponent } from './../promoteur/attribution-list/attribution-list.component';
 import { ProductionPromoteurTotalComponent } from './../promoteur/production-promoteur-total/production-promoteur-total.component';
 import { ProductionPromoteurPeriodeComponent } from './../promoteur/production-promoteur-periode/production-promoteur-periode.component';
@@ -54,7 +55,7 @@ const routes: Routes = [
   },
   {
     path: 'guichet',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuardGuichet],
     children: [
       {
         path: 'transaction',

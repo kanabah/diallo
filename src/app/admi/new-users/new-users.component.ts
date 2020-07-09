@@ -23,7 +23,7 @@ export class NewUsersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.jsService.jsAdmi();
-    this.subscription = timer(0, 2000).subscribe(res => {
+    this.subscription = timer(0, 7000).subscribe(res => {
       this.getNewUsers();
     });
   }

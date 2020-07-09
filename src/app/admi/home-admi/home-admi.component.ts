@@ -1,5 +1,5 @@
 import { NgxSpinnerService } from 'ngx-spinner';
-// import { ResourcesService } from './../../services/resources.service';
+import { ResourcesService } from './../../services/resources.service';
 import { GuichetService } from './../../services/guichet.service';
 import { Subscription, timer, Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -25,6 +25,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
   agences: User[] = [];
   agenceActive: User[] = [];
   promoteurs: User[] = [];
+  usersGuichet: User[] = [];
   cmds: any[] = [];
   commandes: any[] = [];
   clients: Client[] = [];
@@ -367,15 +368,6 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
     purcentWester = (wester * 100)/this.countTotal;
     purcentMoney = (money * 100)/this.countTotal;
 
-    // console.log('PURCCENT OM', purcentOM);
-    // console.log('PURCCENT MOMO', purcentMoMo);
-    // console.log('PURCCENT ST', purcentST);
-    // console.log('PURCCENT RECHARGEMENT', purcentRechargement);
-    // console.log('PURCCENT mONEY GRAM', purcentMoney);
-    // console.log('TOTAL', total);
-
-
-
     this.dataPoints = [
       { y: purcentOM, label: "OM" },
       { y: purcentMoMo, label: "MoMo" },
@@ -387,7 +379,6 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
     ]
     
   }
-
   
   thisMonth(){
     this.month = true;
@@ -397,7 +388,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
     this.month = false;
   }
 
-  constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private route: Router, private guichetService: GuichetService, private spinner: NgxSpinnerService, private js: JsService) {
+  constructor(private userService: UserService, private clientService: ClientService, public print: PrintClientService, private route: Router, private guichetService: GuichetService, private spinner: NgxSpinnerService, private js: JsService, private load: ResourcesService) {
     //Create dummy data
     for (var i = 0; i < this.collection.count; i++) {
       this.collection.data.push(
@@ -448,23 +439,15 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
 
     observable.subscribe(res => {
       console.log('JE SUIS LA REPONSE');
-      // this.cmdTest = [];
       this.caclulForChart();
       this.getChartsColumn();
       this.getChartsDate();
-      // this.chartByDate();
-      // this.load.loadAdmi();
+      this.load.loadAdmi();
     })
     
   }
   
   ngOnInit() {
-    // this.js.jsAdmi();
-    // this.jsService.jsAdmi();
-    // this.caclulForChart();
-    
-    
-    
     this.getAllUsers();
     this.getClients();
     
@@ -521,22 +504,6 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
       {
         type: "spline",
         dataPoints:  this.cmdTest
-        // [
-        //   { x: new Date(2010, 0, 3), y: 10 },
-        //   { x: new Date(2010, 0, 5), y: 100 },
-        //   { x: new Date(2010, 0, 7), y: 110 },
-        //   { x: new Date(2010, 0, 9), y: 158 },
-        //   { x: new Date(2010, 0, 11), y: 34 },
-        //   { x: new Date(2010, 0, 13), y: 363 },
-        //   { x: new Date(2010, 0, 15), y: 247 },
-        //   { x: new Date(2010, 0, 17), y: 253 },
-        //   { x: new Date(2010, 0, 19), y: 269 },
-        //   { x: new Date(2010, 0, 21), y: 343 },
-        //   { x: new Date(2010, 0, 23), y: 370 },
-        //   { x: new Date(2010, 0, 25), y: 588 },
-        //   { x: new Date(2010, 0, 27), y: 900 },
-        //   { x: new Date(2010, 0, 29), y: 200 },
-        // ]
       }
       ]                      
     });
@@ -552,7 +519,7 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
       this.agenceActive = this.users.filter(result => {
-        return result.role == 'user' && result.confirm == 1;
+        return (result.role == 'user' || result.role == 'guichet') && result.confirm == 1;
         // return result.role == 'user';
       });
 
@@ -560,6 +527,10 @@ export class HomeAdmiComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.promoteurs = this.users.filter(result => {
         return result.role == 'promoteur' && result.active == 1;
+      });
+
+      this.usersGuichet = this.users.filter(result => {
+        return result.role == 'guichet' && result.active == 1;
       })
 
       this.spinner.hide();

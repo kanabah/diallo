@@ -42,8 +42,8 @@ export class TransactionGuichetComponent implements OnInit {
             if(this.action.value == 2){
               this.guichetService.getGuichets().subscribe(res => {
                 this.guichets = res;
-                console.log('result Guichets', this.guichets);
-                console.log('Action Value', this.action.value);
+                // console.log('result Guichets', this.guichets);
+                // console.log('Action Value', this.action.value);
                 this.guichets.forEach(result => {
                   if(result.user_id._id == this.userService.getUserDetails()._id && result.type == this.type.value && result.delete == 0){
                     if(result.action == 0 || result.action == 1){
@@ -57,8 +57,8 @@ export class TransactionGuichetComponent implements OnInit {
                 });
 
                 var sumTest = this.sumTotalDepot - this.sumTotalRetait;
-                console.log('Sum Test', Number(sumTest));
-                console.log('Sum Montant', Number(this.montant.value));
+                // console.log('Sum Test', Number(sumTest));
+                // console.log('Sum Montant', Number(this.montant.value));
                 
                 if(Number(this.montant.value) <= Number(sumTest)){
                   this.user_id.setValue(this.userService.getUserDetails()._id);

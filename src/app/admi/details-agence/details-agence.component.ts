@@ -32,6 +32,7 @@ export class DetailsAgenceComponent implements OnInit {
   guichets: Guichet[] = [];
 
   idUser: any;
+  userDetail: User;
   
   sumTotalOM: number = 0;  
   sumTotalMoMo: number = 0;  
@@ -161,9 +162,18 @@ export class DetailsAgenceComponent implements OnInit {
     var id = this.route.snapshot.paramMap.get('id');
 
     this.idUser = id;
+    this.getUser(id);
     this.getPromoteurs(id);
     this.getClients(id); 
     this.getGuichets(id); 
+  }
+
+  getUser(id){
+    this.userService.getUser(id).subscribe(res => {
+      console.log('USER DD', res);
+      this.userDetail = res;
+      
+    })
   }
 
   getGuichets(id){
@@ -351,7 +361,7 @@ export class DetailsAgenceComponent implements OnInit {
     this.clientService.getAllClients().subscribe(res => {
       this.clientFilters = res;
       this.clients = this.clientFilters.filter(result => {
-        return result.user_id._id == id;;
+        return result.user_id._id == id;
       });
 
       
