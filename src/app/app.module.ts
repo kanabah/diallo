@@ -65,7 +65,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     FontAwesomeModule,
     OrderModule,
     SharedModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    
   ],
   providers: [
     {
