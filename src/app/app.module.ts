@@ -31,6 +31,7 @@ import { SharedModule } from './shared.module';
 import { HeaderAdmiComponent } from './header-admi/header-admi.component';
 import { GuideComponent } from './guide/guide.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     {
       provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
     },
+    NgxSpinnerService,
     ResourcesService,
     {
       provide: APP_INITIALIZER,

@@ -19,7 +19,7 @@ const guichetRoutes = require('./routes/guichet.route');
 //======================END ROUTES================
 
 mongoose.Promise = global.Promise;
-mongoose.connect(config.DBDEV, { useNewUrlParser: true, useUnifiedTopology: true }).then(
+mongoose.connect(config.DB, { useNewUrlParser: true, useUnifiedTopology: true }).then(
   () => console.log('Database is connected'),
   err => console.log('Can not connect to the database'+ err)
 );
@@ -34,8 +34,8 @@ app.use('/guichets', guichetRoutes);
 
 app.get('/', (request, response) => response.send("Welcome to sogma API"));
 
-// const port = process.env.PORT || 5202;
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 5202;
+// const port = process.env.PORT || 4001;
 
 app.listen(port, () => console.log('Listen Server in port ', port));
 

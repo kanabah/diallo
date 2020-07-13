@@ -169,15 +169,15 @@ export class DetailsAgenceComponent implements OnInit {
   }
 
   getUser(id){
+    this.spiner.show();
     this.userService.getUser(id).subscribe(res => {
       console.log('USER DD', res);
       this.userDetail = res;
-      
+      this.spiner.hide();
     })
   }
 
   getGuichets(id){
-    this.spiner.show();
     var date = new Date();
     this.guichetService.getGuichets().subscribe(res => {
       this.guichetsFilters = res;
@@ -339,7 +339,7 @@ export class DetailsAgenceComponent implements OnInit {
         
         this.calculSoldeMoney = this.sumDepotMoney + this.soldeMoneyDepot - this.sumRetraitMoney;
       })
-      this.spiner.hide();
+      
       
     })
   }

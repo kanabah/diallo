@@ -13,7 +13,7 @@
             <span><small class="text-danger">{{ getPasswordError() }}</small></span>
             <span *ngIf="!passwordIncorect"><small class="text-danger">Mot de passe incorect</small></span><br>
             
-            <button type="submit">Valider</button>
+            <button type="submit" [disabled]="loginForm.invalid || loginForm.pending || !etatPadding">{{ !etatPadding ? 'Patienter...': 'Valider'}}</button>
             <label>
                 <input type="checkbox" checked="checked" name="remember"> Se souvenir
             </label>
